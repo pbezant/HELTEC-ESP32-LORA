@@ -30,7 +30,7 @@
 // Define pins
 #define MOISTURE_PIN 36  // Analog pin for moisture sensor
 #define SEALEVELPRESSURE_HPA (1013.25)
-#define BME_ADDRESS 0x77 // Try 0x77 if 0x76 doesn't work
+#define BME_ADDRESS 0x78 // Try 0x77 if 0x76 doesn't work
 #define I2C_SDA 46
 #define I2C_SCL 45
 // #define BME_SCK 26
