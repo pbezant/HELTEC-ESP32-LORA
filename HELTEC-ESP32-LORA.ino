@@ -77,7 +77,7 @@ void readSensors() {
 RTC_DATA_ATTR uint8_t count = 0;
 
 // Add these definitions after the other #define statements
-#define BAND    915E6  // Set your region frequency (915MHz for US)
+#define BAND    US915  // Set your region frequency (915MHz for US)
 #define SF      DR_SF7  // Spreading Factor (DR_SF7 to DR_SF12)
 #define TX_POWER    14  // Transmit power in dBm (max 20dBm)
 
@@ -86,48 +86,34 @@ const char* devEui = "70B3D57ED8003DF4";  // Device EUI from TTN console
 const char* appEui = "EABB82D8689A30D7";  // Application EUI from TTN console
 const char* appKey = "C05BB00987036902C5AFBD3F6A55A3CF";  // App Key from TTN console
 
-// Add this function before setup()
-// void initLoRaWAN() {
-//     Serial.println("Initializing LoRaWAN...");
-    
-//     // Set the device credentials
-//     if (!persist.isProvisioned()) {
-//         Serial.println("Setting device credentials...");
-//         persist.setDevEui(devEui);
-//         persist.setAppEui(appEui);
-//         persist.setAppKey(appKey);
-        
-//         // Set region (US915 for United States)
-//         persist.setRegion(REGION_US915);
-        
-//         // Set channel mask for US915 (using channels 8-15 and 65 for TTN)
-//         uint16_t channelMask[] = {0x0000, 0xFF00, 0x0000, 0x0000, 0x0000, 0x0000};
-//         persist.setChannelMask(channelMask);
-//     }
-// }
 
-// Modify the setup() function to include LoRaWAN initialization
-void setup() {
+// Function declarations
+void initHardware();
+void initSensors();
+void initRadio();
+void joinNetwork();
+void sendSensorData();
+
+// Initialize basic hardware components
+void initHardware() {
     heltec_setup();
     Wire.begin();
     //persist.begin();
-    // Initialize LoRaWAN settings
-    //initLoRaWAN();
+}
 
-    // Read sensors
-    readSensors();
-
-    // Initialize radio
+// Initialize and check radio
+void initRadio() {
     Serial.println("Radio init");
     int16_t state = radio.begin();
     if (state != RADIOLIB_ERR_NONE) {
         Serial.println("Radio did not initialize. We'll try again later.");
         goToSleep();
     }
-
     node = persist.manage(&radio);
+}
 
-    // Try to join network
+// Join LoRaWAN network
+void joinNetwork() {
     Serial.println("Attempting to join network...");
     int attempts = 0;
     while (!node->isActivated() && attempts < 5) {
@@ -146,34 +132,43 @@ void setup() {
 
     // Manages uplink intervals to the TTN Fair Use Policy
     node->setDutyCycle(true, 1250);
+}
 
+// Prepare and send sensor data
+void sendSensorData() {
     // Prepare payload - 10 bytes total
     uint8_t uplinkData[10];
+    
     // Temperature: 2 bytes (multiplied by 100 to preserve 2 decimal places)
     int16_t temp = sensorData.temperature * 100;
     uplinkData[0] = temp >> 8;
     uplinkData[1] = temp & 0xFF;
+    
     // Humidity: 1 byte (multiplied by 2 to preserve 1 decimal place)
     uplinkData[2] = (uint8_t)(sensorData.humidity * 2);
+    
     // Pressure: 2 bytes (subtract 900 to fit in 2 bytes)
     uint16_t press = (sensorData.pressure - 900) * 10;
     uplinkData[3] = press >> 8;
     uplinkData[4] = press & 0xFF;
+    
     // Light: 2 bytes
     uint16_t light = sensorData.light;
     uplinkData[5] = light >> 8;
     uplinkData[6] = light & 0xFF;
+    
     // Moisture: 2 bytes
     uint16_t moist = sensorData.moisture;
     uplinkData[7] = moist >> 8;
     uplinkData[8] = moist & 0xFF;
+    
     // Counter
     uplinkData[9] = count++;
 
     uint8_t downlinkData[256];
     size_t lenDown = sizeof(downlinkData);
 
-    state = node->sendReceive(uplinkData, sizeof(uplinkData), 1, downlinkData, &lenDown);
+    int16_t state = node->sendReceive(uplinkData, sizeof(uplinkData), 1, downlinkData, &lenDown);
 
     if(state == RADIOLIB_ERR_NONE) {
         Serial.println("Message sent, no downlink received.");
@@ -182,7 +177,15 @@ void setup() {
     } else {
         Serial.printf("sendReceive returned error %d, we'll try again later.\n", state);
     }
+}
 
+// Refactored setup function
+void setup() {
+    initHardware();
+    readSensors();
+    initRadio();
+    joinNetwork();
+    sendSensorData();
     goToSleep();    // Does not return, program starts over next round
 }
 
