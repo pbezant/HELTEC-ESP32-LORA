@@ -32,8 +32,16 @@
 #define SEALEVELPRESSURE_HPA (1013.25)
 #define BME_ADDRESS 0x76 // Try 0x77 if 0x76 doesn't work
 
+// #define BME_SCK 26
+// #define BME_MISO 21
+// #define BME_MOSI 20 
+// #define BME_CS 19
+
+
 // Create objects for sensors
-Adafruit_BME280 bme;
+Adafruit_BME280 bme; // I2C
+//Adafruit_BME280 bme(BME_CS); // hardware SPI
+//Adafruit_BME280 bme(BME_CS, BME_MOSI, BME_MISO,  BME_SCK);
 BH1750 lightMeter;
 LoRaWANNode* node;
 
@@ -77,7 +85,7 @@ void readSensors() {
 RTC_DATA_ATTR uint8_t count = 0;
 
 // Add these definitions after the other #define statements
-#define BAND    US915  // Set your region frequency (915MHz for US)
+#define BAND    915E6  // Set your region frequency (915MHz for US)
 #define SF      DR_SF7  // Spreading Factor (DR_SF7 to DR_SF12)
 #define TX_POWER    14  // Transmit power in dBm (max 20dBm)
 
