@@ -30,8 +30,9 @@
 // Define pins
 #define MOISTURE_PIN 36  // Analog pin for moisture sensor
 #define SEALEVELPRESSURE_HPA (1013.25)
-#define BME_ADDRESS 0x76 // Try 0x77 if 0x76 doesn't work
-
+#define BME_ADDRESS 0x77 // Try 0x77 if 0x76 doesn't work
+#define I2C_SDA 46
+#define I2C_SCL 45
 // #define BME_SCK 26
 // #define BME_MISO 21
 // #define BME_MOSI 20 
@@ -54,38 +55,12 @@ struct SensorData {
   int moisture;
 } sensorData;
 
-// Function to read all sensors
-void readSensors() {
-    Serial.println("Reading Sensors");
-  // Read BME280
-  if (bme.begin(BME_ADDRESS)) {
-  sensorData.temperature = bme.readTemperature();
-  sensorData.humidity = bme.readHumidity();
-  sensorData.pressure = bme.readPressure() / 100.0F;
-  } else {
-    Serial.println("Could not find BME280 sensor!");
-  }
-  // Read BH1750
-  if (lightMeter.begin(BH1750::CONTINUOUS_HIGH_RES_MODE)) {
-    sensorData.light = lightMeter.readLightLevel();
-  } else{
-    Serial.println("Could not find BH1750 sensor!");
-  }
-  // Read moisture sensor
-  sensorData.moisture = analogRead(MOISTURE_PIN);
-  
-  // Print readings for debugging
-  Serial.printf("Temperature: %.2f°C\n", sensorData.temperature);
-  Serial.printf("Humidity: %.2f%%\n", sensorData.humidity);
-  Serial.printf("Pressure: %.2fhPa\n", sensorData.pressure);
-  Serial.printf("Light: %.2flx\n", sensorData.light);
-  Serial.printf("Moisture: %d\n", sensorData.moisture);
-}
+
 
 RTC_DATA_ATTR uint8_t count = 0;
 
 // Add these definitions after the other #define statements
-#define BAND    915E6  // Set your region frequency (915MHz for US)
+#define BAND    US915  // Set your region frequency (915MHz for US)
 #define SF      DR_SF7  // Spreading Factor (DR_SF7 to DR_SF12)
 #define TX_POWER    14  // Transmit power in dBm (max 20dBm)
 
@@ -96,16 +71,18 @@ const char* appKey = "C05BB00987036902C5AFBD3F6A55A3CF";  // App Key from TTN co
 
 
 // Function declarations
-void initHardware();
-void initSensors();
-void initRadio();
-void joinNetwork();
-void sendSensorData();
+// void initHardware();
+// void initRadio();
+// void joinNetwork();
+// void sendSensorData();
+// void scanI2C();
 
 // Initialize basic hardware components
 void initHardware() {
     heltec_setup();
-    Wire.begin();
+    Wire.begin(I2C_SDA, I2C_SCL);
+    delay(100); // Give I2C time to initialize
+    scanI2C();
     //persist.begin();
 }
 
@@ -121,7 +98,7 @@ void initRadio() {
 }
 
 // Join LoRaWAN network
-void joinNetwork() {
+void joinNetwork() {                         
     Serial.println("Attempting to join network...");
     int attempts = 0;
     while (!node->isActivated() && attempts < 5) {
@@ -141,7 +118,52 @@ void joinNetwork() {
     // Manages uplink intervals to the TTN Fair Use Policy
     node->setDutyCycle(true, 1250);
 }
-
+// Function to read all sensors
+void readSensors() {
+    Serial.println("Reading Sensors");
+    Serial.println("Scanning I2C bus...");
+    // Read BME280
+    Serial.printf("Attempting to initialize BME280 at address 0x%02X\n", BME_ADDRESS);
+    
+    if (!bme.begin(BME_ADDRESS)) {
+        Serial.println("Could not find BME280 sensor! Checking for common issues:");
+        Wire.beginTransmission(BME_ADDRESS);
+        byte error = Wire.endTransmission();
+        if (error == 0) {
+            Serial.println("I2C device found at address 0x77, but failed to initialize");
+        } else {
+            Serial.printf("I2C error: %d - No device found at address 0x%02X\n", error, BME_ADDRESS);
+        }
+        
+        // Try alternative address
+        Wire.beginTransmission(0x76);
+        error = Wire.endTransmission();
+        if (error == 0) {
+            Serial.println("Note: Found a device at alternate address 0x76!");
+        }
+        return;
+    }
+    
+    Serial.println("BME280 initialized successfully!");
+    sensorData.temperature = bme.readTemperature();
+    sensorData.humidity = bme.readHumidity();
+    sensorData.pressure = bme.readPressure() / 100.0F;
+    // Read BH1750
+    if (lightMeter.begin(BH1750::CONTINUOUS_HIGH_RES_MODE)) {
+        sensorData.light = lightMeter.readLightLevel();
+    } else{
+        Serial.println("Could not find BH1750 sensor!");
+    }
+    // Read moisture sensor
+    sensorData.moisture = analogRead(MOISTURE_PIN);
+    
+    // Print readings for debugging
+    Serial.printf("Temperature: %.2f°C\n", sensorData.temperature);
+    Serial.printf("Humidity: %.2f%%\n", sensorData.humidity);
+    Serial.printf("Pressure: %.2fhPa\n", sensorData.pressure);
+    Serial.printf("Light: %.2flx\n", sensorData.light);
+    Serial.printf("Moisture: %d\n", sensorData.moisture);
+}
 // Prepare and send sensor data
 void sendSensorData() {
     // Prepare payload - 10 bytes total
@@ -197,10 +219,7 @@ void setup() {
     goToSleep();    // Does not return, program starts over next round
 }
 
-void loop() {
-  // This is never called. There is no repetition: we always go back to
-  // deep sleep one way or the other at the end of setup()
-}
+
 
 void goToSleep() {
   Serial.println("Going to deep sleep now");
@@ -216,3 +235,29 @@ void goToSleep() {
   heltec_deep_sleep(delayMs/1000);
 }
 
+void scanI2C() {
+    Serial.println("Scanning I2C bus...");
+    byte error, address;
+    int nDevices = 0;
+    
+    for(address = 1; address < 127; address++) {
+        Wire.beginTransmission(address);
+        error = Wire.endTransmission();
+        
+        if (error == 0) {
+            Serial.printf("I2C device found at address 0x%02X\n", address);
+            nDevices++;
+        }
+    }
+    
+    if (nDevices == 0) {
+        Serial.println("No I2C devices found\n");
+    } else {
+        Serial.println("I2C scan done\n");
+    }
+}
+
+void loop() {
+  // This is never called. There is no repetition: we always go back to
+  // deep sleep one way or the other at the end of setup()
+}
