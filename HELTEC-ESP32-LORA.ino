@@ -36,7 +36,7 @@
 // #define BME_SCK 26
 // #define BME_MISO 21
 // #define BME_MOSI 20 
-// #define BME_CS 19
+#define BME_CS 42
 
 
 // Create objects for sensors
@@ -121,33 +121,28 @@ void joinNetwork() {
 // Function to read all sensors
 void readSensors() {
     Serial.println("Reading Sensors");
-    Serial.println("Scanning I2C bus...");
-    // Read BME280
-    Serial.printf("Attempting to initialize BME280 at address 0x%02X\n", BME_ADDRESS);
+    // Serial.println("Scanning I2C bus...");
+    // // Read BME280
+    // Serial.printf("Attempting to initialize BME280 at address 0x%02X\n", BME_ADDRESS);
     
     if (!bme.begin(BME_ADDRESS)) {
         Serial.println("Could not find BME280 sensor! Checking for common issues:");
         Wire.beginTransmission(BME_ADDRESS);
         byte error = Wire.endTransmission();
         if (error == 0) {
-            Serial.println("I2C device found at address 0x77, but failed to initialize");
+            Serial.println("I2C device found at address 0x76, but failed to initialize");
         } else {
             Serial.printf("I2C error: %d - No device found at address 0x%02X\n", error, BME_ADDRESS);
         }
         
-        // Try alternative address
-        Wire.beginTransmission(0x76);
-        error = Wire.endTransmission();
-        if (error == 0) {
-            Serial.println("Note: Found a device at alternate address 0x76!");
-        }
-        return;
+
+    } else {
+      Serial.println("BME280 initialized successfully!");
+      sensorData.temperature = bme.readTemperature();
+      sensorData.humidity = bme.readHumidity();
+      sensorData.pressure = bme.readPressure() / 100.0F;
     }
-    
-    Serial.println("BME280 initialized successfully!");
-    sensorData.temperature = bme.readTemperature();
-    sensorData.humidity = bme.readHumidity();
-    sensorData.pressure = bme.readPressure() / 100.0F;
+
     // Read BH1750
     if (lightMeter.begin(BH1750::CONTINUOUS_HIGH_RES_MODE)) {
         sensorData.light = lightMeter.readLightLevel();
@@ -216,7 +211,7 @@ void setup() {
     initRadio();
     joinNetwork();
     sendSensorData();
-    goToSleep();    // Does not return, program starts over next round
+   goToSleep();    // Does not return, program starts over next round
 }
 
 
@@ -225,10 +220,20 @@ void goToSleep() {
   Serial.println("Going to deep sleep now");
   // allows recall of the session after deepsleep
   persist.saveSession(node);
-  // Calculate minimum duty cycle delay (per FUP & law!)
-  uint32_t interval = node->timeUntilUplink();
-  // And then pick it or our MINIMUM_DELAY, whichever is greater
-  uint32_t delayMs = max(interval, (uint32_t)MINIMUM_DELAY * 1000);
+  
+  uint32_t delayMs;
+  
+  // Check if node is properly initialized
+  if (node == nullptr || !node->isActivated()) {
+    // If node not ready, sleep for minimum delay
+    delayMs = MINIMUM_DELAY * 1000;
+  } else {
+    // Calculate minimum duty cycle delay (per FUP & law!)
+    uint32_t interval = node->timeUntilUplink();
+    // And then pick it or our MINIMUM_DELAY, whichever is greater
+    delayMs = max(interval, (uint32_t)MINIMUM_DELAY * 1000);
+  }
+  
   Serial.printf("Next TX in %i mins\n", (delayMs/1000)/60);
   delay(100);  // So message prints
   // and off to bed we go
