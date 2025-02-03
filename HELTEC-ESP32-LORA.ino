@@ -35,6 +35,9 @@
 #define I2C_SDA 42
 #define I2C_SCL 41
 
+// Add this with other pin definitions
+#define PIR_PIN 5  // Change this to match your PIR sensor connection
+RTC_DATA_ATTR bool pir_wake = false;  // Keep track if PIR caused the wake
 
 // Create objects for sensors
 Adafruit_BME280 bme; // I2C 3.3v
@@ -72,14 +75,34 @@ const char* appKey = "C05BB00987036902C5AFBD3F6A55A3CF";  // App Key from TTN co
 // void sendSensorData();
 // void scanI2C();
 
-// Initialize basic hardware components
+// Add this function to check wake-up cause
+void printWakeupReason() {
+    esp_sleep_wakeup_cause_t wakeup_reason = esp_sleep_get_wakeup_cause();
+    
+    switch(wakeup_reason) {
+        case ESP_SLEEP_WAKEUP_EXT0:
+            Serial.println("Wakeup caused by external signal using RTC_IO (PIR sensor)");
+            pir_wake = true;
+            break;
+        case ESP_SLEEP_WAKEUP_TIMER:
+            Serial.println("Wakeup caused by timer");
+            pir_wake = false;
+            break;
+        default:
+            Serial.printf("Wakeup was not caused by deep sleep: %d\n", wakeup_reason);
+            pir_wake = false;
+            break;
+    }
+}
+
+// Modify initHardware() to configure PIR pin
 void initHardware() {
     heltec_setup();
-    //Wire.begin(I2C_SDA, I2C_SCL);
+    pinMode(PIR_PIN, INPUT);
     bool wireStatus = Wire1.begin(I2C_SDA, I2C_SCL);
-    delay(100); // Give I2C time to initialize
+    delay(100);
     scanI2C();
-    //persist.begin();
+    printWakeupReason();  // Print what woke us up
 }
 
 // Initialize and check radio
@@ -122,7 +145,7 @@ void readSensors() {
         Wire.beginTransmission(BME_ADDRESS);
         byte error = Wire.endTransmission();
         if (error == 0) {
-            Serial.println("I2C device found at address 0x76, but failed to initialize");
+            Serial.println("I2C device found at address 0x%02X\n, but failed to initialize", BME_ADDRESS);
         } else {
             Serial.printf("I2C error: %d - No device found at address 0x%02X\n", error, BME_ADDRESS);
         }
@@ -195,40 +218,51 @@ void sendSensorData() {
     }
 }
 
-// Refactored setup function
+// Modify setup() to handle PIR wake-ups differently
 void setup() {
     initHardware();
-    readSensors();
-    initRadio();
-    joinNetwork();
-    sendSensorData();
-   goToSleep();    // Does not return, program starts over next round
+    
+    if (pir_wake) {
+        // If PIR triggered, send data immediately
+        Serial.println("Motion detected! Taking readings...");
+        readSensors();
+        // initRadio();
+        // joinNetwork();
+        // sendSensorData();
+    } else {
+        // Normal timer-based wake-up
+        readSensors();
+        // initRadio();
+        // joinNetwork();
+        // sendSensorData();
+    }
+    
+    goToSleep();    // Go back to sleep
 }
 
-
-
 void goToSleep() {
-  Serial.println("Going to deep sleep now");
-  // allows recall of the session after deepsleep
-  persist.saveSession(node);
-  
-  uint32_t delayMs;
-  
-  // Check if node is properly initialized
-  if (node == nullptr || !node->isActivated()) {
-    // If node not ready, sleep for minimum delay
-    delayMs = MINIMUM_DELAY * 1000;
-  } else {
-    // Calculate minimum duty cycle delay (per FUP & law!)
-    uint32_t interval = node->timeUntilUplink();
-    // And then pick it or our MINIMUM_DELAY, whichever is greater
-    delayMs = max(interval, (uint32_t)MINIMUM_DELAY * 1000);
-  }
-  
-  Serial.printf("Next TX in %i mins\n", (delayMs/1000)/60);
-  delay(100);  // So message prints
-  // and off to bed we go
-  heltec_deep_sleep(delayMs/1000);
+    Serial.println("Going to deep sleep now");
+    persist.saveSession(node);
+    
+    uint32_t delayMs;
+    
+    if (node == nullptr || !node->isActivated()) {
+        delayMs = MINIMUM_DELAY * 1000;
+    } else {
+        uint32_t interval = node->timeUntilUplink();
+        delayMs = max(interval, (uint32_t)MINIMUM_DELAY * 1000);
+    }
+    
+    Serial.printf("Next TX in %i mins\n", (delayMs/1000)/60);
+    Serial.println("PIR sensor will also wake device on motion");
+    delay(100);
+
+    // Configure wake-up sources
+    esp_sleep_enable_ext0_wakeup(GPIO_NUM_5, HIGH);  // PIR sensor wake-up
+    esp_sleep_enable_timer_wakeup(delayMs * 1000);   // Timer wake-up (convert to microseconds)
+    
+    // Go to sleep
+    esp_deep_sleep_start();
 }
 
 void scanI2C() {
