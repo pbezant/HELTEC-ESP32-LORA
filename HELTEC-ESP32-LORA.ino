@@ -34,14 +34,10 @@
 
 #define I2C_SDA 42
 #define I2C_SCL 41
-// #define BME_SCK 26
-// #define BME_MISO 21
-// #define BME_MOSI 20 
-//#define BME_CS 42
 
 
 // Create objects for sensors
-Adafruit_BME280 bme; // I2C
+Adafruit_BME280 bme; // I2C 3.3v
 BH1750 lightMeter;
 LoRaWANNode* node;
 
@@ -121,10 +117,6 @@ void joinNetwork() {
 // Function to read all sensors
 void readSensors() {
     Serial.println("Reading Sensors");
-    // Serial.println("Scanning I2C bus...");
-    // // Read BME280
-    // Serial.printf("Attempting to initialize BME280 at address 0x%02X\n", BME_ADDRESS);
-
     if (!bme.begin(BME_ADDRESS, &Wire1)) {
         Serial.println("Could not find BME280 sensor! Checking for common issues:");
         Wire.beginTransmission(BME_ADDRESS);
