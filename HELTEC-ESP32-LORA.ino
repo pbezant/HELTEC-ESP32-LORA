@@ -32,18 +32,16 @@
 #define SEALEVELPRESSURE_HPA (1013.25)
 #define BME_ADDRESS 0x76 // Try 0x77 if 0x76 doesn't work
 
-#define I2C_SDA 46
-#define I2C_SCL 45
+#define I2C_SDA 42
+#define I2C_SCL 41
 // #define BME_SCK 26
 // #define BME_MISO 21
 // #define BME_MOSI 20 
-#define BME_CS 42
+//#define BME_CS 42
 
 
 // Create objects for sensors
 Adafruit_BME280 bme; // I2C
-//Adafruit_BME280 bme(BME_CS); // hardware SPI
-//Adafruit_BME280 bme(BME_CS, BME_MOSI, BME_MISO,  BME_SCK);
 BH1750 lightMeter;
 LoRaWANNode* node;
 
@@ -81,7 +79,8 @@ const char* appKey = "C05BB00987036902C5AFBD3F6A55A3CF";  // App Key from TTN co
 // Initialize basic hardware components
 void initHardware() {
     heltec_setup();
-    Wire.begin(I2C_SDA, I2C_SCL);
+    //Wire.begin(I2C_SDA, I2C_SCL);
+    bool wireStatus = Wire1.begin(I2C_SDA, I2C_SCL);
     delay(100); // Give I2C time to initialize
     scanI2C();
     //persist.begin();
@@ -125,8 +124,8 @@ void readSensors() {
     // Serial.println("Scanning I2C bus...");
     // // Read BME280
     // Serial.printf("Attempting to initialize BME280 at address 0x%02X\n", BME_ADDRESS);
-    
-    if (!bme.begin(BME_ADDRESS)) {
+
+    if (!bme.begin(BME_ADDRESS, &Wire1)) {
         Serial.println("Could not find BME280 sensor! Checking for common issues:");
         Wire.beginTransmission(BME_ADDRESS);
         byte error = Wire.endTransmission();
@@ -136,20 +135,6 @@ void readSensors() {
             Serial.printf("I2C error: %d - No device found at address 0x%02X\n", error, BME_ADDRESS);
         }
         
-        // Try alternative address
-        Wire.beginTransmission(0x77);
-        error = Wire.endTransmission();
-        if (error == 0) {
-            Serial.println("Note: Found a device at alternate address 0x77!");
-        }
-                // Try alternative address
-        Wire.beginTransmission(0x78);
-        error = Wire.endTransmission();
-        if (error == 0) {
-            Serial.println("Note: Found a device at alternate address 0x78!");
-        }
-        // return;
-
     } else {
     
       Serial.println("BME280 initialized successfully!");
@@ -222,10 +207,10 @@ void sendSensorData() {
 void setup() {
     initHardware();
     readSensors();
-    // initRadio();
-    // joinNetwork();
-    // sendSensorData();
- //   goToSleep();    // Does not return, program starts over next round
+    initRadio();
+    joinNetwork();
+    sendSensorData();
+    goToSleep();    // Does not return, program starts over next round
 }
 
 
