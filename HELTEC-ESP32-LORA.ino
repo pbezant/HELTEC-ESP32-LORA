@@ -44,13 +44,14 @@ Adafruit_BME280 bme; // I2C 3.3v
 BH1750 lightMeter;
 LoRaWANNode* node;
 
-// Structure to hold sensor readings
+// Modify the struct to include PIR status
 struct SensorData {
-  float temperature;
-  float humidity;
-  float pressure;
-  float light;
-  int moisture;
+    float temperature;
+    float humidity;
+    float pressure;
+    float light;
+    int moisture;
+    bool pir_triggered;  // Add PIR status
 } sensorData;
 
 
@@ -140,6 +141,9 @@ void joinNetwork() {
 // Function to read all sensors
 void readSensors() {
     Serial.println("Reading Sensors");
+    // Store PIR wake status in sensor data
+    sensorData.pir_triggered = pir_wake;
+    
     if (!bme.begin(BME_ADDRESS, &Wire1)) {
         Serial.println("Could not find BME280 sensor! Checking for common issues:");
         Wire.beginTransmission(BME_ADDRESS);
@@ -172,11 +176,14 @@ void readSensors() {
     Serial.printf("Pressure: %.2fhPa\n", sensorData.pressure);
     Serial.printf("Light: %.2flx\n", sensorData.light);
     Serial.printf("Moisture: %d\n", sensorData.moisture);
+    
+    // Add PIR status to debug output
+    Serial.printf("PIR Triggered: %s\n", sensorData.pir_triggered ? "Yes" : "No");
 }
 // Prepare and send sensor data
 void sendSensorData() {
-    // Prepare payload - 10 bytes total
-    uint8_t uplinkData[10];
+    // Prepare payload - now 11 bytes total (added 1 byte for PIR)
+    uint8_t uplinkData[11];
     
     // Temperature: 2 bytes (multiplied by 100 to preserve 2 decimal places)
     int16_t temp = sensorData.temperature * 100;
@@ -201,8 +208,11 @@ void sendSensorData() {
     uplinkData[7] = moist >> 8;
     uplinkData[8] = moist & 0xFF;
     
-    // Counter
+    // Counter (byte 9)
     uplinkData[9] = count++;
+    
+    // Add PIR status (byte 10)
+    uplinkData[10] = sensorData.pir_triggered ? 1 : 0;
 
     uint8_t downlinkData[256];
     size_t lenDown = sizeof(downlinkData);
@@ -226,18 +236,18 @@ void setup() {
         // If PIR triggered, send data immediately
         Serial.println("Motion detected! Taking readings...");
         readSensors();
-        // initRadio();
-        // joinNetwork();
-        // sendSensorData();
+        initRadio();
+        joinNetwork();
+        sendSensorData();
     } else {
         // Normal timer-based wake-up
         readSensors();
-        // initRadio();
-        // joinNetwork();
-        // sendSensorData();
+        initRadio();
+        joinNetwork();
+        sendSensorData();
     }
     
-   // goToSleep();    // Go back to sleep
+   goToSleep();    // Go back to sleep
 }
 
 void goToSleep() {
