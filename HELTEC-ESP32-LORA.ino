@@ -101,7 +101,7 @@ void initHardware() {
     pinMode(PIR_PIN, INPUT);
     bool wireStatus = Wire1.begin(I2C_SDA, I2C_SCL);
     delay(100);
-    scanI2C();
+  //  scanI2C();
     printWakeupReason();  // Print what woke us up
 }
 
@@ -145,7 +145,7 @@ void readSensors() {
         Wire.beginTransmission(BME_ADDRESS);
         byte error = Wire.endTransmission();
         if (error == 0) {
-            Serial.println("I2C device found at address 0x%02X\n, but failed to initialize", BME_ADDRESS);
+            Serial.printf("I2C device found at address 0x%02X\n, but failed to initialize", BME_ADDRESS);
         } else {
             Serial.printf("I2C error: %d - No device found at address 0x%02X\n", error, BME_ADDRESS);
         }
@@ -237,7 +237,7 @@ void setup() {
         // sendSensorData();
     }
     
-    goToSleep();    // Go back to sleep
+   // goToSleep();    // Go back to sleep
 }
 
 void goToSleep() {
