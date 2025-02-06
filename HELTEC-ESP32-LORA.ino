@@ -14,9 +14,7 @@
  * See https://github.com/ropg/LoRaWAN_ESP32
 */
 
-
-// Pause between sends in seconds, so this is every 15 minutes. (Delay will be
-// longer if regulatory or TTN Fair Use Policy requires it.)
+// ============= Configuration =============
 #define MINIMUM_DELAY 90 
 
 
@@ -28,7 +26,7 @@
 #include <BH1750.h>
 
 // Define pins
-#define MOISTURE_PIN 36  // Analog pin for moisture sensor
+// #define MOISTURE_PIN 36  // Analog pin for moisture sensor
 #define SEALEVELPRESSURE_HPA (1013.25)
 #define BME_ADDRESS 0x76 // Try 0x77 if 0x76 doesn't work
 
@@ -50,7 +48,7 @@ struct SensorData {
     float humidity;
     float pressure;
     float light;
-    int moisture;
+    // int moisture;
     bool pir_triggered;  // Add PIR status
 } sensorData;
 
@@ -70,11 +68,11 @@ const char* appKey = "C05BB00987036902C5AFBD3F6A55A3CF";  // App Key from TTN co
 
 
 // Function declarations
-// void initHardware();
-// void initRadio();
-// void joinNetwork();
-// void sendSensorData();
-// void scanI2C();
+void initHardware();
+void initRadio();
+void joinNetwork();
+void sendSensorData();
+void scanI2C();
 
 // Add this function to check wake-up cause
 void printWakeupReason() {
@@ -167,23 +165,24 @@ void readSensors() {
     } else{
         Serial.println("Could not find BH1750 sensor!");
     }
-    // Read moisture sensor
-    sensorData.moisture = analogRead(MOISTURE_PIN);
+    
+    // Comment out moisture sensor reading
+    // sensorData.moisture = analogRead(MOISTURE_PIN);
     
     // Print readings for debugging
     Serial.printf("Temperature: %.2f°C\n", sensorData.temperature);
     Serial.printf("Humidity: %.2f%%\n", sensorData.humidity);
     Serial.printf("Pressure: %.2fhPa\n", sensorData.pressure);
     Serial.printf("Light: %.2flx\n", sensorData.light);
-    Serial.printf("Moisture: %d\n", sensorData.moisture);
+    // Serial.printf("Moisture: %d\n", sensorData.moisture);
     
     // Add PIR status to debug output
     Serial.printf("PIR Triggered: %s\n", sensorData.pir_triggered ? "Yes" : "No");
 }
 // Prepare and send sensor data
 void sendSensorData() {
-    // Prepare payload - now 11 bytes total (added 1 byte for PIR)
-    uint8_t uplinkData[11];
+    // Prepare payload - now 9 bytes total (removed 2 bytes for moisture)
+    uint8_t uplinkData[9];
     
     // Temperature: 2 bytes (multiplied by 100 to preserve 2 decimal places)
     int16_t temp = sensorData.temperature * 100;
@@ -203,16 +202,11 @@ void sendSensorData() {
     uplinkData[5] = light >> 8;
     uplinkData[6] = light & 0xFF;
     
-    // Moisture: 2 bytes
-    uint16_t moist = sensorData.moisture;
-    uplinkData[7] = moist >> 8;
-    uplinkData[8] = moist & 0xFF;
+    // Counter (byte 7)
+    uplinkData[7] = count++;
     
-    // Counter (byte 9)
-    uplinkData[9] = count++;
-    
-    // Add PIR status (byte 10)
-    uplinkData[10] = sensorData.pir_triggered ? 1 : 0;
+    // PIR status (byte 8)
+    uplinkData[8] = sensorData.pir_triggered ? 1 : 0;
 
     uint8_t downlinkData[256];
     size_t lenDown = sizeof(downlinkData);
@@ -228,27 +222,7 @@ void sendSensorData() {
     }
 }
 
-// Modify setup() to handle PIR wake-ups differently
-void setup() {
-    initHardware();
-    
-    if (pir_wake) {
-        // If PIR triggered, send data immediately
-        Serial.println("Motion detected! Taking readings...");
-        readSensors();
-        initRadio();
-        joinNetwork();
-        sendSensorData();
-    } else {
-        // Normal timer-based wake-up
-        readSensors();
-        initRadio();
-        joinNetwork();
-        sendSensorData();
-    }
-    
-   goToSleep();    // Go back to sleep
-}
+
 
 void goToSleep() {
     Serial.println("Going to deep sleep now");
@@ -295,6 +269,28 @@ void scanI2C() {
     } else {
         Serial.println("I2C scan done\n");
     }
+}
+
+// Modify setup() to handle PIR wake-ups differently
+void setup() {
+    initHardware();
+    
+    if (pir_wake) {
+        // If PIR triggered, send data immediately
+        Serial.println("Motion detected! Taking readings...");
+        readSensors();
+        initRadio();
+        joinNetwork();
+        sendSensorData();
+    } else {
+        // Normal timer-based wake-up
+        readSensors();
+        initRadio();
+        joinNetwork();
+        sendSensorData();
+    }
+    
+   goToSleep();    // Go back to sleep
 }
 
 void loop() {
