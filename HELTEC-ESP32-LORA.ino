@@ -23,7 +23,7 @@
 #include <Wire.h>
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BME280.h>
-#include <BH1750.h>
+// #include <BH1750.h>
 
 // Define pins
 // #define MOISTURE_PIN 36  // Analog pin for moisture sensor
@@ -39,17 +39,17 @@ RTC_DATA_ATTR bool pir_wake = false;  // Keep track if PIR caused the wake
 
 // Create objects for sensors
 Adafruit_BME280 bme; // I2C 3.3v
-BH1750 lightMeter;
+// BH1750 lightMeter;
 LoRaWANNode* node;
 
-// Modify the struct to include PIR status
+// Modify the struct to include PIR status and RSSI
 struct SensorData {
     float temperature;
     float humidity;
     float pressure;
-    float light;
-    // int moisture;
-    bool pir_triggered;  // Add PIR status
+    // float light;  // Remove light
+    bool pir_triggered;
+    int16_t rssi;
 } sensorData;
 
 
@@ -66,6 +66,8 @@ const char* devEui = "70B3D57ED8003DF4";  // Device EUI from TTN console
 const char* appEui = "EABB82D8689A30D7";  // Application EUI from TTN console
 const char* appKey = "C05BB00987036902C5AFBD3F6A55A3CF";  // App Key from TTN console
 
+// Add this with other RTC variables near the top of the file
+RTC_DATA_ATTR int16_t last_rssi = 0;  // Store previous transmission's RSSI
 
 // Function declarations
 void initHardware();
@@ -139,7 +141,6 @@ void joinNetwork() {
 // Function to read all sensors
 void readSensors() {
     Serial.println("Reading Sensors");
-    // Store PIR wake status in sensor data
     sensorData.pir_triggered = pir_wake;
     
     if (!bme.begin(BME_ADDRESS, &Wire1)) {
@@ -159,30 +160,17 @@ void readSensors() {
       sensorData.humidity = bme.readHumidity();
       sensorData.pressure = bme.readPressure() / 100.0F;
     }
-    // Read BH1750
-    if (lightMeter.begin(BH1750::CONTINUOUS_HIGH_RES_MODE)) {
-        sensorData.light = lightMeter.readLightLevel();
-    } else{
-        Serial.println("Could not find BH1750 sensor!");
-    }
-    
-    // Comment out moisture sensor reading
-    // sensorData.moisture = analogRead(MOISTURE_PIN);
     
     // Print readings for debugging
     Serial.printf("Temperature: %.2f°C\n", sensorData.temperature);
     Serial.printf("Humidity: %.2f%%\n", sensorData.humidity);
     Serial.printf("Pressure: %.2fhPa\n", sensorData.pressure);
-    Serial.printf("Light: %.2flx\n", sensorData.light);
-    // Serial.printf("Moisture: %d\n", sensorData.moisture);
-    
-    // Add PIR status to debug output
     Serial.printf("PIR Triggered: %s\n", sensorData.pir_triggered ? "Yes" : "No");
 }
 // Prepare and send sensor data
 void sendSensorData() {
-    // Prepare payload - now 9 bytes total (removed 2 bytes for moisture)
-    uint8_t uplinkData[9];
+    // Prepare payload - now 11 bytes total
+    uint8_t uplinkData[11];
     
     // Temperature: 2 bytes (multiplied by 100 to preserve 2 decimal places)
     int16_t temp = sensorData.temperature * 100;
@@ -197,32 +185,35 @@ void sendSensorData() {
     uplinkData[3] = press >> 8;
     uplinkData[4] = press & 0xFF;
     
-    // Light: 2 bytes
-    uint16_t light = sensorData.light;
-    uplinkData[5] = light >> 8;
-    uplinkData[6] = light & 0xFF;
-    
     // Counter (byte 7)
     uplinkData[7] = count++;
     
     // PIR status (byte 8)
     uplinkData[8] = sensorData.pir_triggered ? 1 : 0;
+    
+    // Previous transmission's RSSI (bytes 9-10)
+    uplinkData[9] = last_rssi >> 8;
+    uplinkData[10] = last_rssi & 0xFF;
 
     uint8_t downlinkData[256];
     size_t lenDown = sizeof(downlinkData);
 
     int16_t state = node->sendReceive(uplinkData, sizeof(uplinkData), 1, downlinkData, &lenDown);
 
+    // Store current RSSI for next transmission
+    last_rssi = radio.getRSSI();
+    
     if(state == RADIOLIB_ERR_NONE) {
         Serial.println("Message sent, no downlink received.");
+        Serial.printf("RSSI of this transmission: %d dBm (will be sent in next payload)\n", last_rssi);
     } else if (state > 0) {
         Serial.println("Message sent, downlink received.");
+        Serial.printf("RSSI of this transmission: %d dBm (will be sent in next payload)\n", last_rssi);
     } else {
         Serial.printf("sendReceive returned error %d, we'll try again later.\n", state);
+        goToSleep();
     }
 }
-
-
 
 void goToSleep() {
     Serial.println("Going to deep sleep now");
@@ -230,7 +221,7 @@ void goToSleep() {
     
     uint32_t delayMs;
     
-    if (node == nullptr || !node->isActivated()) {
+    if (node == nullptr || !node->isActivated() ) {
         delayMs = MINIMUM_DELAY * 1000;
     } else {
         uint32_t interval = node->timeUntilUplink();
@@ -243,7 +234,7 @@ void goToSleep() {
 
     // Configure wake-up sources
     esp_sleep_enable_ext0_wakeup(GPIO_NUM_5, HIGH);  // PIR sensor wake-up
-    esp_sleep_enable_timer_wakeup(delayMs * 1000);   // Timer wake-up (convert to microseconds)
+    esp_sleep_enable_timer_wakeup(delayMs);   // Timer wake-up (convert to microseconds)
     
     // Go to sleep
     esp_deep_sleep_start();
