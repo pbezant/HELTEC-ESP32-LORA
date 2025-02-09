@@ -27,9 +27,7 @@ const BYTE_POSITIONS = {
   TEMPERATURE: { START: 0, LENGTH: 2 },
   HUMIDITY: { START: 2, LENGTH: 1 },
   PRESSURE: { START: 3, LENGTH: 2 },
-  LIGHT: { START: 5, LENGTH: 2 },
-  COUNTER: { START: 7, LENGTH: 1 },
-  MOTION: { START: 8, LENGTH: 1 }
+  MOTION: { START: 6, LENGTH: 1 }
 };
 
 // Utility functions for byte conversion
@@ -50,7 +48,8 @@ const ByteConverter = {
 const SensorDecoder = {
   temperature: (bytes) => {
     const raw = ByteConverter.toInt16(bytes, BYTE_POSITIONS.TEMPERATURE.START);
-    return raw / SENSOR_LIMITS.TEMPERATURE.SCALE_FACTOR;
+    const celsius = raw / SENSOR_LIMITS.TEMPERATURE.SCALE_FACTOR;
+    return celsius;
   },
 
   humidity: (bytes) => {
@@ -60,14 +59,6 @@ const SensorDecoder = {
   pressure: (bytes) => {
     const raw = ByteConverter.toUInt16(bytes, BYTE_POSITIONS.PRESSURE.START);
     return (raw / SENSOR_LIMITS.PRESSURE.SCALE_FACTOR) + SENSOR_LIMITS.PRESSURE.OFFSET;
-  },
-
-  light: (bytes) => {
-    return ByteConverter.toUInt16(bytes, BYTE_POSITIONS.LIGHT.START);
-  },
-
-  counter: (bytes) => {
-    return bytes[BYTE_POSITIONS.COUNTER.START];
   },
 
   motion: (bytes) => {
@@ -102,27 +93,27 @@ function decodeUplink(input) {
     }
 
     // Check payload length
-    const EXPECTED_LENGTH = 9;
+    const EXPECTED_LENGTH = 7;  // Updated to match Arduino code
     if (input.bytes.length !== EXPECTED_LENGTH) {
       throw new Error(`Invalid payload length. Expected ${EXPECTED_LENGTH} bytes, got ${input.bytes.length}`);
     }
 
     // Decode sensor data
     const decoded = {
-      temperature: SensorDecoder.temperature(input.bytes),
+      temperature: {
+        celsius: SensorDecoder.temperature(input.bytes),
+        fahrenheit: (SensorDecoder.temperature(input.bytes) * 9/5) + 32
+      },
       humidity: SensorDecoder.humidity(input.bytes),
       pressure: SensorDecoder.pressure(input.bytes),
-      light: SensorDecoder.light(input.bytes),
-      counter: SensorDecoder.counter(input.bytes),
       motion_detected: SensorDecoder.motion(input.bytes)
     };
 
     // Validate readings
     decoded.status = {
-      temperature_valid: Validator.validateReading('temperature', decoded.temperature, SENSOR_LIMITS.TEMPERATURE),
+      temperature_valid: Validator.validateReading('temperature', decoded.temperature.celsius, SENSOR_LIMITS.TEMPERATURE),
       humidity_valid: Validator.validateReading('humidity', decoded.humidity, SENSOR_LIMITS.HUMIDITY),
-      pressure_valid: Validator.validateReading('pressure', decoded.pressure, SENSOR_LIMITS.PRESSURE),
-      light_valid: Validator.validateReading('light', decoded.light, SENSOR_LIMITS.LIGHT)
+      pressure_valid: Validator.validateReading('pressure', decoded.pressure, SENSOR_LIMITS.PRESSURE)
     };
 
     return {

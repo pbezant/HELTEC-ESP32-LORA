@@ -47,14 +47,14 @@ struct SensorData {
     float temperature;
     float humidity;
     float pressure;
-    float light;
+    // float light;
     // int moisture;
     bool pir_triggered;  // Add PIR status
 } sensorData;
 
 
 
-RTC_DATA_ATTR uint8_t count = 0;
+RTC_DATA_ATTR uint8_t count;
 
 // Add these definitions after the other #define statements
 #define BAND    US915  // Set your region frequency (915MHz for US)
@@ -72,7 +72,6 @@ void initHardware();
 void initRadio();
 void joinNetwork();
 void sendSensorData();
-void scanI2C();
 
 // Add this function to check wake-up cause
 void printWakeupReason() {
@@ -100,7 +99,6 @@ void initHardware() {
     pinMode(PIR_PIN, INPUT);
     bool wireStatus = Wire1.begin(I2C_SDA, I2C_SCL);
     delay(100);
-  //  scanI2C();
     printWakeupReason();  // Print what woke us up
 }
 
@@ -109,7 +107,7 @@ void initRadio() {
     Serial.println("Radio init");
     int16_t state = radio.begin();
     if (state != RADIOLIB_ERR_NONE) {
-        Serial.println("Radio did not initialize. We'll try again later.");
+        Serial.printf("Radio did not initialize. We'll try again later. Reason %d\n", state);
         goToSleep();
     }
     node = persist.manage(&radio);
@@ -160,11 +158,11 @@ void readSensors() {
       sensorData.pressure = bme.readPressure() / 100.0F;
     }
     // Read BH1750
-    if (lightMeter.begin(BH1750::CONTINUOUS_HIGH_RES_MODE)) {
-        sensorData.light = lightMeter.readLightLevel();
-    } else{
-        Serial.println("Could not find BH1750 sensor!");
-    }
+    // if (lightMeter.begin(BH1750::CONTINUOUS_HIGH_RES_MODE)) {
+    //     sensorData.light = lightMeter.readLightLevel();
+    // } else{
+    //     Serial.println("Could not find BH1750 sensor!");
+    // }
     
     // Comment out moisture sensor reading
     // sensorData.moisture = analogRead(MOISTURE_PIN);
@@ -173,7 +171,7 @@ void readSensors() {
     Serial.printf("Temperature: %.2f°C\n", sensorData.temperature);
     Serial.printf("Humidity: %.2f%%\n", sensorData.humidity);
     Serial.printf("Pressure: %.2fhPa\n", sensorData.pressure);
-    Serial.printf("Light: %.2flx\n", sensorData.light);
+    // Serial.printf("Light: %.2flx\n", sensorData.light);
     // Serial.printf("Moisture: %d\n", sensorData.moisture);
     
     // Add PIR status to debug output
@@ -181,8 +179,7 @@ void readSensors() {
 }
 // Prepare and send sensor data
 void sendSensorData() {
-    // Prepare payload - now 9 bytes total (removed 2 bytes for moisture)
-    uint8_t uplinkData[9];
+    uint8_t uplinkData[6];
     
     // Temperature: 2 bytes (multiplied by 100 to preserve 2 decimal places)
     int16_t temp = sensorData.temperature * 100;
@@ -197,16 +194,8 @@ void sendSensorData() {
     uplinkData[3] = press >> 8;
     uplinkData[4] = press & 0xFF;
     
-    // Light: 2 bytes
-    uint16_t light = sensorData.light;
-    uplinkData[5] = light >> 8;
-    uplinkData[6] = light & 0xFF;
-    
-    // Counter (byte 7)
-    uplinkData[7] = count++;
-    
-    // PIR status (byte 8)
-    uplinkData[8] = sensorData.pir_triggered ? 1 : 0;
+    // PIR status (byte 5)
+    uplinkData[5] = sensorData.pir_triggered ? 1 : 0;
 
     uint8_t downlinkData[256];
     size_t lenDown = sizeof(downlinkData);
