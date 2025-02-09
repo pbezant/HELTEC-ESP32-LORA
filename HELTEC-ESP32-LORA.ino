@@ -47,7 +47,6 @@ struct SensorData {
     float temperature;
     float humidity;
     float pressure;
-    // float light;  // Remove light
     bool pir_triggered;
     int16_t rssi;
 } sensorData;
@@ -68,6 +67,11 @@ const char* appKey = "C05BB00987036902C5AFBD3F6A55A3CF";  // App Key from TTN co
 
 // Add this with other RTC variables near the top of the file
 RTC_DATA_ATTR int16_t last_rssi = 0;  // Store previous transmission's RSSI
+
+// Add this with other RTC variables
+RTC_DATA_ATTR bool had_successful_transmission = false;  // Track if we've had a successful transmission
+RTC_DATA_ATTR int consecutive_errors = 0;
+RTC_DATA_ATTR uint32_t error_backoff_time = MINIMUM_DELAY;
 
 // Function declarations
 void initHardware();
@@ -169,8 +173,8 @@ void readSensors() {
 }
 // Prepare and send sensor data
 void sendSensorData() {
-    // Prepare payload - now 11 bytes total
-    uint8_t uplinkData[11];
+    // Prepare payload - now 9 bytes total
+    uint8_t uplinkData[9];
     
     // Temperature: 2 bytes (multiplied by 100 to preserve 2 decimal places)
     int16_t temp = sensorData.temperature * 100;
@@ -185,15 +189,15 @@ void sendSensorData() {
     uplinkData[3] = press >> 8;
     uplinkData[4] = press & 0xFF;
     
-    // Counter (byte 7)
-    uplinkData[7] = count++;
+    // Counter (byte 5)
+    uplinkData[5] = count++;
     
-    // PIR status (byte 8)
-    uplinkData[8] = sensorData.pir_triggered ? 1 : 0;
+    // PIR status (byte 6)
+    uplinkData[6] = sensorData.pir_triggered ? 1 : 0;
     
-    // Previous transmission's RSSI (bytes 9-10)
-    uplinkData[9] = last_rssi >> 8;
-    uplinkData[10] = last_rssi & 0xFF;
+    // RSSI: 2 bytes (signed int16) (bytes 7-8)
+    uplinkData[7] = last_rssi >> 8;
+    uplinkData[8] = last_rssi & 0xFF;
 
     uint8_t downlinkData[256];
     size_t lenDown = sizeof(downlinkData);
@@ -203,15 +207,25 @@ void sendSensorData() {
     // Store current RSSI for next transmission
     last_rssi = radio.getRSSI();
     
-    if(state == RADIOLIB_ERR_NONE) {
-        Serial.println("Message sent, no downlink received.");
+    if(state == RADIOLIB_ERR_NONE || state > 0) {
+        Serial.println(state == RADIOLIB_ERR_NONE ? "Message sent, no downlink received." : "Message sent, downlink received.");
         Serial.printf("RSSI of this transmission: %d dBm (will be sent in next payload)\n", last_rssi);
-    } else if (state > 0) {
-        Serial.println("Message sent, downlink received.");
-        Serial.printf("RSSI of this transmission: %d dBm (will be sent in next payload)\n", last_rssi);
+        consecutive_errors = 0;  // Reset error counter on success
+        error_backoff_time = MINIMUM_DELAY;  // Reset backoff time
+        had_successful_transmission = true;  // Mark that we've had a successful transmission
+        Serial.println("PIR triggers will now be enabled");
     } else {
-        Serial.printf("sendReceive returned error %d, we'll try again later.\n", state);
-        goToSleep();
+        Serial.printf("sendReceive returned error %d\n", state);
+        consecutive_errors++;
+        
+        // Exponential backoff for repeated errors (max 1 hour)
+        error_backoff_time = min(error_backoff_time * 2, (uint32_t)3600);
+        
+        Serial.printf("Consecutive errors: %d, next retry in %d seconds\n", 
+                     consecutive_errors, error_backoff_time);
+                     
+        // Force timer-based wake-up instead of PIR for next cycle
+        pir_wake = false;
     }
 }
 
@@ -221,7 +235,9 @@ void goToSleep() {
     
     uint32_t delayMs;
     
-    if (node == nullptr || !node->isActivated() ) {
+    if (consecutive_errors > 0) {
+        delayMs = error_backoff_time * 1000;  // Convert to milliseconds
+    } else if (node == nullptr || !node->isActivated()) {
         delayMs = MINIMUM_DELAY * 1000;
     } else {
         uint32_t interval = node->timeUntilUplink();
@@ -229,14 +245,20 @@ void goToSleep() {
     }
     
     Serial.printf("Next TX in %i mins\n", (delayMs/1000)/60);
-    Serial.println("PIR sensor will also wake device on motion");
-    delay(100);
-
-    // Configure wake-up sources
-    esp_sleep_enable_ext0_wakeup(GPIO_NUM_5, HIGH);  // PIR sensor wake-up
-    esp_sleep_enable_timer_wakeup(delayMs);   // Timer wake-up (convert to microseconds)
     
-    // Go to sleep
+    // Only enable PIR wake-up if we've had a successful transmission and no current errors
+    if (had_successful_transmission && consecutive_errors == 0) {
+        Serial.println("PIR sensor enabled and will wake device on motion");
+        esp_sleep_enable_ext0_wakeup(GPIO_NUM_5, HIGH);
+    } else {
+        if (!had_successful_transmission) {
+            Serial.println("PIR sensor disabled until first successful transmission");
+        } else {
+            Serial.println("PIR sensor disabled until transmission errors resolve");
+        }
+    }
+    
+    esp_sleep_enable_timer_wakeup(delayMs * 1000);   // Timer wake-up (convert to microseconds)
     esp_deep_sleep_start();
 }
 
@@ -262,26 +284,33 @@ void scanI2C() {
     }
 }
 
-// Modify setup() to handle PIR wake-ups differently
+// Modify setup() to respect the transmission success flag
 void setup() {
     initHardware();
     
-    if (pir_wake) {
-        // If PIR triggered, send data immediately
-        Serial.println("Motion detected! Taking readings...");
-        readSensors();
-        initRadio();
-        joinNetwork();
-        sendSensorData();
-    } else {
-        // Normal timer-based wake-up
-        readSensors();
-        initRadio();
-        joinNetwork();
-        sendSensorData();
+    // If we haven't had a successful transmission yet, or have errors, ignore PIR wake-ups
+    if ((!had_successful_transmission || consecutive_errors > 0) && 
+        esp_sleep_get_wakeup_cause() == ESP_SLEEP_WAKEUP_EXT0) {
+        Serial.println("Ignoring PIR wake-up - waiting for successful transmission");
+        goToSleep();
+        return;
     }
     
-   goToSleep();    // Go back to sleep
+    readSensors();
+    initRadio();
+    joinNetwork();
+    sendSensorData();
+    goToSleep();
+}
+
+// Add this function to reset all RTC variables if needed
+void resetRTCVariables() {
+    had_successful_transmission = false;
+    consecutive_errors = 0;
+    error_backoff_time = MINIMUM_DELAY;
+    count = 0;
+    last_rssi = 0;
+    pir_wake = false;
 }
 
 void loop() {
