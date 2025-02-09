@@ -27,7 +27,7 @@ const BYTE_POSITIONS = {
   TEMPERATURE: { START: 0, LENGTH: 2 },
   HUMIDITY: { START: 2, LENGTH: 1 },
   PRESSURE: { START: 3, LENGTH: 2 },
-  MOTION: { START: 6, LENGTH: 1 }
+  MOTION: { START: 5, LENGTH: 1 }
 };
 
 // Utility functions for byte conversion
@@ -93,7 +93,7 @@ function decodeUplink(input) {
     }
 
     // Check payload length
-    const EXPECTED_LENGTH = 7;  // Updated to match Arduino code
+    const EXPECTED_LENGTH = 6;  // Updated to match Arduino code
     if (input.bytes.length !== EXPECTED_LENGTH) {
       throw new Error(`Invalid payload length. Expected ${EXPECTED_LENGTH} bytes, got ${input.bytes.length}`);
     }
