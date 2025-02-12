@@ -140,7 +140,7 @@ void joinNetwork() {
     Serial.println("Successfully joined network!");
 
     // Manages uplink intervals to the TTN Fair Use Policy
-    node->setDutyCycle(true, 1250);
+    node->setDutyCycle(true, 0);
 }
 // Function to read all sensors
 void readSensors() {
