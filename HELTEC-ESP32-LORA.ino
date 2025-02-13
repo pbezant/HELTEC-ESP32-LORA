@@ -242,7 +242,7 @@ void sendSensorData() {
 void goToSleep() {
     SERIAL_LOG("Preparing for deep sleep");
     uint32_t delayMs = node->timeUntilUplink();
-    SERIAL_LOG("Sleeping for %d minutes", delayMs/60000);
+    SERIAL_LOG("Sleeping for %d minutes", delayMs/6000);
     
     if (had_successful_transmission) {
         SERIAL_LOG("Enabling PIR wakeup");
