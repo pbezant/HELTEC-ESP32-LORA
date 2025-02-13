@@ -23,7 +23,10 @@
 #include <Wire.h>
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BME280.h>
+// #include <esp32-hal-misc.h>
 // #include <BH1750.h>
+
+#define Serial Serial0  // Explicit serial port definition
 
 // Define pins
 // #define MOISTURE_PIN 36  // Analog pin for moisture sensor
@@ -80,21 +83,29 @@ void joinNetwork();
 void sendSensorData();
 void scanI2C();
 
+
+// Replace existing SERIAL_LOG macro with:
+#define SERIAL_LOG(fmt, ...) do { \
+    Serial.printf("[%s:%d] ", pathToFileName(__FILE__), __LINE__); \
+    Serial.printf(fmt __VA_OPT__(,) __VA_ARGS__); \
+    Serial.println(); \
+} while(0)
+
 // Add this function to check wake-up cause
 void printWakeupReason() {
     esp_sleep_wakeup_cause_t wakeup_reason = esp_sleep_get_wakeup_cause();
     
     switch(wakeup_reason) {
         case ESP_SLEEP_WAKEUP_EXT0:
-            Serial.println("Wakeup caused by external signal using RTC_IO (PIR sensor)");
+            SERIAL_LOG("Wakeup caused by external signal using RTC_IO (PIR sensor)");
             pir_wake = true;
             break;
         case ESP_SLEEP_WAKEUP_TIMER:
-            Serial.println("Wakeup caused by timer");
+            SERIAL_LOG("Wakeup caused by timer");
             pir_wake = false;
             break;
         default:
-            Serial.printf("Wakeup was not caused by deep sleep: %d\n", wakeup_reason);
+            SERIAL_LOG("Wakeup was not caused by deep sleep: %d", wakeup_reason);
             pir_wake = false;
             break;
     }
@@ -112,7 +123,7 @@ void initHardware() {
 
 // Initialize and check radio
 void initRadio() {
-    Serial.println("Radio init");
+    SERIAL_LOG("Initializing radio");
     int16_t state = radio.begin();
     if (state != RADIOLIB_ERR_NONE) {
         Serial.println("Radio did not initialize. We'll try again later.");
@@ -123,6 +134,7 @@ void initRadio() {
 
 // Join LoRaWAN network
 void joinNetwork() {                         
+    SERIAL_LOG("Joining network");
     Serial.println("Attempting to join network...");
     int attempts = 0;
     while (!node->isActivated() && attempts < 5) {
@@ -208,62 +220,40 @@ void sendSensorData() {
     last_rssi = radio.getRSSI();
     
     if(state == RADIOLIB_ERR_NONE || state > 0) {
-        Serial.println(state == RADIOLIB_ERR_NONE ? "Message sent, no downlink received." : "Message sent, downlink received.");
-        Serial.printf("RSSI of this transmission: %d dBm (will be sent in next payload)\n", last_rssi);
-        consecutive_errors = 0;  // Reset error counter on success
-        error_backoff_time = MINIMUM_DELAY;  // Reset backoff time
-        had_successful_transmission = true;  // Mark that we've had a successful transmission
-        Serial.println("PIR triggers will now be enabled");
+        SERIAL_LOG(state == RADIOLIB_ERR_NONE ? 
+            "Message sent, no downlink received. Status: %d" : 
+            "Message sent, downlink received. Status: %d", 
+            state);
+        SERIAL_LOG("RSSI of this transmission: %d dBm (will be sent in next payload)", last_rssi);
+        consecutive_errors = 0;
+        error_backoff_time = MINIMUM_DELAY;
+        had_successful_transmission = true;
+        SERIAL_LOG("PIR triggers will now be enabled");
     } else {
-        Serial.printf("sendReceive returned error %d\n", state);
+        SERIAL_LOG("sendReceive returned error %d", state);
         consecutive_errors++;
-        
-        // Exponential backoff for repeated errors (max 1 hour)
-        error_backoff_time = min(error_backoff_time * 2, (uint32_t)3600);
-        
-        Serial.printf("Consecutive errors: %d, next retry in %d seconds\n", 
-                     consecutive_errors, error_backoff_time);
-                     
-        // Force timer-based wake-up instead of PIR for next cycle
+        error_backoff_time = min(error_backoff_time, (uint32_t)MINIMUM_DELAY);
+        SERIAL_LOG("Consecutive errors: %d, next retry in %d seconds", 
+                  consecutive_errors, error_backoff_time);
         pir_wake = false;
     }
 }
 
 void goToSleep() {
-    Serial.println("Going to deep sleep now");
-    persist.saveSession(node);
+    SERIAL_LOG("Preparing for deep sleep");
+    uint32_t delayMs = node->timeUntilUplink();
+    SERIAL_LOG("Sleeping for %d minutes", delayMs/60000);
     
-    uint32_t delayMs;
-    
-    if (consecutive_errors > 0) {
-        delayMs = error_backoff_time * 1000;  // Convert to milliseconds
-    } else if (node == nullptr || !node->isActivated()) {
-        delayMs = MINIMUM_DELAY * 1000;
-    } else {
-        uint32_t interval = node->timeUntilUplink();
-        delayMs = max(interval, (uint32_t)MINIMUM_DELAY * 1000);
-    }
-    
-    Serial.printf("Next TX in %i mins\n", (delayMs/1000)/60);
-    
-    // Only enable PIR wake-up if we've had a successful transmission and no current errors
-    if (had_successful_transmission && consecutive_errors == 0) {
-        Serial.println("PIR sensor enabled and will wake device on motion");
+    if (had_successful_transmission) {
+        SERIAL_LOG("Enabling PIR wakeup");
         esp_sleep_enable_ext0_wakeup(GPIO_NUM_5, HIGH);
-    } else {
-        if (!had_successful_transmission) {
-            Serial.println("PIR sensor disabled until first successful transmission");
-        } else {
-            Serial.println("PIR sensor disabled until transmission errors resolve");
-        }
     }
     
-    esp_sleep_enable_timer_wakeup(delayMs * 1000);   // Timer wake-up (convert to microseconds)
     esp_deep_sleep_start();
 }
 
 void scanI2C() {
-    Serial.println("Scanning I2C bus...");
+    SERIAL_LOG("Scanning I2C bus...");
     byte error, address;
     int nDevices = 0;
     
@@ -272,26 +262,29 @@ void scanI2C() {
         error = Wire.endTransmission();
         
         if (error == 0) {
-            Serial.printf("I2C device found at address 0x%02X\n", address);
+            SERIAL_LOG("I2C device found at address 0x%02X", address);
             nDevices++;
         }
     }
     
     if (nDevices == 0) {
-        Serial.println("No I2C devices found\n");
+        SERIAL_LOG("No I2C devices found");
     } else {
-        Serial.println("I2C scan done\n");
+        SERIAL_LOG("I2C scan done");
     }
 }
 
 // Modify setup() to respect the transmission success flag
 void setup() {
+    heltec_setup();
+    Serial.begin(115200);
+    SERIAL_LOG("Initializing system");
+    
     initHardware();
     
-    // If we haven't had a successful transmission yet, or have errors, ignore PIR wake-ups
     if ((!had_successful_transmission || consecutive_errors > 0) && 
         esp_sleep_get_wakeup_cause() == ESP_SLEEP_WAKEUP_EXT0) {
-        Serial.println("Ignoring PIR wake-up - waiting for successful transmission");
+        SERIAL_LOG("Ignoring PIR wake-up - waiting for successful transmission");
         goToSleep();
         return;
     }
