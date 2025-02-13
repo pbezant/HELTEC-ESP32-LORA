@@ -39,7 +39,7 @@
 
 // Add this with other pin definitions
 #define PIR_PIN 5  // Change this to match your PIR sensor connection
-RTC_DATA_ATTR bool pir_wake = false;  // Keep track if PIR caused the wake
+RTC_DATA_ATTR bool pir_wake;  // Keep track if PIR caused the wake
 
 // Create objects for sensors
 Adafruit_BME280 bme; // I2C 3.3v
@@ -416,9 +416,9 @@ void setup() {
     }
     initRadio();
     readSensors();
-   if(!node->isActivated()) {
+  // if(!node->isActivated()) {
     joinNetwork();
-   }
+  //}
     sendSensorData();
     goToSleep();
 }
