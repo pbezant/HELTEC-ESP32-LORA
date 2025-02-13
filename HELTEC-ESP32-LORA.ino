@@ -81,7 +81,7 @@ void initHardware();
 void initRadio();
 void joinNetwork();
 void sendSensorData();
-void scanI2C();
+void goToSleep();
 
 
 // Replace existing SERIAL_LOG macro with:
@@ -119,17 +119,26 @@ void initHardware() {
     delay(100);
     printWakeupReason();  // Print what woke us up
 }
-
+int16_t state;
 // Initialize and check radio
 void initRadio() {
-    SERIAL_LOG("Initializing radio");
-    int16_t state = radio.begin();
-    if (state != RADIOLIB_ERR_NONE) {
-        Serial.printf("Radio did not initialize. We'll try again later. Reason %d\n", state);
-        goToSleep();
+    if(esp_sleep_get_wakeup_cause() != ESP_SLEEP_WAKEUP_UNDEFINED) {
+        SERIAL_LOG("Resuming from deep sleep");
+        // radio.begin();
+        // delay(50);
+        state = radio.reset();  // Full hardware reset
+        // node = persist.loadSession(&radio);
+        persist.loadSession(node);
     }
-    node = persist.manage(&radio);
-}
+    // }else{
+        SERIAL_LOG("Initializing radio");
+        state = radio.begin();
+        if (state != RADIOLIB_ERR_NONE) {
+            Serial.printf("Radio did not initialize. We'll try again later. Reason %d\n", state);
+            goToSleep();
+        }
+        node = persist.manage(&radio);
+    }
 
 // Join LoRaWAN network
 void joinNetwork() {                         
@@ -241,7 +250,8 @@ void sendSensorData() {
 void goToSleep() {
     SERIAL_LOG("Preparing for deep sleep");
     uint32_t delayMs = node->timeUntilUplink();
-    SERIAL_LOG("Sleeping for %d minutes", delayMs/6000);
+//    SERIAL_LOG("Sleeping for %d minutes", (delayMs*1000)/60);
+    SERIAL_LOG("Sleeping for %d seconds", delayMs);
     
     if (had_successful_transmission) {
         SERIAL_LOG("Enabling PIR wakeup");
