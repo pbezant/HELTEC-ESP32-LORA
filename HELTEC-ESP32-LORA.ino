@@ -296,9 +296,9 @@ void setup() {
         goToSleep();
         return;
     }
-    
-    readSensors();
     initRadio();
+    readSensors();
+   
     joinNetwork();
     sendSensorData();
     goToSleep();
