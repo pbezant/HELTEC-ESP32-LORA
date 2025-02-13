@@ -130,15 +130,14 @@ void initRadio() {
         // node = persist.loadSession(&radio);
         persist.loadSession(node);
     }
-    // }else{
-        SERIAL_LOG("Initializing radio");
-        state = radio.begin();
-        if (state != RADIOLIB_ERR_NONE) {
-            Serial.printf("Radio did not initialize. We'll try again later. Reason %d\n", state);
-            goToSleep();
-        }
-        node = persist.manage(&radio);
+    SERIAL_LOG("Initializing radio");
+    state = radio.begin();
+    if (state != RADIOLIB_ERR_NONE) {
+        Serial.printf("Radio did not initialize. We'll try again later. Reason %d\n", state);
+        goToSleep();
     }
+    node = persist.manage(&radio);
+}
 
 // Join LoRaWAN network
 void joinNetwork() {                         
