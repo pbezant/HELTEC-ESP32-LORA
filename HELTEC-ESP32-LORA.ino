@@ -139,26 +139,20 @@ void initRadio() {
 }
 
 // Join LoRaWAN network
-void joinNetwork() {                         
-    SERIAL_LOG("Joining network");
-    Serial.println("Attempting to join network...");
-    int attempts = 0;
-    while (!node->isActivated() && attempts < 5) {
-        Serial.print("Join attempt ");
-        Serial.println(attempts + 1);
-        delay(5000);  // Wait between attempts
-        attempts++;
+void joinNetwork() {
+    // Initiate join
+    SERIAL_LOG("Activating OTAA");
+    int joinResult = node->activateOTAA();
+    SERIAL_LOG("Join result: %d", joinResult);
+    if(joinResult == RADIOLIB_ERR_NONE) {
+        SERIAL_LOG("Joined successfully!");
+        persist.saveSession(node);
+        // Manages uplink intervals to the TTN Fair Use Policy
+        node->setDutyCycle(true, 0);
+    } else {
+        SERIAL_LOG("Join failed: %d", joinResult);
     }
-
-    if (!node->isActivated()) {
-        Serial.println("Could not join network after 5 attempts. Going to sleep.");
-        goToSleep();
-    }
-
-    Serial.println("Successfully joined network!");
-
-    // Manages uplink intervals to the TTN Fair Use Policy
-    node->setDutyCycle(true, 0);
+    
 }
 
 // Function to read all sensors
