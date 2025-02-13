@@ -16,9 +16,9 @@ const SENSOR_LIMITS = {
     OFFSET: 900,       // Add this to get actual value
     SCALE_FACTOR: 10   // Divide by 10 to get actual value
   },
-  LIGHT: {
-    MIN: 0,
-    MAX: 65535        // 16-bit maximum
+  RSSI: {
+    MIN: -120,        // Typical minimum RSSI value
+    MAX: 0           // Typical maximum RSSI value
   }
 };
 
@@ -27,7 +27,9 @@ const BYTE_POSITIONS = {
   TEMPERATURE: { START: 0, LENGTH: 2 },
   HUMIDITY: { START: 2, LENGTH: 1 },
   PRESSURE: { START: 3, LENGTH: 2 },
-  MOTION: { START: 5, LENGTH: 1 }
+  COUNTER: { START: 7, LENGTH: 1 },
+  MOTION: { START: 8, LENGTH: 1 },
+  RSSI: { START: 9, LENGTH: 2 }
 };
 
 // Utility functions for byte conversion
@@ -61,8 +63,16 @@ const SensorDecoder = {
     return (raw / SENSOR_LIMITS.PRESSURE.SCALE_FACTOR) + SENSOR_LIMITS.PRESSURE.OFFSET;
   },
 
+  counter: (bytes) => {
+    return bytes[BYTE_POSITIONS.COUNTER.START];
+  },
+
   motion: (bytes) => {
     return bytes[BYTE_POSITIONS.MOTION.START] === 1;
+  },
+
+  rssi: (bytes) => {
+    return ByteConverter.toInt16(bytes, BYTE_POSITIONS.RSSI.START);
   }
 };
 
@@ -93,7 +103,7 @@ function decodeUplink(input) {
     }
 
     // Check payload length
-    const EXPECTED_LENGTH = 6;  // Updated to match Arduino code
+    const EXPECTED_LENGTH = 11; // Updated to include RSSI
     if (input.bytes.length !== EXPECTED_LENGTH) {
       throw new Error(`Invalid payload length. Expected ${EXPECTED_LENGTH} bytes, got ${input.bytes.length}`);
     }
@@ -106,14 +116,17 @@ function decodeUplink(input) {
       },
       humidity: SensorDecoder.humidity(input.bytes),
       pressure: SensorDecoder.pressure(input.bytes),
-      motion_detected: SensorDecoder.motion(input.bytes)
+      counter: SensorDecoder.counter(input.bytes),
+      motion_detected: SensorDecoder.motion(input.bytes),
+      last_rssi: SensorDecoder.rssi(input.bytes)
     };
 
     // Validate readings
     decoded.status = {
       temperature_valid: Validator.validateReading('temperature', decoded.temperature.celsius, SENSOR_LIMITS.TEMPERATURE),
       humidity_valid: Validator.validateReading('humidity', decoded.humidity, SENSOR_LIMITS.HUMIDITY),
-      pressure_valid: Validator.validateReading('pressure', decoded.pressure, SENSOR_LIMITS.PRESSURE)
+      pressure_valid: Validator.validateReading('pressure', decoded.pressure, SENSOR_LIMITS.PRESSURE),
+      rssi_valid: Validator.validateReading('rssi', decoded.last_rssi, SENSOR_LIMITS.RSSI)
     };
 
     return {

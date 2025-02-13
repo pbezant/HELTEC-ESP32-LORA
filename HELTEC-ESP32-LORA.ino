@@ -15,7 +15,7 @@
 */
 
 // ============= Configuration =============
-#define MINIMUM_DELAY 90 
+#define MINIMUM_DELAY 120
 
 
 #include <heltec_unofficial.h>
@@ -23,7 +23,10 @@
 #include <Wire.h>
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BME280.h>
-#include <BH1750.h>
+// #include <esp32-hal-misc.h>
+// #include <BH1750.h>
+
+#define Serial Serial0  // Explicit serial port definition
 
 // Define pins
 // #define MOISTURE_PIN 36  // Analog pin for moisture sensor
@@ -39,17 +42,16 @@ RTC_DATA_ATTR bool pir_wake = false;  // Keep track if PIR caused the wake
 
 // Create objects for sensors
 Adafruit_BME280 bme; // I2C 3.3v
-BH1750 lightMeter;
+// BH1750 lightMeter;
 LoRaWANNode* node;
 
-// Modify the struct to include PIR status
+// Modify the struct to include PIR status and RSSI
 struct SensorData {
     float temperature;
     float humidity;
     float pressure;
-    // float light;
-    // int moisture;
-    bool pir_triggered;  // Add PIR status
+    bool pir_triggered;
+    int16_t rssi;
 } sensorData;
 
 
@@ -66,12 +68,28 @@ const char* devEui = "70B3D57ED8003DF4";  // Device EUI from TTN console
 const char* appEui = "EABB82D8689A30D7";  // Application EUI from TTN console
 const char* appKey = "C05BB00987036902C5AFBD3F6A55A3CF";  // App Key from TTN console
 
+// Add this with other RTC variables near the top of the file
+RTC_DATA_ATTR int16_t last_rssi = 0;  // Store previous transmission's RSSI
+
+// Add this with other RTC variables
+RTC_DATA_ATTR bool had_successful_transmission = false;  // Track if we've had a successful transmission
+RTC_DATA_ATTR int consecutive_errors = 0;
+RTC_DATA_ATTR uint32_t error_backoff_time = MINIMUM_DELAY;
 
 // Function declarations
 void initHardware();
 void initRadio();
 void joinNetwork();
 void sendSensorData();
+void scanI2C();
+
+
+// Replace existing SERIAL_LOG macro with:
+#define SERIAL_LOG(fmt, ...) do { \
+    Serial.printf("[%s:%d] ", pathToFileName(__FILE__), __LINE__); \
+    Serial.printf(fmt __VA_OPT__(,) __VA_ARGS__); \
+    Serial.println(); \
+} while(0)
 
 // Add this function to check wake-up cause
 void printWakeupReason() {
@@ -79,15 +97,15 @@ void printWakeupReason() {
     
     switch(wakeup_reason) {
         case ESP_SLEEP_WAKEUP_EXT0:
-            Serial.println("Wakeup caused by external signal using RTC_IO (PIR sensor)");
+            SERIAL_LOG("Wakeup caused by external signal using RTC_IO (PIR sensor)");
             pir_wake = true;
             break;
         case ESP_SLEEP_WAKEUP_TIMER:
-            Serial.println("Wakeup caused by timer");
+            SERIAL_LOG("Wakeup caused by timer");
             pir_wake = false;
             break;
         default:
-            Serial.printf("Wakeup was not caused by deep sleep: %d\n", wakeup_reason);
+            SERIAL_LOG("Wakeup was not caused by deep sleep: %d", wakeup_reason);
             pir_wake = false;
             break;
     }
@@ -104,7 +122,7 @@ void initHardware() {
 
 // Initialize and check radio
 void initRadio() {
-    Serial.println("Radio init");
+    SERIAL_LOG("Initializing radio");
     int16_t state = radio.begin();
     if (state != RADIOLIB_ERR_NONE) {
         Serial.printf("Radio did not initialize. We'll try again later. Reason %d\n", state);
@@ -115,6 +133,7 @@ void initRadio() {
 
 // Join LoRaWAN network
 void joinNetwork() {                         
+    SERIAL_LOG("Joining network");
     Serial.println("Attempting to join network...");
     int attempts = 0;
     while (!node->isActivated() && attempts < 5) {
@@ -132,12 +151,11 @@ void joinNetwork() {
     Serial.println("Successfully joined network!");
 
     // Manages uplink intervals to the TTN Fair Use Policy
-    node->setDutyCycle(true, 1250);
+    node->setDutyCycle(true, 0);
 }
 // Function to read all sensors
 void readSensors() {
     Serial.println("Reading Sensors");
-    // Store PIR wake status in sensor data
     sensorData.pir_triggered = pir_wake;
     
     if (!bme.begin(BME_ADDRESS, &Wire1)) {
@@ -157,29 +175,17 @@ void readSensors() {
       sensorData.humidity = bme.readHumidity();
       sensorData.pressure = bme.readPressure() / 100.0F;
     }
-    // Read BH1750
-    // if (lightMeter.begin(BH1750::CONTINUOUS_HIGH_RES_MODE)) {
-    //     sensorData.light = lightMeter.readLightLevel();
-    // } else{
-    //     Serial.println("Could not find BH1750 sensor!");
-    // }
-    
-    // Comment out moisture sensor reading
-    // sensorData.moisture = analogRead(MOISTURE_PIN);
     
     // Print readings for debugging
     Serial.printf("Temperature: %.2f°C\n", sensorData.temperature);
     Serial.printf("Humidity: %.2f%%\n", sensorData.humidity);
     Serial.printf("Pressure: %.2fhPa\n", sensorData.pressure);
-    // Serial.printf("Light: %.2flx\n", sensorData.light);
-    // Serial.printf("Moisture: %d\n", sensorData.moisture);
-    
-    // Add PIR status to debug output
     Serial.printf("PIR Triggered: %s\n", sensorData.pir_triggered ? "Yes" : "No");
 }
 // Prepare and send sensor data
 void sendSensorData() {
-    uint8_t uplinkData[6];
+    // Prepare payload - now 9 bytes total
+    uint8_t uplinkData[9];
     
     // Temperature: 2 bytes (multiplied by 100 to preserve 2 decimal places)
     int16_t temp = sensorData.temperature * 100;
@@ -194,52 +200,59 @@ void sendSensorData() {
     uplinkData[3] = press >> 8;
     uplinkData[4] = press & 0xFF;
     
-    // PIR status (byte 5)
-    uplinkData[5] = sensorData.pir_triggered ? 1 : 0;
+    // Counter (byte 5)
+    uplinkData[5] = count++;
+    
+    // PIR status (byte 6)
+    uplinkData[6] = sensorData.pir_triggered ? 1 : 0;
+    
+    // RSSI: 2 bytes (signed int16) (bytes 7-8)
+    uplinkData[7] = last_rssi >> 8;
+    uplinkData[8] = last_rssi & 0xFF;
 
     uint8_t downlinkData[256];
     size_t lenDown = sizeof(downlinkData);
 
     int16_t state = node->sendReceive(uplinkData, sizeof(uplinkData), 1, downlinkData, &lenDown);
 
-    if(state == RADIOLIB_ERR_NONE) {
-        Serial.println("Message sent, no downlink received.");
-    } else if (state > 0) {
-        Serial.println("Message sent, downlink received.");
+    // Store current RSSI for next transmission
+    last_rssi = radio.getRSSI();
+    
+    if(state == RADIOLIB_ERR_NONE || state > 0) {
+        SERIAL_LOG(state == RADIOLIB_ERR_NONE ? 
+            "Message sent, no downlink received. Status: %d" : 
+            "Message sent, downlink received. Status: %d", 
+            state);
+        SERIAL_LOG("RSSI of this transmission: %d dBm (will be sent in next payload)", last_rssi);
+        consecutive_errors = 0;
+        error_backoff_time = MINIMUM_DELAY;
+        had_successful_transmission = true;
+        SERIAL_LOG("PIR triggers will now be enabled");
     } else {
-        Serial.printf("sendReceive returned error %d, we'll try again later.\n", state);
+        SERIAL_LOG("sendReceive returned error %d", state);
+        consecutive_errors++;
+        error_backoff_time = min(error_backoff_time, (uint32_t)MINIMUM_DELAY);
+        SERIAL_LOG("Consecutive errors: %d, next retry in %d seconds", 
+                  consecutive_errors, error_backoff_time);
+        pir_wake = false;
     }
 }
 
-
-
 void goToSleep() {
-    Serial.println("Going to deep sleep now");
-    persist.saveSession(node);
+    SERIAL_LOG("Preparing for deep sleep");
+    uint32_t delayMs = node->timeUntilUplink();
+    SERIAL_LOG("Sleeping for %d minutes", delayMs/6000);
     
-    uint32_t delayMs;
-    
-    if (node == nullptr || !node->isActivated()) {
-        delayMs = MINIMUM_DELAY * 1000;
-    } else {
-        uint32_t interval = node->timeUntilUplink();
-        delayMs = max(interval, (uint32_t)MINIMUM_DELAY * 1000);
+    if (had_successful_transmission) {
+        SERIAL_LOG("Enabling PIR wakeup");
+        esp_sleep_enable_ext0_wakeup(GPIO_NUM_5, HIGH);
     }
     
-    Serial.printf("Next TX in %i mins\n", (delayMs/1000)/60);
-    Serial.println("PIR sensor will also wake device on motion");
-    delay(100);
-
-    // Configure wake-up sources
-    esp_sleep_enable_ext0_wakeup(GPIO_NUM_5, HIGH);  // PIR sensor wake-up
-    esp_sleep_enable_timer_wakeup(delayMs * 1000);   // Timer wake-up (convert to microseconds)
-    
-    // Go to sleep
     esp_deep_sleep_start();
 }
 
 void scanI2C() {
-    Serial.println("Scanning I2C bus...");
+    SERIAL_LOG("Scanning I2C bus...");
     byte error, address;
     int nDevices = 0;
     
@@ -248,38 +261,48 @@ void scanI2C() {
         error = Wire.endTransmission();
         
         if (error == 0) {
-            Serial.printf("I2C device found at address 0x%02X\n", address);
+            SERIAL_LOG("I2C device found at address 0x%02X", address);
             nDevices++;
         }
     }
     
     if (nDevices == 0) {
-        Serial.println("No I2C devices found\n");
+        SERIAL_LOG("No I2C devices found");
     } else {
-        Serial.println("I2C scan done\n");
+        SERIAL_LOG("I2C scan done");
     }
 }
 
-// Modify setup() to handle PIR wake-ups differently
+// Modify setup() to respect the transmission success flag
 void setup() {
+    heltec_setup();
+    Serial.begin(115200);
+    SERIAL_LOG("Initializing system");
+    
     initHardware();
     
-    if (pir_wake) {
-        // If PIR triggered, send data immediately
-        Serial.println("Motion detected! Taking readings...");
-        readSensors();
-        initRadio();
-        joinNetwork();
-        sendSensorData();
-    } else {
-        // Normal timer-based wake-up
-        readSensors();
-        initRadio();
-        joinNetwork();
-        sendSensorData();
+    if ((!had_successful_transmission || consecutive_errors > 0) && 
+        esp_sleep_get_wakeup_cause() == ESP_SLEEP_WAKEUP_EXT0) {
+        SERIAL_LOG("Ignoring PIR wake-up - waiting for successful transmission");
+        goToSleep();
+        return;
     }
     
-   goToSleep();    // Go back to sleep
+    readSensors();
+    initRadio();
+    joinNetwork();
+    sendSensorData();
+    goToSleep();
+}
+
+// Add this function to reset all RTC variables if needed
+void resetRTCVariables() {
+    had_successful_transmission = false;
+    consecutive_errors = 0;
+    error_backoff_time = MINIMUM_DELAY;
+    count = 0;
+    last_rssi = 0;
+    pir_wake = false;
 }
 
 void loop() {
