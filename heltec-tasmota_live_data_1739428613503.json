@@ -1,0 +1,426 @@
+[
+  {
+    "name": "ns.down.data.schedule.attempt",
+    "time": "2025-02-13T06:36:44.564399415Z",
+    "identifiers": [
+      {
+        "device_ids": {
+          "device_id": "heltec-tasmota",
+          "application_ids": {
+            "application_id": "henke"
+          },
+          "dev_eui": "70B3D57ED8003DF4",
+          "join_eui": "EABB82D8689A30D7",
+          "dev_addr": "27FD4836"
+        }
+      }
+    ],
+    "data": {
+      "@type": "type.googleapis.com/ttn.lorawan.v3.DownlinkMessage",
+      "raw_payload": "YDZI/SeLAAADAAIAcQMAAP8BBmvPotE=",
+      "payload": {
+        "m_hdr": {
+          "m_type": "UNCONFIRMED_DOWN"
+        },
+        "mic": "a8+i0Q==",
+        "mac_payload": {
+          "f_hdr": {
+            "dev_addr": "27FD4836",
+            "f_ctrl": {
+              "adr": true
+            },
+            "f_opts": "AwACAHEDAAD/AQY="
+          }
+        }
+      },
+      "request": {
+        "downlink_paths": [
+          {
+            "uplink_token": "ChcKFQoJaGVua2Vjb3ZlEgioQEH//yBb1BDc6OacBBoLCPyltr0GEKjeqUcg4I6ig4GaqQE="
+          }
+        ],
+        "rx1_delay": 5,
+        "rx1_data_rate": {
+          "lora": {
+            "bandwidth": 500000,
+            "spreading_factor": 10,
+            "coding_rate": "4/5"
+          }
+        },
+        "rx1_frequency": "925700000",
+        "rx2_data_rate": {
+          "lora": {
+            "bandwidth": 500000,
+            "spreading_factor": 12,
+            "coding_rate": "4/5"
+          }
+        },
+        "rx2_frequency": "923300000",
+        "priority": "HIGHEST",
+        "frequency_plan_id": "US_902_928_FSB_2"
+      },
+      "correlation_ids": [
+        "gs:uplink:01JKZ0CA7NZXVXJYSB2VVHST73",
+        "ns:downlink:01JKZ0CAMM68EEE7SK4B0R1P07",
+        "ns:transmission:01JKZ0CAMMREJTT6XJ91WFGPV8"
+      ]
+    },
+    "correlation_ids": [
+      "gs:uplink:01JKZ0CA7NZXVXJYSB2VVHST73",
+      "ns:downlink:01JKZ0CAMM68EEE7SK4B0R1P07",
+      "ns:transmission:01JKZ0CAMMREJTT6XJ91WFGPV8"
+    ],
+    "origin": "ip-10-22-7-153.us-west-1.compute.internal",
+    "context": {
+      "tenant-id": "CgtmbXNpb3RjbG91ZA=="
+    },
+    "visibility": {
+      "rights": [
+        "RIGHT_APPLICATION_TRAFFIC_READ"
+      ]
+    },
+    "unique_id": "01JKZ0CAMMJF8PMMHHPFHRPP07"
+  },
+  {
+    "name": "as.up.data.forward",
+    "time": "2025-02-13T06:36:44.366103315Z",
+    "identifiers": [
+      {
+        "device_ids": {
+          "device_id": "heltec-tasmota",
+          "application_ids": {
+            "application_id": "henke"
+          },
+          "dev_eui": "70B3D57ED8003DF4",
+          "join_eui": "EABB82D8689A30D7",
+          "dev_addr": "27FD4836"
+        }
+      }
+    ],
+    "data": {
+      "@type": "type.googleapis.com/ttn.lorawan.v3.ApplicationUp",
+      "end_device_ids": {
+        "device_id": "heltec-tasmota",
+        "application_ids": {
+          "application_id": "henke"
+        },
+        "dev_eui": "70B3D57ED8003DF4",
+        "join_eui": "EABB82D8689A30D7",
+        "dev_addr": "27FD4836"
+      },
+      "correlation_ids": [
+        "gs:uplink:01JKZ0CA7NZXVXJYSB2VVHST73"
+      ],
+      "received_at": "2025-02-13T06:36:44.362291870Z",
+      "uplink_message": {
+        "session_key_id": "AZT+BhPnUy1wOPwua/9/ew==",
+        "f_port": 1,
+        "frm_payload": "B9tQA7UAAAAA",
+        "decoded_payload": {
+          "humidity": 40,
+          "motion_detected": false,
+          "pressure": 994.9,
+          "temperature": {
+            "celsius": 20.11,
+            "fahrenheit": 68.19800000000001
+          }
+        },
+        "rx_metadata": [
+          {
+            "gateway_ids": {
+              "gateway_id": "henkecove",
+              "eui": "A84041FFFF205BD4"
+            },
+            "time": "2025-02-13T06:36:44.115640Z",
+            "timestamp": 1134146652,
+            "rssi": -104,
+            "channel_rssi": -104,
+            "snr": -3.2,
+            "uplink_token": "ChcKFQoJaGVua2Vjb3ZlEgioQEH//yBb1BDc6OacBBoLCPyltr0GEKjeqUcg4I6ig4GaqQE=",
+            "channel_index": 4,
+            "received_at": "2025-02-13T06:36:44.118412190Z"
+          }
+        ],
+        "settings": {
+          "data_rate": {
+            "lora": {
+              "bandwidth": 125000,
+              "spreading_factor": 10,
+              "coding_rate": "4/5"
+            }
+          },
+          "frequency": "904700000",
+          "timestamp": 1134146652,
+          "time": "2025-02-13T06:36:44.115640Z"
+        },
+        "received_at": "2025-02-13T06:36:44.150589794Z",
+        "consumed_airtime": "0.370688s",
+        "network_ids": {
+          "net_id": "000013",
+          "ns_id": "EC656E0000102C53",
+          "tenant_id": "fmsiotcloud",
+          "cluster_id": "nam1",
+          "cluster_address": "nam1.cloud.thethings.industries",
+          "tenant_address": "fmsiotcloud.nam1.cloud.thethings.industries"
+        }
+      }
+    },
+    "correlation_ids": [
+      "gs:uplink:01JKZ0CA7NZXVXJYSB2VVHST73"
+    ],
+    "origin": "ip-10-22-5-82.us-west-1.compute.internal",
+    "context": {
+      "tenant-id": "CgtmbXNpb3RjbG91ZA=="
+    },
+    "visibility": {
+      "rights": [
+        "RIGHT_APPLICATION_TRAFFIC_READ"
+      ]
+    },
+    "unique_id": "01JKZ0CAEE1KAEQFE2SBV60HYN"
+  },
+  {
+    "name": "ns.up.data.process",
+    "time": "2025-02-13T06:36:44.361381610Z",
+    "identifiers": [
+      {
+        "device_ids": {
+          "device_id": "heltec-tasmota",
+          "application_ids": {
+            "application_id": "henke"
+          },
+          "dev_eui": "70B3D57ED8003DF4",
+          "join_eui": "EABB82D8689A30D7",
+          "dev_addr": "27FD4836"
+        }
+      }
+    ],
+    "data": {
+      "@type": "type.googleapis.com/ttn.lorawan.v3.UplinkMessage",
+      "raw_payload": "QDZI/SeAAAABcBzIrP8ZoSwk0so+1A==",
+      "payload": {
+        "m_hdr": {
+          "m_type": "UNCONFIRMED_UP"
+        },
+        "mic": "0so+1A==",
+        "mac_payload": {
+          "f_hdr": {
+            "dev_addr": "27FD4836",
+            "f_ctrl": {
+              "adr": true
+            }
+          },
+          "f_port": 1,
+          "frm_payload": "cBzIrP8ZoSwk"
+        }
+      },
+      "settings": {
+        "data_rate": {
+          "lora": {
+            "bandwidth": 125000,
+            "spreading_factor": 10,
+            "coding_rate": "4/5"
+          }
+        },
+        "frequency": "904700000",
+        "timestamp": 1134146652,
+        "time": "2025-02-13T06:36:44.115640Z"
+      },
+      "rx_metadata": [
+        {
+          "gateway_ids": {
+            "gateway_id": "henkecove",
+            "eui": "A84041FFFF205BD4"
+          },
+          "time": "2025-02-13T06:36:44.115640Z",
+          "timestamp": 1134146652,
+          "rssi": -104,
+          "channel_rssi": -104,
+          "snr": -3.2,
+          "uplink_token": "ChcKFQoJaGVua2Vjb3ZlEgioQEH//yBb1BDc6OacBBoLCPyltr0GEKjeqUcg4I6ig4GaqQE=",
+          "channel_index": 4,
+          "received_at": "2025-02-13T06:36:44.118412190Z"
+        }
+      ],
+      "received_at": "2025-02-13T06:36:44.150589794Z",
+      "correlation_ids": [
+        "gs:uplink:01JKZ0CA7NZXVXJYSB2VVHST73"
+      ],
+      "device_channel_index": 12,
+      "consumed_airtime": "0.370688s"
+    },
+    "correlation_ids": [
+      "gs:uplink:01JKZ0CA7NZXVXJYSB2VVHST73"
+    ],
+    "origin": "ip-10-22-13-131.us-west-1.compute.internal",
+    "context": {
+      "tenant-id": "CgtmbXNpb3RjbG91ZA=="
+    },
+    "visibility": {
+      "rights": [
+        "RIGHT_APPLICATION_TRAFFIC_READ"
+      ]
+    },
+    "unique_id": "01JKZ0CAE9NQPY6C8QYH3ADN1R"
+  },
+  {
+    "name": "as.up.join.forward",
+    "time": "2025-02-13T06:36:40.437220020Z",
+    "identifiers": [
+      {
+        "device_ids": {
+          "device_id": "heltec-tasmota",
+          "application_ids": {
+            "application_id": "henke"
+          },
+          "dev_eui": "70B3D57ED8003DF4",
+          "join_eui": "EABB82D8689A30D7",
+          "dev_addr": "27FD4836"
+        }
+      }
+    ],
+    "data": {
+      "@type": "type.googleapis.com/ttn.lorawan.v3.ApplicationUp",
+      "end_device_ids": {
+        "device_id": "heltec-tasmota",
+        "application_ids": {
+          "application_id": "henke"
+        },
+        "dev_eui": "70B3D57ED8003DF4",
+        "join_eui": "EABB82D8689A30D7",
+        "dev_addr": "27FD4836"
+      },
+      "correlation_ids": [
+        "gs:uplink:01JKZ0C4TRCVMQBWCEJ0D3GS26"
+      ],
+      "received_at": "2025-02-13T06:36:40.428885712Z",
+      "join_accept": {
+        "session_key_id": "AZT+BhPnUy1wOPwua/9/ew==",
+        "received_at": "2025-02-13T06:36:38.616627996Z"
+      }
+    },
+    "correlation_ids": [
+      "gs:uplink:01JKZ0C4TRCVMQBWCEJ0D3GS26"
+    ],
+    "origin": "ip-10-22-15-82.us-west-1.compute.internal",
+    "context": {
+      "tenant-id": "CgtmbXNpb3RjbG91ZA=="
+    },
+    "visibility": {
+      "rights": [
+        "RIGHT_APPLICATION_TRAFFIC_READ"
+      ]
+    },
+    "unique_id": "01JKZ0C6KNKA2CE55ZSTYQ95G7"
+  },
+  {
+    "name": "ns.up.join.process",
+    "time": "2025-02-13T06:36:38.819487519Z",
+    "identifiers": [
+      {
+        "device_ids": {
+          "device_id": "heltec-tasmota",
+          "application_ids": {
+            "application_id": "henke"
+          },
+          "dev_eui": "70B3D57ED8003DF4",
+          "join_eui": "EABB82D8689A30D7",
+          "dev_addr": "27FD483E"
+        }
+      }
+    ],
+    "data": {
+      "@type": "type.googleapis.com/ttn.lorawan.v3.UplinkMessage",
+      "raw_payload": "ANcwmmjYgrvq9D0A2H7Vs3A0AdilAr8=",
+      "payload": {
+        "m_hdr": {},
+        "mic": "2KUCvw==",
+        "join_request_payload": {
+          "join_eui": "EABB82D8689A30D7",
+          "dev_eui": "70B3D57ED8003DF4",
+          "dev_nonce": "0134"
+        }
+      },
+      "settings": {
+        "data_rate": {
+          "lora": {
+            "bandwidth": 125000,
+            "spreading_factor": 10,
+            "coding_rate": "4/5"
+          }
+        },
+        "frequency": "903900000",
+        "timestamp": 1128604372,
+        "time": "2025-02-13T06:36:38.583101Z"
+      },
+      "rx_metadata": [
+        {
+          "gateway_ids": {
+            "gateway_id": "henkecove",
+            "eui": "A84041FFFF205BD4"
+          },
+          "time": "2025-02-13T06:36:38.583101Z",
+          "timestamp": 1128604372,
+          "rssi": -115,
+          "channel_rssi": -115,
+          "snr": -13.5,
+          "uplink_token": "ChcKFQoJaGVua2Vjb3ZlEgioQEH//yBb1BDUxZSaBBoMCPaltr0GENaa5aUCIKCYwLDsmakB",
+          "received_at": "2025-02-13T06:36:38.585114976Z"
+        }
+      ],
+      "received_at": "2025-02-13T06:36:38.616627996Z",
+      "correlation_ids": [
+        "gs:uplink:01JKZ0C4TRCVMQBWCEJ0D3GS26"
+      ],
+      "device_channel_index": 8,
+      "consumed_airtime": "0.370688s"
+    },
+    "correlation_ids": [
+      "gs:uplink:01JKZ0C4TRCVMQBWCEJ0D3GS26"
+    ],
+    "origin": "ip-10-22-7-153.us-west-1.compute.internal",
+    "context": {
+      "tenant-id": "CgtmbXNpb3RjbG91ZA=="
+    },
+    "visibility": {
+      "rights": [
+        "RIGHT_APPLICATION_TRAFFIC_READ"
+      ]
+    },
+    "unique_id": "01JKZ0C513XRF7T0NMW9XJZVR3"
+  },
+  {
+    "name": "js.join.accept",
+    "time": "2025-02-13T06:36:38.762651239Z",
+    "identifiers": [
+      {
+        "device_ids": {
+          "device_id": "heltec-tasmota",
+          "application_ids": {
+            "application_id": "henke"
+          },
+          "dev_eui": "70B3D57ED8003DF4",
+          "join_eui": "EABB82D8689A30D7",
+          "dev_addr": "27FD4836"
+        }
+      }
+    ],
+    "origin": "ip-10-22-7-76.us-west-1.compute.internal",
+    "context": {
+      "tenant-id": "CgtmbXNpb3RjbG91ZA=="
+    },
+    "visibility": {
+      "rights": [
+        "RIGHT_APPLICATION_TRAFFIC_READ"
+      ]
+    },
+    "unique_id": "01JKZ0C4ZA57CPKB44K4JSC4TS"
+  },
+  {
+    "time": "2025-02-13T06:36:32.911Z",
+    "name": "synthetic.status.cleared",
+    "isError": false,
+    "isSynthetic": true,
+    "unique_id": "synthetic.1739428592911"
+  }
+]

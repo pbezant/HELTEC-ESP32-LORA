@@ -124,11 +124,10 @@ int16_t state;
 void initRadio() {
     if(esp_sleep_get_wakeup_cause() != ESP_SLEEP_WAKEUP_UNDEFINED) {
         SERIAL_LOG("Resuming from deep sleep");
-        // radio.begin();
-        // delay(50);
-        state = radio.reset();  // Full hardware reset
-        // node = persist.loadSession(&radio);
-        persist.loadSession(node);
+        // Reset radio hardware
+        radio.reset();
+        delay(50);
+       // persist.loadSession(node); //the red button
     }
     SERIAL_LOG("Initializing radio");
     state = radio.begin();
@@ -161,6 +160,7 @@ void joinNetwork() {
     // Manages uplink intervals to the TTN Fair Use Policy
     node->setDutyCycle(true, 0);
 }
+
 // Function to read all sensors
 void readSensors() {
     Serial.println("Reading Sensors");
@@ -248,9 +248,9 @@ void sendSensorData() {
 
 void goToSleep() {
     SERIAL_LOG("Preparing for deep sleep");
-    uint32_t delayMs = node->timeUntilUplink();
+    uint32_t delayMs = max(node->timeUntilUplink(), (uint32_t)MINIMUM_DELAY*1000);
 //    SERIAL_LOG("Sleeping for %d minutes", (delayMs*1000)/60);
-    SERIAL_LOG("Sleeping for %d seconds", delayMs);
+    SERIAL_LOG("Sleeping for %d minutes", delayMs/60000);
     
     if (had_successful_transmission) {
         SERIAL_LOG("Enabling PIR wakeup");
