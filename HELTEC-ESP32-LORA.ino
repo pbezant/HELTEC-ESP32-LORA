@@ -15,7 +15,7 @@
 */
 
 // ============= Configuration =============
-#define MINIMUM_DELAY 90 
+#define MINIMUM_DELAY 120
 
 
 #include <heltec_unofficial.h>
