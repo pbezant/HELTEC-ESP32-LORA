@@ -376,7 +376,7 @@ void goToSleep() {
         SERIAL_LOG("Enabling PIR wakeup");
         esp_sleep_enable_ext0_wakeup(GPIO_NUM_5, HIGH);
     }
-    esp_sleep_enable_timer_wakeup(delayMs*100000);
+    esp_sleep_enable_timer_wakeup(delayMs);
     esp_deep_sleep_start();
 }
 
