@@ -376,7 +376,7 @@ void goToSleep() {
         SERIAL_LOG("Enabling PIR wakeup");
         esp_sleep_enable_ext0_wakeup(GPIO_NUM_5, HIGH);
     }
-    esp_sleep_enable_timer_wakeup(delayMs);
+    //esp_sleep_enable_timer_wakeup(delayMs);
     esp_deep_sleep_start();
 }
 
@@ -404,6 +404,7 @@ void scanI2C() {
 
 // Modify setup() to respect the transmission success flag
 void setup() {
+    delay(5000);
     heltec_setup();
     Serial.begin(115200);
     SERIAL_LOG("Initializing system");
