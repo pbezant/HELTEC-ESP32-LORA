@@ -34,11 +34,12 @@
 #define SEALEVELPRESSURE_HPA (1013.25)
 #define BME_ADDRESS 0x76 // Try 0x77 if 0x76 doesn't work
 
-#define I2C_SDA 42
-#define I2C_SCL 41
+#define I2C_SDA 45
+#define I2C_SCL 46
 
 // Add this with other pin definitions
 #define PIR_PIN 5  // Change this to match your PIR sensor connection
+#define pir_gpio GPIO_NUM_5
 RTC_DATA_ATTR bool pir_wake;  // Keep track if PIR caused the wake
 
 // Create objects for sensors
@@ -368,13 +369,14 @@ void sendSensorData() {
 void goToSleep() {
     SERIAL_LOG("Preparing for deep sleep");
     uint32_t delayMs = max(node->timeUntilUplink(), custom_sleep_interval * 1000);
-    SERIAL_LOG("Sleeping for %d minutes", delayMs/60000);
+    // SERIAL_LOG("Sleeping for %d minutes", delayMs/60000);
+    SERIAL_LOG("Sleeping for %f", delayMs);
     
     if (had_successful_transmission) {
         SERIAL_LOG("Enabling PIR wakeup");
         esp_sleep_enable_ext0_wakeup(GPIO_NUM_5, HIGH);
     }
-    
+    esp_sleep_enable_timer_wakeup(delayMs*100000);
     esp_deep_sleep_start();
 }
 
@@ -407,7 +409,7 @@ void setup() {
     SERIAL_LOG("Initializing system");
     
     initHardware();
-    
+    readSensors();
     if ((!had_successful_transmission || consecutive_errors > 0) && 
         esp_sleep_get_wakeup_cause() == ESP_SLEEP_WAKEUP_EXT0) {
         SERIAL_LOG("Ignoring PIR wake-up - waiting for successful transmission");
@@ -415,7 +417,7 @@ void setup() {
         return;
     }
     initRadio();
-    readSensors();
+   
   // if(!node->isActivated()) {
     joinNetwork();
   //}
