@@ -38,8 +38,8 @@
 #define I2C_SCL 46
 
 // Add this with other pin definitions
-#define PIR_PIN 5  // Change this to match your PIR sensor connection
-#define pir_gpio GPIO_NUM_5
+#define PIR_PIN 37
+#define PIR_WAKE_LEVEL HIGH  // HIGH for active-high PIR, LOW for active-low
 RTC_DATA_ATTR bool pir_wake;  // Keep track if PIR caused the wake
 
 // Create objects for sensors
@@ -124,7 +124,7 @@ void printWakeupReason() {
 void initHardware() {
     heltec_setup();
     printWakeupReason();  // Print what woke us up
-    pinMode(PIR_PIN, INPUT);
+    pinMode(PIR_PIN, INPUT_PULLDOWN);  // PULLDOWN if PIR is active-high
     bool wireStatus = Wire1.begin(I2C_SDA, I2C_SCL);
     delay(100);
    
@@ -375,7 +375,7 @@ void goToSleep() {
     
     if (had_successful_transmission) {
         SERIAL_LOG("Enabling PIR wakeup");
-        esp_sleep_enable_ext0_wakeup(GPIO_NUM_5, HIGH);
+        esp_sleep_enable_ext0_wakeup(GPIO_NUM_37, PIR_WAKE_LEVEL);
     }
     SERIAL_LOG("ACTUALLY only sleeping for 120 seconds");
     esp_sleep_enable_timer_wakeup(delayMs*1000000);
