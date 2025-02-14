@@ -123,10 +123,11 @@ void printWakeupReason() {
 // Modify initHardware() to configure PIR pin
 void initHardware() {
     heltec_setup();
+    printWakeupReason();  // Print what woke us up
     pinMode(PIR_PIN, INPUT);
     bool wireStatus = Wire1.begin(I2C_SDA, I2C_SCL);
     delay(100);
-    printWakeupReason();  // Print what woke us up
+   
 }
 int16_t state;
 // Initialize and check radio
