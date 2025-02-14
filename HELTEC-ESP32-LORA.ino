@@ -123,10 +123,11 @@ void printWakeupReason() {
 // Modify initHardware() to configure PIR pin
 void initHardware() {
     heltec_setup();
+    printWakeupReason();  // Print what woke us up
     pinMode(PIR_PIN, INPUT);
     bool wireStatus = Wire1.begin(I2C_SDA, I2C_SCL);
     delay(100);
-    printWakeupReason();  // Print what woke us up
+   
 }
 int16_t state;
 // Initialize and check radio
@@ -376,8 +377,9 @@ void goToSleep() {
         SERIAL_LOG("Enabling PIR wakeup");
         esp_sleep_enable_ext0_wakeup(GPIO_NUM_5, HIGH);
     }
-    esp_sleep_enable_timer_wakeup(delayMs*1000);
-    esp_light_sleep_start();
+    SERIAL_LOG("ACTUALLY only sleeping for 120 seconds");
+    esp_sleep_enable_timer_wakeup(120*1000000);
+    esp_deep_sleep_start();
 }
 
 void scanI2C() {
@@ -404,9 +406,8 @@ void scanI2C() {
 
 // Modify setup() to respect the transmission success flag
 void setup() {
-    if (digitalRead(BOOT_PIN) == LOW) {  // Use your actual boot pin
-        delay(5000);  // 5-second programming window
-    }
+    delay(5000);
+    heltec_setup();
     Serial.begin(115200);
     heltec_setup();
     
