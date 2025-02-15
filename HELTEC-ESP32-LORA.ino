@@ -378,7 +378,7 @@ void goToSleep() {
     // }
     esp_sleep_enable_ext0_wakeup(GPIO_NUM_5, PIR_WAKE_LEVEL);
     SERIAL_LOG("Sleeping for %d minutes", delayMs/60000);
-    esp_sleep_enable_timer_wakeup(delayMs);
+    esp_sleep_enable_timer_wakeup(delayMs*10000);
     esp_deep_sleep_start();
 }
 
@@ -406,13 +406,20 @@ void scanI2C() {
 
 // Modify setup() to respect the transmission success flag
 void setup() {
-    delay(5000);
+    // Wire.end();
+    // SPI.end();
     heltec_setup();
     Serial.begin(115200);
-    heltec_setup();
     
-    SERIAL_LOG("Initializing system");
     
+    detachInterrupt(PIR_PIN);
+    
+    // Programming mode check (keep sensors powered off)
+    // if (digitalRead(BOOT_PIN) == LOW) {
+    //     delay(5000);  // 5-second programming window
+    //     ESP.restart();  // Clean restart if not programming
+    // }
+    SERIAL_LOG("Initialed system");
     initHardware();
     readSensors();
     if ((!had_successful_transmission || consecutive_errors > 0) && 
