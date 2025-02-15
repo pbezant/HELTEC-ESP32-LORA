@@ -38,7 +38,7 @@
 #define I2C_SCL 46
 
 // Add this with other pin definitions
-#define PIR_PIN 37
+#define PIR_PIN 5
 #define PIR_WAKE_LEVEL HIGH  // HIGH for active-high PIR, LOW for active-low
 RTC_DATA_ATTR bool pir_wake;  // Keep track if PIR caused the wake
 
@@ -370,15 +370,15 @@ void sendSensorData() {
 void goToSleep() {
     SERIAL_LOG("Preparing for deep sleep");
     uint32_t delayMs = max(node->timeUntilUplink(), custom_sleep_interval * 1000);
-    // SERIAL_LOG("Sleeping for %d minutes", delayMs/60000);
-    SERIAL_LOG("Sleeping for %f", delayMs);
     
-    if (had_successful_transmission) {
-        SERIAL_LOG("Enabling PIR wakeup");
-        esp_sleep_enable_ext0_wakeup(GPIO_NUM_37, PIR_WAKE_LEVEL);
-    }
-    SERIAL_LOG("ACTUALLY only sleeping for 120 seconds");
-    esp_sleep_enable_timer_wakeup(delayMs*1000000);
+    
+    // if (had_successful_transmission) {
+    //     SERIAL_LOG("Enabling PIR wakeup");
+    //     esp_sleep_enable_ext0_wakeup(GPIO_NUM_5, PIR_WAKE_LEVEL);
+    // }
+    esp_sleep_enable_ext0_wakeup(GPIO_NUM_5, PIR_WAKE_LEVEL);
+    SERIAL_LOG("Sleeping for %d minutes", delayMs/60000);
+    esp_sleep_enable_timer_wakeup(delayMs);
     esp_deep_sleep_start();
 }
 
