@@ -34,8 +34,8 @@
 #define SEALEVELPRESSURE_HPA (1013.25)
 #define BME_ADDRESS 0x76 // Try 0x77 if 0x76 doesn't work
 
-#define I2C_SDA 45
-#define I2C_SCL 46
+#define I2C_SCL 45
+#define I2C_SDA 46
 
 // Add this with other pin definitions
 #define PIR_PIN 5
