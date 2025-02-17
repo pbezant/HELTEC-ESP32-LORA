@@ -406,8 +406,8 @@ void scanI2C() {
 
 // Modify setup() to respect the transmission success flag
 void setup() {
-    // Wire.end();
-    // SPI.end();
+    Wire.end();
+    SPI.end();
     heltec_setup();
     Serial.begin(115200);
     
