@@ -23,7 +23,8 @@
 #include <Wire.h>
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BME280.h>
-#include "secrets.h"
+// #include "DisplayLogger.h"
+// #include "secrets.h"
 // #include <esp32-hal-misc.h>
 // #include <BH1750.h>
 
@@ -92,9 +93,14 @@ RTC_DATA_ATTR uint32_t custom_sleep_interval = MINIMUM_DELAY;  // In seconds
 } while(0)
 // Modify setup() to respect the transmission success flag
 
+// DisplayLogger display;  // Create a single instance
+
 void setup() {
     heltec_setup();
+  //  display.begin();
     
+    // Run the display test
+
     // Programming mode check (keep sensors powered off)
     // if (digitalRead(BOOT_PIN) == LOW) {
     //     delay(5000);  // 5-second programming window
@@ -102,18 +108,23 @@ void setup() {
     // }
     SERIAL_LOG("Initialed system");
     initHardware();
-    readSensors();
-    if ((!had_successful_transmission || consecutive_errors > 0) && 
+    initRadio();
+    
+      // if(!node->isActivated()) {
+    joinNetwork();
+    // }
+
+}
+void loop() {
+    heltec_loop();
+  //      display.runTest();
+      if ((!had_successful_transmission || consecutive_errors > 0) && 
         esp_sleep_get_wakeup_cause() == ESP_SLEEP_WAKEUP_EXT0) {
         SERIAL_LOG("Ignoring PIR wake-up - waiting for successful transmission");
         goToSleep();
         return;
     }
-    initRadio();
-   
-  // if(!node->isActivated()) {
-    joinNetwork();
-  //}
+    readSensors();
     sendSensorData();
     goToSleep();
 }
@@ -476,7 +487,3 @@ void resetRTCVariables() {
     pir_wake = false;
 }
 
-void loop() {
-  // This is never called. There is no repetition: we always go back to
-  // deep sleep one way or the other at the end of setup()
-}
