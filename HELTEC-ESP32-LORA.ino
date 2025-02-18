@@ -84,22 +84,39 @@ RTC_DATA_ATTR uint32_t max_join_attempts = 5;
 #define DOWNLINK_COMMAND 0x02
 RTC_DATA_ATTR uint32_t custom_sleep_interval = MINIMUM_DELAY;  // In seconds
 
-// Function declarations
-void initHardware();
-void initRadio();
-void joinNetwork();
-void sendSensorData();
-void goToSleep();
-void handleDownlink(uint8_t* data, size_t len);
-
-
 // Replace existing SERIAL_LOG macro with:
 #define SERIAL_LOG(fmt, ...) do { \
     Serial.printf("[%s:%d] ", pathToFileName(__FILE__), __LINE__); \
     Serial.printf(fmt __VA_OPT__(,) __VA_ARGS__); \
     Serial.println(); \
 } while(0)
+// Modify setup() to respect the transmission success flag
 
+void setup() {
+    heltec_setup();
+    
+    // Programming mode check (keep sensors powered off)
+    // if (digitalRead(BOOT_PIN) == LOW) {
+    //     delay(5000);  // 5-second programming window
+    //     ESP.restart();  // Clean restart if not programming
+    // }
+    SERIAL_LOG("Initialed system");
+    initHardware();
+    readSensors();
+    if ((!had_successful_transmission || consecutive_errors > 0) && 
+        esp_sleep_get_wakeup_cause() == ESP_SLEEP_WAKEUP_EXT0) {
+        SERIAL_LOG("Ignoring PIR wake-up - waiting for successful transmission");
+        goToSleep();
+        return;
+    }
+    initRadio();
+   
+  // if(!node->isActivated()) {
+    joinNetwork();
+  //}
+    sendSensorData();
+    goToSleep();
+}
 // Add this function to check wake-up cause
 void printWakeupReason() {
     esp_sleep_wakeup_cause_t wakeup_reason = esp_sleep_get_wakeup_cause();
@@ -122,7 +139,6 @@ void printWakeupReason() {
 
 // Modify initHardware() to configure PIR pin
 void initHardware() {
-    heltec_setup();
     printWakeupReason();  // Print what woke us up
     pinMode(PIR_PIN, INPUT_PULLDOWN);  // PULLDOWN if PIR is active-high
     bool wireStatus = Wire1.begin(I2C_SDA, I2C_SCL);
@@ -135,8 +151,8 @@ void initRadio() {
     if(esp_sleep_get_wakeup_cause() != ESP_SLEEP_WAKEUP_UNDEFINED) {
         SERIAL_LOG("Resuming from deep sleep");
         // Reset radio hardware
-        radio.reset();
-        delay(50);
+        // radio.reset();
+        // delay(50);
        // persist.loadSession(node); //the red button
     }
     SERIAL_LOG("Initializing radio");
@@ -377,8 +393,9 @@ void goToSleep() {
     //     esp_sleep_enable_ext0_wakeup(GPIO_NUM_5, PIR_WAKE_LEVEL);
     // }
     esp_sleep_enable_ext0_wakeup(GPIO_NUM_5, PIR_WAKE_LEVEL);
+    
+    esp_sleep_enable_timer_wakeup(delayMs);
     SERIAL_LOG("Sleeping for %d minutes", delayMs/60000);
-    esp_sleep_enable_timer_wakeup(delayMs*10000);
     esp_deep_sleep_start();
 }
 
@@ -404,38 +421,7 @@ void scanI2C() {
     }
 }
 
-// Modify setup() to respect the transmission success flag
-void setup() {
-    Wire.end();
-    SPI.end();
-    heltec_setup();
-    Serial.begin(115200);
-    
-    
-    detachInterrupt(PIR_PIN);
-    
-    // Programming mode check (keep sensors powered off)
-    // if (digitalRead(BOOT_PIN) == LOW) {
-    //     delay(5000);  // 5-second programming window
-    //     ESP.restart();  // Clean restart if not programming
-    // }
-    SERIAL_LOG("Initialed system");
-    initHardware();
-    readSensors();
-    if ((!had_successful_transmission || consecutive_errors > 0) && 
-        esp_sleep_get_wakeup_cause() == ESP_SLEEP_WAKEUP_EXT0) {
-        SERIAL_LOG("Ignoring PIR wake-up - waiting for successful transmission");
-        goToSleep();
-        return;
-    }
-    initRadio();
-   
-  // if(!node->isActivated()) {
-    joinNetwork();
-  //}
-    sendSensorData();
-    goToSleep();
-}
+
 
 // Add this function to reset all RTC variables if needed
 void resetRTCVariables() {
