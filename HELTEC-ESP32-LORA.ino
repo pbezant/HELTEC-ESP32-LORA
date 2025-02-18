@@ -143,7 +143,17 @@ void initHardware() {
     pinMode(PIR_PIN, INPUT_PULLDOWN);  // PULLDOWN if PIR is active-high
     bool wireStatus = Wire1.begin(I2C_SDA, I2C_SCL);
     delay(100);
-   
+    
+    // Add BME280 sleep mode configuration
+    if (bme.begin(BME_ADDRESS, &Wire1)) {
+        // Set BME280 to forced mode (takes one measurement then sleeps)
+        bme.setSampling(Adafruit_BME280::MODE_FORCED,
+                       Adafruit_BME280::SAMPLING_X1,  // temperature
+                       Adafruit_BME280::SAMPLING_X1,  // pressure
+                       Adafruit_BME280::SAMPLING_X1,  // humidity
+                       Adafruit_BME280::FILTER_OFF);
+        SERIAL_LOG("BME280 configured for forced mode");
+    }
 }
 int16_t state;
 // Initialize and check radio
@@ -217,11 +227,19 @@ void readSensors() {
         }
         
     } else {
-    
-      Serial.println("BME280 initialized successfully!");
-      sensorData.temperature = bme.readTemperature();
-      sensorData.humidity = bme.readHumidity();
-      sensorData.pressure = bme.readPressure() / 100.0F;
+        Serial.println("BME280 initialized successfully!");
+        
+        // Force a measurement
+        bme.takeForcedMeasurement();
+        
+        // Read the values
+        sensorData.temperature = bme.readTemperature();
+        sensorData.humidity = bme.readHumidity();
+        sensorData.pressure = bme.readPressure() / 100.0F;
+        
+        // Put BME280 into sleep mode
+        bme.setSampling(Adafruit_BME280::MODE_SLEEP);
+        SERIAL_LOG("BME280 put into sleep mode");
     }
     
     // Print readings for debugging
@@ -385,17 +403,42 @@ void sendSensorData() {
 // Modify goToSleep() to use custom_sleep_interval
 void goToSleep() {
     SERIAL_LOG("Preparing for deep sleep");
-    uint32_t delayMs = max(node->timeUntilUplink(), custom_sleep_interval * 1000);
     
+    // Get time until next uplink and custom interval
+    uint32_t timeUntilNext = node->timeUntilUplink();
+    uint32_t customDelay = custom_sleep_interval * 1000;
+    SERIAL_LOG("Time until next uplink: %d ms", timeUntilNext);
+    SERIAL_LOG("Custom sleep interval: %d ms", customDelay);
     
-    // if (had_successful_transmission) {
-    //     SERIAL_LOG("Enabling PIR wakeup");
-    //     esp_sleep_enable_ext0_wakeup(GPIO_NUM_5, PIR_WAKE_LEVEL);
-    // }
+    uint32_t delayMs = max(timeUntilNext, customDelay);
+    SERIAL_LOG("Final sleep duration: %d ms (%d minutes)", delayMs, delayMs/60000);
+    
+    // Debug PIR wake-up configuration
+    SERIAL_LOG("PIR wake-up enabled on GPIO %d, trigger level: %s", 
+               PIR_PIN, 
+               PIR_WAKE_LEVEL == HIGH ? "HIGH" : "LOW");
+    
     esp_sleep_enable_ext0_wakeup(GPIO_NUM_5, PIR_WAKE_LEVEL);
+    esp_sleep_enable_timer_wakeup(delayMs * 1000ULL); // Convert to microseconds
     
-    esp_sleep_enable_timer_wakeup(delayMs);
-    SERIAL_LOG("Sleeping for %d minutes", delayMs/60000);
+    // Log enabled wake-up sources
+    esp_sleep_wakeup_cause_t cause = esp_sleep_get_wakeup_cause();
+    SERIAL_LOG("Current wake-up cause: %d", cause);
+    SERIAL_LOG("Enabled wake-up sources:");
+    SERIAL_LOG("- Timer: %d minutes", delayMs/60000);
+    SERIAL_LOG("- PIR sensor on GPIO %d", PIR_PIN);
+    
+    // Ensure BME280 is in sleep mode
+    if (bme.begin(BME_ADDRESS, &Wire1)) {
+        bme.setSampling(Adafruit_BME280::MODE_SLEEP);
+        SERIAL_LOG("BME280 confirmed in sleep mode before deep sleep");
+    }
+    
+    // Power down I2C bus
+    Wire1.end();
+    SERIAL_LOG("I2C bus powered down");
+    
+    SERIAL_LOG("Entering deep sleep now...");
     esp_deep_sleep_start();
 }
 
