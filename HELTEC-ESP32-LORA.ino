@@ -15,7 +15,7 @@
 */
 
 // ============= Configuration =============
-#define MINIMUM_DELAY 0
+#define MINIMUM_DELAY 120
 
 
 #include <heltec_unofficial.h>
@@ -114,12 +114,14 @@ void loop() {
     //     return;
     // }
     readSensors();
+    sendSensorData();
     if(custom_sleep_interval == 0) {
-        sendSensorData();
+       
         SERIAL_LOG("delaying for %d ms", node->timeUntilUplink());
         delay(node->timeUntilUplink()*1000);
         
     }else{
+
         goToSleep();
     }
 }
@@ -220,7 +222,7 @@ void joinNetwork() {
 // Function to read all sensors
 void readSensors() {
     Serial.println("Reading Sensors");
-    sensorData.pir_triggered = pir_wake;
+
     
     if (!bme.begin(BME_ADDRESS, &Wire1)) {
         Serial.println("Could not find BME280 sensor! Checking for common issues:");
@@ -247,7 +249,7 @@ void readSensors() {
         bme.setSampling(Adafruit_BME280::MODE_SLEEP);
         SERIAL_LOG("BME280 put into sleep mode");
     }
-    
+    sensorData.pir_triggered = pir_wake;
     // Print readings for debugging
     Serial.printf("Temperature: %.2f°C\n", sensorData.temperature);
     Serial.printf("Humidity: %.2f%%\n", sensorData.humidity);
@@ -341,7 +343,7 @@ void handleDownlink(uint8_t* data, size_t len) {
 // Modify sendSensorData() to use the new downlink handler
 void sendSensorData() {
     // Prepare payload - now 9 bytes total
-    uint8_t uplinkData[9];
+    uint8_t uplinkData[8];
     
     // Temperature: 2 bytes (multiplied by 100 to preserve 2 decimal places)
     int16_t temp = sensorData.temperature * 100;
@@ -356,15 +358,12 @@ void sendSensorData() {
     uplinkData[3] = press >> 8;
     uplinkData[4] = press & 0xFF;
     
-    // Counter (byte 5)
-    uplinkData[5] = count++;
-    
-    // PIR status (byte 6)
-    uplinkData[6] = sensorData.pir_triggered ? 1 : 0;
-    
-    // RSSI: 2 bytes (signed int16) (bytes 7-8)
-    uplinkData[7] = last_rssi >> 8;
-    uplinkData[8] = last_rssi & 0xFF;
+    // PIR status (byte 5)
+    uplinkData[5] = sensorData.pir_triggered ? 1 : 0;
+
+    // RSSI: 2 bytes (signed int16) (bytes 6-7)
+    uplinkData[6] = last_rssi >> 8;
+    uplinkData[7] = last_rssi & 0xFF;
 
     uint8_t downlinkData[256];
     size_t lenDown = sizeof(downlinkData);
@@ -406,14 +405,14 @@ void sendSensorData() {
     had_successful_transmission = false;
 }
 
-void calculateDelay(){
+uint32_t calculateDelay(uint32_t timeUntilUplink, uint32_t customInterval){
       // Get time until next uplink and custom interval
-    uint32_t timeUntilNext = node->timeUntilUplink();
-    uint32_t customDelay = custom_sleep_interval * 1000;
-    SERIAL_LOG("Time until next uplink: %d ms", timeUntilNext);
+    //uint32_t timeUntilNext = node->timeUntilUplink();
+    uint32_t customDelay = customInterval * 1000;
+    SERIAL_LOG("Time until next uplink: %d ms", timeUntilUplink);
     SERIAL_LOG("Custom sleep interval: %d ms", customDelay);
     
-    uint32_t delayMs = max(timeUntilNext, customDelay);
+    uint32_t delayMs = max(timeUntilUplink, customDelay);
     SERIAL_LOG("Final sleep duration: %d ms (%d minutes)", delayMs, delayMs/60000);
     return delayMs;
 }
@@ -422,7 +421,7 @@ void calculateDelay(){
 void goToSleep() {
     SERIAL_LOG("Preparing for deep sleep");
     
-    int32_t delayMs = calulateDelay();
+    uint32_t delayMs = calculateDelay(node->timeUntilUplink(), custom_sleep_interval);
     
     // Debug PIR wake-up configuration
     SERIAL_LOG("PIR wake-up enabled on GPIO %d, trigger level: %s", 
