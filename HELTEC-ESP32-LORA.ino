@@ -15,7 +15,7 @@
 */
 
 // ============= Configuration =============
-#define MINIMUM_DELAY 120
+#define MINIMUM_DELAY 0
 
 
 #include <heltec_unofficial.h>
@@ -93,19 +93,9 @@ RTC_DATA_ATTR uint32_t custom_sleep_interval = MINIMUM_DELAY;  // In seconds
 } while(0)
 // Modify setup() to respect the transmission success flag
 
-// DisplayLogger display;  // Create a single instance
 
 void setup() {
     heltec_setup();
-  //  display.begin();
-    
-    // Run the display test
-
-    // Programming mode check (keep sensors powered off)
-    // if (digitalRead(BOOT_PIN) == LOW) {
-    //     delay(5000);  // 5-second programming window
-    //     ESP.restart();  // Clean restart if not programming
-    // }
     SERIAL_LOG("Initialed system");
     initHardware();
     initRadio();
@@ -117,16 +107,21 @@ void setup() {
 }
 void loop() {
     heltec_loop();
-  //      display.runTest();
-      if ((!had_successful_transmission || consecutive_errors > 0) && 
-        esp_sleep_get_wakeup_cause() == ESP_SLEEP_WAKEUP_EXT0) {
-        SERIAL_LOG("Ignoring PIR wake-up - waiting for successful transmission");
-        goToSleep();
-        return;
-    }
+    //   if ((!had_successful_transmission || consecutive_errors > 0) && 
+    //     esp_sleep_get_wakeup_cause() == ESP_SLEEP_WAKEUP_EXT0) {
+    //     SERIAL_LOG("Ignoring PIR wake-up - waiting for successful transmission");
+    //     goToSleep();
+    //     return;
+    // }
     readSensors();
-    sendSensorData();
-    goToSleep();
+    if(custom_sleep_interval == 0) {
+        sendSensorData();
+        SERIAL_LOG("delaying for %d ms", node->timeUntilUplink());
+        delay(node->timeUntilUplink()*1000);
+        
+    }else{
+        goToSleep();
+    }
 }
 // Add this function to check wake-up cause
 void printWakeupReason() {
@@ -411,11 +406,8 @@ void sendSensorData() {
     had_successful_transmission = false;
 }
 
-// Modify goToSleep() to use custom_sleep_interval
-void goToSleep() {
-    SERIAL_LOG("Preparing for deep sleep");
-    
-    // Get time until next uplink and custom interval
+void calculateDelay(){
+      // Get time until next uplink and custom interval
     uint32_t timeUntilNext = node->timeUntilUplink();
     uint32_t customDelay = custom_sleep_interval * 1000;
     SERIAL_LOG("Time until next uplink: %d ms", timeUntilNext);
@@ -423,6 +415,14 @@ void goToSleep() {
     
     uint32_t delayMs = max(timeUntilNext, customDelay);
     SERIAL_LOG("Final sleep duration: %d ms (%d minutes)", delayMs, delayMs/60000);
+    return delayMs;
+}
+
+// Modify goToSleep() to use custom_sleep_interval
+void goToSleep() {
+    SERIAL_LOG("Preparing for deep sleep");
+    
+    int32_t delayMs = calulateDelay();
     
     // Debug PIR wake-up configuration
     SERIAL_LOG("PIR wake-up enabled on GPIO %d, trigger level: %s", 
