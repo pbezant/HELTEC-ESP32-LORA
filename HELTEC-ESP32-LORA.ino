@@ -23,8 +23,9 @@
 #include <Wire.h>
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BME280.h>
+#include "secrets.h"
 // #include "DisplayLogger.h"
-// #include "secrets.h"
+
 // #include <esp32-hal-misc.h>
 // #include <BH1750.h>
 
@@ -45,7 +46,6 @@ RTC_DATA_ATTR bool pir_wake;  // Keep track if PIR caused the wake
 
 // Create objects for sensors
 Adafruit_BME280 bme; // I2C 3.3v
-// BH1750 lightMeter;
 LoRaWANNode* node;
 
 // Modify the struct to include PIR status and RSSI
@@ -59,17 +59,15 @@ struct SensorData {
 
 
 
-RTC_DATA_ATTR uint8_t count;
+
 
 // Add these definitions after the other #define statements
 #define BAND    US915  // Set your region frequency (915MHz for US)
 #define SF      DR_SF7  // Spreading Factor (DR_SF7 to DR_SF12)
 #define TX_POWER    14  // Transmit power in dBm (max 20dBm)
 
-// Add this with other RTC variables near the top of the file
+RTC_DATA_ATTR uint8_t count;
 RTC_DATA_ATTR int16_t last_rssi = 0;  // Store previous transmission's RSSI
-
-// Add this with other RTC variables
 RTC_DATA_ATTR bool had_successful_transmission = false;  // Track if we've had a successful transmission
 RTC_DATA_ATTR int consecutive_errors = 0;
 RTC_DATA_ATTR uint32_t error_backoff_time = MINIMUM_DELAY;
@@ -171,15 +169,21 @@ void initRadio() {
         // Reset radio hardware
         // radio.reset();
         // delay(50);
-       // persist.loadSession(node); //the red button
     }
     SERIAL_LOG("Initializing radio");
     state = radio.begin();
+    
     if (state != RADIOLIB_ERR_NONE) {
-        Serial.printf("Radio did not initialize. We'll try again later. Reason %d\n", state);
+        SERIAL_LOG("Radio did not initialize. We'll try again later. Reason %d\n", state);
         goToSleep();
+    }else{
+        SERIAL_LOG("Radio Initialized %d", state);
     }
+        // persist.isProvisioned();
     node = persist.manage(&radio);
+    SERIAL_LOG("%d", node);
+
+
 }
 
 // Join LoRaWAN network
@@ -189,6 +193,9 @@ void joinNetwork() {
     int joinResult;
     uint8_t retries = 0;
     
+    int beginState = node->beginOTAA();
+    SERIAL_LOG("Begin state: %d", beginState);
+   
     while (retries < MAX_RETRIES) {
         joinResult = node->activateOTAA();
         SERIAL_LOG("Join attempt %d result: %d", retries + 1, joinResult);
