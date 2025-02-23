@@ -105,12 +105,6 @@ void setup() {
 }
 void loop() {
     heltec_loop();
-    //   if ((!had_successful_transmission || consecutive_errors > 0) && 
-    //     esp_sleep_get_wakeup_cause() == ESP_SLEEP_WAKEUP_EXT0) {
-    //     SERIAL_LOG("Ignoring PIR wake-up - waiting for successful transmission");
-    //     goToSleep();
-    //     return;
-    // }
     readSensors();
     sendSensorData();
     if(custom_sleep_interval == 0) {
@@ -178,20 +172,19 @@ void initRadio() {
 
 // Join LoRaWAN network
 void joinNetwork() {
-    //node->clearSession();
+    node->clearSession();
     SERIAL_LOG("Activating OTAA");
     int joinResult;
     uint8_t retries = 0;
     
     // Setup the OTAA session information
-    int16_t state = node->beginOTAA(joinEui, devEui, nwkKey, appKey);
+    int16_t state = node->beginOTAA(joinEui, devEui, toByteArray(nwkKey), toByteArray(appKey) );
     if (state != RADIOLIB_ERR_NONE) {
         SERIAL_LOG("Failed to initialize OTAA: %d", state);
         return;
     } else{
         SERIAL_LOG("OTAA initialized successfully: %d", state);
     }
-
 
     while (retries < MAX_RETRIES) {
         joinResult = node->activateOTAA();
@@ -488,5 +481,17 @@ void resetRTCVariables() {
     count = 0;
     last_rssi = 0;
     pir_wake = false;
+}
+
+uint8_t* toByteArray(const char* hexString) {
+    static uint8_t byteArray[16];  // Static array to hold the result
+    
+    // Convert each pair of hex chars to a byte
+    for(int i = 0; i < 16; i++) {
+        char byteStr[3] = {hexString[i*2], hexString[i*2 + 1], '\0'};
+        byteArray[i] = strtol(byteStr, NULL, 16);
+    }
+    SERIAL_LOG("Converted hex string to byte array: %s", hexString);
+    return byteArray;
 }
 
