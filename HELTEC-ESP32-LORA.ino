@@ -44,27 +44,12 @@
 #define PIR_WAKE_LEVEL HIGH  // HIGH for active-high PIR, LOW for active-low
 RTC_DATA_ATTR bool pir_wake;  // Keep track if PIR caused the wake
 
-// Create objects for sensors
-Adafruit_BME280 bme; // I2C 3.3v
-LoRaWANNode* node;
-
-// Modify the struct to include PIR status and RSSI
-struct SensorData {
-    float temperature;
-    float humidity;
-    float pressure;
-    bool pir_triggered;
-    int16_t rssi;
-} sensorData;
-
-
-
-
 
 // Add these definitions after the other #define statements
-#define BAND    US915  // Set your region frequency (915MHz for US)
 #define SF      DR_SF7  // Spreading Factor (DR_SF7 to DR_SF12)
 #define TX_POWER    14  // Transmit power in dBm (max 20dBm)
+const LoRaWANBand_t Region = US915;
+const uint8_t subBand = 2;
 
 RTC_DATA_ATTR uint8_t count;
 RTC_DATA_ATTR int16_t last_rssi = 0;  // Store previous transmission's RSSI
@@ -91,17 +76,32 @@ RTC_DATA_ATTR uint32_t custom_sleep_interval = MINIMUM_DELAY;  // In seconds
 } while(0)
 // Modify setup() to respect the transmission success flag
 
+// Create objects for sensors
+Adafruit_BME280 bme; // I2C 3.3v
+LoRaWANNode* node = new LoRaWANNode(&radio, &Region, subBand);
+
+// Modify the struct to include PIR status and RSSI
+struct SensorData {
+    float temperature;
+    float humidity;
+    float pressure;
+    bool pir_triggered;
+    int16_t rssi;
+} sensorData;
 
 void setup() {
     heltec_setup();
-    SERIAL_LOG("Initialed system");
+    SERIAL_LOG("System initialized");
+    
     initHardware();
     initRadio();
     
-      // if(!node->isActivated()) {
-    joinNetwork();
-    // }
-
+    // Only try to join if we're not already activated
+    if (!node->isActivated()) {
+        joinNetwork();
+    } else {
+        SERIAL_LOG("Node already activated, resuming session");
+    }
 }
 void loop() {
     heltec_loop();
@@ -161,41 +161,38 @@ void initHardware() {
         SERIAL_LOG("BME280 configured for forced mode");
     }
 }
-int16_t state;
+
 // Initialize and check radio
 void initRadio() {
-    if(esp_sleep_get_wakeup_cause() != ESP_SLEEP_WAKEUP_UNDEFINED) {
-        SERIAL_LOG("Resuming from deep sleep");
-        // Reset radio hardware
-        // radio.reset();
-        // delay(50);
-    }
     SERIAL_LOG("Initializing radio");
-    state = radio.begin();
-    
+    int16_t state = radio.begin();
     if (state != RADIOLIB_ERR_NONE) {
-        SERIAL_LOG("Radio did not initialize. We'll try again later. Reason %d\n", state);
+        SERIAL_LOG("Radio initialization failed: %d", state);
         goToSleep();
-    }else{
-        SERIAL_LOG("Radio Initialized %d", state);
+        return;
     }
-        // persist.isProvisioned();
-    node = persist.manage(&radio);
-    SERIAL_LOG("%d", node);
-
-
+    //    node = persist.manage(&radio);
+    // SERIAL_LOG("%d", node);
+    SERIAL_LOG("Radio initialized successfully");
 }
 
 // Join LoRaWAN network
 void joinNetwork() {
-    node->clearSession();
+    //node->clearSession();
     SERIAL_LOG("Activating OTAA");
     int joinResult;
     uint8_t retries = 0;
     
-    int beginState = node->beginOTAA();
-    SERIAL_LOG("Begin state: %d", beginState);
-   
+    // Setup the OTAA session information
+    int16_t state = node->beginOTAA(joinEui, devEui, nwkKey, appKey);
+    if (state != RADIOLIB_ERR_NONE) {
+        SERIAL_LOG("Failed to initialize OTAA: %d", state);
+        return;
+    } else{
+        SERIAL_LOG("OTAA initialized successfully: %d", state);
+    }
+
+
     while (retries < MAX_RETRIES) {
         joinResult = node->activateOTAA();
         SERIAL_LOG("Join attempt %d result: %d", retries + 1, joinResult);
