@@ -90,22 +90,31 @@ struct SensorData {
     int16_t rssi;
 } sensorData;
 
+// Add these at the top with other includes
+#include <Preferences.h>
+Preferences store;
+
+// Add these with other RTC variables
+RTC_DATA_ATTR uint8_t LWsession[RADIOLIB_LORAWAN_SESSION_BUF_SIZE];
+RTC_DATA_ATTR uint16_t bootCount = 0;
+RTC_DATA_ATTR uint16_t bootCountSinceUnsuccessfulJoin = 0;
+
 void setup() {
     heltec_setup();
     SERIAL_LOG("System initialized");
     
     initHardware();
     initRadio();
-    
+    joinNetwork();
     // Only try to join if we're not already activated
-    if (!node->isActivated()) {
-        joinNetwork();
-    } else {
-        SERIAL_LOG("Node already activated, resuming session");
-    }
-}
-void loop() {
-    heltec_loop();
+    // if (!node->isActivated()) {
+    //     joinNetwork();
+    // } else {
+    //     SERIAL_LOG("Node already activated, resuming session");
+    // }
+// }
+// void loop() {
+    // heltec_loop();
     readSensors();
     sendSensorData();
     if(custom_sleep_interval == 0) {
@@ -117,6 +126,8 @@ void loop() {
 
         goToSleep();
     }
+}
+void loop() {
 }
 // Add this function to check wake-up cause
 void printWakeupReason() {
@@ -173,29 +184,67 @@ void initRadio() {
 
 // Join LoRaWAN network
 void joinNetwork() {
-    node->clearSession();
     SERIAL_LOG("Activating OTAA");
-    int joinResult;
-    uint8_t retries = 0;
+    int16_t state = RADIOLIB_ERR_UNKNOWN;
     
     // Setup the OTAA session information
-    int16_t state = node->beginOTAA(joinEui, devEui, toByteArray(nwkKey), toByteArray(appKey) );
+    state = node->beginOTAA(joinEui, devEui, toByteArray(nwkKey), toByteArray(appKey));
     if (state != RADIOLIB_ERR_NONE) {
         SERIAL_LOG("Failed to initialize OTAA: %d", state);
         return;
     } else{
         SERIAL_LOG("OTAA initialized successfully: %d", state);
     }
+    
+    SERIAL_LOG("Recalling LoRaWAN nonces & session");
+    store.begin("radiolib");
 
-    while (retries < MAX_RETRIES) {
-        joinResult = node->activateOTAA();
-        SERIAL_LOG("Join attempt %d result: %d", retries + 1, joinResult);
+    // If we have previously saved nonces, restore them and try to restore session
+    if (store.isKey("nonces")) {
+        uint8_t buffer[RADIOLIB_LORAWAN_NONCES_BUF_SIZE+1];
+        store.getBytes("nonces", buffer, RADIOLIB_LORAWAN_NONCES_BUF_SIZE);
+        state = node->setBufferNonces(buffer);
         
-        if (joinResult == RADIOLIB_ERR_NONE) {
+        if (state != RADIOLIB_ERR_NONE) {
+            SERIAL_LOG("Restoring nonces buffer failed: %d", state);
+        }
+
+        // Recall session from RTC deep-sleep preserved variable
+        state = node->setBufferSession(LWsession);
+        if (state == RADIOLIB_ERR_NONE) {
+            SERIAL_LOG("Successfully restored session - now activating");
+            state = node->activateOTAA();
+            if (state == RADIOLIB_LORAWAN_SESSION_RESTORED) {
+                store.end();
+                return;
+            }
+        }
+    } else {
+        SERIAL_LOG("No Nonces saved - starting fresh");
+    }
+
+    // If we got here, there was no session to restore, so start trying to join
+    uint8_t retries = 0;
+    while (retries < MAX_RETRIES) {
+        state = node->activateOTAA();
+        SERIAL_LOG("Join attempt %d result: %d", retries + 1, state);
+        
+        if (state == RADIOLIB_LORAWAN_NEW_SESSION) {
             SERIAL_LOG("Joined successfully!");
-            persist.saveSession(node);
-            node->setDutyCycle(true, 0);
-            join_attempts = 0;  // Reset join attempts on success
+            
+            // Save the join counters (nonces) to permanent store
+            SERIAL_LOG("Saving nonces to flash");
+            uint8_t buffer[RADIOLIB_LORAWAN_NONCES_BUF_SIZE];
+            uint8_t *persist = node->getBufferNonces();
+            memcpy(buffer, persist, RADIOLIB_LORAWAN_NONCES_BUF_SIZE);
+            store.putBytes("nonces", buffer, RADIOLIB_LORAWAN_NONCES_BUF_SIZE);
+            
+            // Save session to RTC memory
+            persist = node->getBufferSession();
+            memcpy(LWsession, persist, RADIOLIB_LORAWAN_SESSION_BUF_SIZE);
+            
+            bootCountSinceUnsuccessfulJoin = 0;
+            store.end();
             return;
         }
         
@@ -204,7 +253,8 @@ void joinNetwork() {
         
         if (join_attempts >= max_join_attempts) {
             SERIAL_LOG("Max join attempts reached. Increasing sleep time.");
-            error_backoff_time *= 2;  // Double the sleep time
+            error_backoff_time *= 2;
+            store.end();
             goToSleep();
         }
         
@@ -215,6 +265,7 @@ void joinNetwork() {
     }
     
     SERIAL_LOG("Join failed after %d attempts", MAX_RETRIES);
+    store.end();
 }
 
 // Function to read all sensors
