@@ -201,7 +201,8 @@ void joinNetwork() {
 
     // If we have previously saved nonces, restore them and try to restore session
     if (store.isKey("nonces")) {
-        uint8_t buffer[RADIOLIB_LORAWAN_NONCES_BUF_SIZE+1];
+        // uint8_t buffer[RADIOLIB_LORAWAN_NONCES_BUF_SIZE];
+        uint8_t buffer[1234];
         store.getBytes("nonces", buffer, RADIOLIB_LORAWAN_NONCES_BUF_SIZE);
         state = node->setBufferNonces(buffer);
         
