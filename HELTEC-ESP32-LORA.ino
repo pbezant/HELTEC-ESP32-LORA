@@ -25,8 +25,6 @@
 #include <Adafruit_BME280.h>
 // #include "DisplayLogger.h"
 // #include "secrets.h"
-// #include <esp32-hal-misc.h>
-// #include <BH1750.h>
 
 #define Serial Serial0  // Explicit serial port definition
 
