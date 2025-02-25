@@ -183,6 +183,7 @@ void joinNetwork() {
     
     // Setup the OTAA session information
     int16_t state = node->beginOTAA(joinEui, devEui, toByteArray(nwkKey), toByteArray(appKey) );
+    
     if (state != RADIOLIB_ERR_NONE) {
         SERIAL_LOG("Failed to initialize OTAA: %d", state);
         return;
