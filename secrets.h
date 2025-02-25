@@ -5,7 +5,7 @@ extern const uint64_t joinEui = appEui;
 extern const uint64_t devEui = 0x70B3D57ED8004069;  // Device EUI from TTN console
 // Define keys as hex strings
 extern const char* appKey = "0EF9A3826DD27B1F46D82048EE598998";
-extern const char* nwkKey = "7A4F3BE02CEEC661C34511B76BCBB77F";
+extern const char* nwkKey = "0EF9A3826DD27B1F46D82048EE598998";
 // // The keys need to be byte arrays
 // extern const uint8_t appKey[16] = { 0xC0, 0x5B, 0xB0, 0x09, 0x87, 0x03, 0x69, 0x02, 
 //                                  0xC5, 0xAF, 0xBD, 0x3F, 0x6A, 0x55, 0xA3, 0xCF };
