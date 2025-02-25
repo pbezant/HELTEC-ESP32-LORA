@@ -14,6 +14,7 @@
  * See https://github.com/ropg/LoRaWAN_ESP32
 */
 
+
 // ============= Configuration =============
 #define MINIMUM_DELAY 120
 
@@ -23,8 +24,11 @@
 #include <Wire.h>
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BME280.h>
+#include "secrets.h"
 // #include "DisplayLogger.h"
-// #include "secrets.h"
+
+// #include <esp32-hal-misc.h>
+// #include <BH1750.h>
 
 #define Serial Serial0  // Explicit serial port definition
 
@@ -41,33 +45,15 @@
 #define PIR_WAKE_LEVEL HIGH  // HIGH for active-high PIR, LOW for active-low
 RTC_DATA_ATTR bool pir_wake;  // Keep track if PIR caused the wake
 
-// Create objects for sensors
-Adafruit_BME280 bme; // I2C 3.3v
-// BH1750 lightMeter;
-LoRaWANNode* node;
-
-// Modify the struct to include PIR status and RSSI
-struct SensorData {
-    float temperature;
-    float humidity;
-    float pressure;
-    bool pir_triggered;
-    int16_t rssi;
-} sensorData;
-
-
-
-RTC_DATA_ATTR uint8_t count;
 
 // Add these definitions after the other #define statements
-#define BAND    US915  // Set your region frequency (915MHz for US)
 #define SF      DR_SF7  // Spreading Factor (DR_SF7 to DR_SF12)
 #define TX_POWER    14  // Transmit power in dBm (max 20dBm)
+const LoRaWANBand_t Region = US915;
+const uint8_t subBand = 2;
 
-// Add this with other RTC variables near the top of the file
+RTC_DATA_ATTR uint8_t count;
 RTC_DATA_ATTR int16_t last_rssi = 0;  // Store previous transmission's RSSI
-
-// Add this with other RTC variables
 RTC_DATA_ATTR bool had_successful_transmission = false;  // Track if we've had a successful transmission
 RTC_DATA_ATTR int consecutive_errors = 0;
 RTC_DATA_ATTR uint32_t error_backoff_time = MINIMUM_DELAY;
@@ -91,26 +77,37 @@ RTC_DATA_ATTR uint32_t custom_sleep_interval = MINIMUM_DELAY;  // In seconds
 } while(0)
 // Modify setup() to respect the transmission success flag
 
+// Create objects for sensors
+#include <Preferences.h>
+Preferences store;
+Adafruit_BME280 bme; // I2C 3.3v
+LoRaWANNode* node = new LoRaWANNode(&radio, &Region, subBand);
+
+// Modify the struct to include PIR status and RSSI
+struct SensorData {
+    float temperature;
+    float humidity;
+    float pressure;
+    bool pir_triggered;
+    int16_t rssi;
+} sensorData;
 
 void setup() {
     heltec_setup();
-    SERIAL_LOG("Initialed system");
+    SERIAL_LOG("System initialized");
+    
     initHardware();
     initRadio();
-    
-      // if(!node->isActivated()) {
     joinNetwork();
+    // Only try to join if we're not already activated
+    // if (!node->isActivated()) {
+    //     joinNetwork();
+    // } else {
+    //     SERIAL_LOG("Node already activated, resuming session");
     // }
-
 }
 void loop() {
     heltec_loop();
-    //   if ((!had_successful_transmission || consecutive_errors > 0) && 
-    //     esp_sleep_get_wakeup_cause() == ESP_SLEEP_WAKEUP_EXT0) {
-    //     SERIAL_LOG("Ignoring PIR wake-up - waiting for successful transmission");
-    //     goToSleep();
-    //     return;
-    // }
     readSensors();
     sendSensorData();
     if(custom_sleep_interval == 0) {
@@ -161,39 +158,50 @@ void initHardware() {
         SERIAL_LOG("BME280 configured for forced mode");
     }
 }
-int16_t state;
+
 // Initialize and check radio
 void initRadio() {
-    if(esp_sleep_get_wakeup_cause() != ESP_SLEEP_WAKEUP_UNDEFINED) {
-        SERIAL_LOG("Resuming from deep sleep");
-        // Reset radio hardware
-        // radio.reset();
-        // delay(50);
-       // persist.loadSession(node); //the red button
-    }
     SERIAL_LOG("Initializing radio");
-    state = radio.begin();
+    int16_t state = radio.begin();
     if (state != RADIOLIB_ERR_NONE) {
-        Serial.printf("Radio did not initialize. We'll try again later. Reason %d\n", state);
+        SERIAL_LOG("Radio initialization failed: %d", state);
         goToSleep();
+        return;
     }
-    node = persist.manage(&radio);
+    //    node = persist.manage(&radio);
+    // SERIAL_LOG("%d", node);
+    SERIAL_LOG("Radio initialized successfully");
 }
+
 
 // Join LoRaWAN network
 void joinNetwork() {
-    node->clearSession();
+    // node->clearSession();
     SERIAL_LOG("Activating OTAA");
-    int joinResult;
+
     uint8_t retries = 0;
     
+    // Setup the OTAA session information
+    int16_t state = node->beginOTAA(joinEui, devEui, toByteArray(nwkKey), toByteArray(appKey) );
+    if (state != RADIOLIB_ERR_NONE) {
+        SERIAL_LOG("Failed to initialize OTAA: %d", state);
+        return;
+    } else{
+        SERIAL_LOG("OTAA initialized successfully: %d", state);
+    }
+
     while (retries < MAX_RETRIES) {
-        joinResult = node->activateOTAA();
+        int joinResult = node->activateOTAA();
+
+        Serial.println(F("Saving nonces to flash"));
+        uint8_t buffer[RADIOLIB_LORAWAN_NONCES_BUF_SIZE];           // create somewhere to store nonces
+        uint8_t *persist = node->getBufferNonces();                  // get pointer to nonces
+        memcpy(buffer, persist, RADIOLIB_LORAWAN_NONCES_BUF_SIZE);  // copy in to buffer
+        store.putBytes("nonces", buffer, RADIOLIB_LORAWAN_NONCES_BUF_SIZE); // send them to the store
         SERIAL_LOG("Join attempt %d result: %d", retries + 1, joinResult);
         
         if (joinResult == RADIOLIB_ERR_NONE) {
             SERIAL_LOG("Joined successfully!");
-            persist.saveSession(node);
             node->setDutyCycle(true, 0);
             join_attempts = 0;  // Reset join attempts on success
             return;
@@ -482,5 +490,17 @@ void resetRTCVariables() {
     count = 0;
     last_rssi = 0;
     pir_wake = false;
+}
+
+uint8_t* toByteArray(const char* hexString) {
+    static uint8_t byteArray[16];  // Static array to hold the result
+    
+    // Convert each pair of hex chars to a byte
+    for(int i = 0; i < 16; i++) {
+        char byteStr[3] = {hexString[i*2], hexString[i*2 + 1], '\0'};
+        byteArray[i] = strtol(byteStr, NULL, 16);
+    }
+    SERIAL_LOG("Converted hex string to byte array: %s", hexString);
+    return byteArray;
 }
 
