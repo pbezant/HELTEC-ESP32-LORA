@@ -221,7 +221,7 @@ int16_t lwActivate() {
     // ##### save the join counters (nonces) to permanent store
     Serial.println(F("Saving nonces to flash"));
     uint8_t buffer[RADIOLIB_LORAWAN_NONCES_BUF_SIZE];           // create somewhere to store nonces
-    uint8_t *persist = node.getBufferNonces();                  // get pointer to nonces
+    uint8_t *persist = node->getBufferNonces();                  // get pointer to nonces
     memcpy(buffer, persist, RADIOLIB_LORAWAN_NONCES_BUF_SIZE);  // copy in to buffer
     store.putBytes("nonces", buffer, RADIOLIB_LORAWAN_NONCES_BUF_SIZE); // send them to the store
     
