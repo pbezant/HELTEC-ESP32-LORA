@@ -1,34 +1,14 @@
-/**
- * 
- * FOR THIS EXAMPLE TO WORK, YOU MUST INSTALL THE "LoRaWAN_ESP32" LIBRARY USING
- * THE LIBRARY MANAGER IN THE ARDUINO IDE.
- * 
- * This code will send a two-byte LoRaWAN message every 15 minutes. The first
- * byte is a simple 8-bit counter, the second is the ESP32 chip temperature
- * directly after waking up from its 15 minute sleep in degrees celsius + 100.
- *
- * If your NVS partition does not have stored TTN / LoRaWAN provisioning
- * information in it yet, you will be prompted for them on the serial port and
- * they will be stored for subsequent use.
- *
- * See https://github.com/ropg/LoRaWAN_ESP32
-*/
-
-
 // ============= Configuration =============
 #define MINIMUM_DELAY 120
 
 
 #include <heltec_unofficial.h>
 #include <LoRaWAN_ESP32.h>
+#include <LoRaWANManager.h>
 #include <Wire.h>
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BME280.h>
 #include "secrets.h"
-// #include "DisplayLogger.h"
-
-// #include <esp32-hal-misc.h>
-// #include <BH1750.h>
 
 #define Serial Serial0  // Explicit serial port definition
 
@@ -49,7 +29,7 @@ RTC_DATA_ATTR bool pir_wake;  // Keep track if PIR caused the wake
 // Add these definitions after the other #define statements
 #define SF      DR_SF7  // Spreading Factor (DR_SF7 to DR_SF12)
 #define TX_POWER    14  // Transmit power in dBm (max 20dBm)
-const LoRaWANBand_t Region = US915;
+const LoRaWANBand_t region = US915;
 const uint8_t subBand = 2;
 
 RTC_DATA_ATTR uint8_t count;
@@ -81,9 +61,9 @@ RTC_DATA_ATTR uint32_t custom_sleep_interval = MINIMUM_DELAY;  // In seconds
 #include <Preferences.h>
 Preferences store;
 Adafruit_BME280 bme; // I2C 3.3v
-LoRaWANNode* node = new LoRaWANNode(&radio, &Region, subBand);
 
-// Modify the struct to include PIR status and RSSI
+LoRaWANManager lorawan(joinEui, devEui, nwkKey, appKey, region, subBand);
+
 struct SensorData {
     float temperature;
     float humidity;
@@ -97,28 +77,40 @@ void setup() {
     SERIAL_LOG("System initialized");
     
     initHardware();
-    initRadio();
-    joinNetwork();
+    // initRadio();
+    // joinNetwork();
     // Only try to join if we're not already activated
     // if (!node->isActivated()) {
     //     joinNetwork();
     // } else {
     //     SERIAL_LOG("Node already activated, resuming session");
     // }
+    if (!lorawan.begin()) {
+        Serial.println("Failed to initialize LoRaWAN");
+        return;
+    }
+    
+    // Join network
+    if (!lorawan.joinNetwork()) {
+        Serial.println("Failed to join network");
+        return;
+    }
 }
 void loop() {
     heltec_loop();
     readSensors();
-    sendSensorData();
-    if(custom_sleep_interval == 0) {
-       
-        SERIAL_LOG("delaying for %d ms", node->timeUntilUplink());
-        delay(node->timeUntilUplink()*1000);
-        
-    }else{
+    // sendSensorData();
 
-        goToSleep();
-    }
+    // if(custom_sleep_interval == 0) {
+       
+    //     SERIAL_LOG("delaying for %d ms", node->timeUntilUplink());
+    //     delay(node->timeUntilUplink()*1000);
+        
+    // }else{
+
+    //     goToSleep();
+    // }
+    goToSleep();
 }
 // Add this function to check wake-up cause
 void printWakeupReason() {
@@ -160,71 +152,71 @@ void initHardware() {
 }
 
 // Initialize and check radio
-void initRadio() {
-    SERIAL_LOG("Initializing radio");
-    int16_t state = radio.begin();
-    if (state != RADIOLIB_ERR_NONE) {
-        SERIAL_LOG("Radio initialization failed: %d", state);
-        goToSleep();
-        return;
-    }
-    //    node = persist.manage(&radio);
-    // SERIAL_LOG("%d", node);
-    SERIAL_LOG("Radio initialized successfully");
-}
+// void initRadio() {
+//     SERIAL_LOG("Initializing radio");
+//     int16_t state = radio.begin();
+//     if (state != RADIOLIB_ERR_NONE) {
+//         SERIAL_LOG("Radio initialization failed: %d", state);
+//         goToSleep();
+//         return;
+//     }
+//     //    node = persist.manage(&radio);
+//     // SERIAL_LOG("%d", node);
+//     SERIAL_LOG("Radio initialized successfully");
+// }
 
 
 // Join LoRaWAN network
-void joinNetwork() {
-    // node->clearSession();
-    SERIAL_LOG("Activating OTAA");
+// void joinNetwork() {
+//     // node->clearSession();
+//     SERIAL_LOG("Activating OTAA");
 
-    uint8_t retries = 0;
+//     uint8_t retries = 0;
     
-    // Setup the OTAA session information
-    int16_t state = node->beginOTAA(joinEui, devEui, toByteArray(nwkKey), toByteArray(appKey) );
+//     // Setup the OTAA session information
+//     int16_t state = node->beginOTAA(joinEui, devEui, toByteArray(nwkKey), toByteArray(appKey) );
     
-    if (state != RADIOLIB_ERR_NONE) {
-        SERIAL_LOG("Failed to initialize OTAA: %d", state);
-        return;
-    } else{
-        SERIAL_LOG("OTAA initialized successfully: %d", state);
-    }
+//     if (state != RADIOLIB_ERR_NONE) {
+//         SERIAL_LOG("Failed to initialize OTAA: %d", state);
+//         return;
+//     } else{
+//         SERIAL_LOG("OTAA initialized successfully: %d", state);
+//     }
 
-    while (retries < MAX_RETRIES) {
-        int joinResult = node->activateOTAA();
+//     while (retries < MAX_RETRIES) {
+//         int joinResult = node->activateOTAA();
 
-        Serial.println(F("Saving nonces to flash"));
-        uint8_t buffer[RADIOLIB_LORAWAN_NONCES_BUF_SIZE];           // create somewhere to store nonces
-        uint8_t *persist = node->getBufferNonces();                  // get pointer to nonces
-        memcpy(buffer, persist, RADIOLIB_LORAWAN_NONCES_BUF_SIZE);  // copy in to buffer
-        store.putBytes("nonces", buffer, RADIOLIB_LORAWAN_NONCES_BUF_SIZE); // send them to the store
-        SERIAL_LOG("Join attempt %d result: %d", retries + 1, joinResult);
+//         Serial.println(F("Saving nonces to flash"));
+//         uint8_t buffer[RADIOLIB_LORAWAN_NONCES_BUF_SIZE];           // create somewhere to store nonces
+//         uint8_t *persist = node->getBufferNonces();                  // get pointer to nonces
+//         memcpy(buffer, persist, RADIOLIB_LORAWAN_NONCES_BUF_SIZE);  // copy in to buffer
+//         store.putBytes("nonces", buffer, RADIOLIB_LORAWAN_NONCES_BUF_SIZE); // send them to the store
+//         SERIAL_LOG("Join attempt %d result: %d", retries + 1, joinResult);
         
-        if (joinResult == RADIOLIB_ERR_NONE) {
-            SERIAL_LOG("Joined successfully!");
-            node->setDutyCycle(true, 0);
-            join_attempts = 0;  // Reset join attempts on success
-            return;
-        }
+//         if (joinResult == RADIOLIB_ERR_NONE) {
+//             SERIAL_LOG("Joined successfully!");
+//             node->setDutyCycle(true, 0);
+//             join_attempts = 0;  // Reset join attempts on success
+//             return;
+//         }
         
-        retries++;
-        join_attempts++;
+//         retries++;
+//         join_attempts++;
         
-        if (join_attempts >= max_join_attempts) {
-            SERIAL_LOG("Max join attempts reached. Increasing sleep time.");
-            error_backoff_time *= 2;  // Double the sleep time
-            goToSleep();
-        }
+//         if (join_attempts >= max_join_attempts) {
+//             SERIAL_LOG("Max join attempts reached. Increasing sleep time.");
+//             error_backoff_time *= 2;  // Double the sleep time
+//             goToSleep();
+//         }
         
-        if (retries < MAX_RETRIES) {
-            SERIAL_LOG("Join failed, retrying in %d ms", RETRY_DELAY);
-            delay(RETRY_DELAY);
-        }
-    }
+//         if (retries < MAX_RETRIES) {
+//             SERIAL_LOG("Join failed, retrying in %d ms", RETRY_DELAY);
+//             delay(RETRY_DELAY);
+//         }
+//     }
     
-    SERIAL_LOG("Join failed after %d attempts", MAX_RETRIES);
-}
+//     SERIAL_LOG("Join failed after %d attempts", MAX_RETRIES);
+// }
 
 // Function to read all sensors
 void readSensors() {
@@ -348,69 +340,69 @@ void handleDownlink(uint8_t* data, size_t len) {
 }
 
 // Modify sendSensorData() to use the new downlink handler
-void sendSensorData() {
-    // Prepare payload - now 9 bytes total
-    uint8_t uplinkData[8];
+// void sendSensorData() {
+//     // Prepare payload - now 9 bytes total
+//     uint8_t uplinkData[8];
     
-    // Temperature: 2 bytes (multiplied by 100 to preserve 2 decimal places)
-    int16_t temp = sensorData.temperature * 100;
-    uplinkData[0] = temp >> 8;
-    uplinkData[1] = temp & 0xFF;
+//     // Temperature: 2 bytes (multiplied by 100 to preserve 2 decimal places)
+//     int16_t temp = sensorData.temperature * 100;
+//     uplinkData[0] = temp >> 8;
+//     uplinkData[1] = temp & 0xFF;
     
-    // Humidity: 1 byte (multiplied by 2 to preserve 1 decimal place)
-    uplinkData[2] = (uint8_t)(sensorData.humidity * 2);
+//     // Humidity: 1 byte (multiplied by 2 to preserve 1 decimal place)
+//     uplinkData[2] = (uint8_t)(sensorData.humidity * 2);
     
-    // Pressure: 2 bytes (subtract 900 to fit in 2 bytes)
-    uint16_t press = (sensorData.pressure - 900) * 10;
-    uplinkData[3] = press >> 8;
-    uplinkData[4] = press & 0xFF;
+//     // Pressure: 2 bytes (subtract 900 to fit in 2 bytes)
+//     uint16_t press = (sensorData.pressure - 900) * 10;
+//     uplinkData[3] = press >> 8;
+//     uplinkData[4] = press & 0xFF;
     
-    // PIR status (byte 5)
-    uplinkData[5] = sensorData.pir_triggered ? 1 : 0;
+//     // PIR status (byte 5)
+//     uplinkData[5] = sensorData.pir_triggered ? 1 : 0;
 
-    // RSSI: 2 bytes (signed int16) (bytes 6-7)
-    uplinkData[6] = last_rssi >> 8;
-    uplinkData[7] = last_rssi & 0xFF;
+//     // RSSI: 2 bytes (signed int16) (bytes 6-7)
+//     uplinkData[6] = last_rssi >> 8;
+//     uplinkData[7] = last_rssi & 0xFF;
 
-    uint8_t downlinkData[256];
-    size_t lenDown = sizeof(downlinkData);
-    uint8_t retries = 0;
+//     uint8_t downlinkData[256];
+//     size_t lenDown = sizeof(downlinkData);
+//     uint8_t retries = 0;
 
-    while (retries < MAX_RETRIES) {
-        int16_t state = node->sendReceive(uplinkData, sizeof(uplinkData), 1, downlinkData, &lenDown);
-        last_rssi = radio.getRSSI();
+//     while (retries < MAX_RETRIES) {
+//         int16_t state = node->sendReceive(uplinkData, sizeof(uplinkData), 1, downlinkData, &lenDown);
+//         last_rssi = radio.getRSSI();
 
-        if (state == RADIOLIB_ERR_NONE || state > 0) {
-            SERIAL_LOG("Message sent successfully on attempt %d", retries + 1);
-            SERIAL_LOG("RSSI: %d dBm", last_rssi);
+//         if (state == RADIOLIB_ERR_NONE || state > 0) {
+//             SERIAL_LOG("Message sent successfully on attempt %d", retries + 1);
+//             SERIAL_LOG("RSSI: %d dBm", last_rssi);
             
-            if (state > 0) {
-                SERIAL_LOG("Received %d bytes of downlink data", state);
-                // Process downlink data
-                handleDownlink(downlinkData, state);
-            }
+//             if (state > 0) {
+//                 SERIAL_LOG("Received %d bytes of downlink data", state);
+//                 // Process downlink data
+//                 handleDownlink(downlinkData, state);
+//             }
             
-            consecutive_errors = 0;
-            error_backoff_time = MINIMUM_DELAY;
-            had_successful_transmission = true;
-            return;
-        }
+//             consecutive_errors = 0;
+//             error_backoff_time = MINIMUM_DELAY;
+//             had_successful_transmission = true;
+//             return;
+//         }
 
-        retries++;
-        SERIAL_LOG("Transmission attempt %d failed with error %d", retries, state);
+//         retries++;
+//         SERIAL_LOG("Transmission attempt %d failed with error %d", retries, state);
         
-        if (retries < MAX_RETRIES) {
-            SERIAL_LOG("Retrying in %d ms", RETRY_DELAY);
-            delay(RETRY_DELAY);
-        }
-    }
+//         if (retries < MAX_RETRIES) {
+//             SERIAL_LOG("Retrying in %d ms", RETRY_DELAY);
+//             delay(RETRY_DELAY);
+//         }
+//     }
 
-    SERIAL_LOG("All transmission attempts failed");
-    consecutive_errors++;
-    error_backoff_time *= 2;  // Double the backoff time
-    error_backoff_time = min(error_backoff_time, (uint32_t)(3600));  // Cap at 1 hour
-    had_successful_transmission = false;
-}
+//     SERIAL_LOG("All transmission attempts failed");
+//     consecutive_errors++;
+//     error_backoff_time *= 2;  // Double the backoff time
+//     error_backoff_time = min(error_backoff_time, (uint32_t)(3600));  // Cap at 1 hour
+//     had_successful_transmission = false;
+// }
 
 uint32_t calculateDelay(uint32_t timeUntilUplink, uint32_t customInterval){
       // Get time until next uplink and custom interval
@@ -428,7 +420,7 @@ uint32_t calculateDelay(uint32_t timeUntilUplink, uint32_t customInterval){
 void goToSleep() {
     SERIAL_LOG("Preparing for deep sleep");
     
-    uint32_t delayMs = calculateDelay(node->timeUntilUplink(), custom_sleep_interval);
+    uint32_t delayMs = calculateDelay(lorawan.getTimeUntilNextTransmission(), custom_sleep_interval);
     
     // Debug PIR wake-up configuration
     SERIAL_LOG("PIR wake-up enabled on GPIO %d, trigger level: %s", 
