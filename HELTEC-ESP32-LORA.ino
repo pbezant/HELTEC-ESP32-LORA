@@ -2,8 +2,8 @@
 #define MINIMUM_DELAY 120
 
 
-#include <heltec_unofficial.h>
-#include <LoRaWAN_ESP32.h>
+// #include <heltec_unofficial.h>
+// #include <LoRaWAN_ESP32.h>
 #include <LoRaWANManager.h>
 #include <Wire.h>
 #include <Adafruit_Sensor.h>
@@ -73,7 +73,7 @@ struct SensorData {
 } sensorData;
 
 void setup() {
-    heltec_setup();
+    // heltec_setup();
     SERIAL_LOG("System initialized");
     
     initHardware();
@@ -97,7 +97,7 @@ void setup() {
     }
 }
 void loop() {
-    heltec_loop();
+    // heltec_loop();
     readSensors();
     // sendSensorData();
 

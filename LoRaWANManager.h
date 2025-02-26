@@ -3,6 +3,8 @@
 
 #include <Arduino.h>
 #include <RadioLib.h>
+#define RADIO_BOARD_WIFI_LORA32_V3
+#include <RadioBoards.h>
 #include <LoRaWAN_ESP32.h>
 //#include <heltec.h>  // Add this for Heltec board support
 #include <SPI.h>     // Add this for SPI communication
@@ -32,6 +34,12 @@ public:
     // Check if connected
     bool isConnected() const;
 
+    ~LoRaWANManager() {
+        delete node;
+        delete radio;
+        delete module;
+    }
+
 private:
     // Constants
     static const uint8_t MAX_RETRIES = 3;
@@ -48,8 +56,9 @@ private:
     // LoRaWAN node instance
     LoRaWANNode* node;
     
-    // Radio instance (using SX1276 for Heltec boards)
-    SX1276* radio;
+    // Radio instance (using SX1262 for Heltec boards)
+    Module* module;
+    SX1262* radio;
     
     // Utility function to convert hex string to byte array
     uint8_t* toByteArray(const char* hexString);

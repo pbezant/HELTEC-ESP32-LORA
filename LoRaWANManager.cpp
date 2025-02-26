@@ -1,23 +1,26 @@
 #include "LoRaWANManager.h"
 
-
-// Pin definitions for Heltec board
-#define LORA_CS   18
-#define LORA_DIO0 26
-#define LORA_DIO1 35
-#define LORA_RST  14
+#define RADIO_BOARD_AUTO
+// Pin definitions for Heltec WiFi LoRa 32 V3
+#define LORA_CS   8     // NSS pin
+#define LORA_DIO1 14    // DIO1 pin
+#define LORA_RST  12    // RESET pin
+#define LORA_BUSY 13    // BUSY pin
 
 LoRaWANManager::LoRaWANManager(const char* joinEui, const char* devEui, 
                              const char* nwkKey, const char* appKey,
                              LoRaWANBand_t region, uint8_t subBand)
     : _joinEui(joinEui), _devEui(devEui), _nwkKey(nwkKey), _appKey(appKey),
       _region(region), _subBand(subBand), _isConnected(false) {
+    
+    // Initialize the Module with the correct pins
+    module = new Module(LORA_CS, LORA_DIO1, LORA_RST, LORA_BUSY);
+    radio = new SX1262(module);
     node = nullptr;
-    radio = new SX1276(LORA_CS, LORA_DIO0, LORA_RST, LORA_DIO1);
 }
 
 bool LoRaWANManager::begin() {
-    if (!radio) return false;
+    if (!radio || !module) return false;
     
     SERIAL_LOG("Initializing radio");
     int16_t state = radio->begin();
@@ -26,6 +29,7 @@ bool LoRaWANManager::begin() {
         return false;
     }
     SERIAL_LOG("Radio initialized successfully");
+    
     node = new LoRaWANNode(radio, &_region, _subBand);
     return (node != nullptr);
 }
