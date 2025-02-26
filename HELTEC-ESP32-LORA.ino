@@ -2,10 +2,9 @@
 #define MINIMUM_DELAY 120
 
 
-// #include <heltec_unofficial.h>
-// #include <LoRaWAN_ESP32.h>
 #include <LoRaWANManager.h>
 #include <Wire.h>
+#include <Relay.h>
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BME280.h>
 #include "secrets.h"
@@ -39,8 +38,6 @@ RTC_DATA_ATTR int consecutive_errors = 0;
 RTC_DATA_ATTR uint32_t error_backoff_time = MINIMUM_DELAY;
 
 // Add these with other RTC variables
-#define MAX_RETRIES 3
-#define RETRY_DELAY 5000  // 5 seconds between retries
 RTC_DATA_ATTR uint32_t join_attempts = 0;
 RTC_DATA_ATTR uint32_t max_join_attempts = 5;
 
