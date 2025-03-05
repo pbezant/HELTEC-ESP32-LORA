@@ -4,7 +4,6 @@
 
 #include <LoRaWANManager.h>
 #include <Wire.h>
-#include <Relay.h>
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BME280.h>
 #include "secrets.h"
@@ -71,6 +70,7 @@ struct SensorData {
 
 void setup() {
     // heltec_setup();
+    Serial.begin(115200);
     SERIAL_LOG("System initialized");
     
     initHardware();

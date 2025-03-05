@@ -34,6 +34,9 @@ public:
     // Check if connected
     bool isConnected() const;
 
+    // Receive downlink
+    bool receiveDownlink(uint8_t* buffer, size_t* length, uint8_t* port = nullptr);
+
     ~LoRaWANManager() {
         delete node;
         delete radio;
@@ -61,7 +64,7 @@ private:
     SX1262* radio;
     
     // Utility function to convert hex string to byte array
-    uint8_t* toByteArray(const char* hexString);
+    uint8_t* toByteArray(const char* hexString, bool reverseOrder = false);
     
     // Track connection state
     bool _isConnected;
