@@ -1,0 +1,313 @@
+[37m13:32:45.653 > S[37maving nonc[37me[37ms to flash[37m[37m
+13:32:45.655 > [HELTEC-E[37mS[37mP32-LORA.in[37mo[37m:202] Join [37ma[37mttempt 2 r[37me[37msult: -1118[37m[37m
+13:32:45.660 > [HELTEC-E[37mS[37mP32-LORA.in[37mo[37m:221] Join[37m [37mfailed, ret[37mr[37mying in 50[37m0[37m0 ms
+[37m13:32:50.663 > S[37ma[37mving nonces[37m [37mto flash
+[37m13:32:50.666 > [[37mHELTEC-ESP3[37m2[37m-LORA.ino:[37m2[37m02] Join at[37mt[37mempt 3 res[37mu[37mlt: 0
+13:32:50.670 > [HEL[37mT[37mEC-ESP32-L[37mO[37mRA.ino:205][37m [37mJoined suc[37mc[37messfully!
+[37m13:32:50.675 > R[37meading Sen[37ms[37mors
+13:32:50.676 > Could [37mn[37mot find BM[37mE[37m280 sensor![37m [37mChecking f[37mo[37mr common is[37ms[37mues:
+13:32:50.681 > I2C e[37mr[37mror: 2 - N[37mo[37m device fou[37mn[37md at addre[37ms[37ms 0x76
+13:32:50.685 > Temp[37me[37mrature: 0.[37m0[37m0°C
+13:32:50.687 > Humidi[37mt[37my: 0.00%
+13:32:50.688 > P[37mr[37messure: 0.0[37m0[37mhPa
+13:32:50.690 > PIR Tr[37mi[37mggered: No
+[37m13:32:56.231 > [[37mH[37mELTEC-ESP[37m3[37m2-LORA.ino:[37m3[37m84] Messag[37me[37m sent succe[37ms[37msfully on [37ma[37mttempt 1
+13:32:56.237 > [[37mH[37mELTEC-ESP3[37m2[37m-LORA.ino:3[37m8[37m5] RSSI: -[37m5[37m9 dBm
+13:32:56.241 > [HEL[37mT[37mEC-ESP32-L[37mO[37mRA.ino:388][37m [37mReceived 1[37m [37mbytes of do[37mw[37mnlink data[37m[37m
+13:32:56.247 > [HELTEC-ES[37mP[37m32-LORA.ino[37m:[37m292] Downl[37mi[37mnk too shor[37mt[37m to be val[37mi[37md
+13:32:56.252 > [HELTEC[37m-[37mESP32-LORA.[37mi[37mno:429] Pr[37me[37mparing for [37md[37meep sleep[37m
+[37m13:32:56.257 > [HELTEC-ESP[37m3[37m2-LORA.ino:[37m4[37m19] Time u[37mn[37mtil next up[37ml[37mink: 0 ms[37m
+[37m13:32:56.262 > [HELTEC-ESP[37m3[37m2-LORA.ino[37m:[37m420] Custom[37m [37msleep inte[37mr[37mval: 120000[37m [37mms
+13:32:56.267 > [HELTE[37mC[37m-ESP32-LORA[37m.[37mino:423] F[37mi[37mnal sleep d[37mu[37mration: 12[37m0[37m000 ms (2 m[37mi[37mnutes)
+13:32:56.273 > [H[37mE[37mLTEC-ESP32-[37mL[37mORA.ino:434[37m][37m PIR wake-[37mu[37mp enabled o[37mn[37m GPIO 5, t[37mr[37migger leve[37ml[37m: HIGH
+13:32:56.280 > [HE[37mL[37mTEC-ESP32-[37mL[37mORA.ino:443[37m][37m Current wa[37mk[37me-up cause[37m:[37m 0
+13:32:56.285 > [HELTEC[37m-[37mESP32-LORA[37m.[37mino:444] En[37ma[37mbled wake-[37mu[37mp sources:[37m
+[37m13:32:56.290 > [HELTEC-ES[37mP[37m32-LORA.ino[37m:[37m445] - Tim[37me[37mr: 2 minute[37ms[37m
+13:32:56.294 > [HELTEC-[37mE[37mSP32-LORA.i[37mn[37mo:446] - P[37mI[37mR sensor on[37m [37mGPIO 5
+13:32:56.298 > [H[37mE[37mLTEC-ESP32-[37mL[37mORA.ino:456[37m][37m I2C bus p[37mo[37mwered down[37m[37m
+13:32:56.303 > [HELTEC-ES[37mP[37m32-LORA.ino[37m:[37m458] Enter[37mi[37mng deep sle[37me[37mp now...
+[37m13:34:55.800 > E[37mS[37mP-ROM:esp32[37ms[37m3-20210327[37m[37m
+[37m13:34:55.805 > B[37mu[37mild:Ma[37mr[37m 27 2021
+13:34:55.807 > r[37ms[37mt:0x5 (DSL[37mE[37mEP),boot:0x[37m3[37md (SPI_FAS[37mT[37m_FLASH_BOOT[37m)[37m
+13:34:55.812 > pro cpu [37mr[37meset by JTA[37mG[37m
+13:34:55.813 > SPIWP:0xe[37me[37m
+13:34:55.815 > mode:DIO[37m,[37m clock div:[37m1[37m
+13:34:55.817 > load:0x3[37mf[37mce3818,len:[37m0[37mx508
+13:34:55.819 > load[37m:[37m0x403c9700,[37ml[37men:0x4
+13:34:55.821 > lo[37ma[37md:0x403c970[37m4[37m,len:0xad0[37m[37m
+13:34:55.824 > load:0x403[37mc[37mc700,len:0[37mx[37m29e4
+13:34:55.826 > entry[37m [37m0x403c9880[37m[37m
+[37m13:34:55.889 > [[37mH[37mELTEC-ES[37mP[37m32-LORA.ino[37m:[37m97] System[37m [37minitialized[37m[37m
+13:34:55.894 > [HELTEC-E[37mS[37mP32-LORA.in[37mo[37m:133] Wake[37mu[37mp caused by[37m [37mtimer
+[37m13:34:55.989 > [[37mHELTEC[37m-[37mESP32-LORA.[37mi[37mno:164] In[37mi[37mtializing r[37ma[37mdio
+[37m13:34:56.038 > [[37mH[37mELTEC-[37mE[37mSP32-LORA.i[37mn[37mo:173] Rad[37mi[37mo initializ[37me[37md successf[37mu[37mlly
+13:34:56.044 > [HELTE[37mC[37m-ESP32-LOR[37mA[37m.ino:180] A[37mc[37mtivating O[37mT[37mAA
+13:34:56.048 > [HELTE[37mC[37m-ESP32-LORA[37m.[37mino:504] Co[37mn[37mverted hex[37m [37mstring to [37mb[37myte array: [37mD[37mD6587DD870C[37mC[37m956ACE752E[37m2[37mDFAC2C7A
+13:34:56.056 > [[37mH[37mELTEC-ESP3[37m2[37m-LORA.ino:5[37m0[37m4] Convert[37me[37md hex strin[37mg[37m to byte a[37mr[37mray: DD6587[37mD[37mD870CC956A[37mC[37mE752E2DFAC2[37mC[37m7A
+13:34:56.064 > [HELTE[37mC[37m-ESP32-LORA[37m.[37mino:191] O[37mT[37mAA initiali[37mz[37med successf[37mu[37mlly: 0
+[37m13:35:01.670 > S[37maving non[37mc[37mes to flas[37mh[37m
+13:35:01.673 > [HELTEC-E[37mS[37mP32-LORA.i[37mn[37mo:202] Join[37m [37mattempt 1 [37mr[37mesult: -111[37m8[37m
+13:35:01.678 > [HELTEC-[37mE[37mSP32-LORA.i[37mn[37mo:221] Joi[37mn[37m failed, re[37mt[37mrying in 5[37m0[37m00 ms
+[37m13:35:06.681 > S[37ma[37mving nonc[37me[37ms to flash[37m
+[37m13:35:06.684 > [HELTEC-ESP[37m3[37m2-LORA.ino[37m:[37m202] Join a[37mt[37mtempt 2 re[37ms[37mult: 0
+13:35:06.688 > [HE[37mL[37mTEC-ESP32-[37mL[37mORA.ino:205[37m][37m Joined su[37mc[37mcessfully![37m
+[37m13:35:06.693 > Reading Se[37mn[37msors
+13:35:06.694 > Could[37m [37mnot find B[37mM[37mE280 sensor[37m![37m Checking [37mf[37mor common i[37ms[37msues:
+13:35:06.699 > I2C[37m [37merror: 2 - [37mN[37mo device f[37mo[37mund at addr[37me[37mss 0x76
+13:35:06.703 > Tem[37mp[37merature: 0[37m.[37m00°C
+13:35:06.705 > Humid[37mi[37mty: 0.00%
+[37m13:35:06.707 > P[37mressure: 0[37m.[37m00hPa
+13:35:06.708 > PIR T[37mr[37miggered: N[37mo[37m
+[37m13:35:12.249 > [[37mHELTEC-ES[37mP[37m32-LORA.in[37mo[37m:384] Messa[37mg[37me sent suc[37mc[37messfully on[37m [37mattempt 1
+[37m13:35:12.256 > [[37mHELTEC-ESP[37m3[37m2-LORA.ino:[37m3[37m85] RSSI: [37m-[37m57 dBm
+13:35:12.259 > [HE[37mL[37mTEC-ESP32-[37mL[37mORA.ino:388[37m][37m Received [37m1[37m bytes of d[37mo[37mwnlink dat[37ma[37m
+13:35:12.265 > [HELTEC-E[37mS[37mP32-LORA.i[37mn[37mo:292] Down[37ml[37mink too sh[37mo[37mrt to be va[37ml[37mid
+13:35:12.270 > [HELTE[37mC[37m-ESP32-LORA[37m.[37mino:429] P[37mr[37meparing for[37m [37mdeep sleep[37m[37m
+13:35:12.275 > [HELTEC-ES[37mP[37m32-LORA.in[37mo[37m:419] Time [37mu[37mntil next [37mu[37mplink: 0 ms[37m[37m
+13:35:12.280 > [HELTEC-E[37mS[37mP32-LORA.in[37mo[37m:420] Custo[37mm[37m sleep int[37me[37mrval: 12000[37m0[37m ms
+13:35:12.285 > [HELT[37mE[37mC-ESP32-LOR[37mA[37m.ino:423] [37mF[37minal sleep [37md[37muration: 12[37m0[37m000 ms (2 [37mm[37minutes)
+13:35:12.290 > [H[37mE[37mLTEC-ESP32[37m-[37mLORA.ino:4[37m3[37m4] PIR wake[37m-[37mup enabled[37m [37mon GPIO 5, [37mt[37mrigger lev[37me[37ml: HIGH
+13:35:12.298 > [H[37mE[37mLTEC-ESP32[37m-[37mLORA.ino:44[37m3[37m] Current w[37ma[37mke-up caus[37me[37m: 4
+13:35:12.303 > [HELTE[37mC[37m-ESP32-LOR[37mA[37m.ino:444] E[37mn[37mabled wake[37m-[37mup sources:[37m[37m
+13:35:12.307 > [HELTEC-E[37mS[37mP32-LORA.in[37mo[37m:445] - Ti[37mm[37mer: 2 minut[37me[37ms
+13:35:12.311 > [HELTEC[37m-[37mESP32-LORA.[37mi[37mno:446] - [37mP[37mIR sensor o[37mn[37m GPIO 5
+13:35:12.315 > [[37mH[37mELTEC-ESP32[37m-[37mLORA.ino:4[37m5[37m6] I2C bus [37mp[37mowered dow[37mn[37m
+13:35:12.320 > [HELTEC-E[37mS[37mP32-LORA.i[37mn[37mo:458] Ente[37mr[37ming deep sl[37me[37mep now...[37m
+[37m13:35:22.788 > E[37mSP-R[37mO[37mM:esp32s3-[37m2[37m0210327
+[37m13:35:22.794 > B[37mu[37mild:Mar 27[37m [37m2021
+13:35:22.796 > rst:0[37mx[37m5 (DSLEEP)[37m,[37mboot:0x3d ([37mS[37mPI_FAST_FL[37mA[37mSH_BOOT)
+13:35:22.799 > p[37mr[37mo cpu rese[37mt[37m by JTAG
+13:35:22.802 > S[37mP[37mIWP:0xee
+13:35:22.803 > m[37mo[37mde:DIO, cl[37mo[37mck div:1
+[37m13:35:22.806 > l[37moad:0x3fce3[37m8[37m18,len:0x5[37m0[37m8
+13:35:22.808 > load:0x4[37m0[37m3c9700,len[37m:[37m0x4
+13:35:22.810 > load:0[37mx[37m403c9704,le[37mn[37m:0xad0
+13:35:22.812 > lo[37ma[37md:0x403cc70[37m0[37m,len:0x29e[37m4[37m
+13:35:22.814 > entry 0x4[37m0[37m3c9880
+[37m13:35:22.878 > [[37mH[37mELTEC-ESP32-[37mL[37mORA.ino:97[37m][37m System ini[37mt[37mialized
+13:35:22.881 > [[37mH[37mELTEC-ESP32[37m-[37mLORA.ino:12[37m9[37m] Wakeup c[37ma[37mused by ex[37mt[37mernal signa[37ml[37m using RTC_[37mI[37mO (PIR sen[37ms[37mor)
+[37m13:35:22.989 > [[37mH[37mELTEC-ESP[37m3[37m2-LORA.ino:[37m1[37m64] Initia[37ml[37mizing radio[37m[37m
+[37m13:35:23.043 > [[37mHELTEC-ESP32-LORA.ino:173] Radio initialized successfully[37m[37m
+13:35:23.046 > [HELTEC-E[37mS[37mP32-LORA.in[37mo[37m:180] Activ[37ma[37mting OTAA[37m
+[37m13:35:23.049 > [HELTEC-ESP[37m3[37m2-LORA.ino[37m:[37m504] Conver[37mt[37med hex str[37mi[37mng to byte [37ma[37mrray: DD65[37m8[37m7DD870CC95[37m6[37mACE752E2DFA[37mC[37m2C7A
+13:35:23.057 > [HELT[37mE[37mC-ESP32-LO[37mR[37mA.ino:504] [37mC[37monverted h[37me[37mx string to[37m [37mbyte array[37m:[37m DD6587DD87[37m0[37mCC956ACE75[37m2[37mE2DFAC2C7A[37m
+[37m13:35:23.066 > [HELTEC-ES[37mP[37m32-LORA.ino[37m:[37m191] OTAA [37mi[37mnitialized [37ms[37muccessfull[37my[37m: 0
+[37m13:35:28.671 > S[37ma[37mving nonces[37m [37mto flash
+13:35:28.673 > [[37mH[37mELTEC-ESP3[37m2[37m-LORA.ino:2[37m0[37m2] Join at[37mt[37mempt 1 resu[37ml[37mt: -1118
+13:35:28.678 > [[37mH[37mELTEC-ESP3[37m2[37m-LORA.ino:2[37m2[37m1] Join fa[37mi[37mled, retryi[37mn[37mg in 5000 [37mm[37ms
+[37m13:35:33.682 > S[37mavi[37mn[37mg nonces t[37mo[37m flash
+13:35:33.684 > [HE[37mL[37mTEC-ESP32-[37mL[37mORA.ino:202[37m][37m Join atte[37mm[37mpt 2 result[37m:[37m 0
+13:35:33.688 > [HELTE[37mC[37m-ESP32-LORA[37m.[37mino:205] J[37mo[37mined succes[37ms[37mfully!
+13:35:33.692 > Re[37ma[37mding Sensor[37ms[37m
+13:35:33.694 > Could not[37m [37mfind BME28[37m0[37m sensor! Ch[37me[37mcking for [37mc[37mommon issue[37ms[37m:
+13:35:33.699 > I2C err[37mo[37mr: 2 - No d[37me[37mvice found[37m [37mat address [37m0[37mx76
+13:35:33.703 > Temper[37ma[37mture: 0.00[37m°[37mC
+13:35:33.705 > Humidity[37m:[37m 0.00%
+13:35:33.706 > Pres[37ms[37mure: 0.00h[37mP[37ma
+13:35:33.708 > PIR Trigg[37me[37mred: Yes
+[37m13:35:39.250 > [[37mHE[37mL[37mTEC-ESP32-[37mL[37mORA.ino:384[37m][37m Message s[37me[37mnt successf[37mu[37mlly on att[37me[37mmpt 1
+13:35:39.256 > [HEL[37mT[37mEC-ESP32-L[37mO[37mRA.ino:385][37m [37mRSSI: -52 [37md[37mBm
+13:35:39.260 > [HELTEC[37m-[37mESP32-LORA[37m.[37mino:388] Re[37mc[37meived 1 by[37mt[37mes of downl[37mi[37mnk data
+13:35:39.264 > [[37mH[37mELTEC-ESP32[37m-[37mLORA.ino:2[37m9[37m2] Downlink[37m [37mtoo short [37mt[37mo be valid[37m
+[37m13:35:39.271 > [HELTEC-ES[37mP[37m32-LORA.ino[37m:[37m429] Prepa[37mr[37ming for dee[37mp[37m sleep
+13:35:39.275 > [HE[37mL[37mTEC-ESP32-[37mL[37mORA.ino:419[37m][37m Time unti[37ml[37m next uplin[37mk[37m: 0 ms
+13:35:39.279 > [H[37mE[37mLTEC-ESP32-[37mL[37mORA.ino:42[37m0[37m] Custom sl[37me[37mep interva[37ml[37m: 120000 ms[37m[37m
+13:35:39.285 > [HELTEC-E[37mS[37mP32-LORA.in[37mo[37m:423] Fina[37ml[37m sleep dura[37mt[37mion: 120000[37m [37mms (2 minu[37mt[37mes)
+13:35:39.291 > [HELTE[37mC[37m-ESP32-LOR[37mA[37m.ino:434] P[37mI[37mR wake-up [37me[37mnabled on G[37mP[37mIO 5, trig[37mg[37mer level: H[37mI[37mGH
+13:35:39.298 > [HELTE[37mC[37m-ESP32-LORA[37m.[37mino:443] C[37mu[37mrrent wake-[37mu[37mp cause: 2[37m[37m
+13:35:39.303 > [HELTEC-ES[37mP[37m32-LORA.in[37mo[37m:444] Enabl[37me[37md wake-up [37ms[37mources:
+13:35:39.307 > [H[37mE[37mLTEC-ESP32[37m-[37mLORA.ino:44[37m5[37m] - Timer:[37m [37m2 minutes
+[37m13:35:39.312 > [[37mHELTEC-ESP[37m3[37m2-LORA.ino:[37m4[37m46] - PIR [37ms[37mensor on GP[37mI[37mO 5
+13:35:39.316 > [HELT[37mE[37mC-ESP32-LOR[37mA[37m.ino:456] [37mI[37m2C bus powe[37mr[37med down
+13:35:39.320 > [[37mH[37mELTEC-ESP32[37m-[37mLORA.ino:4[37m5[37m8] Entering[37m [37mdeep sleep [37mn[37mow...
+[37m13:36:51.400 > E[37mS[37mP-ROM:esp[37m3[37m2s3-2021032[37m7[37m
+[37m13:36:51.405 > B[37muild:M[37ma[37mr 27 2021
+[37m13:36:51.407 > r[37mst:0x5 (DS[37mL[37mEEP),boot:0[37mx[37m3d (SPI_FAS[37mT[37m_FLASH_BOO[37mT[37m)
+13:36:51.412 > pro cpu [37mr[37meset by JT[37mA[37mG
+13:36:51.413 > SPIWP:0x[37me[37me
+13:36:51.414 > mode:DI[37mO[37m, clock di[37mv[37m:1
+13:36:51.417 > load:0x[37m3[37mfce3818,le[37mn[37m:0x508
+13:36:51.418 > loa[37md[37m:0x403c9700[37m,[37mlen:0x4
+13:36:51.420 > l[37mo[37mad:0x403c97[37m0[37m4,len:0xad[37m0[37m
+13:36:51.423 > load:0x40[37m3[37mcc700,len:[37m0[37mx29e4
+13:36:51.425 > entr[37my[37m 0x403c988[37m0[37m
+[37m13:36:51.489 > [[37mH[37mELTEC-E[37mS[37mP32-LORA.in[37mo[37m:97] Syste[37mm[37m initialize[37md[37m
+13:36:51.494 > [HELTEC-[37mE[37mSP32-LORA.i[37mn[37mo:129] Wak[37me[37mup caused b[37my[37m external [37ms[37mignal usin[37mg[37m RTC_IO (PI[37mR[37m sensor)
+[37m13:36:51.600 > [[37mH[37mELTE[37mC[37m-ESP32-LORA[37m.[37mino:164] I[37mn[37mitializing [37mr[37madio
+[37m13:36:51.651 > [[37mH[37mELTEC[37m-[37mESP32-LORA[37m.[37mino:173] Ra[37md[37mio initiali[37mz[37med success[37mf[37mully
+13:36:51.656 > [HEL[37mT[37mEC-ESP32-LO[37mR[37mA.ino:180][37m [37mActivating [37mO[37mTAA
+13:36:51.660 > [HELTE[37mC[37m-ESP32-LOR[37mA[37m.ino:504] C[37mo[37mnverted he[37mx[37m string to [37mb[37myte array:[37m [37mDD6587DD870[37mC[37mC956ACE752[37mE[37m2DFAC2C7A
+[37m13:36:51.669 > [[37mHELTEC-ESP[37m3[37m2-LORA.ino:[37m5[37m04] Conver[37mt[37med hex stri[37mn[37mg to byte [37ma[37mrray: DD658[37m7[37mDD870CC956A[37mC[37mE752E2DFAC[37m2[37mC7A
+13:36:51.677 > [HELT[37mE[37mC-ESP32-LOR[37mA[37m.ino:191] [37mO[37mTAA initial[37mi[37mzed succes[37ms[37mfully: 0
+[37m13:36:51.748 > S[37ma[37mving nonce[37ms[37m to flash[37m
+[37m13:36:51.750 > [HELTEC-ESP[37m3[37m2-LORA.ino[37m:[37m202] Join a[37mt[37mtempt 1 re[37ms[37mult: -1106[37m
+[37m13:36:51.755 > [HELTEC-ES[37mP[37m32-LORA.ino[37m:[37m221] Join [37mf[37mailed, retr[37my[37ming in 500[37m0[37m ms
+[37m13:37:02.363 > S[37maving no[37mn[37mces to flas[37mh[37m
+13:37:02.365 > [HELTEC-[37mE[37mSP32-LORA.i[37mn[37mo:202] Joi[37mn[37m attempt 2 [37mr[37mesult: -11[37m1[37m8
+13:37:02.371 > [HELTEC-[37mE[37mSP32-LORA.[37mi[37mno:221] Joi[37mn[37m failed, re[37mt[37mrying in 5[37m0[37m00 ms
+[37m13:37:07.374 > S[37ma[37mving nonc[37me[37ms to flash[37m[37m
+13:37:07.376 > [HELTEC-ES[37mP[37m32-LORA.in[37mo[37m:202] Join [37ma[37mttempt 3 r[37me[37msult: 0
+13:37:07.380 > [H[37mE[37mLTEC-ESP32[37m-[37mLORA.ino:20[37m5[37m] Joined s[37mu[37mccessfully![37m[37m
+13:37:07.386 > Reading S[37me[37mnsors
+13:37:07.386 > Coul[37md[37m not find B[37mM[37mE280 senso[37mr[37m! Checking [37mf[37mor common [37mi[37mssues:
+13:37:07.392 > I2C[37m [37merror: 2 -[37m [37mNo device f[37mo[37mund at add[37mr[37mess 0x76
+13:37:07.395 > Te[37mm[37mperature: [37m0[37m.00°C
+13:37:07.397 > Humi[37md[37mity: 0.00%[37m
+[37m13:37:07.399 > Pressure: 0[37m.[37m00hPa
+13:37:07.400 > PIR [37mT[37mriggered: Y[37me[37ms
+[37m13:37:12.942 > [[37mHELTEC-E[37mS[37mP32-LORA.in[37mo[37m:384] Mess[37ma[37mge sent suc[37mc[37messfully on[37m [37mattempt 1[37m
+[37m13:37:12.949 > [HELTEC-ESP[37m3[37m2-LORA.ino[37m:[37m385] RSSI: [37m-[37m53 dBm
+13:37:12.951 > [H[37mE[37mLTEC-ESP32-[37mL[37mORA.ino:38[37m8[37m] Received [37m1[37m bytes of [37md[37mownlink dat[37ma[37m
+13:37:12.957 > [HELTEC-[37mE[37mSP32-LORA.i[37mn[37mo:292] Dow[37mn[37mlink too sh[37mo[37mrt to be v[37ma[37mlid
+13:37:12.962 > [HELTE[37mC[37m-ESP32-LOR[37mA[37m.ino:429] P[37mr[37meparing fo[37mr[37m deep sleep[37m[37m
+13:37:12.967 > [HELTEC-E[37mS[37mP32-LORA.in[37mo[37m:419] Time[37m [37muntil next [37mu[37mplink: 0 m[37ms[37m
+13:37:12.972 > [HELTEC-E[37mS[37mP32-LORA.i[37mn[37mo:420] Cust[37mo[37mm sleep in[37mt[37merval: 1200[37m0[37m0 ms
+13:37:12.977 > [HEL[37mT[37mEC-ESP32-LO[37mR[37mA.ino:423] [37mF[37minal sleep[37m [37mduration: 1[37m2[37m0000 ms (2[37m [37mminutes)
+13:37:12.983 > [[37mH[37mELTEC-ESP3[37m2[37m-LORA.ino:4[37m3[37m4] PIR wak[37me[37m-up enabled[37m [37mon GPIO 5,[37m [37mtrigger lev[37me[37ml: HIGH
+13:37:12.990 > [[37mH[37mELTEC-ESP32[37m-[37mLORA.ino:4[37m4[37m3] Current [37mw[37make-up cau[37ms[37me: 2
+13:37:12.995 > [HELT[37mE[37mC-ESP32-LOR[37mA[37m.ino:444] [37mE[37mnabled wake[37m-[37mup sources[37m:[37m
+13:37:13.000 > [HELTEC-E[37mS[37mP32-LORA.i[37mn[37mo:445] - Ti[37mm[37mer: 2 minu[37mt[37mes
+13:37:13.004 > [HELTEC[37m-[37mESP32-LORA[37m.[37mino:446] - [37mP[37mIR sensor [37mo[37mn GPIO 5
+13:37:13.008 > [[37mH[37mELTEC-ESP3[37m2[37m-LORA.ino:4[37m5[37m6] I2C bus[37m [37mpowered dow[37mn[37m
+13:37:13.013 > [HELTEC-[37mE[37mSP32-LORA.i[37mn[37mo:458] Ent[37me[37mring deep s[37ml[37meep now...[37m[37m
+[37m13:38:50.786 > E[37mS[37mP-ROM:esp[37m3[37m2s3-2021032[37m7[37m
+[37m13:38:50.791 > B[37mu[37mild:M[37ma[37mr 27 2021
+[37m13:38:50.793 > r[37mst:0x5 (DS[37mL[37mEEP),boot:[37m0[37mx3d (SPI_FA[37mS[37mT_FLASH_BO[37mO[37mT)
+13:38:50.798 > pro cpu[37m [37mreset by JT[37mA[37mG
+13:38:50.799 > SPIWP:0[37mx[37mee
+13:38:50.800 > mode:DI[37mO[37m, clock di[37mv[37m:1
+13:38:50.803 > load:0x[37m3[37mfce3818,le[37mn[37m:0x508
+13:38:50.805 > loa[37md:0x403c970[37m0[37m,len:0x4
+13:38:50.806 > l[37mo[37mad:0x403c9[37m7[37m04,len:0xad[37m0[37m
+13:38:50.809 > load:0x4[37m0[37m3cc700,len:[37m0[37mx29e4
+13:38:50.811 > ent[37mr[37my 0x403c988[37m0[37m
+[37m13:38:50.875 > [[37mH[37mELTEC-E[37mS[37mP32-LORA.in[37mo[37m:97] Syste[37mm[37m initializ[37me[37md
+13:38:50.879 > [HELTEC-[37mE[37mSP32-LORA.[37mi[37mno:129] Wak[37me[37mup caused [37mb[37my external [37ms[37mignal using[37m [37mRTC_IO (PI[37mR[37m sensor)
+[37m13:38:50.986 > [[37mHELTE[37mC[37m-ESP32-LOR[37mA[37m.ino:164] I[37mn[37mitializing[37m [37mradio
+[37m13:38:51.037 > [[37mHELTEC[37m-[37mESP32-LORA[37m.[37mino:173] Ra[37md[37mio initial[37mi[37mzed success[37mf[37mully
+13:38:51.042 > [HEL[37mT[37mEC-ESP32-LO[37mR[37mA.ino:180][37m [37mActivating [37mO[37mTAA
+13:38:51.046 > [HELT[37mE[37mC-ESP32-LOR[37mA[37m.ino:504] [37mC[37monverted he[37mx[37m string to [37mb[37myte array:[37m [37mDD6587DD870[37mC[37mC956ACE752[37mE[37m2DFAC2C7A[37m
+[37m13:38:51.055 > [HELTEC-ESP[37m3[37m2-LORA.ino[37m:[37m504] Conver[37mt[37med hex stri[37mn[37mg to byte [37ma[37mrray: DD658[37m7[37mDD870CC956[37mA[37mCE752E2DFAC[37m2[37mC7A
+13:38:51.063 > [HELT[37mE[37mC-ESP32-LOR[37mA[37m.ino:191] [37mO[37mTAA initial[37mi[37mzed succes[37ms[37mfully: 0
+[37m13:38:56.669 > S[37maving n[37mo[37mnces to fla[37ms[37mh
+13:38:56.672 > [HELTEC[37m-[37mESP32-LORA.[37mi[37mno:202] Joi[37mn[37m attempt 1[37m [37mresult: -11[37m1[37m8
+13:38:56.676 > [HELTEC[37m-[37mESP32-LORA.[37mi[37mno:221] Jo[37mi[37mn failed, r[37me[37mtrying in [37m5[37m000 ms
+[37m13:39:01.680 > S[37ma[37mving non[37mc[37mes to flas[37mh[37m
+13:39:01.682 > [HELTEC-E[37mS[37mP32-LORA.in[37mo[37m:202] Join[37m [37mattempt 2 r[37me[37msult: 0
+13:39:01.687 > [[37mH[37mELTEC-ESP32[37m-[37mLORA.ino:2[37m0[37m5] Joined s[37mu[37mccessfully[37m![37m
+13:39:01.691 > Reading S[37me[37mnsors
+13:39:01.693 > Cou[37ml[37md not find [37mB[37mME280 senso[37mr[37m! Checking[37m [37mfor common [37mi[37mssues:
+13:39:01.697 > I2[37mC[37m error: 2 [37m-[37m No device [37mf[37mound at ad[37md[37mress 0x76
+13:39:01.701 > T[37me[37mmperature:[37m [37m0.00°C
+13:39:01.703 > Hum[37mi[37mdity: 0.00[37m%[37m
+13:39:01.705 > Pressure: [37m0[37m.00hPa
+13:39:01.706 > PIR [37mT[37mriggered: [37mY[37mes
+[37m13:39:07.248 > [[37mHELTEC-E[37mS[37mP32-LORA.i[37mn[37mo:384] Mess[37ma[37mge sent su[37mc[37mcessfully o[37mn[37m attempt 1[37m[37m
+13:39:07.254 > [HELTEC-ES[37mP[37m32-LORA.in[37mo[37m:385] RSSI:[37m [37m-54 dBm
+13:39:07.257 > [[37mH[37mELTEC-ESP32[37m-[37mLORA.ino:3[37m8[37m8] Received[37m [37m1 bytes of[37m [37mdownlink da[37mt[37ma
+13:39:07.263 > [HELTEC[37m-[37mESP32-LORA.[37mi[37mno:292] Do[37mw[37mnlink too s[37mh[37mort to be [37mv[37malid
+13:39:07.268 > [HELT[37mE[37mC-ESP32-LO[37mR[37mA.ino:429] [37mP[37mreparing f[37mo[37mr deep slee[37mp[37m
+13:39:07.273 > [HELTEC-E[37mS[37mP32-LORA.i[37mn[37mo:419] Time[37m [37muntil next[37m [37muplink: 0 m[37ms[37m
+13:39:07.278 > [HELTEC-[37mE[37mSP32-LORA.i[37mn[37mo:420] Cus[37mt[37mom sleep in[37mt[37merval: 120[37m0[37m00 ms
+13:39:07.283 > [HEL[37mT[37mEC-ESP32-L[37mO[37mRA.ino:423][37m [37mFinal slee[37mp[37m duration: [37m1[37m20000 ms ([37m2[37m minutes)
+[37m13:39:07.290 > [[37mHELTEC-ESP[37m3[37m2-LORA.ino:[37m4[37m34] PIR wa[37mk[37me-up enable[37md[37m on GPIO 5[37m,[37m trigger le[37mv[37mel: HIGH
+13:39:07.296 > [[37mH[37mELTEC-ESP3[37m2[37m-LORA.ino:4[37m4[37m3] Current[37m [37mwake-up cau[37ms[37me: 2
+13:39:07.301 > [HEL[37mT[37mEC-ESP32-LO[37mR[37mA.ino:444][37m [37mEnabled wak[37me[37m-up source[37ms[37m:
+13:39:07.306 > [HELTEC-[37mE[37mSP32-LORA.[37mi[37mno:445] - T[37mi[37mmer: 2 min[37mu[37mtes
+13:39:07.310 > [HELTE[37mC[37m-ESP32-LOR[37mA[37m.ino:446] -[37m [37mPIR sensor[37m [37mon GPIO 5
+[37m13:39:07.315 > [[37mHELTEC-ESP[37m3[37m2-LORA.ino:[37m4[37m56] I2C bu[37ms[37m powered do[37mw[37mn
+13:39:07.319 > [HELTEC[37m-[37mESP32-LORA.[37mi[37mno:458] En[37mt[37mering deep [37ms[37mleep now..[37m.[37m
+[37m13:39:13.689 > E[37mSP[37m-[37mROM:esp32s[37m3[37m-20210327
+[37m13:39:13.694 > B[37mu[37mild:Mar [37m2[37m7 2021
+13:39:13.696 > rst[37m:[37m0x5 (DSLEE[37mP[37m),boot:0x3d[37m [37m(SPI_FAST_[37mF[37mLASH_BOOT)[37m
+[37m13:39:13.701 > pro cpu re[37ms[37met by JTAG[37m
+[37m13:39:13.704 > SPIWP:0xee[37m[37m
+13:39:13.704 > mode:DIO, [37mc[37mlock div:1[37m[37m
+13:39:13.707 > load:0x3fc[37me[37m3818,len:0x[37m5[37m08
+13:39:13.709 > load:0[37mx[37m403c9700,le[37mn[37m:0x4
+13:39:13.710 > load[37m:[37m0x403c9704,[37ml[37men:0xad0
+[37m13:39:13.713 > l[37moad:0x403c[37mc[37m700,len:0x2[37m9[37me4
+13:39:13.715 > entry [37m0[37mx403c9880
+[37m13:39:13.779 > [[37mH[37mELTEC-ESP3[37m2[37m-LORA.ino:[37m9[37m7] System i[37mn[37mitialized[37m
+[37m13:39:13.783 > [HELTEC-ESP[37m3[37m2-LORA.ino[37m:[37m129] Wakeup[37m [37mcaused by [37me[37mxternal sig[37mn[37mal using R[37mT[37mC_IO (PIR s[37me[37mnsor)
+[37m13:39:13.890 > [[37mHELTEC-E[37mS[37mP32-LORA.in[37mo[37m:164] Init[37mi[37malizing rad[37mi[37mo
+[37m13:39:13.941 > [[37mHELTEC-ES[37mP[37m32-LORA.ino[37m:[37m173] Radio[37m [37minitialized[37m [37msuccessful[37ml[37my
+13:39:13.946 > [HELTEC-[37mE[37mSP32-LORA.[37mi[37mno:180] Act[37mi[37mvating OTA[37mA[37m
+13:39:13.950 > [HELTEC-[37mE[37mSP32-LORA.i[37mn[37mo:504] Conv[37me[37mrted hex s[37mt[37mring to byt[37me[37m array: DD[37m6[37m587DD870CC9[37m5[37m6ACE752E2D[37mF[37mAC2C7A
+13:39:13.958 > [HE[37mL[37mTEC-ESP32-L[37mO[37mRA.ino:504[37m][37m Converted[37m [37mhex string [37mt[37mo byte arr[37ma[37my: DD6587DD[37m8[37m70CC956ACE[37m7[37m52E2DFAC2C7[37mA[37m
+13:39:13.967 > [HELTEC-E[37mS[37mP32-LORA.i[37mn[37mo:191] OTAA[37m [37minitialize[37md[37m successful[37ml[37my: 0
+[37m13:39:19.572 > S[37ma[37mving nonce[37ms[37m to flash[37m
+[37m13:39:19.574 > [HELTEC-ESP[37m3[37m2-LORA.ino[37m:[37m202] Join a[37mt[37mtempt 1 re[37ms[37mult: -1118[37m
+[37m13:39:19.579 > [HELTEC-ES[37mP[37m32-LORA.ino[37m:[37m221] Join [37mf[37mailed, retr[37my[37ming in 500[37m0[37m ms
+[37m13:39:24.582 > S[37ma[37mving nonces[37m [37mto flash
+13:39:24.584 > [[37mH[37mELTEC-ESP3[37m2[37m-LORA.ino:2[37m0[37m2] Join at[37mt[37mempt 2 resu[37ml[37mt: 0
+13:39:24.590 > [HEL[37mT[37mEC-ESP32-LO[37mR[37mA.ino:205] [37mJ[37moined succ[37me[37mssfully!
+13:39:24.593 > R[37me[37mading Sens[37mo[37mrs
+13:39:24.595 > Could n[37mo[37mt find BME[37m2[37m80 sensor![37m [37mChecking fo[37mr[37m common is[37ms[37mues:
+13:39:24.600 > I2C e[37mr[37mror: 2 - N[37mo[37m device fou[37mn[37md at addres[37ms[37m 0x76
+13:39:24.604 > Temp[37me[37mrature: 0.0[37m0[37m°C
+13:39:24.606 > Humidi[37mt[37my: 0.00%
+13:39:24.607 > Pr[37me[37mssure: 0.0[37m0[37mhPa
+13:39:24.609 > PIR Tri[37mg[37mgered: Yes[37m
+[37m13:39:30.151 > [[37mH[37mELTEC-ESP3[37m2[37m-LORA.ino:3[37m8[37m4] Message[37m [37msent succes[37ms[37mfully on a[37mt[37mtempt 1
+13:39:30.156 > [H[37mE[37mLTEC-ESP32[37m-[37mLORA.ino:38[37m5[37m] RSSI: -5[37m4[37m dBm
+13:39:30.160 > [HELT[37mE[37mC-ESP32-LO[37mR[37mA.ino:388] [37mR[37meceived 1 [37mb[37mytes of dow[37mn[37mlink data[37m
+[37m13:39:30.166 > [HELTEC-ESP[37m3[37m2-LORA.ino[37m:[37m292] Downli[37mn[37mk too shor[37mt[37m to be vali[37md[37m
+13:39:30.171 > [HELTEC-E[37mS[37mP32-LORA.i[37mn[37mo:429] Prep[37ma[37mring for d[37me[37mep sleep
+13:39:30.175 > [[37mH[37mELTEC-ESP3[37m2[37m-LORA.ino:4[37m1[37m9] Time un[37mt[37mil next upl[37mi[37mnk: 0 ms
+[37m13:39:30.181 > [[37mHELTEC-ESP3[37m2[37m-LORA.ino:[37m4[37m20] Custom [37ms[37mleep inter[37mv[37mal: 120000 [37mm[37ms
+13:39:30.186 > [HELTEC[37m-[37mESP32-LORA.[37mi[37mno:423] Fi[37mn[37mal sleep du[37mr[37mation: 120[37m0[37m00 ms (2 mi[37mn[37mutes)
+13:39:30.192 > [HEL[37mT[37mEC-ESP32-L[37mO[37mRA.ino:434][37m [37mPIR wake-u[37mp[37m enabled on[37m [37mGPIO 5, tr[37mi[37mgger level:[37m [37mHIGH
+13:39:30.199 > [HEL[37mT[37mEC-ESP32-LO[37mR[37mA.ino:443][37m [37mCurrent wak[37me[37m-up cause:[37m [37m2
+13:39:30.204 > [HELTEC-[37mE[37mSP32-LORA.[37mi[37mno:444] Ena[37mb[37mled wake-u[37mp[37m sources:
+[37m13:39:30.209 > [[37mHELTEC-ESP[37m3[37m2-LORA.ino:[37m4[37m45] - Timer[37m:[37m 2 minutes[37m[37m
+13:39:30.213 > [HELTEC-ES[37mP[37m32-LORA.in[37mo[37m:446] - PI[37mR[37m sensor on [37mG[37mPIO 5
+13:39:30.217 > [HEL[37mT[37mEC-ESP32-L[37mO[37mRA.ino:456][37m [37mI2C bus po[37mw[37mered down
+[37m13:39:30.222 > [[37mHELTEC-ESP[37m3[37m2-LORA.ino:[37m4[37m58] Enteri[37mn[37mg deep slee[37mp[37m now...
+[37m13:40:33.924 > E[37mSP-ROM:e[37ms[37mp32s3-20210[37m3[37m27
+[37m13:40:33.929 > B[37mu[37mild[37m:[37mMar 27 2021[37m[37m
+13:40:33.931 > rst:0x5 ([37mD[37mSLEEP),boot[37m:[37m0x3d (SPI_[37mF[37mAST_FLASH_B[37mO[37mOT)
+13:40:33.935 > pro c[37mp[37mu reset by [37mJ[37mTAG
+13:40:33.937 > SPIWP[37m:[37m0xee
+13:40:33.939 > mode:DIO, clock [37md[37miv:1
+13:40:33.940 > load:[37m0[37mx3fce3818,[37ml[37men:0x508
+13:40:33.942 > l[37mo[37mad:0x403c9[37m7[37m00,len:0x4[37m
+[37m13:40:33.945 > load:0x403[37mc[37m9704,len:0x[37ma[37md0
+13:40:33.947 > load:0[37mx[37m403cc700,le[37mn[37m:0x29e4
+13:40:33.949 > en[37mt[37mry 0x403c9[37m8[37m80
+[37m13:40:34.013 > [[37mH[37mELTEC[37m-[37mESP32-LORA[37m.[37mino:97] Sys[37mt[37mem initial[37mi[37mzed
+13:40:34.017 > [HELTE[37mC[37m-ESP32-LOR[37mA[37m.ino:129] W[37ma[37mkeup cause[37md[37m by externa[37ml[37m signal usi[37mn[37mg RTC_IO ([37mP[37mIR sensor)[37m
+[37m13:40:34.124 > [[37mHEL[37mT[37mEC-ESP32-L[37mO[37mRA.ino:164][37m [37mInitializi[37mn[37mg radio
+[37m13:40:34.175 > [[37mHELT[37mE[37mC-ESP32-LO[37mR[37mA.ino:173] [37mR[37madio initi[37ma[37mlized succe[37ms[37msfully
+13:40:34.180 > [H[37mE[37mLTEC-ESP32-[37mL[37mORA.ino:18[37m0[37m] Activatin[37mg[37m OTAA
+13:40:34.184 > [HE[37mL[37mTEC-ESP32-L[37mO[37mRA.ino:504][37m [37mConverted [37mh[37mex string t[37mo[37m byte arra[37my[37m: DD6587DD8[37m7[37m0CC956ACE7[37m5[37m2E2DFAC2C7[37mA[37m
+13:40:34.193 > [HELTEC-E[37mS[37mP32-LORA.i[37mn[37mo:504] Conv[37me[37mrted hex st[37mr[37ming to byt[37me[37m array: DD6[37m5[37m87DD870CC9[37m5[37m6ACE752E2DF[37mA[37mC2C7A
+13:40:34.201 > [HE[37mL[37mTEC-ESP32-LORA.ino:191] OTAA initi[37ma[37mlized succ[37me[37mssfully: 0[37m
+[37m13:40:39.806 > S[37maving[37m [37mnonces to f[37ml[37mash
+13:40:39.808 > [HELT[37mE[37mC-ESP32-LOR[37mA[37m.ino:202] [37mJ[37moin attempt[37m [37m1 result: [37m-[37m1118
+13:40:39.813 > [HELT[37mE[37mC-ESP32-LO[37mR[37mA.ino:221] [37mJ[37moin failed[37m,[37m retrying i[37mn[37m 5000 ms
+[37m13:40:44.817 > S[37maving n[37mo[37mnces to fla[37ms[37mh
+13:40:44.819 > [HELTEC[37m-[37mESP32-LORA.[37mi[37mno:202] Jo[37mi[37mn attempt [37m2[37m result: 0[37m
+[37m13:40:44.824 > [HELTEC-ES[37mP[37m32-LORA.ino[37m:[37m205] Joined[37m [37msuccessful[37ml[37my!
+13:40:44.828 > Reading[37m [37mSensors
+13:40:44.829 > C[37mo[37muld not fin[37md[37m BME280 se[37mn[37msor! Checki[37mn[37mg for comm[37mo[37mn issues:
+[37m13:40:44.835 > I[37m2C error: [37m2[37m - No devic[37me[37m found at [37ma[37mddress 0x76
+13:40:44.841 > Temperature: 0.00°C
+13:40:44.841 > H[37mu[37mmidity: 0.0[37m0[37m%
+13:40:44.842 > Pressure[37m:[37m 0.00hPa
+13:40:44.843 > PI[37mR[37m Triggered[37m:[37m Yes
+[37m13:40:50.385 > [[37mHELTEC[37m-[37mESP32-LORA[37m.[37mino:384] Me[37ms[37msage sent [37ms[37muccessfully[37m [37mon attempt[37m [37m1
+13:40:50.391 > [HELTEC-[37mE[37mSP32-LORA.[37mi[37mno:385] RSS[37mI[37m: -54 dBm
+[37m13:40:50.395 > [[37mHELTEC-ESP[37m3[37m2-LORA.ino:[37m3[37m88] Receiv[37me[37md 1 bytes o[37mf[37m downlink [37md[37mata
+13:40:50.400 > [HELTE[37mC[37m-ESP32-LOR[37mA[37m.ino:292] D[37mo[37mwnlink too[37m [37mshort to be[37m valid
+13:40:50.405 > [HE[37mL[37mTEC-ESP32-L[37mO[37mRA.ino:429[37m][37m Preparing [37mf[37mor deep sl[37me[37mep
+13:40:50.410 > [HELTEC[37m-[37mESP32-LORA[37m.[37mino:419] Ti[37mm[37me until ne[37mx[37mt uplink: 0[37m [37mms
+13:40:50.415 > [HELTEC[37m-[37mESP32-LORA[37m.[37mino:420] Cu[37ms[37mtom sleep [37mi[37mnterval: 12[37m0[37m000 ms
+13:40:50.420 > [H[37mE[37mLTEC-ESP32[37m-[37mLORA.ino:42[37m3[37m] Final sl[37me[37mep duration[37m:[37m 120000 ms[37m [37m(2 minutes)[37m[37m
+13:40:50.427 > [HELTEC-ES[37mP[37m32-LORA.in[37mo[37m:434] PIR [37mw[37make-up enab[37ml[37med on GPIO [37m5[37m, trigger [37ml[37mevel: HIGH[37m
+[37m13:40:50.434 > [HELTEC-ES[37mP[37m32-LORA.ino[37m:[37m443] Curre[37mn[37mt wake-up c[37ma[37muse: 2
+13:40:50.438 > [HE[37mL[37mTEC-ESP32-[37mL[37mORA.ino:444[37m][37m Enabled w[37ma[37mke-up sourc[37me[37ms:
+13:40:50.443 > [HELTE[37mC[37m-ESP32-LOR[37mA[37m.ino:445] -[37m [37mTimer: 2 m[37mi[37mnutes
+13:40:50.447 > [HEL[37mT[37mEC-ESP32-L[37mO[37mRA.ino:446][37m [37m- PIR senso[37mr[37m on GPIO 5[37m[37m
+13:40:50.452 > [HELTEC-ES[37mP[37m32-LORA.in[37mo[37m:456] I2C b[37mu[37ms powered [37md[37mown
+13:40:50.456 > [HELTE[37mC[37m-ESP32-LOR[37mA[37m.ino:458] E[37mn[37mtering dee[37mp[37m sleep now.[37m.[37m.

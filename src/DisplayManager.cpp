@@ -74,6 +74,12 @@ void DisplayManager::wakeup() {
     u8g2.setPowerSave(0);  // Wake up display
 }
 
+void DisplayManager::setContrast(uint8_t contrast) {
+    // Set contrast value (0-255), higher values make display brighter
+    u8g2.setContrast(contrast);
+    refresh();  // Apply changes to display
+}
+
 void DisplayManager::setNormalMode() {
     // Reset display to normal mode (white text on black background)
     u8g2.setFlipMode(0);

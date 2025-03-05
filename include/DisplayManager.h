@@ -18,6 +18,7 @@ public:
     void refresh();
     void sleep();
     void wakeup();
+    void setContrast(uint8_t contrast); // Set display contrast (brightness)
     void setNormalMode(); // Set display to normal mode (not inverted)
     
     // Text functions

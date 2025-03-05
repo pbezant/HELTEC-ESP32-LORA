@@ -2,8 +2,8 @@
 
 // ===== Board Configuration =====
 // I2C Pins
-#define I2C_SDA 46
-#define I2C_SCL 45
+#define I2C_SDA 45
+#define I2C_SCL 46
 
 // BME280 Sensor
 #define BME_ADDRESS 0x76  // Try 0x77 if 0x76 doesn't work
