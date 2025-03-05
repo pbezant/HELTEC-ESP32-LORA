@@ -1,0 +1,314 @@
+[37m23:14:16.516 > R[37me[37mbooting...
+[37m23:14:16.523 > E[37mS[37mP-RO[37mM[37m:esp32s3-20[37m2[37m10327
+23:14:16.526 > Bui[37ml[37md:Mar 27 20[37m2[37m1
+23:14:16.528 > rst:0xc [37m([37mRTC_SW_CPU[37m_[37mRST),boot:0[37mx[37m8 (SPI_FAS[37mT[37m_FLASH_BOOT[37m)[37m
+23:14:16.533 > Saved PC[37m:[37m0x42030dae[37m
+[37m23:14:16.535 > SPIWP:0xee[37m[37m
+23:14:16.536 > mode:DIO, [37mc[37mlock div:1[37m[37m
+23:14:16.538 > load:0x3fc[37me[37m3808,len:0[37mx[37m4bc
+23:14:16.540 > load:[37m0[37mx403c9700,l[37me[37mn:0xbd8
+23:14:16.542 > l[37mo[37mad:0x403cc7[37m0[37m0,len:0x2a0[37mc[37m
+23:14:16.545 > entry 0x[37m4[37m03c98d0
+[37m23:14:16.662 > [[37m   131][V][esp32-hal-uart.c:330] uartBegin(): UART0 baud(115200) Mode(800001c) rxPin(44) txPin(43)
+23:14:16.662 > [   140][V][esp32-hal-uart.c:416] uartBegin(): UART0 no[37mt[37m installed. Starting installation
+23:14:16.687 > [   148][V][esp32-hal-uart.c:467] uartBegin(): UART0 initialization done.
+[37m23:14:16.772 > 
+[37m23:14:16.773 > 
+[37m23:14:16.773 > === Heltec [37mE[37mSP32 LoRa S[37me[37mnsor Node [37m=[37m==
+23:14:16.776 > Boot co[37mu[37mnt: 1
+23:14:16.777 > [   [37m2[37m55][I][esp[37m3[37m2-hal-i2c.c[37m:[37m75] i2cIni[37mt[37m(): Initia[37ml[37mising I2C M[37ma[37mster: sda=4[37m6[37m scl=45 fr[37me[37mq=100000
+[37m23:14:16.786 > [[37m   268[37m][37m[W][Wire.cp[37mp[37m:301] begi[37mn[37m(): Bus alr[37me[37mady starte[37md[37m in Master [37mM[37mode.
+[37m23:14:17.109 > [[37m [37m  59[37m1[37m][W][Wire.c[37mp[37mp:301] beg[37mi[37mn(): Bus al[37mr[37meady starte[37md[37m in Master[37m [37mMode.
+23:14:17.116 > [  [37m 597][W][Wi[37mr[37me.cpp:301] [37mb[37megin(): Bu[37ms[37m already st[37ma[37mrted in Ma[37ms[37mter Mode.
+[37m23:14:17.122 > [[37m   604][[37mW[37m][Wire.cpp[37m:[37m301] begin([37m)[37m: Bus alrea[37md[37my started [37mi[37mn Master Mo[37md[37me.
+23:14:17.128 > BME28[37m0[37m sensor no[37mt[37m found!
+23:14:17.130 > In[37mi[37mtializing [37mS[37mX1276... G[37mu[37mr[37mu Meditatio[37mn[37m Error: Cor[37me[37m  1 panic'[37me[37md (LoadProh[37mi[37mbited). Ex[37mc[37meption was [37mu[37mnhandled.[37m
+[37m23:14:17.186 > 
+23:14:17.186 > Core  1 r[37me[37mgister dump[37m:[37m
+23:14:17.188 > PC      [37m:[37m 0x4202fb8b[37m [37m PS      :[37m [37m0x00060830 [37m [37mA0      : [37m0[37mx820067d0 [37m [37mA1      : 0[37mx[37m3fcebda0  [37m[37m
+23:14:17.196 > A2      : [37m0[37mx00000000 [37m [37mA3      : 0[37mx[37m3c04016c  [37mA[37m4      : 0x[37m0[37m0000017  A5[37m [37m     : 0x0[37m0[37m00ff00  
+23:14:17.203 > A[37m6[37m      : 0x[37m0[37m0ff0000  A7[37m [37m     : 0xf[37mf[37m000000  A8 [37m [37m    : 0x82[37m0[37m08180  A9  [37m [37m   : 0x3fc[37me[37mbda0  
+23:14:17.211 > A10[37m [37m    : 0x3f[37mc[37m944b8  A11 [37m [37m   : 0x3c0[37m4[37m016c  A12  [37m [37m  : 0x0000[37m0[37m017  A13   [37m [37m : 0xffffff[37mf[37mf  
+23:14:17.219 > A14  [37m [37m  : 0x00000[37m0[37m00  A15   [37m [37m : 0x3fcecc[37md[37m0  SAR    [37m [37m: 0x0000001[37m5[37m  EXCCAUSE[37m:[37m 0x0000001c[37m [37m 
+23:14:17.227 > EXCVADD[37mR[37m: 0x0000000[37m0[37m  LBEG    [37m:[37m 0x400556d5[37m [37m LEND    :[37m [37m0x400556e5 [37m [37mLCOUNT  : [37m0[37mxfffffff9  [37m[37m
+23:14:17.235 > 
+23:14:17.235 > 
+23:14:17.235 > Backt[37mr[37mace: 0x4202[37mf[37mb88:0x3fce[37mb[37mda0 0x42006[37m7[37mcd:0x3fceb[37md[37mc0 0x42004b[37m5[37m1:0x3fcebde[37m0[37m 0x4200243[37mc[37m:0x3fcebe20[37m [37m0x42002b99[37m:[37m0x3fcebe50 [37m0[37mx4200b182:[37m0[37mx3fcebeb0
+[37m23:14:17.248 > [37m
+23:14:17.248 > 
+23:14:17.248 > 
+23:14:17.248 > 
+23:14:17.248 > ELF[37m [37mfile SHA256[37m:[37m 9637ba901[37m2[37mb3d7b2
+23:14:17.251 > 
+[37m23:14:17.414 > R[37me[37mbo[37mo[37mting...
+[37m23:14:17.421 > E[37mS[37mP-ROM:es[37mp[37m32s3-202103[37m2[37m7
+23:14:17.424 > Build:M[37ma[37mr 27 2021[37m
+[37m23:14:17.426 > rst:0xc (RT[37mC[37m_SW_CPU_RS[37mT[37m),boot:0x8 [37m([37mSPI_FAST_F[37mL[37mASH_BOOT)
+[37m23:14:17.431 > S[37maved PC:0x4[37m2[37m030dae
+23:14:17.432 > SP[37mI[37mWP:0xee
+23:14:17.433 > mo[37md[37me:DIO, clo[37mc[37mk div:1
+23:14:17.435 > lo[37ma[37md:0x3fce38[37m0[37m8,len:0x4bc[37m[37m
+23:14:17.438 > load:0x40[37m3[37mc9700,len:0[37mx[37mbd8
+23:14:17.440 > load:0[37mx[37m403cc700,l[37me[37mn:0x2a0c
+23:14:17.442 > e[37mn[37mtry 0x403c[37m9[37m8d0
+[37m23:14:17.546 > [[37m [37m  130][V[37m][37m[esp32-hal-[37mu[37mart.c:330] [37mu[37martBegin()[37m:[37m UART0 baud[37m([37m115200) Mo[37md[37me(800001c) [37mr[37mxPin(44) t[37mx[37mPin(43)
+23:14:17.555 > [[37m [37m  139][V][[37me[37msp32-hal-ua[37mr[37mt.c:416] u[37ma[37mrtBegin(): [37mU[37mART0 not i[37mn[37mstalled. St[37ma[37mrting inst[37ma[37mllation
+[37m23:14:17.564 > [[37m   148][37m[[37mV][esp32-ha[37ml[37m-uart.c:46[37m7[37m] uartBegin[37m([37m): UART0 i[37mn[37mitializatio[37mn[37m done.
+[37m23:14:17.670 > 
+[37m23:14:17.670 > 
+23:14:17.670 > === [37mH[37meltec ESP3[37m2[37m LoRa Sens[37mo[37mr Node ===[37m
+[37m23:14:17.674 > Boot count[37m:[37m 1
+23:14:17.675 > [   254[37m][37m[I][esp32-h[37ma[37ml-i2c.c:75[37m][37m i2cInit():[37m [37mInitialisi[37mn[37mg I2C Maste[37mr[37m: sda=46 s[37mc[37ml=45 freq=1[37m0[37m0000
+[37m23:14:17.684 > [[37m   268][W][37m[[37mWire.cpp:3[37m0[37m1] begin():[37m [37mBus alread[37my[37m started in[37m [37mMaster Mod[37me[37m.
+[37m23:14:18.006 > [[37m [37m  591][W[37m][37m[Wire.cpp:3[37m0[37m1] begin()[37m:[37m Bus alread[37my[37m started i[37mn[37m Master Mod[37me[37m.
+23:14:18.013 > [   59[37m7[37m][W][Wire.c[37mp[37mp:301] beg[37mi[37mn(): Bus al[37mr[37meady starte[37md[37m in Master[37m [37mMode.
+23:14:18.019 > [[37m [37m  603][W][W[37mi[37mre.cpp:301[37m][37m begin(): B[37mu[37ms already [37ms[37mtarted in M[37ma[37mster Mode.[37m[37m
+23:14:18.026 > BME280 s[37me[37mnsor not fo[37mu[37mnd!
+23:14:18.028 > Initia[37ml[37mizing SX12[37m7[37m6... G[37mu[37mr[37mu M[37me[37mditation Er[37mr[37mor: Core  [37m1[37m panic'ed ([37mL[37moadProhibit[37me[37md). Except[37mi[37mon was unha[37mn[37mdled.
+23:14:18.083 > 
+23:14:18.083 > C[37mo[37mre  1 regis[37mt[37mer dump:
+[37m23:14:18.086 > P[37mC      : 0x[37m4[37m202fb8b  P[37mS[37m      : 0x[37m0[37m0060830  A0[37m [37m     : 0x8[37m2[37m0067d0  A1 [37m [37m    : 0x3f[37mc[37mebda0  
+23:14:18.093 > A2[37m [37m     : 0x0[37m0[37m000000  A3 [37m [37m    : 0x3c0[37m4[37m016c  A4  [37m [37m   : 0x0000[37m0[37m017  A5   [37m [37m  : 0x0000f[37mf[37m00  
+23:14:18.101 > A6  [37m [37m   : 0x00ff[37m0[37m000  A7   [37m [37m  : 0xff000[37m0[37m00  A8    [37m [37m : 0x820081[37m8[37m0  A9     [37m [37m: 0x3fcebda[37m0[37m  
+23:14:18.109 > A10   [37m [37m : 0x3fc944[37mb[37m8  A11     [37m:[37m 0x3c04016[37mc[37m  A12     :[37m 0x00000017[37m [37m A13     : [37m0[37mxffffffff [37m [37m
+23:14:18.117 > A14     :[37m [37m0x00000000[37m [37m A15     : [37m0[37mx3fceccd0 [37m [37mSAR     : 0[37mx[37m00000015  [37mE[37mXCCAUSE: 0x[37m0[37m000001c  [37m
+[37m23:14:18.125 > EXCVADDR: 0[37mx[37m00000000  [37mL[37mBEG    : 0x[37m4[37m00556d5  L[37mE[37mND    : 0x4[37m0[37m0556e5  LC[37mO[37mUNT  : 0xff[37mf[37mffff9  
+23:14:18.132 > [37m
+[37m23:14:18.133 > 
+23:14:18.133 > Backtrace[37m:[37m 0x4202fb8[37m8[37m:0x3fcebda0[37m [37m0x420067cd:[37m0[37mx3fcebdc0 [37m0[37mx42004b51:0[37mx[37m3fcebde0 0[37mx[37m4200243c:0x[37m3[37mfcebe20 0x[37m4[37m2002b99:0x3[37mf[37mcebe50 0x4[37m2[37m00b182:0x3f[37mc[37mebeb0
+23:14:18.145 > 
+23:14:18.145 > [37m
+[37m23:14:18.146 > 
+23:14:18.146 > 
+23:14:18.146 > ELF fil[37me[37m SHA256: 9[37m6[37m37ba9012b3d[37m7[37mb2
+23:14:18.149 > 
+[37m23:14:18.307 > R[37me[37mbooting...
+[37m23:14:18.315 > E[37mSP-R[37mO[37mM:esp32s3-2[37m0[37m210327
+23:14:18.317 > Bui[37ml[37md:Mar 27 2[37m0[37m21
+23:14:18.319 > rst:0xc[37m [37m(RTC_SW_CP[37mU[37m_RST),boot:[37m0[37mx8 (SPI_FA[37mS[37mT_FLASH_BOO[37mT[37m)
+23:14:18.324 > Saved PC[37m:[37m0x42030dae[37m[37m
+23:14:18.326 > SPIWP:0xee[37m[37m
+23:14:18.327 > mode:DIO,[37m [37mclock div:1[37m[37m
+23:14:18.329 > load:0x3f[37mc[37me3808,len:0[37mx[37m4bc
+23:14:18.331 > load:[37m0[37mx403c9700,l[37me[37mn:0xbd8
+23:14:18.333 > l[37mo[37mad:0x403cc7[37m0[37m0,len:0x2a[37m0[37mc
+23:14:18.336 > entry 0x[37m4[37m03c98d0
+[37m23:14:18.439 > [[37m   13[37m1[37m][V][esp32-[37mh[37mal-uart.c:[37m3[37m30] uartBeg[37mi[37mn(): UART0[37m [37mbaud(115200[37m)[37m Mode(8000[37m0[37m1c) rxPin(4[37m4[37m) txPin(43[37m)[37m
+23:14:18.449 > [   140][37m[[37mV][esp32-ha[37ml[37m-uart.c:41[37m6[37m] uartBegin[37m([37m): UART0 n[37mo[37mt installed[37m.[37m Starting [37mi[37mnstallation[37m[37m
+23:14:18.457 > [   [37m1[37m48][V][esp[37m3[37m2-hal-uart.[37mc[37m:467] uart[37mB[37megin(): UAR[37mT[37m0 initializ[37ma[37mtion done.[37m[37m
+[37m23:14:18.563 > 
+[37m23:14:18.564 > 
+[37m23:14:18.564 > === Heltec [37mE[37mSP32 LoRa [37mS[37mensor Node [37m=[37m==
+23:14:18.567 > Boot co[37mu[37mnt: 1
+23:14:18.568 > [  [37m [37m254][I][esp[37m3[37m2-hal-i2c.[37mc[37m:75] i2cIni[37mt[37m(): Initia[37ml[37mising I2C M[37ma[37mster: sda=[37m4[37m6 scl=45 fr[37me[37mq=100000
+[37m23:14:18.577 > [[37m   26[37m8[37m][W][Wire.c[37mp[37mp:301] beg[37mi[37mn(): Bus al[37mr[37meady start[37me[37md in Master[37m [37mMode.
+[37m23:14:18.899 > [[37m [37m  59[37m1[37m][W][Wire.c[37mp[37mp:301] beg[37mi[37mn(): Bus al[37mr[37meady start[37med in Master[37m [37mMode.
+23:14:18.906 > [ [37m [37m 597][W][Wi[37mr[37me.cpp:301][37m [37mbegin(): B[37mu[37ms already s[37mt[37marted in M[37ma[37mster Mode.[37m
+[37m23:14:18.913 > [   604][37m[[37mW][Wire.cpp[37m:[37m301] begin[37m([37m): Bus alre[37ma[37mdy started[37m [37min Master M[37mo[37mde.
+23:14:18.919 > BME2[37m8[37m0 sensor no[37mt[37m found!
+23:14:18.921 > I[37mnitializing [37mSX1276... G[37mu[37mr[37mu Meditatio[37mn[37m Error: Core  1 panic[37m'[37med (LoadPro[37mh[37mibited). E[37mx[37mception was[37m [37munhandled.[37m
+[37m23:14:18.977 > 
+23:14:18.977 > Core  1 [37mr[37megister dum[37mp[37m:
+23:14:18.979 > PC     [37m [37m: 0x4202fb8[37mb[37m  PS      [37m:[37m 0x00060830[37m [37m A0      :[37m [37m0x820067d0 [37m [37mA1      : 0[37mx[37m3fcebda0  [37m[37m
+23:14:18.987 > A2      : [37m0[37mx00000000 [37m [37mA3      : 0[37mx[37m3c04016c  [37mA[37m4      : 0x[37m0[37m0000017  A[37m5[37m      : 0x0[37m0[37m00ff00  
+[37m23:14:18.995 > A[37m6      : 0x[37m0[37m0ff0000  A[37m7[37m      : 0xf[37mf[37m000000  A8[37m [37m     : 0x8[37m2[37m008180  A9 [37m [37m    : 0x3fc[37me[37mbda0  
+23:14:19.002 > A1[37m0[37m     : 0x3f[37mc[37m944b8  A11[37m     : 0x3c0[37m4[37m016c  A12 [37m [37m   : 0x0000[37m0[37m017  A13  [37m [37m  : 0xfffff[37mf[37mff  
+23:14:19.010 > A14 [37m [37m   : 0x0000[37m0[37m000  A15  [37m [37m  : 0x3fcec[37mc[37md0  SAR   [37m [37m : 0x000000[37m1[37m5  EXCCAUSE[37m:[37m 0x0000001[37mc[37m  
+23:14:19.018 > EXCVADD[37mR[37m: 0x000000[37m0[37m0  LBEG    [37m:[37m 0x400556d[37m5[37m  LEND    :[37m [37m0x400556e5[37m [37m LCOUNT  : [37m0[37mxfffffff9 [37m [37m
+23:14:19.026 > 
+23:14:19.026 > 
+23:14:19.026 > Backt[37mr[37mace: 0x420[37m2[37mfb88:0x3fce[37mb[37mda0 0x4200[37m6[37m7cd:0x3fceb[37md[37mc0 0x42004[37mb[37m51:0x3fcebd[37me[37m0 0x420024[37m3[37mc:0x3fcebe2[37m0[37m 0x42002b9[37m9[37m:0x3fcebe50[37m [37m0x4200b182[37m:[37m0x3fcebeb0[37m
+[37m23:14:19.040 > 
+23:14:19.040 > 
+23:14:19.040 > 
+23:14:19.040 > 
+23:14:19.040 > ELF file SHA25[37m6[37m: 9637ba901[37m2[37mb3d7b2
+23:14:19.042 > 
+[37m23:14:19.202 > R[37mebo[37mo[37mting...
+[37m23:14:19.209 > E[37mS[37mP-ROM:es[37mp[37m32s3-202103[37m2[37m7
+23:14:19.212 > Build:M[37ma[37mr 27 2021
+[37m23:14:19.214 > r[37mst:0xc (RT[37mC[37m_SW_CPU_RST[37m)[37m,boot:0x8 [37m([37mSPI_FAST_FL[37mA[37mSH_BOOT)
+[37m23:14:19.219 > S[37maved PC:0x4[37m2[37m030dae
+23:14:19.220 > SP[37mI[37mWP:0xee
+23:14:19.221 > mo[37md[37me:DIO, cloc[37mk[37m div:1
+23:14:19.223 > lo[37ma[37md:0x3fce380[37m8[37m,len:0x4bc[37m[37m
+23:14:19.226 > load:0x403[37mc[37m9700,len:0[37mx[37mbd8
+23:14:19.228 > load:0[37mx[37m403cc700,l[37me[37mn:0x2a0c
+23:14:19.230 > e[37mn[37mtry 0x403c[37m9[37m8d0
+[37m23:14:19.334 > [[37m [37m  130][V][37m[[37mesp32-hal-[37mu[37mart.c:330] [37mu[37martBegin():[37m [37mUART0 baud[37m([37m115200) Mod[37me[37m(800001c) [37mr[37mxPin(44) tx[37mP[37min(43)
+23:14:19.343 > [[37m [37m  139][V][e[37ms[37mp32-hal-ua[37mr[37mt.c:416] ua[37mr[37mtBegin(): [37mU[37mART0 not in[37ms[37mtalled. St[37ma[37mrting insta[37ml[37mlation
+[37m23:14:19.352 > [[37m   148][[37mV[37m][esp32-ha[37ml[37m-uart.c:467[37m][37m uartBegin[37m([37m): UART0 in[37mi[37mtializatio[37mn[37m done.
+[37m23:14:19.457 > 
+[37m23:14:19.458 > 
+[37m23:14:19.458 > === [37mH[37meltec ESP3[37m2[37m LoRa Senso[37mr[37m Node ===[37m
+[37m23:14:19.462 > Boot count:[37m [37m1
+23:14:19.463 > [   254[37m][37m[I][esp32-h[37ma[37ml-i2c.c:75][37m [37mi2cInit():[37m [37mInitialisin[37mg[37m I2C Maste[37mr[37m: sda=46 sc[37ml[37m=45 freq=1[37m0[37m0000
+[37m23:14:19.472 > [[37m   268][W][37m[[37mWire.cpp:3[37m0[37m1] begin():[37m [37mBus already[37m [37mstarted in[37m [37mMaster Mode[37m.[37m
+[37m23:14:19.794 > [[37m [37m  591][W][37m[[37mWire.cpp:3[37m0[37m1] begin()[37m:[37m Bus alread[37my[37m started in[37m [37mMaster Mod[37me[37m.
+23:14:19.801 > [   597[37m][37m[W][Wire.c[37mp[37mp:301] begi[37mn[37m(): Bus al[37mr[37meady starte[37md[37m in Master[37m [37mMode.
+23:14:19.807 > [ [37m [37m 603][W][W[37mi[37mre.cpp:301][37m [37mbegin(): B[37mu[37ms already s[37mt[37marted in M[37ma[37mster Mode.[37m
+[37m23:14:19.814 > BME280 se[37mn[37msor not fo[37mu[37mnd!
+23:14:19.816 > Initia[37ml[37mizing SX12[37m7[37m6... G[37mu[37mr[37mu Me[37md[37mitation Er[37mr[37mor: Core  1[37m [37mpanic'ed ([37mL[37moadProhibit[37me[37md). Except[37mi[37mon was unha[37mn[37mdled.
+23:14:19.871 > 
+23:14:19.871 > C[37mo[37mre  1 regis[37mt[37mer dump:
+[37m23:14:19.874 > P[37mC      : 0x[37m4[37m202fb8b  P[37mS[37m      : 0x0[37m0[37m060830  A0[37m [37m     : 0x82[37m0[37m067d0  A1 [37m [37m    : 0x3fc[37me[37mbda0  
+23:14:19.881 > A2[37m [37m     : 0x00[37m0[37m00000  A3  [37m [37m   : 0x3c0[37m4[37m016c  A4   [37m [37m  : 0x0000[37m0[37m017  A5    [37m [37m : 0x0000f[37mf[37m00  
+23:14:19.890 > A6   [37m   : 0x00ff[37m0[37m000  A7    [37m [37m : 0xff000[37m0[37m00  A8     [37m [37m: 0x820081[37m8[37m0  A9      [37m:[37m 0x3fcebda[37m0[37m  
+23:14:19.897 > A10    [37m [37m: 0x3fc944[37mb[37m8  A11     [37m:[37m 0x3c04016[37mc[37m  A12     :[37m [37m0x00000017[37m [37m A13     : [37m0[37mxffffffff [37m [37m
+23:14:19.905 > A14     :[37m 0x00000000[37m [37m A15     : [37m0[37mx3fceccd0  [37mS[37mAR     : 0[37mx[37m00000015  E[37mX[37mCCAUSE: 0x[37m0[37m000001c  
+[37m23:14:19.913 > E[37mXCVADDR: 0[37mx[37m00000000  L[37mB[37mEG    : 0x[37m4[37m00556d5  LE[37mN[37mD    : 0x4[37m0[37m0556e5  LCO[37mU[37mNT  : 0xff[37mf[37mffff9  
+23:14:19.920 > 
+[37m23:14:19.921 > [37m
+23:14:19.921 > Backtrace[37m:[37m 0x4202fb88[37m:[37m0x3fcebda0[37m [37m0x420067cd:[37m0[37mx3fcebdc0 [37m0[37mx42004b51:0[37mx[37m3fcebde0 0[37mx[37m4200243c:0x[37m3[37mfcebe20 0x[37m4[37m2002b99:0x3[37mf[37mcebe50 0x4[37m2[37m00b182:0x3f[37mc[37mebeb0
+23:14:19.933 > 
+23:14:19.933 > 
+[37m23:14:19.934 > [37m
+23:14:19.934 > 
+23:14:19.934 > ELF fil[37me[37m SHA256: 96[37m3[37m7ba9012b3d[37m7[37mb2
+23:14:19.937 > 
+[37m23:14:20.099 > R[37me[37mboo[37mt[37ming...
+[37m23:14:20.107 > E[37mS[37mP-ROM:[37me[37msp32s3-2021[37m0[37m327
+23:14:20.110 > Build[37m:[37mMar 27 2021[37m[37m
+23:14:20.112 > rst:0xc (R[37mT[37mC_SW_CPU_R[37mS[37mT),boot:0x8[37m [37m(SPI_FAST_[37mF[37mLASH_BOOT)[37m
+[37m23:14:20.117 > Saved PC:0[37mx[37m42030dae
+23:14:20.118 > S[37mP[37mIWP:0xee
+23:14:20.119 > m[37mo[37mde:DIO, cl[37mo[37mck div:1
+23:14:20.121 > l[37mo[37mad:0x3fce3[37m8[37m08,len:0x4b[37mc[37m
+23:14:20.124 > load:0x4[37m0[37m3c9700,len:[37m0[37mxbd8
+23:14:20.126 > load[37m:[37m0x403cc700,[37ml[37men:0x2a0c[37m
+[37m23:14:20.129 > entry 0x403[37mc[37m98d0
+[37m23:14:20.232 > [[37m [37m  131][[37mV[37m][esp32-hal[37m-[37muart.c:330[37m][37m uartBegin([37m)[37m: UART0 ba[37mu[37md(115200) M[37mo[37mde(800001c[37m)[37m rxPin(44) [37mt[37mxPin(43)
+[37m23:14:20.242 > [[37m   140][V][37m[[37mesp32-hal-u[37ma[37mrt.c:416] [37mu[37martBegin():[37m [37mUART0 not [37mi[37mnstalled. S[37mt[37marting ins[37mt[37mallation
+[37m23:14:20.250 > [[37m   148[37m][37m[V][esp32-[37mh[37mal-uart.c:4[37m6[37m7] uartBeg[37mi[37mn(): UART0 [37mi[37mnitializat[37mi[37mon done.
+[37m23:14:20.356 > 
+[37m23:14:20.356 > 
+23:14:20.356 > ==[37m=[37m Heltec ESP[37m3[37m2 LoRa Sen[37ms[37mor Node ===[37m[37m
+23:14:20.360 > Boot coun[37mt[37m: 1
+23:14:20.361 > [   25[37m4[37m][I][esp32[37m-[37mhal-i2c.c:7[37m5[37m] i2cInit([37m)[37m: Initialis[37mi[37mng I2C Mast[37me[37mr: sda=46 [37ms[37mcl=45 freq=[37m1[37m00000
+[37m23:14:20.370 > [[37m   268][[37mW[37m][Wire.cpp:[37m3[37m01] begin([37m)[37m: Bus alrea[37md[37my started [37mi[37mn Master Mo[37md[37me.
+[37m23:14:20.692 > [[37m [37m  591][[37mW[37m][Wire.cpp[37m:[37m301] begin([37m)[37m: Bus alre[37ma[37mdy started [37mi[37mn Master M[37mo[37mde.
+23:14:20.699 > [   5[37m9[37m7][W][Wire[37m.[37mcpp:301] be[37mg[37min(): Bus a[37ml[37mready star[37mt[37med in Maste[37mr[37m Mode.
+[37m23:14:20.706 > [[37m   604][W][37m[[37mWire.cpp:30[37m1[37m] begin():[37m [37mBus already[37m [37mstarted in[37m [37mMaster Mode[37m.[37m
+23:14:20.712 > BME280 [37ms[37mensor not f[37mo[37mund!
+23:14:20.714 > Init[37mi[37malizing SX1[37m2[37m76... G[37mu[37mru [37mM[37meditation [37mE[37mrror: Core [37m [37m1 panic'ed[37m [37m(LoadProhib[37mi[37mted). Exce[37mp[37mtion was un[37mh[37mandled.
+23:14:20.769 > 
+[37m23:14:20.770 > C[37more  1 reg[37mi[37mster dump:[37m
+[37m23:14:20.772 > PC      : [37m0[37mx4202fb8b  [37mP[37mS      : 0[37mx[37m00060830  A[37m0[37m      : 0x[37m8[37m20067d0  A1[37m [37m     : 0x3f[37mc[37mebda0  
+23:14:20.779 > A[37m2[37m      : 0x0[37m0[37m000000  A3[37m [37m     : 0x3[37mc[37m04016c  A4 [37m [37m    : 0x00[37m0[37m00017  A5  [37m [37m   : 0x000[37m0[37mff00  
+23:14:20.787 > A6 [37m [37m    : 0x00[37mf[37mf0000  A7  [37m [37m   : 0xff0[37m0[37m0000  A8   [37m [37m  : 0x82008[37m1[37m80  A9    [37m [37m : 0x3fcebd[37ma[37m0  
+23:14:20.795 > A10  [37m [37m  : 0x3fc94[37m4[37mb8  A11   [37m [37m : 0x3c0401[37m6[37mc  A12    [37m [37m: 0x0000001[37m7[37m  A13     [37m:[37m 0xffffffff[37m [37m 
+23:14:20.803 > A14    [37m [37m: 0x0000000[37m0[37m  A15     [37m:[37m 0x3fceccd0[37m [37m SAR     :[37m [37m0x00000015 [37m [37mEXCCAUSE: [37m0[37mx0000001c  [37m[37m
+23:14:20.811 > EXCVADDR: [37m0[37mx00000000 [37m [37mLBEG    : 0[37mx[37m400556d5  [37mL[37mEND    : 0x[37m4[37m00556e5  L[37mC[37mOUNT  : 0xf[37mf[37mfffff9  
+[37m23:14:20.819 > [37m
+23:14:20.819 > 
+23:14:20.819 > Backtrac[37me[37m: 0x4202fb[37m8[37m8:0x3fcebda[37m0[37m 0x420067c[37md[37m:0x3fcebdc0[37m [37m0x42004b51[37m:[37m0x3fcebde0 [37m0[37mx4200243c:[37m0[37mx3fcebe20 0[37mx[37m42002b99:0[37mx[37m3fcebe50 0x[37m4[37m200b182:0x[37m3[37mfcebeb0
+23:14:20.831 > 
+[37m23:14:20.832 > [37m
+23:14:20.832 > 
+23:14:20.832 > 
+23:14:20.832 > ELF f[37mi[37mle SHA256: [37m9[37m637ba9012b[37m3[37md7b2
+23:14:20.835 > 
+[37m23:14:20.994 > R[37me[37mboot[37mi[37mng...
+[37m23:14:21.002 > E[37mS[37mP-ROM:esp3[37m2[37ms3-20210327[37m[37m
+23:14:21.005 > Build:Mar[37m [37m27 2021
+23:14:21.006 > rs[37mt[37m:0xc (RTC_[37mS[37mW_CPU_RST),[37mb[37moot:0x8 (S[37mP[37mI_FAST_FLAS[37mH[37m_BOOT)
+23:14:21.011 > Sa[37mv[37med PC:0x420[37m3[37m0dae
+23:14:21.013 > SPIWP[37m:[37m0xee
+23:14:21.014 > mode[37m:[37mDIO, clock [37md[37miv:1
+23:14:21.016 > load[37m:[37m0x3fce3808,[37ml[37men:0x4bc
+[37m23:14:21.019 > l[37moad:0x403c9[37m7[37m00,len:0xb[37md[37m8
+23:14:21.021 > load:0x4[37m03cc700,len[37m:[37m0x2a0c
+23:14:21.023 > ent[37mr[37my 0x403c98[37md[37m0
+[37m23:14:21.127 > [[37m [37m  130][V][e[37ms[37mp32-hal-ua[37mr[37mt.c:330] ua[37mr[37mtBegin(): U[37mA[37mRT0 baud(1[37m1[37m5200) Mode([37m8[37m00001c) rx[37mP[37min(44) txPi[37mn[37m(43)
+23:14:21.136 > [  [37m [37m139][V][esp[37m3[37m2-hal-uart[37m.[37mc:416] uart[37mB[37megin(): UA[37mR[37mT0 not inst[37ma[37mlled. Star[37mt[37ming install[37ma[37mtion
+[37m23:14:21.145 > [[37m   148][V][37m[[37mesp32-hal-[37mu[37mart.c:467][37m [37muartBegin()[37m:[37m UART0 ini[37mt[37mialization [37md[37mone.
+[37m23:14:21.250 > 
+[37m23:14:21.251 > 
+[37m23:14:21.251 > === He[37ml[37mtec ESP32 [37mL[37moRa Sensor [37mN[37mode ===
+23:14:21.254 > Bo[37mo[37mt count: 1[37m[37m
+23:14:21.256 > [   254][I[37m][37m[esp32-hal[37m-[37mi2c.c:75] i[37m2[37mcInit(): I[37mn[37mitialising [37mI[37m2C Master:[37m [37msda=46 scl=[37m4[37m5 freq=100[37m0[37m00
+23:14:21.264 > [ [37m [37m 268][W][W[37mi[37mre.cpp:301][37m [37mbegin(): B[37mu[37ms already s[37mt[37marted in M[37ma[37mster Mode.[37m
+[37m23:14:21.587 > [[37m [37m  591][W][[37mW[37mire.cpp:301[37m] begin(): Bus already [37ms[37mtarted in M[37ma[37mster Mode.[37m[37m
+23:14:21.594 > [   597][[37mW[37m][Wire.cpp[37m:[37m301] begin([37m)[37m: Bus alre[37ma[37mdy started [37mi[37mn Master M[37mo[37mde.
+23:14:21.600 > [   [37m6[37m03][W][Wir[37me[37m.cpp:301] b[37me[37mgin(): Bus[37m [37malready sta[37mr[37mted in Mas[37mt[37mer Mode.
+[37m23:14:21.607 > B[37mME280 sens[37mo[37mr not found!
+23:14:21.609 > Initiali[37mz[37ming SX1276.[37m.[37m. G[37mu[37mr[37mu Medi[37mt[37mation Erro[37mr[37m: Core  1 p[37ma[37mnic'ed (Lo[37ma[37mdProhibited[37m)[37m. Exceptio[37mn[37m was unhand[37ml[37med.
+23:14:21.664 > 
+23:14:21.664 > Cor[37me[37m  1 registe[37mr[37m dump:
+23:14:21.666 > PC[37m [37m     : 0x42[37m0[37m2fb8b  PS [37m [37m    : 0x000[37m6[37m0830  A0  [37m [37m   : 0x8200[37m6[37m7d0  A1   [37m   : 0x3fceb[37md[37ma0  
+23:14:21.674 > A2  [37m [37m   : 0x0000[37m0[37m000  A3    [37m [37m : 0x3c040[37m1[37m6c  A4     [37m [37m: 0x000000[37m1[37m7  A5      [37m:[37m 0x0000ff0[37m0[37m  
+23:14:21.682 > A6     [37m [37m: 0x00ff00[37m0[37m0  A7      [37m:[37m 0xff00000[37m0[37m  A8      :[37m [37m0x82008180[37m [37m A9      : [37m0[37mx3fcebda0 [37m [37m
+23:14:21.690 > A10     :[37m [37m0x3fc944b8[37m [37m A11     : [37m0[37mx3c04016c [37m [37mA12     : 0[37mx[37m00000017  [37mA[37m13     : 0x[37mf[37mfffffff  [37m
+[37m23:14:21.698 > A14     : 0[37mx[37m00000000  A[37m1[37m5     : 0x[37m3[37mfceccd0  SA[37mR[37m     : 0x0[37m0[37m000015  EXC[37mC[37mAUSE: 0x00[37m0[37m0001c  
+23:14:21.705 > EX[37mC[37mVADDR: 0x0[37m0[37m000000  LBE[37mG[37m    : 0x40[37m0[37m556d5  LEND[37m [37m   : 0x400[37m5[37m56e5  LCOUN[37mT[37m  : 0xffff[37mf[37mff9  
+23:14:21.713 > 
+23:14:21.713 > 
+[37m23:14:21.714 > B[37macktrace: [37m0[37mx4202fb88:0[37mx[37m3fcebda0 0[37mx[37m420067cd:0x[37m3[37mfcebdc0 0x[37m4[37m2004b51:0x3[37mf[37mcebde0 0x4[37m2[37m00243c:0x3f[37mc[37mebe20 0x42[37m0[37m02b99:0x3fc[37me[37mbe50 0x4200[37mb[37m182:0x3fce[37mb[37meb0
+23:14:21.726 > 
+23:14:21.726 > 
+23:14:21.726 > 
+[37m23:14:21.727 > [37m
+23:14:21.727 > ELF file [37mS[37mHA256: 9637[37mb[37ma9012b3d7b[37m2[37m
+23:14:21.730 > 
+[37m23:14:21.888 > R[37me[37mbooting...[37m
+[37m23:14:21.896 > E[37mSP-R[37mO[37mM:esp32s3-[37m2[37m0210327
+23:14:21.898 > Bu[37mi[37mld:Mar 27 [37m2[37m021
+23:14:21.900 > rst:0x[37mc[37m (RTC_SW_C[37mP[37mU_RST),boot[37m:[37m0x8 (SPI_F[37mA[37mST_FLASH_BO[37mO[37mT)
+23:14:21.905 > Saved [37mP[37mC:0x42030da[37me[37m
+23:14:21.907 > SPIWP:0x[37me[37me
+23:14:21.908 > mode:DIO[37m,[37m clock div[37m:[37m1
+23:14:21.910 > load:0x3[37mf[37mce3808,len[37m:[37m0x4bc
+23:14:21.912 > load[37m:[37m0x403c9700,[37ml[37men:0xbd8
+[37m23:14:21.915 > l[37moad:0x403cc[37m7[37m00,len:0x2[37ma[37m0c
+23:14:21.917 > entry 0[37mx[37m403c98d0
+[37m23:14:22.021 > [[37m   1[37m3[37m1][V][esp32[37m-[37mhal-uart.c[37m:[37m330] uartBe[37mg[37min(): UART[37m0[37m baud(11520[37m0[37m) Mode(800[37m0[37m01c) rxPin([37m4[37m4) txPin(4[37m3[37m)
+23:14:22.030 > [   140[37m][37m[V][esp32-h[37ma[37ml-uart.c:4[37m1[37m6] uartBegi[37mn[37m(): UART0 [37mn[37mot installe[37md[37m. Starting[37m [37minstallatio[37mn[37m
+23:14:22.039 > [  [37m [37m148][V][es[37mp[37m32-hal-uart[37m.[37mc:467] uart[37mB[37megin(): UA[37mR[37mT0 initiali[37mz[37mation done[37m.[37m
+[37m23:14:22.144 > 
+[37m23:14:22.145 > 
+[37m23:14:22.145 > === Heltec[37m [37mESP32 LoRa [37mS[37mensor Node[37m [37m===
+23:14:22.148 > Boot c[37mo[37munt: 1
+23:14:22.149 > [ [37m [37m 255][I][e[37ms[37mp32-hal-i2c[37m.[37mc:75] i2cI[37mn[37mit(): Initi[37ma[37mlising I2C[37m [37mMaster: sda[37m=[37m46 scl=45 [37mf[37mreq=100000[37m
+[37m23:14:22.160 > [   268][W][Wire.cpp:301] be[37mg[37min(): Bus a[37ml[37mready star[37mt[37med in Maste[37mr[37m Mode.
+[37m23:14:22.480 > [[37m [37m  5[37m9[37m1][W][Wire[37m.[37mcpp:301] be[37mg[37min(): Bus [37ma[37mlready star[37mt[37med in Mast[37me[37mr Mode.
+23:14:22.487 > [[37m [37m  597][W][W[37mi[37mre.cpp:301[37m][37m begin(): B[37mu[37ms already [37ms[37mtarted in M[37ma[37mster Mode.[37m[37m
+23:14:22.494 > [   604[37m][37m[W][Wire.cp[37mp[37m:301] begi[37mn[37m(): Bus alr[37me[37mady starte[37md[37m in Master [37mM[37mode.
+23:14:22.500 > BME[37m2[37m80 sensor n[37mo[37mt found!
+[37m23:14:22.503 > I[37mnitializing[37m [37mSX1276... [37mG[37mu[37mr[37mu Meditat[37mi[37mon Error: C[37mo[37mre  1 panic[37m'[37med (LoadPr[37mo[37mhibited). Exception wa[37ms[37m unhandled.[37m[37m
+23:14:22.558 > 
+23:14:22.558 > Core  1[37m [37mregister du[37mm[37mp:
+23:14:22.560 > PC    [37m [37m : 0x4202fb[37m8[37mb  PS     [37m [37m: 0x0006083[37m0[37m  A0      :[37m [37m0x820067d0[37m [37m A1      : [37m0[37mx3fcebda0 [37m [37m
+23:14:22.568 > A2      :[37m [37m0x00000000[37m [37m A3      : [37m0[37mx3c04016c [37m [37mA4      : [37m0[37mx00000017  [37mA[37m5      : 0[37mx[37m0000ff00  [37m
+[37m23:14:22.576 > A6      : [37m0[37mx00ff0000  [37mA[37m7      : 0[37mx[37mff000000  A[37m8[37m      : 0x8[37m2[37m008180  A9[37m [37m     : 0x3f[37mc[37mebda0  
+23:14:22.583 > A[37m1[37m0     : 0x3[37mf[37mc944b8  A1[37m1[37m     : 0x3c[37m0[37m4016c  A12[37m [37m    : 0x000[37m0[37m0017  A13  [37m [37m  : 0xffff[37mf[37mfff  
+23:14:22.591 > A14 [37m [37m   : 0x000[37m0[37m0000  A15  [37m [37m  : 0x3fce[37mc[37mcd0  SAR   [37m [37m : 0x00000[37m0[37m15  EXCCAUS[37mE[37m: 0x000000[37m1[37mc  
+23:14:22.599 > EXCVAD[37mD[37mR: 0x00000[37m0[37m00  LBEG   [37m [37m: 0x400556[37md[37m5  LEND    [37m:[37m 0x400556e[37m5[37m  LCOUNT  :[37m [37m0xfffffff9[37m [37m 
+23:14:22.607 > 
+23:14:22.607 > 
+23:14:22.607 > Back[37mt[37mrace: 0x42[37m0[37m2fb88:0x3fc[37me[37mbda0 0x4200[37m6[37m7cd:0x3fce[37mb[37mdc0 0x42004[37mb[37m51:0x3fceb[37md[37me0 0x420024[37m3[37mc:0x3fcebe[37m2[37m0 0x42002b[37m9[37m9:0x3fcebe5[37m0[37m 0x4200b18[37m2[37m:0x3fcebeb0[37m[37m
+23:14:22.620 > 
+23:14:22.620 > 
+23:14:22.620 > 
+23:14:22.620 > 
+23:14:22.620 > E[37mL[37mF file SHA2[37m5[37m6: 9637ba9[37m0[37m12b3d7b2
+23:14:22.623 > [37m
+[37m23:14:22.783 > R[37me[37mbooting...[37m
+[37m23:14:22.791 > E[37mSP-R[37mO[37mM:esp32s3-2[37m0[37m210327
+23:14:22.793 > Bu[37mi[37mld:Mar 27 2[37m0[37m21
+23:14:22.795 > rst:0x[37mc[37m (RTC_SW_CP[37mU[37m_RST),boot:[37m0[37mx8 (SPI_FA[37mS[37mT_FLASH_BOO[37mT[37m)
+23:14:22.800 > Saved P[37mC[37m:0x42030dae[37m[37m
+23:14:22.802 > SPIWP:0xe[37me[37m
+23:14:22.803 > mode:DIO,[37m [37mclock div:[37m1[37m
+23:14:22.805 > load:0x3f[37mce3808,len:[37m0[37mx4bc
+23:14:22.807 > load:[37m0[37mx403c9700,[37ml[37men:0xbd8
+23:14:22.809 > l[37mo[37mad:0x403cc[37m7[37m00,len:0x2a[37m0[37mc
+23:14:22.812 > entry 0[37mx[37m403c98d0
+[37m23:14:22.915 > [[37m   13[37m1[37m][V][esp32[37m-[37mhal-uart.c:[37m3[37m30] uartBe[37mg[37min(): UART0[37m [37mbaud(11520[37m0[37m) Mode(8000[37m01c) rxPin(4[37m4[37m) txPin(43[37m)[37m
+23:14:22.925 > [   140][37m[[37mV][esp32-h[37ma[37ml-uart.c:41[37m6[37m] uartBegi[37mn[37m(): UART0 n[37mo[37mt installe[37md[37m. Starting [37mi[37mnstallatio[37mn[37m
+23:14:22.933 > [  [37m [37m148][V][esp[37m3[37m2-hal-uart[37m.[37mc:467] uart[37mB[37megin(): UA[37mR[37mT0 initiali[37mz[37mation done[37m.[37m
+[37m23:14:23.039 > 
+[37m23:14:23.040 > 
+[37m23:14:23.040 > === Heltec[37m [37mESP32 LoRa [37mS[37mensor Node[37m [37m===
+23:14:23.043 > Boot c[37mo[37munt: 1
+23:14:23.044 > [ [37m [37m 254][I][es[37mp[37m32-hal-i2c[37m.[37mc:75] i2cIn[37mi[37mt(): Initi[37ma[37mlising I2C [37mM[37master: sda=[37m4[37m6 scl=45 f[37mr[37meq=100000
+[37m23:14:23.053 > [[37m   26[37m8[37m][W][Wire.[37mc[37mpp:301] beg[37mi[37mn(): Bus a[37ml[37mready start[37me[37md in Master[37m [37mMode.
