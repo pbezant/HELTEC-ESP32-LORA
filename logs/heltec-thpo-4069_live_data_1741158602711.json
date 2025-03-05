@@ -1,0 +1,2347 @@
+[
+  {
+    "name": "as.up.join.forward",
+    "time": "2025-03-05T07:09:14.658758703Z",
+    "identifiers": [
+      {
+        "device_ids": {
+          "device_id": "heltec-thpo-4069",
+          "application_ids": {
+            "application_id": "henke"
+          },
+          "dev_eui": "70B3D57ED8004069",
+          "join_eui": "70B3D57ED8004069",
+          "dev_addr": "27FD483D"
+        }
+      }
+    ],
+    "data": {
+      "@type": "type.googleapis.com/ttn.lorawan.v3.ApplicationUp",
+      "end_device_ids": {
+        "device_id": "heltec-thpo-4069",
+        "application_ids": {
+          "application_id": "henke"
+        },
+        "dev_eui": "70B3D57ED8004069",
+        "join_eui": "70B3D57ED8004069",
+        "dev_addr": "27FD483D"
+      },
+      "correlation_ids": [
+        "gs:uplink:01JNJJ658AAHATCZZEBBDD676J"
+      ],
+      "received_at": "2025-03-05T07:09:14.656376934Z",
+      "join_accept": {
+        "session_key_id": "AZVlIxUQ7dEzV8V/IMltKA==",
+        "received_at": "2025-03-05T07:09:12.842709635Z"
+      }
+    },
+    "correlation_ids": [
+      "gs:uplink:01JNJJ658AAHATCZZEBBDD676J"
+    ],
+    "origin": "ip-10-22-4-255.us-west-1.compute.internal",
+    "context": {
+      "tenant-id": "CgtmbXNpb3RjbG91ZA=="
+    },
+    "visibility": {
+      "rights": [
+        "RIGHT_APPLICATION_TRAFFIC_READ"
+      ]
+    },
+    "unique_id": "01JNJJ6712AE50DYSKXC05PBC3"
+  },
+  {
+    "name": "ns.up.join.process",
+    "time": "2025-03-05T07:09:13.047262938Z",
+    "identifiers": [
+      {
+        "device_ids": {
+          "device_id": "heltec-thpo-4069",
+          "application_ids": {
+            "application_id": "henke"
+          },
+          "dev_eui": "70B3D57ED8004069",
+          "join_eui": "70B3D57ED8004069",
+          "dev_addr": "27FD4830"
+        }
+      }
+    ],
+    "data": {
+      "@type": "type.googleapis.com/ttn.lorawan.v3.UplinkMessage",
+      "raw_payload": "AGlAANh+1bNwaUAA2H7Vs3AAAJCKW+Q=",
+      "payload": {
+        "m_hdr": {},
+        "mic": "kIpb5A==",
+        "join_request_payload": {
+          "join_eui": "70B3D57ED8004069",
+          "dev_eui": "70B3D57ED8004069",
+          "dev_nonce": "0000"
+        }
+      },
+      "settings": {
+        "data_rate": {
+          "lora": {
+            "bandwidth": 125000,
+            "spreading_factor": 10,
+            "coding_rate": "4/5"
+          }
+        },
+        "frequency": "905100000",
+        "timestamp": 4073492684,
+        "time": "2025-03-05T07:09:12.809474Z"
+      },
+      "rx_metadata": [
+        {
+          "gateway_ids": {
+            "gateway_id": "henkecove",
+            "eui": "A84041FFFF205BD4"
+          },
+          "time": "2025-03-05T07:09:12.809474Z",
+          "timestamp": 4073492684,
+          "rssi": -109,
+          "channel_rssi": -109,
+          "snr": -3.2,
+          "uplink_token": "ChcKFQoJaGVua2Vjb3ZlEgioQEH//yBb1BDMobKWDxoMCJjxn74GEMSmxZEDIOC51vjGmR8=",
+          "channel_index": 6,
+          "received_at": "2025-03-05T07:09:12.808908950Z"
+        }
+      ],
+      "received_at": "2025-03-05T07:09:12.842709635Z",
+      "correlation_ids": [
+        "gs:uplink:01JNJJ658AAHATCZZEBBDD676J"
+      ],
+      "device_channel_index": 14,
+      "consumed_airtime": "0.370688s"
+    },
+    "correlation_ids": [
+      "gs:uplink:01JNJJ658AAHATCZZEBBDD676J"
+    ],
+    "origin": "ip-10-22-6-144.us-west-1.compute.internal",
+    "context": {
+      "tenant-id": "CgtmbXNpb3RjbG91ZA=="
+    },
+    "visibility": {
+      "rights": [
+        "RIGHT_APPLICATION_TRAFFIC_READ"
+      ]
+    },
+    "unique_id": "01JNJJ65EQF3WA2BEX1BCJSFXB"
+  },
+  {
+    "name": "js.join.accept",
+    "time": "2025-03-05T07:09:12.850844280Z",
+    "identifiers": [
+      {
+        "device_ids": {
+          "device_id": "heltec-thpo-4069",
+          "application_ids": {
+            "application_id": "henke"
+          },
+          "dev_eui": "70B3D57ED8004069",
+          "join_eui": "70B3D57ED8004069",
+          "dev_addr": "27FD483D"
+        }
+      }
+    ],
+    "origin": "ip-10-22-7-240.us-west-1.compute.internal",
+    "context": {
+      "tenant-id": "CgtmbXNpb3RjbG91ZA=="
+    },
+    "visibility": {
+      "rights": [
+        "RIGHT_APPLICATION_TRAFFIC_READ"
+      ]
+    },
+    "unique_id": "01JNJJ658JXJEXXZTBT1WY0QQR"
+  },
+  {
+    "name": "as.up.join.forward",
+    "time": "2025-03-05T07:08:31.784787507Z",
+    "identifiers": [
+      {
+        "device_ids": {
+          "device_id": "heltec-thpo-4069",
+          "application_ids": {
+            "application_id": "henke"
+          },
+          "dev_eui": "70B3D57ED8004069",
+          "join_eui": "70B3D57ED8004069",
+          "dev_addr": "27FD4830"
+        }
+      }
+    ],
+    "data": {
+      "@type": "type.googleapis.com/ttn.lorawan.v3.ApplicationUp",
+      "end_device_ids": {
+        "device_id": "heltec-thpo-4069",
+        "application_ids": {
+          "application_id": "henke"
+        },
+        "dev_eui": "70B3D57ED8004069",
+        "join_eui": "70B3D57ED8004069",
+        "dev_addr": "27FD4830"
+      },
+      "correlation_ids": [
+        "gs:uplink:01JNJJ4VCEYMP5EW3W0F8X2ZZW"
+      ],
+      "received_at": "2025-03-05T07:08:31.781221102Z",
+      "join_accept": {
+        "session_key_id": "AZVlIm2Vv8TbRXtYVMgXLg==",
+        "received_at": "2025-03-05T07:08:29.967188065Z"
+      }
+    },
+    "correlation_ids": [
+      "gs:uplink:01JNJJ4VCEYMP5EW3W0F8X2ZZW"
+    ],
+    "origin": "ip-10-22-4-255.us-west-1.compute.internal",
+    "context": {
+      "tenant-id": "CgtmbXNpb3RjbG91ZA=="
+    },
+    "visibility": {
+      "rights": [
+        "RIGHT_APPLICATION_TRAFFIC_READ"
+      ]
+    },
+    "unique_id": "01JNJJ4X58G06TZA3F0C4WZV59"
+  },
+  {
+    "name": "ns.up.join.process",
+    "time": "2025-03-05T07:08:30.168970518Z",
+    "identifiers": [
+      {
+        "device_ids": {
+          "device_id": "heltec-thpo-4069",
+          "application_ids": {
+            "application_id": "henke"
+          },
+          "dev_eui": "70B3D57ED8004069",
+          "join_eui": "70B3D57ED8004069",
+          "dev_addr": "27FD4830"
+        }
+      }
+    ],
+    "data": {
+      "@type": "type.googleapis.com/ttn.lorawan.v3.UplinkMessage",
+      "raw_payload": "AGlAANh+1bNwaUAA2H7Vs3AAAJCKW+Q=",
+      "payload": {
+        "m_hdr": {},
+        "mic": "kIpb5A==",
+        "join_request_payload": {
+          "join_eui": "70B3D57ED8004069",
+          "dev_eui": "70B3D57ED8004069",
+          "dev_nonce": "0000"
+        }
+      },
+      "settings": {
+        "data_rate": {
+          "lora": {
+            "bandwidth": 125000,
+            "spreading_factor": 10,
+            "coding_rate": "4/5"
+          }
+        },
+        "frequency": "905300000",
+        "timestamp": 4030604188,
+        "time": "2025-03-05T07:08:29.927010Z"
+      },
+      "rx_metadata": [
+        {
+          "gateway_ids": {
+            "gateway_id": "henkecove",
+            "eui": "A84041FFFF205BD4"
+          },
+          "time": "2025-03-05T07:08:29.927010Z",
+          "timestamp": 4030604188,
+          "rssi": -113,
+          "channel_rssi": -113,
+          "snr": -4.8,
+          "uplink_token": "ChcKFQoJaGVua2Vjb3ZlEgioQEH//yBb1BCcx/iBDxoMCO3wn74GEJGn8cwDIOCy7JWnmB8=",
+          "channel_index": 7,
+          "received_at": "2025-03-05T07:08:29.933554489Z"
+        }
+      ],
+      "received_at": "2025-03-05T07:08:29.967188065Z",
+      "correlation_ids": [
+        "gs:uplink:01JNJJ4VCEYMP5EW3W0F8X2ZZW"
+      ],
+      "device_channel_index": 15,
+      "consumed_airtime": "0.370688s"
+    },
+    "correlation_ids": [
+      "gs:uplink:01JNJJ4VCEYMP5EW3W0F8X2ZZW"
+    ],
+    "origin": "ip-10-22-6-144.us-west-1.compute.internal",
+    "context": {
+      "tenant-id": "CgtmbXNpb3RjbG91ZA=="
+    },
+    "visibility": {
+      "rights": [
+        "RIGHT_APPLICATION_TRAFFIC_READ"
+      ]
+    },
+    "unique_id": "01JNJJ4VJRNQ8EX2ARHY2RK1RG"
+  },
+  {
+    "name": "js.join.accept",
+    "time": "2025-03-05T07:08:29.976441052Z",
+    "identifiers": [
+      {
+        "device_ids": {
+          "device_id": "heltec-thpo-4069",
+          "application_ids": {
+            "application_id": "henke"
+          },
+          "dev_eui": "70B3D57ED8004069",
+          "join_eui": "70B3D57ED8004069",
+          "dev_addr": "27FD4830"
+        }
+      }
+    ],
+    "origin": "ip-10-22-7-240.us-west-1.compute.internal",
+    "context": {
+      "tenant-id": "CgtmbXNpb3RjbG91ZA=="
+    },
+    "visibility": {
+      "rights": [
+        "RIGHT_APPLICATION_TRAFFIC_READ"
+      ]
+    },
+    "unique_id": "01JNJJ4VCRNB7KY4018HTMGXFP"
+  },
+  {
+    "name": "as.up.join.forward",
+    "time": "2025-03-05T06:59:03.957047213Z",
+    "identifiers": [
+      {
+        "device_ids": {
+          "device_id": "heltec-thpo-4069",
+          "application_ids": {
+            "application_id": "henke"
+          },
+          "dev_eui": "70B3D57ED8004069",
+          "join_eui": "70B3D57ED8004069",
+          "dev_addr": "27FD4834"
+        }
+      }
+    ],
+    "data": {
+      "@type": "type.googleapis.com/ttn.lorawan.v3.ApplicationUp",
+      "end_device_ids": {
+        "device_id": "heltec-thpo-4069",
+        "application_ids": {
+          "application_id": "henke"
+        },
+        "dev_eui": "70B3D57ED8004069",
+        "join_eui": "70B3D57ED8004069",
+        "dev_addr": "27FD4834"
+      },
+      "correlation_ids": [
+        "gs:uplink:01JNJHKGW3VHXNH3NEGKZXWZP7"
+      ],
+      "received_at": "2025-03-05T06:59:03.953562481Z",
+      "join_accept": {
+        "session_key_id": "AZVlGcOIKxZ5DJWTOZwk0w==",
+        "received_at": "2025-03-05T06:59:02.148852098Z"
+      }
+    },
+    "correlation_ids": [
+      "gs:uplink:01JNJHKGW3VHXNH3NEGKZXWZP7"
+    ],
+    "origin": "ip-10-22-4-255.us-west-1.compute.internal",
+    "context": {
+      "tenant-id": "CgtmbXNpb3RjbG91ZA=="
+    },
+    "visibility": {
+      "rights": [
+        "RIGHT_APPLICATION_TRAFFIC_READ"
+      ]
+    },
+    "unique_id": "01JNJHKJMN5WWP5MMDJD08GZ1V"
+  },
+  {
+    "name": "ns.up.join.process",
+    "time": "2025-03-05T06:59:02.358256641Z",
+    "identifiers": [
+      {
+        "device_ids": {
+          "device_id": "heltec-thpo-4069",
+          "application_ids": {
+            "application_id": "henke"
+          },
+          "dev_eui": "70B3D57ED8004069",
+          "join_eui": "70B3D57ED8004069",
+          "dev_addr": "27FD4830"
+        }
+      }
+    ],
+    "data": {
+      "@type": "type.googleapis.com/ttn.lorawan.v3.UplinkMessage",
+      "raw_payload": "AGlAANh+1bNwaUAA2H7Vs3AAAJCKW+Q=",
+      "payload": {
+        "m_hdr": {},
+        "mic": "kIpb5A==",
+        "join_request_payload": {
+          "join_eui": "70B3D57ED8004069",
+          "dev_eui": "70B3D57ED8004069",
+          "dev_nonce": "0000"
+        }
+      },
+      "settings": {
+        "data_rate": {
+          "lora": {
+            "bandwidth": 125000,
+            "spreading_factor": 10,
+            "coding_rate": "4/5"
+          }
+        },
+        "frequency": "905100000",
+        "timestamp": 3462788844,
+        "time": "2025-03-05T06:59:02.114557Z"
+      },
+      "rx_metadata": [
+        {
+          "gateway_ids": {
+            "gateway_id": "henkecove",
+            "eui": "A84041FFFF205BD4"
+          },
+          "time": "2025-03-05T06:59:02.114557Z",
+          "timestamp": 3462788844,
+          "rssi": -59,
+          "channel_rssi": -59,
+          "snr": 10.2,
+          "uplink_token": "ChcKFQoJaGVua2Vjb3ZlEgioQEH//yBb1BDs7ZfzDBoLCLbsn74GEI2gtUYg4JOy8uOHHw==",
+          "channel_index": 6,
+          "received_at": "2025-03-05T06:59:02.114354444Z"
+        }
+      ],
+      "received_at": "2025-03-05T06:59:02.148852098Z",
+      "correlation_ids": [
+        "gs:uplink:01JNJHKGW3VHXNH3NEGKZXWZP7"
+      ],
+      "device_channel_index": 14,
+      "consumed_airtime": "0.370688s"
+    },
+    "correlation_ids": [
+      "gs:uplink:01JNJHKGW3VHXNH3NEGKZXWZP7"
+    ],
+    "origin": "ip-10-22-15-162.us-west-1.compute.internal",
+    "context": {
+      "tenant-id": "CgtmbXNpb3RjbG91ZA=="
+    },
+    "visibility": {
+      "rights": [
+        "RIGHT_APPLICATION_TRAFFIC_READ"
+      ]
+    },
+    "unique_id": "01JNJHKH2PHWKMC7P4VZ41QBHR"
+  },
+  {
+    "name": "js.join.accept",
+    "time": "2025-03-05T06:59:02.154822509Z",
+    "identifiers": [
+      {
+        "device_ids": {
+          "device_id": "heltec-thpo-4069",
+          "application_ids": {
+            "application_id": "henke"
+          },
+          "dev_eui": "70B3D57ED8004069",
+          "join_eui": "70B3D57ED8004069",
+          "dev_addr": "27FD4834"
+        }
+      }
+    ],
+    "origin": "ip-10-22-7-240.us-west-1.compute.internal",
+    "context": {
+      "tenant-id": "CgtmbXNpb3RjbG91ZA=="
+    },
+    "visibility": {
+      "rights": [
+        "RIGHT_APPLICATION_TRAFFIC_READ"
+      ]
+    },
+    "unique_id": "01JNJHKGWAXDYNJHSSMCX37YEK"
+  },
+  {
+    "name": "as.up.join.forward",
+    "time": "2025-03-05T06:56:09.128249146Z",
+    "identifiers": [
+      {
+        "device_ids": {
+          "device_id": "heltec-thpo-4069",
+          "application_ids": {
+            "application_id": "henke"
+          },
+          "dev_eui": "70B3D57ED8004069",
+          "join_eui": "70B3D57ED8004069",
+          "dev_addr": "27FD4831"
+        }
+      }
+    ],
+    "data": {
+      "@type": "type.googleapis.com/ttn.lorawan.v3.ApplicationUp",
+      "end_device_ids": {
+        "device_id": "heltec-thpo-4069",
+        "application_ids": {
+          "application_id": "henke"
+        },
+        "dev_eui": "70B3D57ED8004069",
+        "join_eui": "70B3D57ED8004069",
+        "dev_addr": "27FD4831"
+      },
+      "correlation_ids": [
+        "gs:uplink:01JNJHE64DPKQWME8F9VEJ39ZT"
+      ],
+      "received_at": "2025-03-05T06:56:09.124905427Z",
+      "join_accept": {
+        "session_key_id": "AZVlFxiR2S5REUPGnGeD9A==",
+        "received_at": "2025-03-05T06:56:07.309934804Z"
+      }
+    },
+    "correlation_ids": [
+      "gs:uplink:01JNJHE64DPKQWME8F9VEJ39ZT"
+    ],
+    "origin": "ip-10-22-4-255.us-west-1.compute.internal",
+    "context": {
+      "tenant-id": "CgtmbXNpb3RjbG91ZA=="
+    },
+    "visibility": {
+      "rights": [
+        "RIGHT_APPLICATION_TRAFFIC_READ"
+      ]
+    },
+    "unique_id": "01JNJHE7X8S9FZPDH4AE25MVZX"
+  },
+  {
+    "name": "ns.up.join.process",
+    "time": "2025-03-05T06:56:07.518165954Z",
+    "identifiers": [
+      {
+        "device_ids": {
+          "device_id": "heltec-thpo-4069",
+          "application_ids": {
+            "application_id": "henke"
+          },
+          "dev_eui": "70B3D57ED8004069",
+          "join_eui": "70B3D57ED8004069",
+          "dev_addr": "27FD4830"
+        }
+      }
+    ],
+    "data": {
+      "@type": "type.googleapis.com/ttn.lorawan.v3.UplinkMessage",
+      "raw_payload": "AGlAANh+1bNwaUAA2H7Vs3AAAJCKW+Q=",
+      "payload": {
+        "m_hdr": {},
+        "mic": "kIpb5A==",
+        "join_request_payload": {
+          "join_eui": "70B3D57ED8004069",
+          "dev_eui": "70B3D57ED8004069",
+          "dev_nonce": "0000"
+        }
+      },
+      "settings": {
+        "data_rate": {
+          "lora": {
+            "bandwidth": 125000,
+            "spreading_factor": 10,
+            "coding_rate": "4/5"
+          }
+        },
+        "frequency": "904900000",
+        "timestamp": 3287952180,
+        "time": "2025-03-05T06:56:07.270605Z"
+      },
+      "rx_metadata": [
+        {
+          "gateway_ids": {
+            "gateway_id": "henkecove",
+            "eui": "A84041FFFF205BD4"
+          },
+          "time": "2025-03-05T06:56:07.270605Z",
+          "timestamp": 3287952180,
+          "rssi": -55,
+          "channel_rssi": -55,
+          "snr": 11.8,
+          "uplink_token": "ChcKFQoJaGVua2Vjb3ZlEgioQEH//yBb1BC01uifDBoMCIfrn74GEOG8pJMBIKCG48nYgh8=",
+          "channel_index": 5,
+          "received_at": "2025-03-05T06:56:07.275627401Z"
+        }
+      ],
+      "received_at": "2025-03-05T06:56:07.309934804Z",
+      "correlation_ids": [
+        "gs:uplink:01JNJHE64DPKQWME8F9VEJ39ZT"
+      ],
+      "device_channel_index": 13,
+      "consumed_airtime": "0.370688s"
+    },
+    "correlation_ids": [
+      "gs:uplink:01JNJHE64DPKQWME8F9VEJ39ZT"
+    ],
+    "origin": "ip-10-22-15-162.us-west-1.compute.internal",
+    "context": {
+      "tenant-id": "CgtmbXNpb3RjbG91ZA=="
+    },
+    "visibility": {
+      "rights": [
+        "RIGHT_APPLICATION_TRAFFIC_READ"
+      ]
+    },
+    "unique_id": "01JNJHE6AYWAH728X91VEGDQVJ"
+  },
+  {
+    "name": "js.join.accept",
+    "time": "2025-03-05T06:56:07.316923798Z",
+    "identifiers": [
+      {
+        "device_ids": {
+          "device_id": "heltec-thpo-4069",
+          "application_ids": {
+            "application_id": "henke"
+          },
+          "dev_eui": "70B3D57ED8004069",
+          "join_eui": "70B3D57ED8004069",
+          "dev_addr": "27FD4831"
+        }
+      }
+    ],
+    "origin": "ip-10-22-7-240.us-west-1.compute.internal",
+    "context": {
+      "tenant-id": "CgtmbXNpb3RjbG91ZA=="
+    },
+    "visibility": {
+      "rights": [
+        "RIGHT_APPLICATION_TRAFFIC_READ"
+      ]
+    },
+    "unique_id": "01JNJHE64MWX3GRRVS096CT1JD"
+  },
+  {
+    "time": "2025-03-05T06:53:44.293Z",
+    "name": "synthetic.status.reconnected",
+    "isError": false,
+    "isSynthetic": true,
+    "unique_id": "synthetic.1741157624293"
+  },
+  {
+    "name": "as.up.join.forward",
+    "time": "2025-03-05T06:53:37.994262792Z",
+    "identifiers": [
+      {
+        "device_ids": {
+          "device_id": "heltec-thpo-4069",
+          "application_ids": {
+            "application_id": "henke"
+          },
+          "dev_eui": "70B3D57ED8004069",
+          "join_eui": "70B3D57ED8004069",
+          "dev_addr": "27FD4831"
+        }
+      }
+    ],
+    "data": {
+      "@type": "type.googleapis.com/ttn.lorawan.v3.ApplicationUp",
+      "end_device_ids": {
+        "device_id": "heltec-thpo-4069",
+        "application_ids": {
+          "application_id": "henke"
+        },
+        "dev_eui": "70B3D57ED8004069",
+        "join_eui": "70B3D57ED8004069",
+        "dev_addr": "27FD4831"
+      },
+      "correlation_ids": [
+        "gs:uplink:01JNJH9JHD1YDK5QWSW78GX3J6"
+      ],
+      "received_at": "2025-03-05T06:53:37.988488580Z",
+      "join_accept": {
+        "session_key_id": "AZVlFMq5wI05w3gEUpcjww==",
+        "received_at": "2025-03-05T06:53:36.174664260Z"
+      }
+    },
+    "correlation_ids": [
+      "gs:uplink:01JNJH9JHD1YDK5QWSW78GX3J6"
+    ],
+    "origin": "ip-10-22-14-47.us-west-1.compute.internal",
+    "context": {
+      "tenant-id": "CgtmbXNpb3RjbG91ZA=="
+    },
+    "visibility": {
+      "rights": [
+        "RIGHT_APPLICATION_TRAFFIC_READ"
+      ]
+    },
+    "unique_id": "01JNJH9MAA8BENT0H59N5MHZ2F"
+  },
+  {
+    "time": "2025-03-05T06:53:37.437Z",
+    "name": "synthetic.status.closed",
+    "isError": false,
+    "isSynthetic": true,
+    "unique_id": "synthetic.1741157617437"
+  },
+  {
+    "name": "ns.up.join.process",
+    "time": "2025-03-05T06:53:36.383419226Z",
+    "identifiers": [
+      {
+        "device_ids": {
+          "device_id": "heltec-thpo-4069",
+          "application_ids": {
+            "application_id": "henke"
+          },
+          "dev_eui": "70B3D57ED8004069",
+          "join_eui": "70B3D57ED8004069",
+          "dev_addr": "27FD4830"
+        }
+      }
+    ],
+    "data": {
+      "@type": "type.googleapis.com/ttn.lorawan.v3.UplinkMessage",
+      "raw_payload": "AGlAANh+1bNwaUAA2H7Vs3AAAJCKW+Q=",
+      "payload": {
+        "m_hdr": {},
+        "mic": "kIpb5A==",
+        "join_request_payload": {
+          "join_eui": "70B3D57ED8004069",
+          "dev_eui": "70B3D57ED8004069",
+          "dev_nonce": "0000"
+        }
+      },
+      "settings": {
+        "data_rate": {
+          "lora": {
+            "bandwidth": 125000,
+            "spreading_factor": 10,
+            "coding_rate": "4/5"
+          }
+        },
+        "frequency": "905100000",
+        "timestamp": 3136813612,
+        "time": "2025-03-05T06:53:36.135980Z"
+      },
+      "rx_metadata": [
+        {
+          "gateway_ids": {
+            "gateway_id": "henkecove",
+            "eui": "A84041FFFF205BD4"
+          },
+          "time": "2025-03-05T06:53:36.135980Z",
+          "timestamp": 3136813612,
+          "rssi": -87,
+          "channel_rssi": -87,
+          "snr": 8,
+          "uplink_token": "ChcKFQoJaGVua2Vjb3ZlEgioQEH//yBb1BCs9N/XCxoLCPDpn74GEL7l41Ig4PekxaX+Hg==",
+          "channel_index": 6,
+          "received_at": "2025-03-05T06:53:36.140282813Z"
+        }
+      ],
+      "received_at": "2025-03-05T06:53:36.174664260Z",
+      "correlation_ids": [
+        "gs:uplink:01JNJH9JHD1YDK5QWSW78GX3J6"
+      ],
+      "device_channel_index": 14,
+      "consumed_airtime": "0.370688s"
+    },
+    "correlation_ids": [
+      "gs:uplink:01JNJH9JHD1YDK5QWSW78GX3J6"
+    ],
+    "origin": "ip-10-22-15-162.us-west-1.compute.internal",
+    "context": {
+      "tenant-id": "CgtmbXNpb3RjbG91ZA=="
+    },
+    "visibility": {
+      "rights": [
+        "RIGHT_APPLICATION_TRAFFIC_READ"
+      ]
+    },
+    "unique_id": "01JNJH9JQZ77F988FYMDF7FR8F"
+  },
+  {
+    "name": "js.join.accept",
+    "time": "2025-03-05T06:53:36.317641465Z",
+    "identifiers": [
+      {
+        "device_ids": {
+          "device_id": "heltec-thpo-4069",
+          "application_ids": {
+            "application_id": "henke"
+          },
+          "dev_eui": "70B3D57ED8004069",
+          "join_eui": "70B3D57ED8004069",
+          "dev_addr": "27FD4831"
+        }
+      }
+    ],
+    "origin": "ip-10-22-7-240.us-west-1.compute.internal",
+    "context": {
+      "tenant-id": "CgtmbXNpb3RjbG91ZA=="
+    },
+    "visibility": {
+      "rights": [
+        "RIGHT_APPLICATION_TRAFFIC_READ"
+      ]
+    },
+    "unique_id": "01JNJH9JNXCZJ2XDSXE5YBKVAT"
+  },
+  {
+    "name": "as.up.join.forward",
+    "time": "2025-03-05T06:48:10.309485999Z",
+    "identifiers": [
+      {
+        "device_ids": {
+          "device_id": "heltec-thpo-4069",
+          "application_ids": {
+            "application_id": "henke"
+          },
+          "dev_eui": "70B3D57ED8004069",
+          "join_eui": "70B3D57ED8004069",
+          "dev_addr": "27FD4836"
+        }
+      }
+    ],
+    "data": {
+      "@type": "type.googleapis.com/ttn.lorawan.v3.ApplicationUp",
+      "end_device_ids": {
+        "device_id": "heltec-thpo-4069",
+        "application_ids": {
+          "application_id": "henke"
+        },
+        "dev_eui": "70B3D57ED8004069",
+        "join_eui": "70B3D57ED8004069",
+        "dev_addr": "27FD4836"
+      },
+      "correlation_ids": [
+        "gs:uplink:01JNJGZJH6C0FSWHG869DTWBSX"
+      ],
+      "received_at": "2025-03-05T06:48:10.302785803Z",
+      "join_accept": {
+        "session_key_id": "AZVlD8oyrP+5821ksJea9Q==",
+        "received_at": "2025-03-05T06:48:08.487329712Z"
+      }
+    },
+    "correlation_ids": [
+      "gs:uplink:01JNJGZJH6C0FSWHG869DTWBSX"
+    ],
+    "origin": "ip-10-22-14-47.us-west-1.compute.internal",
+    "context": {
+      "tenant-id": "CgtmbXNpb3RjbG91ZA=="
+    },
+    "visibility": {
+      "rights": [
+        "RIGHT_APPLICATION_TRAFFIC_READ"
+      ]
+    },
+    "unique_id": "01JNJGZMA537A24G8TCGENEEV6"
+  },
+  {
+    "name": "ns.up.join.process",
+    "time": "2025-03-05T06:48:08.689885477Z",
+    "identifiers": [
+      {
+        "device_ids": {
+          "device_id": "heltec-thpo-4069",
+          "application_ids": {
+            "application_id": "henke"
+          },
+          "dev_eui": "70B3D57ED8004069",
+          "join_eui": "70B3D57ED8004069",
+          "dev_addr": "27FD4830"
+        }
+      }
+    ],
+    "data": {
+      "@type": "type.googleapis.com/ttn.lorawan.v3.UplinkMessage",
+      "raw_payload": "AGlAANh+1bNwaUAA2H7Vs3AAAJCKW+Q=",
+      "payload": {
+        "m_hdr": {},
+        "mic": "kIpb5A==",
+        "join_request_payload": {
+          "join_eui": "70B3D57ED8004069",
+          "dev_eui": "70B3D57ED8004069",
+          "dev_nonce": "0000"
+        }
+      },
+      "settings": {
+        "data_rate": {
+          "lora": {
+            "bandwidth": 125000,
+            "spreading_factor": 10,
+            "coding_rate": "4/5"
+          }
+        },
+        "frequency": "905300000",
+        "timestamp": 2809105556,
+        "time": "2025-03-05T06:48:08.422523Z"
+      },
+      "rx_metadata": [
+        {
+          "gateway_ids": {
+            "gateway_id": "henkecove",
+            "eui": "A84041FFFF205BD4"
+          },
+          "time": "2025-03-05T06:48:08.422523Z",
+          "timestamp": 2809105556,
+          "rssi": -71,
+          "channel_rssi": -71,
+          "snr": 12.2,
+          "uplink_token": "ChcKFQoJaGVua2Vjb3ZlEgioQEH//yBb1BCUmb67ChoMCKjnn74GEOr2iugBIKDE9N3g9B4=",
+          "channel_index": 7,
+          "received_at": "2025-03-05T06:48:08.453901115Z"
+        }
+      ],
+      "received_at": "2025-03-05T06:48:08.487329712Z",
+      "correlation_ids": [
+        "gs:uplink:01JNJGZJH6C0FSWHG869DTWBSX"
+      ],
+      "device_channel_index": 15,
+      "consumed_airtime": "0.370688s"
+    },
+    "correlation_ids": [
+      "gs:uplink:01JNJGZJH6C0FSWHG869DTWBSX"
+    ],
+    "origin": "ip-10-22-6-144.us-west-1.compute.internal",
+    "context": {
+      "tenant-id": "CgtmbXNpb3RjbG91ZA=="
+    },
+    "visibility": {
+      "rights": [
+        "RIGHT_APPLICATION_TRAFFIC_READ"
+      ]
+    },
+    "unique_id": "01JNJGZJQH3M6A9HCX1K7HN8EX"
+  },
+  {
+    "name": "js.join.accept",
+    "time": "2025-03-05T06:48:08.512884822Z",
+    "identifiers": [
+      {
+        "device_ids": {
+          "device_id": "heltec-thpo-4069",
+          "application_ids": {
+            "application_id": "henke"
+          },
+          "dev_eui": "70B3D57ED8004069",
+          "join_eui": "70B3D57ED8004069",
+          "dev_addr": "27FD4836"
+        }
+      }
+    ],
+    "origin": "ip-10-22-12-131.us-west-1.compute.internal",
+    "context": {
+      "tenant-id": "CgtmbXNpb3RjbG91ZA=="
+    },
+    "visibility": {
+      "rights": [
+        "RIGHT_APPLICATION_TRAFFIC_READ"
+      ]
+    },
+    "unique_id": "01JNJGZJJ0PRPFVJB0JGGRD3SZ"
+  },
+  {
+    "name": "as.up.join.forward",
+    "time": "2025-03-05T06:43:33.907910463Z",
+    "identifiers": [
+      {
+        "device_ids": {
+          "device_id": "heltec-thpo-4069",
+          "application_ids": {
+            "application_id": "henke"
+          },
+          "dev_eui": "70B3D57ED8004069",
+          "join_eui": "70B3D57ED8004069",
+          "dev_addr": "27FD4835"
+        }
+      }
+    ],
+    "data": {
+      "@type": "type.googleapis.com/ttn.lorawan.v3.ApplicationUp",
+      "end_device_ids": {
+        "device_id": "heltec-thpo-4069",
+        "application_ids": {
+          "application_id": "henke"
+        },
+        "dev_eui": "70B3D57ED8004069",
+        "join_eui": "70B3D57ED8004069",
+        "dev_addr": "27FD4835"
+      },
+      "correlation_ids": [
+        "gs:uplink:01JNJGQ4M0TS697YJ0EWYZR784"
+      ],
+      "received_at": "2025-03-05T06:43:33.905810308Z",
+      "join_accept": {
+        "session_key_id": "AZVlC5MQdH8WFF8M1HRSiQ==",
+        "received_at": "2025-03-05T06:43:32.097549666Z"
+      }
+    },
+    "correlation_ids": [
+      "gs:uplink:01JNJGQ4M0TS697YJ0EWYZR784"
+    ],
+    "origin": "ip-10-22-4-255.us-west-1.compute.internal",
+    "context": {
+      "tenant-id": "CgtmbXNpb3RjbG91ZA=="
+    },
+    "visibility": {
+      "rights": [
+        "RIGHT_APPLICATION_TRAFFIC_READ"
+      ]
+    },
+    "unique_id": "01JNJGQ6CKWJFWN4T7J1H57YEM"
+  },
+  {
+    "name": "ns.up.join.process",
+    "time": "2025-03-05T06:43:32.305650166Z",
+    "identifiers": [
+      {
+        "device_ids": {
+          "device_id": "heltec-thpo-4069",
+          "application_ids": {
+            "application_id": "henke"
+          },
+          "dev_eui": "70B3D57ED8004069",
+          "join_eui": "70B3D57ED8004069",
+          "dev_addr": "27FD4830"
+        }
+      }
+    ],
+    "data": {
+      "@type": "type.googleapis.com/ttn.lorawan.v3.UplinkMessage",
+      "raw_payload": "AGlAANh+1bNwaUAA2H7Vs3AAAJCKW+Q=",
+      "payload": {
+        "m_hdr": {},
+        "mic": "kIpb5A==",
+        "join_request_payload": {
+          "join_eui": "70B3D57ED8004069",
+          "dev_eui": "70B3D57ED8004069",
+          "dev_nonce": "0000"
+        }
+      },
+      "settings": {
+        "data_rate": {
+          "lora": {
+            "bandwidth": 125000,
+            "spreading_factor": 10,
+            "coding_rate": "4/5"
+          }
+        },
+        "frequency": "904100000",
+        "timestamp": 2532741836,
+        "time": "2025-03-05T06:43:32.058589Z"
+      },
+      "rx_metadata": [
+        {
+          "gateway_ids": {
+            "gateway_id": "henkecove",
+            "eui": "A84041FFFF205BD4"
+          },
+          "time": "2025-03-05T06:43:32.058589Z",
+          "timestamp": 2532741836,
+          "rssi": -52,
+          "channel_rssi": -52,
+          "snr": 10,
+          "uplink_token": "ChcKFQoJaGVua2Vjb3ZlEgioQEH//yBb1BDMpdq3CRoLCJTln74GEKLngi4g4Nm1mdvsHg==",
+          "channel_index": 1,
+          "received_at": "2025-03-05T06:43:32.063196321Z"
+        }
+      ],
+      "received_at": "2025-03-05T06:43:32.097549666Z",
+      "correlation_ids": [
+        "gs:uplink:01JNJGQ4M0TS697YJ0EWYZR784"
+      ],
+      "device_channel_index": 9,
+      "consumed_airtime": "0.370688s"
+    },
+    "correlation_ids": [
+      "gs:uplink:01JNJGQ4M0TS697YJ0EWYZR784"
+    ],
+    "origin": "ip-10-22-15-162.us-west-1.compute.internal",
+    "context": {
+      "tenant-id": "CgtmbXNpb3RjbG91ZA=="
+    },
+    "visibility": {
+      "rights": [
+        "RIGHT_APPLICATION_TRAFFIC_READ"
+      ]
+    },
+    "unique_id": "01JNJGQ4THNBVE1ZVXPENC0ZHY"
+  },
+  {
+    "name": "js.join.accept",
+    "time": "2025-03-05T06:43:32.253665954Z",
+    "identifiers": [
+      {
+        "device_ids": {
+          "device_id": "heltec-thpo-4069",
+          "application_ids": {
+            "application_id": "henke"
+          },
+          "dev_eui": "70B3D57ED8004069",
+          "join_eui": "70B3D57ED8004069",
+          "dev_addr": "27FD4835"
+        }
+      }
+    ],
+    "origin": "ip-10-22-12-131.us-west-1.compute.internal",
+    "context": {
+      "tenant-id": "CgtmbXNpb3RjbG91ZA=="
+    },
+    "visibility": {
+      "rights": [
+        "RIGHT_APPLICATION_TRAFFIC_READ"
+      ]
+    },
+    "unique_id": "01JNJGQ4RX21VM4EA04KKP3PDQ"
+  },
+  {
+    "name": "as.up.join.forward",
+    "time": "2025-03-05T06:37:35.946753369Z",
+    "identifiers": [
+      {
+        "device_ids": {
+          "device_id": "heltec-thpo-4069",
+          "application_ids": {
+            "application_id": "henke"
+          },
+          "dev_eui": "70B3D57ED8004069",
+          "join_eui": "70B3D57ED8004069",
+          "dev_addr": "27FD483C"
+        }
+      }
+    ],
+    "data": {
+      "@type": "type.googleapis.com/ttn.lorawan.v3.ApplicationUp",
+      "end_device_ids": {
+        "device_id": "heltec-thpo-4069",
+        "application_ids": {
+          "application_id": "henke"
+        },
+        "dev_eui": "70B3D57ED8004069",
+        "join_eui": "70B3D57ED8004069",
+        "dev_addr": "27FD483C"
+      },
+      "correlation_ids": [
+        "gs:uplink:01JNJGC71P5VV1J2G4VVEPAFVP"
+      ],
+      "received_at": "2025-03-05T06:37:35.943352625Z",
+      "join_accept": {
+        "session_key_id": "AZVlBhxApT5eHPjuynfFRg==",
+        "received_at": "2025-03-05T06:37:34.134873023Z"
+      }
+    },
+    "correlation_ids": [
+      "gs:uplink:01JNJGC71P5VV1J2G4VVEPAFVP"
+    ],
+    "origin": "ip-10-22-4-255.us-west-1.compute.internal",
+    "context": {
+      "tenant-id": "CgtmbXNpb3RjbG91ZA=="
+    },
+    "visibility": {
+      "rights": [
+        "RIGHT_APPLICATION_TRAFFIC_READ"
+      ]
+    },
+    "unique_id": "01JNJGC8TASJ28TK721WNRQKP6"
+  },
+  {
+    "name": "ns.up.join.process",
+    "time": "2025-03-05T06:37:34.337383112Z",
+    "identifiers": [
+      {
+        "device_ids": {
+          "device_id": "heltec-thpo-4069",
+          "application_ids": {
+            "application_id": "henke"
+          },
+          "dev_eui": "70B3D57ED8004069",
+          "join_eui": "70B3D57ED8004069",
+          "dev_addr": "27FD4830"
+        }
+      }
+    ],
+    "data": {
+      "@type": "type.googleapis.com/ttn.lorawan.v3.UplinkMessage",
+      "raw_payload": "AGlAANh+1bNwaUAA2H7Vs3AAAJCKW+Q=",
+      "payload": {
+        "m_hdr": {},
+        "mic": "kIpb5A==",
+        "join_request_payload": {
+          "join_eui": "70B3D57ED8004069",
+          "dev_eui": "70B3D57ED8004069",
+          "dev_nonce": "0000"
+        }
+      },
+      "settings": {
+        "data_rate": {
+          "lora": {
+            "bandwidth": 125000,
+            "spreading_factor": 10,
+            "coding_rate": "4/5"
+          }
+        },
+        "frequency": "904300000",
+        "timestamp": 2174788732,
+        "time": "2025-03-05T06:37:34.100869Z"
+      },
+      "rx_metadata": [
+        {
+          "gateway_ids": {
+            "gateway_id": "henkecove",
+            "eui": "A84041FFFF205BD4"
+          },
+          "time": "2025-03-05T06:37:34.100869Z",
+          "timestamp": 2174788732,
+          "rssi": -52,
+          "channel_rssi": -52,
+          "snr": 8.5,
+          "uplink_token": "ChcKFQoJaGVua2Vjb3ZlEgioQEH//yBb1BD8yIKNCBoLCK7in74GEOGg/D8g4IiK3KXiHg==",
+          "channel_index": 2,
+          "received_at": "2025-03-05T06:37:34.100837728Z"
+        }
+      ],
+      "received_at": "2025-03-05T06:37:34.134873023Z",
+      "correlation_ids": [
+        "gs:uplink:01JNJGC71P5VV1J2G4VVEPAFVP"
+      ],
+      "device_channel_index": 10,
+      "consumed_airtime": "0.370688s"
+    },
+    "correlation_ids": [
+      "gs:uplink:01JNJGC71P5VV1J2G4VVEPAFVP"
+    ],
+    "origin": "ip-10-22-6-144.us-west-1.compute.internal",
+    "context": {
+      "tenant-id": "CgtmbXNpb3RjbG91ZA=="
+    },
+    "visibility": {
+      "rights": [
+        "RIGHT_APPLICATION_TRAFFIC_READ"
+      ]
+    },
+    "unique_id": "01JNJGC781Y5VX4VZ3DZKFSXDX"
+  },
+  {
+    "name": "js.join.accept",
+    "time": "2025-03-05T06:37:34.157269326Z",
+    "identifiers": [
+      {
+        "device_ids": {
+          "device_id": "heltec-thpo-4069",
+          "application_ids": {
+            "application_id": "henke"
+          },
+          "dev_eui": "70B3D57ED8004069",
+          "join_eui": "70B3D57ED8004069",
+          "dev_addr": "27FD483C"
+        }
+      }
+    ],
+    "origin": "ip-10-22-12-131.us-west-1.compute.internal",
+    "context": {
+      "tenant-id": "CgtmbXNpb3RjbG91ZA=="
+    },
+    "visibility": {
+      "rights": [
+        "RIGHT_APPLICATION_TRAFFIC_READ"
+      ]
+    },
+    "unique_id": "01JNJGC72DA1WV6BTT91N1WKC7"
+  },
+  {
+    "name": "as.up.join.forward",
+    "time": "2025-03-05T06:34:38.080775328Z",
+    "identifiers": [
+      {
+        "device_ids": {
+          "device_id": "heltec-thpo-4069",
+          "application_ids": {
+            "application_id": "henke"
+          },
+          "dev_eui": "70B3D57ED8004069",
+          "join_eui": "70B3D57ED8004069",
+          "dev_addr": "27FD483E"
+        }
+      }
+    ],
+    "data": {
+      "@type": "type.googleapis.com/ttn.lorawan.v3.ApplicationUp",
+      "end_device_ids": {
+        "device_id": "heltec-thpo-4069",
+        "application_ids": {
+          "application_id": "henke"
+        },
+        "dev_eui": "70B3D57ED8004069",
+        "join_eui": "70B3D57ED8004069",
+        "dev_addr": "27FD483E"
+      },
+      "correlation_ids": [
+        "gs:uplink:01JNJG6SBFEEE51HVDVA4560V8"
+      ],
+      "received_at": "2025-03-05T06:34:38.078561615Z",
+      "join_accept": {
+        "session_key_id": "AZVlA2V4SP29G0WCMdNZRQ==",
+        "received_at": "2025-03-05T06:34:36.272379714Z"
+      }
+    },
+    "correlation_ids": [
+      "gs:uplink:01JNJG6SBFEEE51HVDVA4560V8"
+    ],
+    "origin": "ip-10-22-4-255.us-west-1.compute.internal",
+    "context": {
+      "tenant-id": "CgtmbXNpb3RjbG91ZA=="
+    },
+    "visibility": {
+      "rights": [
+        "RIGHT_APPLICATION_TRAFFIC_READ"
+      ]
+    },
+    "unique_id": "01JNJG6V40V9WZT61FY1TXD9GB"
+  },
+  {
+    "name": "ns.up.join.process",
+    "time": "2025-03-05T06:34:36.475730874Z",
+    "identifiers": [
+      {
+        "device_ids": {
+          "device_id": "heltec-thpo-4069",
+          "application_ids": {
+            "application_id": "henke"
+          },
+          "dev_eui": "70B3D57ED8004069",
+          "join_eui": "70B3D57ED8004069",
+          "dev_addr": "27FD4830"
+        }
+      }
+    ],
+    "data": {
+      "@type": "type.googleapis.com/ttn.lorawan.v3.UplinkMessage",
+      "raw_payload": "AGlAANh+1bNwaUAA2H7Vs3AAAJCKW+Q=",
+      "payload": {
+        "m_hdr": {},
+        "mic": "kIpb5A==",
+        "join_request_payload": {
+          "join_eui": "70B3D57ED8004069",
+          "dev_eui": "70B3D57ED8004069",
+          "dev_nonce": "0000"
+        }
+      },
+      "settings": {
+        "data_rate": {
+          "lora": {
+            "bandwidth": 125000,
+            "spreading_factor": 10,
+            "coding_rate": "4/5"
+          }
+        },
+        "frequency": "904900000",
+        "timestamp": 1996916876,
+        "time": "2025-03-05T06:34:36.239414Z"
+      },
+      "rx_metadata": [
+        {
+          "gateway_ids": {
+            "gateway_id": "henkecove",
+            "eui": "A84041FFFF205BD4"
+          },
+          "time": "2025-03-05T06:34:36.239414Z",
+          "timestamp": 1996916876,
+          "rssi": -53,
+          "channel_rssi": -53,
+          "snr": 10,
+          "uplink_token": "ChcKFQoJaGVua2Vjb3ZlEgioQEH//yBb1BCMkZq4BxoMCPzgn74GELmowoEBIODFlYyP3R4=",
+          "channel_index": 5,
+          "received_at": "2025-03-05T06:34:36.238357146Z"
+        }
+      ],
+      "received_at": "2025-03-05T06:34:36.272379714Z",
+      "correlation_ids": [
+        "gs:uplink:01JNJG6SBFEEE51HVDVA4560V8"
+      ],
+      "device_channel_index": 13,
+      "consumed_airtime": "0.370688s"
+    },
+    "correlation_ids": [
+      "gs:uplink:01JNJG6SBFEEE51HVDVA4560V8"
+    ],
+    "origin": "ip-10-22-6-144.us-west-1.compute.internal",
+    "context": {
+      "tenant-id": "CgtmbXNpb3RjbG91ZA=="
+    },
+    "visibility": {
+      "rights": [
+        "RIGHT_APPLICATION_TRAFFIC_READ"
+      ]
+    },
+    "unique_id": "01JNJG6SHV6JRBA7FZ5K1SBVQM"
+  },
+  {
+    "name": "js.join.accept",
+    "time": "2025-03-05T06:34:36.284528174Z",
+    "identifiers": [
+      {
+        "device_ids": {
+          "device_id": "heltec-thpo-4069",
+          "application_ids": {
+            "application_id": "henke"
+          },
+          "dev_eui": "70B3D57ED8004069",
+          "join_eui": "70B3D57ED8004069",
+          "dev_addr": "27FD483E"
+        }
+      }
+    ],
+    "origin": "ip-10-22-7-240.us-west-1.compute.internal",
+    "context": {
+      "tenant-id": "CgtmbXNpb3RjbG91ZA=="
+    },
+    "visibility": {
+      "rights": [
+        "RIGHT_APPLICATION_TRAFFIC_READ"
+      ]
+    },
+    "unique_id": "01JNJG6SBWXRKQDVDWPSJ7NH8D"
+  },
+  {
+    "name": "as.up.join.forward",
+    "time": "2025-03-05T06:30:26.178199724Z",
+    "identifiers": [
+      {
+        "device_ids": {
+          "device_id": "heltec-thpo-4069",
+          "application_ids": {
+            "application_id": "henke"
+          },
+          "dev_eui": "70B3D57ED8004069",
+          "join_eui": "70B3D57ED8004069",
+          "dev_addr": "27FD483D"
+        }
+      }
+    ],
+    "data": {
+      "@type": "type.googleapis.com/ttn.lorawan.v3.ApplicationUp",
+      "end_device_ids": {
+        "device_id": "heltec-thpo-4069",
+        "application_ids": {
+          "application_id": "henke"
+        },
+        "dev_eui": "70B3D57ED8004069",
+        "join_eui": "70B3D57ED8004069",
+        "dev_addr": "27FD483D"
+      },
+      "correlation_ids": [
+        "gs:uplink:01JNJFZ3B96400JCR8QTMC6MM2"
+      ],
+      "received_at": "2025-03-05T06:30:26.176198891Z",
+      "join_accept": {
+        "session_key_id": "AZVk/43vuG3tqPx8p3zgWQ==",
+        "received_at": "2025-03-05T06:30:24.361925116Z"
+      }
+    },
+    "correlation_ids": [
+      "gs:uplink:01JNJFZ3B96400JCR8QTMC6MM2"
+    ],
+    "origin": "ip-10-22-4-255.us-west-1.compute.internal",
+    "context": {
+      "tenant-id": "CgtmbXNpb3RjbG91ZA=="
+    },
+    "visibility": {
+      "rights": [
+        "RIGHT_APPLICATION_TRAFFIC_READ"
+      ]
+    },
+    "unique_id": "01JNJFZ5425QTHHZ15D3ZA5MS6"
+  },
+  {
+    "name": "ns.up.join.process",
+    "time": "2025-03-05T06:30:24.572984598Z",
+    "identifiers": [
+      {
+        "device_ids": {
+          "device_id": "heltec-thpo-4069",
+          "application_ids": {
+            "application_id": "henke"
+          },
+          "dev_eui": "70B3D57ED8004069",
+          "join_eui": "70B3D57ED8004069",
+          "dev_addr": "27FD4830"
+        }
+      }
+    ],
+    "data": {
+      "@type": "type.googleapis.com/ttn.lorawan.v3.UplinkMessage",
+      "raw_payload": "AGlAANh+1bNwaUAA2H7Vs3AAAJCKW+Q=",
+      "payload": {
+        "m_hdr": {},
+        "mic": "kIpb5A==",
+        "join_request_payload": {
+          "join_eui": "70B3D57ED8004069",
+          "dev_eui": "70B3D57ED8004069",
+          "dev_nonce": "0000"
+        }
+      },
+      "settings": {
+        "data_rate": {
+          "lora": {
+            "bandwidth": 125000,
+            "spreading_factor": 10,
+            "coding_rate": "4/5"
+          }
+        },
+        "frequency": "904700000",
+        "timestamp": 1745005740,
+        "time": "2025-03-05T06:30:24.324832Z"
+      },
+      "rx_metadata": [
+        {
+          "gateway_ids": {
+            "gateway_id": "henkecove",
+            "eui": "A84041FFFF205BD4"
+          },
+          "time": "2025-03-05T06:30:24.324832Z",
+          "timestamp": 1745005740,
+          "rssi": -46,
+          "channel_rssi": -46,
+          "snr": 8.8,
+          "uplink_token": "ChcKFQoJaGVua2Vjb3ZlEgioQEH//yBb1BCs2YrABhoMCIDfn74GENSNi6wBIOD/ydPk1R4=",
+          "channel_index": 4,
+          "received_at": "2025-03-05T06:30:24.327686807Z"
+        }
+      ],
+      "received_at": "2025-03-05T06:30:24.361925116Z",
+      "correlation_ids": [
+        "gs:uplink:01JNJFZ3B96400JCR8QTMC6MM2"
+      ],
+      "device_channel_index": 12,
+      "consumed_airtime": "0.370688s"
+    },
+    "correlation_ids": [
+      "gs:uplink:01JNJFZ3B96400JCR8QTMC6MM2"
+    ],
+    "origin": "ip-10-22-15-162.us-west-1.compute.internal",
+    "context": {
+      "tenant-id": "CgtmbXNpb3RjbG91ZA=="
+    },
+    "visibility": {
+      "rights": [
+        "RIGHT_APPLICATION_TRAFFIC_READ"
+      ]
+    },
+    "unique_id": "01JNJFZ3HW2BT8HW8D14TNE6MW"
+  },
+  {
+    "name": "js.join.accept",
+    "time": "2025-03-05T06:30:24.500133493Z",
+    "identifiers": [
+      {
+        "device_ids": {
+          "device_id": "heltec-thpo-4069",
+          "application_ids": {
+            "application_id": "henke"
+          },
+          "dev_eui": "70B3D57ED8004069",
+          "join_eui": "70B3D57ED8004069",
+          "dev_addr": "27FD483D"
+        }
+      }
+    ],
+    "origin": "ip-10-22-7-240.us-west-1.compute.internal",
+    "context": {
+      "tenant-id": "CgtmbXNpb3RjbG91ZA=="
+    },
+    "visibility": {
+      "rights": [
+        "RIGHT_APPLICATION_TRAFFIC_READ"
+      ]
+    },
+    "unique_id": "01JNJFZ3FMYA1HDTJT1R3KJ0VR"
+  },
+  {
+    "name": "as.up.join.forward",
+    "time": "2025-03-05T06:29:42.977751302Z",
+    "identifiers": [
+      {
+        "device_ids": {
+          "device_id": "heltec-thpo-4069",
+          "application_ids": {
+            "application_id": "henke"
+          },
+          "dev_eui": "70B3D57ED8004069",
+          "join_eui": "70B3D57ED8004069",
+          "dev_addr": "27FD483A"
+        }
+      }
+    ],
+    "data": {
+      "@type": "type.googleapis.com/ttn.lorawan.v3.ApplicationUp",
+      "end_device_ids": {
+        "device_id": "heltec-thpo-4069",
+        "application_ids": {
+          "application_id": "henke"
+        },
+        "dev_eui": "70B3D57ED8004069",
+        "join_eui": "70B3D57ED8004069",
+        "dev_addr": "27FD483A"
+      },
+      "correlation_ids": [
+        "gs:uplink:01JNJFXS511QMFAQ4AC6VPBSWK"
+      ],
+      "received_at": "2025-03-05T06:29:42.970374095Z",
+      "join_accept": {
+        "session_key_id": "AZVk/uUyijz7tLMwEKSABA==",
+        "received_at": "2025-03-05T06:29:41.153732850Z"
+      }
+    },
+    "correlation_ids": [
+      "gs:uplink:01JNJFXS511QMFAQ4AC6VPBSWK"
+    ],
+    "origin": "ip-10-22-14-47.us-west-1.compute.internal",
+    "context": {
+      "tenant-id": "CgtmbXNpb3RjbG91ZA=="
+    },
+    "visibility": {
+      "rights": [
+        "RIGHT_APPLICATION_TRAFFIC_READ"
+      ]
+    },
+    "unique_id": "01JNJFXTY1F60BECY1AH6AB762"
+  },
+  {
+    "name": "ns.up.join.process",
+    "time": "2025-03-05T06:29:41.355589907Z",
+    "identifiers": [
+      {
+        "device_ids": {
+          "device_id": "heltec-thpo-4069",
+          "application_ids": {
+            "application_id": "henke"
+          },
+          "dev_eui": "70B3D57ED8004069",
+          "join_eui": "70B3D57ED8004069",
+          "dev_addr": "27FD4830"
+        }
+      }
+    ],
+    "data": {
+      "@type": "type.googleapis.com/ttn.lorawan.v3.UplinkMessage",
+      "raw_payload": "AGlAANh+1bNwaUAA2H7Vs3AAAJCKW+Q=",
+      "payload": {
+        "m_hdr": {},
+        "mic": "kIpb5A==",
+        "join_request_payload": {
+          "join_eui": "70B3D57ED8004069",
+          "dev_eui": "70B3D57ED8004069",
+          "dev_nonce": "0000"
+        }
+      },
+      "settings": {
+        "data_rate": {
+          "lora": {
+            "bandwidth": 125000,
+            "spreading_factor": 10,
+            "coding_rate": "4/5"
+          }
+        },
+        "frequency": "904500000",
+        "timestamp": 1701797900,
+        "time": "2025-03-05T06:29:41.113866Z"
+      },
+      "rx_metadata": [
+        {
+          "gateway_ids": {
+            "gateway_id": "henkecove",
+            "eui": "A84041FFFF205BD4"
+          },
+          "time": "2025-03-05T06:29:41.113866Z",
+          "timestamp": 1701797900,
+          "rssi": -64,
+          "channel_rssi": -64,
+          "snr": 13,
+          "uplink_token": "ChcKFQoJaGVua2Vjb3ZlEgioQEH//yBb1BCMwL2rBhoLCNXen74GEJCPg0kg4N282MPUHg==",
+          "channel_index": 3,
+          "received_at": "2025-03-05T06:29:41.120224335Z"
+        }
+      ],
+      "received_at": "2025-03-05T06:29:41.153732850Z",
+      "correlation_ids": [
+        "gs:uplink:01JNJFXS511QMFAQ4AC6VPBSWK"
+      ],
+      "device_channel_index": 11,
+      "consumed_airtime": "0.370688s"
+    },
+    "correlation_ids": [
+      "gs:uplink:01JNJFXS511QMFAQ4AC6VPBSWK"
+    ],
+    "origin": "ip-10-22-6-144.us-west-1.compute.internal",
+    "context": {
+      "tenant-id": "CgtmbXNpb3RjbG91ZA=="
+    },
+    "visibility": {
+      "rights": [
+        "RIGHT_APPLICATION_TRAFFIC_READ"
+      ]
+    },
+    "unique_id": "01JNJFXSBB8MPJGDP8ETH0T053"
+  },
+  {
+    "name": "js.join.accept",
+    "time": "2025-03-05T06:29:41.311144013Z",
+    "identifiers": [
+      {
+        "device_ids": {
+          "device_id": "heltec-thpo-4069",
+          "application_ids": {
+            "application_id": "henke"
+          },
+          "dev_eui": "70B3D57ED8004069",
+          "join_eui": "70B3D57ED8004069",
+          "dev_addr": "27FD483A"
+        }
+      }
+    ],
+    "origin": "ip-10-22-12-131.us-west-1.compute.internal",
+    "context": {
+      "tenant-id": "CgtmbXNpb3RjbG91ZA=="
+    },
+    "visibility": {
+      "rights": [
+        "RIGHT_APPLICATION_TRAFFIC_READ"
+      ]
+    },
+    "unique_id": "01JNJFXS9ZJSJKJ9DPMNKJTD2R"
+  },
+  {
+    "name": "as.up.join.forward",
+    "time": "2025-03-05T06:17:51.955227256Z",
+    "identifiers": [
+      {
+        "device_ids": {
+          "device_id": "heltec-thpo-4069",
+          "application_ids": {
+            "application_id": "henke"
+          },
+          "dev_eui": "70B3D57ED8004069",
+          "join_eui": "70B3D57ED8004069",
+          "dev_addr": "27FD483F"
+        }
+      }
+    ],
+    "data": {
+      "@type": "type.googleapis.com/ttn.lorawan.v3.ApplicationUp",
+      "end_device_ids": {
+        "device_id": "heltec-thpo-4069",
+        "application_ids": {
+          "application_id": "henke"
+        },
+        "dev_eui": "70B3D57ED8004069",
+        "join_eui": "70B3D57ED8004069",
+        "dev_addr": "27FD483F"
+      },
+      "correlation_ids": [
+        "gs:uplink:01JNJF82SX8ZDWBSA0XRMS0QDF"
+      ],
+      "received_at": "2025-03-05T06:17:51.947220053Z",
+      "join_accept": {
+        "session_key_id": "AZVk9AtGn4cWNxpDp8yH2A==",
+        "received_at": "2025-03-05T06:17:50.142572452Z"
+      }
+    },
+    "correlation_ids": [
+      "gs:uplink:01JNJF82SX8ZDWBSA0XRMS0QDF"
+    ],
+    "origin": "ip-10-22-14-47.us-west-1.compute.internal",
+    "context": {
+      "tenant-id": "CgtmbXNpb3RjbG91ZA=="
+    },
+    "visibility": {
+      "rights": [
+        "RIGHT_APPLICATION_TRAFFIC_READ"
+      ]
+    },
+    "unique_id": "01JNJF84JK2C2ZTYFFD3YS9B2P"
+  },
+  {
+    "name": "ns.up.join.process",
+    "time": "2025-03-05T06:17:50.351816827Z",
+    "identifiers": [
+      {
+        "device_ids": {
+          "device_id": "heltec-thpo-4069",
+          "application_ids": {
+            "application_id": "henke"
+          },
+          "dev_eui": "70B3D57ED8004069",
+          "join_eui": "70B3D57ED8004069",
+          "dev_addr": "27FD4830"
+        }
+      }
+    ],
+    "data": {
+      "@type": "type.googleapis.com/ttn.lorawan.v3.UplinkMessage",
+      "raw_payload": "AGlAANh+1bNwaUAA2H7Vs3AAAJCKW+Q=",
+      "payload": {
+        "m_hdr": {},
+        "mic": "kIpb5A==",
+        "join_request_payload": {
+          "join_eui": "70B3D57ED8004069",
+          "dev_eui": "70B3D57ED8004069",
+          "dev_nonce": "0000"
+        }
+      },
+      "settings": {
+        "data_rate": {
+          "lora": {
+            "bandwidth": 125000,
+            "spreading_factor": 10,
+            "coding_rate": "4/5"
+          }
+        },
+        "frequency": "904100000",
+        "timestamp": 990787108,
+        "time": "2025-03-05T06:17:50.104610Z"
+      },
+      "rx_metadata": [
+        {
+          "gateway_ids": {
+            "gateway_id": "henkecove",
+            "eui": "A84041FFFF205BD4"
+          },
+          "time": "2025-03-05T06:17:50.104610Z",
+          "timestamp": 990787108,
+          "rssi": -65,
+          "channel_rssi": -65,
+          "snr": 12.2,
+          "uplink_token": "ChcKFQoJaGVua2Vjb3ZlEgioQEH//yBb1BCk7LjYAxoLCI7Zn74GEMKavEMgoPmN/Oq/Hg==",
+          "channel_index": 1,
+          "received_at": "2025-03-05T06:17:50.108863230Z"
+        }
+      ],
+      "received_at": "2025-03-05T06:17:50.142572452Z",
+      "correlation_ids": [
+        "gs:uplink:01JNJF82SX8ZDWBSA0XRMS0QDF"
+      ],
+      "device_channel_index": 9,
+      "consumed_airtime": "0.370688s"
+    },
+    "correlation_ids": [
+      "gs:uplink:01JNJF82SX8ZDWBSA0XRMS0QDF"
+    ],
+    "origin": "ip-10-22-15-162.us-west-1.compute.internal",
+    "context": {
+      "tenant-id": "CgtmbXNpb3RjbG91ZA=="
+    },
+    "visibility": {
+      "rights": [
+        "RIGHT_APPLICATION_TRAFFIC_READ"
+      ]
+    },
+    "unique_id": "01JNJF830F4X683RC67V8JTE9R"
+  },
+  {
+    "name": "js.join.accept",
+    "time": "2025-03-05T06:17:50.163524013Z",
+    "identifiers": [
+      {
+        "device_ids": {
+          "device_id": "heltec-thpo-4069",
+          "application_ids": {
+            "application_id": "henke"
+          },
+          "dev_eui": "70B3D57ED8004069",
+          "join_eui": "70B3D57ED8004069",
+          "dev_addr": "27FD483F"
+        }
+      }
+    ],
+    "origin": "ip-10-22-12-131.us-west-1.compute.internal",
+    "context": {
+      "tenant-id": "CgtmbXNpb3RjbG91ZA=="
+    },
+    "visibility": {
+      "rights": [
+        "RIGHT_APPLICATION_TRAFFIC_READ"
+      ]
+    },
+    "unique_id": "01JNJF82TKHX069JSTND61WD1Q"
+  },
+  {
+    "name": "as.up.join.forward",
+    "time": "2025-03-05T06:16:56.259055132Z",
+    "identifiers": [
+      {
+        "device_ids": {
+          "device_id": "heltec-thpo-4069",
+          "application_ids": {
+            "application_id": "henke"
+          },
+          "dev_eui": "70B3D57ED8004069",
+          "join_eui": "70B3D57ED8004069",
+          "dev_addr": "27FD483F"
+        }
+      }
+    ],
+    "data": {
+      "@type": "type.googleapis.com/ttn.lorawan.v3.ApplicationUp",
+      "end_device_ids": {
+        "device_id": "heltec-thpo-4069",
+        "application_ids": {
+          "application_id": "henke"
+        },
+        "dev_eui": "70B3D57ED8004069",
+        "join_eui": "70B3D57ED8004069",
+        "dev_addr": "27FD483F"
+      },
+      "correlation_ids": [
+        "gs:uplink:01JNJF6CDH2CKG9B77P1CGEHEW"
+      ],
+      "received_at": "2025-03-05T06:16:56.256184638Z",
+      "join_accept": {
+        "session_key_id": "AZVk8zG7Ms2Omydli4KZFQ==",
+        "received_at": "2025-03-05T06:16:54.449888100Z"
+      }
+    },
+    "correlation_ids": [
+      "gs:uplink:01JNJF6CDH2CKG9B77P1CGEHEW"
+    ],
+    "origin": "ip-10-22-4-255.us-west-1.compute.internal",
+    "context": {
+      "tenant-id": "CgtmbXNpb3RjbG91ZA=="
+    },
+    "visibility": {
+      "rights": [
+        "RIGHT_APPLICATION_TRAFFIC_READ"
+      ]
+    },
+    "unique_id": "01JNJF6E63KGJN42EVH29JRFDT"
+  },
+  {
+    "name": "ns.up.join.process",
+    "time": "2025-03-05T06:16:54.652019240Z",
+    "identifiers": [
+      {
+        "device_ids": {
+          "device_id": "heltec-thpo-4069",
+          "application_ids": {
+            "application_id": "henke"
+          },
+          "dev_eui": "70B3D57ED8004069",
+          "join_eui": "70B3D57ED8004069",
+          "dev_addr": "27FD4830"
+        }
+      }
+    ],
+    "data": {
+      "@type": "type.googleapis.com/ttn.lorawan.v3.UplinkMessage",
+      "raw_payload": "AGlAANh+1bNwaUAA2H7Vs3AAAJCKW+Q=",
+      "payload": {
+        "m_hdr": {},
+        "mic": "kIpb5A==",
+        "join_request_payload": {
+          "join_eui": "70B3D57ED8004069",
+          "dev_eui": "70B3D57ED8004069",
+          "dev_nonce": "0000"
+        }
+      },
+      "settings": {
+        "data_rate": {
+          "lora": {
+            "bandwidth": 125000,
+            "spreading_factor": 10,
+            "coding_rate": "4/5"
+          }
+        },
+        "frequency": "905300000",
+        "timestamp": 935101388,
+        "time": "2025-03-05T06:16:54.413224Z"
+      },
+      "rx_metadata": [
+        {
+          "gateway_ids": {
+            "gateway_id": "henkecove",
+            "eui": "A84041FFFF205BD4"
+          },
+          "time": "2025-03-05T06:16:54.413224Z",
+          "timestamp": 935101388,
+          "rssi": -69,
+          "channel_rssi": -69,
+          "snr": 10.8,
+          "uplink_token": "ChcKFQoJaGVua2Vjb3ZlEgioQEH//yBb1BDMh/K9AxoMCNbYn74GEN3nnNYBIOCpi8Obvh4=",
+          "channel_index": 7,
+          "received_at": "2025-03-05T06:16:54.417490014Z"
+        }
+      ],
+      "received_at": "2025-03-05T06:16:54.449888100Z",
+      "correlation_ids": [
+        "gs:uplink:01JNJF6CDH2CKG9B77P1CGEHEW"
+      ],
+      "device_channel_index": 15,
+      "consumed_airtime": "0.370688s"
+    },
+    "correlation_ids": [
+      "gs:uplink:01JNJF6CDH2CKG9B77P1CGEHEW"
+    ],
+    "origin": "ip-10-22-6-144.us-west-1.compute.internal",
+    "context": {
+      "tenant-id": "CgtmbXNpb3RjbG91ZA=="
+    },
+    "visibility": {
+      "rights": [
+        "RIGHT_APPLICATION_TRAFFIC_READ"
+      ]
+    },
+    "unique_id": "01JNJF6CKW0ASTACBZ4JE3E05V"
+  },
+  {
+    "name": "js.join.accept",
+    "time": "2025-03-05T06:16:54.472315887Z",
+    "identifiers": [
+      {
+        "device_ids": {
+          "device_id": "heltec-thpo-4069",
+          "application_ids": {
+            "application_id": "henke"
+          },
+          "dev_eui": "70B3D57ED8004069",
+          "join_eui": "70B3D57ED8004069",
+          "dev_addr": "27FD483F"
+        }
+      }
+    ],
+    "origin": "ip-10-22-12-131.us-west-1.compute.internal",
+    "context": {
+      "tenant-id": "CgtmbXNpb3RjbG91ZA=="
+    },
+    "visibility": {
+      "rights": [
+        "RIGHT_APPLICATION_TRAFFIC_READ"
+      ]
+    },
+    "unique_id": "01JNJF6CE8QG667YV2QWCVEMM9"
+  },
+  {
+    "name": "as.up.join.forward",
+    "time": "2025-03-05T06:13:06.807199446Z",
+    "identifiers": [
+      {
+        "device_ids": {
+          "device_id": "heltec-thpo-4069",
+          "application_ids": {
+            "application_id": "henke"
+          },
+          "dev_eui": "70B3D57ED8004069",
+          "join_eui": "70B3D57ED8004069",
+          "dev_addr": "27FD483A"
+        }
+      }
+    ],
+    "data": {
+      "@type": "type.googleapis.com/ttn.lorawan.v3.ApplicationUp",
+      "end_device_ids": {
+        "device_id": "heltec-thpo-4069",
+        "application_ids": {
+          "application_id": "henke"
+        },
+        "dev_eui": "70B3D57ED8004069",
+        "join_eui": "70B3D57ED8004069",
+        "dev_addr": "27FD483A"
+      },
+      "correlation_ids": [
+        "gs:uplink:01JNJEZCAPVXWBYZ0190TC4K0C"
+      ],
+      "received_at": "2025-03-05T06:13:06.788685257Z",
+      "join_accept": {
+        "session_key_id": "AZVk77HfuSt5K0tmbEfshA==",
+        "received_at": "2025-03-05T06:13:04.983069946Z"
+      }
+    },
+    "correlation_ids": [
+      "gs:uplink:01JNJEZCAPVXWBYZ0190TC4K0C"
+    ],
+    "origin": "ip-10-22-14-47.us-west-1.compute.internal",
+    "context": {
+      "tenant-id": "CgtmbXNpb3RjbG91ZA=="
+    },
+    "visibility": {
+      "rights": [
+        "RIGHT_APPLICATION_TRAFFIC_READ"
+      ]
+    },
+    "unique_id": "01JNJEZE3QTGFP72P5CTV0RF91"
+  },
+  {
+    "name": "ns.up.join.process",
+    "time": "2025-03-05T06:13:05.196395617Z",
+    "identifiers": [
+      {
+        "device_ids": {
+          "device_id": "heltec-thpo-4069",
+          "application_ids": {
+            "application_id": "henke"
+          },
+          "dev_eui": "70B3D57ED8004069",
+          "join_eui": "70B3D57ED8004069",
+          "dev_addr": "27FD4830"
+        }
+      }
+    ],
+    "data": {
+      "@type": "type.googleapis.com/ttn.lorawan.v3.UplinkMessage",
+      "raw_payload": "AGlAANh+1bNwaUAA2H7Vs3AAAJCKW+Q=",
+      "payload": {
+        "m_hdr": {},
+        "mic": "kIpb5A==",
+        "join_request_payload": {
+          "join_eui": "70B3D57ED8004069",
+          "dev_eui": "70B3D57ED8004069",
+          "dev_nonce": "0000"
+        }
+      },
+      "settings": {
+        "data_rate": {
+          "lora": {
+            "bandwidth": 125000,
+            "spreading_factor": 10,
+            "coding_rate": "4/5"
+          }
+        },
+        "frequency": "905100000",
+        "timestamp": 705628308,
+        "time": "2025-03-05T06:13:04.947177Z"
+      },
+      "rx_metadata": [
+        {
+          "gateway_ids": {
+            "gateway_id": "henkecove",
+            "eui": "A84041FFFF205BD4"
+          },
+          "time": "2025-03-05T06:13:04.947177Z",
+          "timestamp": 705628308,
+          "rssi": -122,
+          "channel_rssi": -122,
+          "snr": -14.5,
+          "uplink_token": "ChcKFQoJaGVua2Vjb3ZlEgioQEH//yBb1BCUkbzQAhoMCPDWn74GEPHtm9QDIKCE5tXEtx4=",
+          "channel_index": 6,
+          "received_at": "2025-03-05T06:13:04.951583792Z"
+        }
+      ],
+      "received_at": "2025-03-05T06:13:04.983069946Z",
+      "correlation_ids": [
+        "gs:uplink:01JNJEZCAPVXWBYZ0190TC4K0C"
+      ],
+      "device_channel_index": 14,
+      "consumed_airtime": "0.370688s"
+    },
+    "correlation_ids": [
+      "gs:uplink:01JNJEZCAPVXWBYZ0190TC4K0C"
+    ],
+    "origin": "ip-10-22-15-162.us-west-1.compute.internal",
+    "context": {
+      "tenant-id": "CgtmbXNpb3RjbG91ZA=="
+    },
+    "visibility": {
+      "rights": [
+        "RIGHT_APPLICATION_TRAFFIC_READ"
+      ]
+    },
+    "unique_id": "01JNJEZCHCAXPAZDRZCSRJJTXW"
+  },
+  {
+    "name": "js.join.accept",
+    "time": "2025-03-05T06:13:05.121508153Z",
+    "identifiers": [
+      {
+        "device_ids": {
+          "device_id": "heltec-thpo-4069",
+          "application_ids": {
+            "application_id": "henke"
+          },
+          "dev_eui": "70B3D57ED8004069",
+          "join_eui": "70B3D57ED8004069",
+          "dev_addr": "27FD483A"
+        }
+      }
+    ],
+    "origin": "ip-10-22-7-240.us-west-1.compute.internal",
+    "context": {
+      "tenant-id": "CgtmbXNpb3RjbG91ZA=="
+    },
+    "visibility": {
+      "rights": [
+        "RIGHT_APPLICATION_TRAFFIC_READ"
+      ]
+    },
+    "unique_id": "01JNJEZCF1CV4ZG6VNDTGEN036"
+  },
+  {
+    "name": "as.up.join.forward",
+    "time": "2025-03-05T06:10:08.202147816Z",
+    "identifiers": [
+      {
+        "device_ids": {
+          "device_id": "heltec-thpo-4069",
+          "application_ids": {
+            "application_id": "henke"
+          },
+          "dev_eui": "70B3D57ED8004069",
+          "join_eui": "70B3D57ED8004069",
+          "dev_addr": "27FD483F"
+        }
+      }
+    ],
+    "data": {
+      "@type": "type.googleapis.com/ttn.lorawan.v3.ApplicationUp",
+      "end_device_ids": {
+        "device_id": "heltec-thpo-4069",
+        "application_ids": {
+          "application_id": "henke"
+        },
+        "dev_eui": "70B3D57ED8004069",
+        "join_eui": "70B3D57ED8004069",
+        "dev_addr": "27FD483F"
+      },
+      "correlation_ids": [
+        "gs:uplink:01JNJESXXFE4GYE4DKVVNXXE5J"
+      ],
+      "received_at": "2025-03-05T06:10:08.199788259Z",
+      "join_accept": {
+        "session_key_id": "AZVk7Pg/Gbfx8iIlHML3WA==",
+        "received_at": "2025-03-05T06:10:06.384344464Z"
+      }
+    },
+    "correlation_ids": [
+      "gs:uplink:01JNJESXXFE4GYE4DKVVNXXE5J"
+    ],
+    "origin": "ip-10-22-4-255.us-west-1.compute.internal",
+    "context": {
+      "tenant-id": "CgtmbXNpb3RjbG91ZA=="
+    },
+    "visibility": {
+      "rights": [
+        "RIGHT_APPLICATION_TRAFFIC_READ"
+      ]
+    },
+    "unique_id": "01JNJESZPAD1PNTPK9V1EDG7ZE"
+  },
+  {
+    "name": "ns.up.join.process",
+    "time": "2025-03-05T06:10:06.587688514Z",
+    "identifiers": [
+      {
+        "device_ids": {
+          "device_id": "heltec-thpo-4069",
+          "application_ids": {
+            "application_id": "henke"
+          },
+          "dev_eui": "70B3D57ED8004069",
+          "join_eui": "70B3D57ED8004069",
+          "dev_addr": "27FD4830"
+        }
+      }
+    ],
+    "data": {
+      "@type": "type.googleapis.com/ttn.lorawan.v3.UplinkMessage",
+      "raw_payload": "AGlAANh+1bNwaUAA2H7Vs3AAAJCKW+Q=",
+      "payload": {
+        "m_hdr": {},
+        "mic": "kIpb5A==",
+        "join_request_payload": {
+          "join_eui": "70B3D57ED8004069",
+          "dev_eui": "70B3D57ED8004069",
+          "dev_nonce": "0000"
+        }
+      },
+      "settings": {
+        "data_rate": {
+          "lora": {
+            "bandwidth": 125000,
+            "spreading_factor": 10,
+            "coding_rate": "4/5"
+          }
+        },
+        "frequency": "904100000",
+        "timestamp": 527038372,
+        "time": "2025-03-05T06:10:06.349867Z"
+      },
+      "rx_metadata": [
+        {
+          "gateway_ids": {
+            "gateway_id": "henkecove",
+            "eui": "A84041FFFF205BD4"
+          },
+          "time": "2025-03-05T06:10:06.349867Z",
+          "timestamp": 527038372,
+          "rssi": -109,
+          "channel_rssi": -109,
+          "snr": -3.2,
+          "uplink_token": "ChcKFQoJaGVua2Vjb3ZlEgioQEH//yBb1BCk76f7ARoMCL7Vn74GEJ6f+LYBIKCxva+rsh4=",
+          "channel_index": 1,
+          "received_at": "2025-03-05T06:10:06.383651742Z"
+        }
+      ],
+      "received_at": "2025-03-05T06:10:06.384344464Z",
+      "correlation_ids": [
+        "gs:uplink:01JNJESXXFE4GYE4DKVVNXXE5J"
+      ],
+      "device_channel_index": 9,
+      "consumed_airtime": "0.370688s"
+    },
+    "correlation_ids": [
+      "gs:uplink:01JNJESXXFE4GYE4DKVVNXXE5J"
+    ],
+    "origin": "ip-10-22-6-144.us-west-1.compute.internal",
+    "context": {
+      "tenant-id": "CgtmbXNpb3RjbG91ZA=="
+    },
+    "visibility": {
+      "rights": [
+        "RIGHT_APPLICATION_TRAFFIC_READ"
+      ]
+    },
+    "unique_id": "01JNJESY3VMNZMNM4S4JN9HCSH"
+  },
+  {
+    "name": "js.join.accept",
+    "time": "2025-03-05T06:10:06.540566642Z",
+    "identifiers": [
+      {
+        "device_ids": {
+          "device_id": "heltec-thpo-4069",
+          "application_ids": {
+            "application_id": "henke"
+          },
+          "dev_eui": "70B3D57ED8004069",
+          "join_eui": "70B3D57ED8004069",
+          "dev_addr": "27FD483F"
+        }
+      }
+    ],
+    "origin": "ip-10-22-12-131.us-west-1.compute.internal",
+    "context": {
+      "tenant-id": "CgtmbXNpb3RjbG91ZA=="
+    },
+    "visibility": {
+      "rights": [
+        "RIGHT_APPLICATION_TRAFFIC_READ"
+      ]
+    },
+    "unique_id": "01JNJESY2C9P9NMVD8P9H6RHXQ"
+  },
+  {
+    "time": "2025-03-05T05:49:38.903Z",
+    "name": "synthetic.status.reconnected",
+    "isError": false,
+    "isSynthetic": true,
+    "unique_id": "synthetic.1741153778903"
+  },
+  {
+    "time": "2025-03-05T05:49:32.208Z",
+    "name": "synthetic.status.closed",
+    "isError": false,
+    "isSynthetic": true,
+    "unique_id": "synthetic.1741153772208"
+  },
+  {
+    "time": "2025-03-05T05:37:25.226Z",
+    "name": "synthetic.status.cleared",
+    "isError": false,
+    "isSynthetic": true,
+    "unique_id": "synthetic.1741153045226"
+  }
+]
