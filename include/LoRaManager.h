@@ -59,6 +59,7 @@ private:
     bool isJoined;
     float lastRssi;
     float lastSnr;
+    uint8_t consecutiveTransmitErrors = 0;  // Track transmission errors
     
     // Receive buffer
     uint8_t receivedData[256];

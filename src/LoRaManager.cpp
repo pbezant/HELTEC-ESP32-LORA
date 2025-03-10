@@ -18,7 +18,8 @@ LoRaManager::LoRaManager() :
   lastRssi(0),
   lastSnr(0),
   receivedBytes(0),
-  lastErrorCode(RADIOLIB_ERR_NONE) {
+  lastErrorCode(RADIOLIB_ERR_NONE),
+  consecutiveTransmitErrors(0) {
   
   // Set this instance as the active one
   instance = this;
@@ -130,8 +131,15 @@ bool LoRaManager::joinNetwork() {
 bool LoRaManager::sendData(uint8_t* data, size_t len, uint8_t port, bool confirmed) {
   if (!isJoined || node == nullptr) {
     Serial.println(F("[LoRaWAN] Not joined to network!"));
-    lastErrorCode = -2; // RADIOLIB_ERR_INVALID_STATE
-    return false;
+    
+    // Add automatic rejoin attempt when trying to send while not joined
+    Serial.println(F("[LoRaWAN] Attempting to rejoin the network..."));
+    if (joinNetwork()) {
+      Serial.println(F("[LoRaWAN] Successfully rejoined, will now try to send data"));
+    } else {
+      Serial.println(F("[LoRaWAN] Rejoin failed, cannot send data"));
+      return false;
+    }
   }
   
   // Send the data
@@ -171,15 +179,32 @@ bool LoRaManager::sendData(uint8_t* data, size_t len, uint8_t port, bool confirm
     lastRssi = radio->getRSSI();
     lastSnr = radio->getSNR();
     
+    consecutiveTransmitErrors = 0; // Reset error counter on success
     return true;
   } else if (state == RADIOLIB_ERR_NONE) {
     // No downlink received but uplink was successful
     Serial.println(F("success! No downlink received."));
+    consecutiveTransmitErrors = 0; // Reset error counter on success
     return true;
   } else {
     // Error occurred
     Serial.print(F("failed, code "));
     Serial.println(state);
+    
+    consecutiveTransmitErrors++; // Track consecutive errors
+    
+    // If we've encountered errors multiple times in a row, try rejoining
+    if (consecutiveTransmitErrors >= 3) {
+      Serial.println(F("[LoRaWAN] Multiple transmission errors, attempting to rejoin..."));
+      isJoined = false; // Force a rejoin by marking as not joined
+      if (joinNetwork()) {
+        Serial.println(F("[LoRaWAN] Successfully rejoined network"));
+        consecutiveTransmitErrors = 0;
+      } else {
+        Serial.println(F("[LoRaWAN] Failed to rejoin network"));
+      }
+    }
+    
     return false;
   }
 }
