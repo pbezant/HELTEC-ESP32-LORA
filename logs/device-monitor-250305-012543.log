@@ -1,0 +1,67 @@
+[37m01:25:48.680 > I[37m2C de[37mv[37mice found [37ma[37mt address 0[37mx[37m76
+01:25:48.683 > Found [37m1[37m I2C device[37m([37ms)
+01:25:48.685 > Trying[37m [37mBME280 at a[37md[37mdress 0x76[37m.[37m.. [ 14520][37m[[37mW][Wire.cp[37mp[37m:301] begin[37m([37m): Bus alr[37me[37mady started[37m [37min Master [37mM[37mode.
+[37m01:25:48.816 > S[37mu[37mccess![37m[37m
+01:25:48.818 > BME2[37m8[37m0 sensor i[37mn[37mitialized
+[37m01:25:49.684 > [[37mS[37mX1262][37m [37mInitializin[37mg[37m ... [37ms[37mu[37mcces[37ms[37m!
+01:25:49.736 > LoRa ini[37mt[37mialized an[37md[37m ready
+[37m01:25:51.468 > [[37mL[37moRaWAN] Atte[37mm[37mpting over[37m-[37mthe-air act[37mi[37mvation ...[37m [37ms[37mu[37mcces[37ms[37m! (new ses[37ms[37mion started[37m)[37m
+[37m01:25:57.751 > N[37mew LoRaWAN session created successfully
+01:25:57.751 > Sending sensor data immediately after joining the network
+[37m01:25:58.696 > S[37mtart[37mi[37mng sendSens[37mo[37mrData func[37mt[37mion
+01:25:58.699 > Readin[37mg[37m BME280 se[37mn[37msor data
+01:25:58.701 > S[37me[37mnsor readi[37mn[37mgs - Temp: [37m2[37m2.85°C, Hu[37mm[37midity: 45.[37m9[37m4%, Pressur[37me[37m: 991.02 h[37mP[37ma
+[37m01:25:59.834 > S[37me[37mnding senso[37mr[37m data packe[37mt[37m of 8 byte[37ms[37m
+01:25:59.838 > Payload h[37me[37mx: 00 E4 0[37m1[37m CB 00 63 0[37m0[37m 00 
+01:25:59.841 > [LoRa[37mW[37mAN] Sendin[37mg[37m data ... [37ms[37mu[37mccess! No d[37mo[37mwnlink rec[37me[37mived.
+01:26:05.369 > Dat[37ma[37m sent succe[37ms[37msfully!
+[37m01:26:14.168 > N[37me[37mtwork join[37me[37md. Next tr[37ma[37mnsmission i[37mn[37m 112 secon[37md[37ms
+[37m01:26:24.162 > N[37me[37mtwork jo[37mi[37mned. Next [37mt[37mransmission[37m [37min 102 sec[37mo[37mnds
+[37m01:26:34.166 > N[37me[37mtwork[37m [37mjoined. Nex[37mt[37m transmiss[37mi[37mon in 92 se[37mc[37monds
+[37m01:26:44.163 > N[37metwo[37mr[37mk joined. [37mN[37mext transmi[37ms[37msion in 82[37m [37mseconds
+[37m01:26:54.167 > N[37me[37mtwork joined[37m.[37m Next tran[37ms[37mmission in [37m7[37m2 seconds[37m
+[37m01:27:14.168 > N[37me[37mtwork j[37mo[37mined. Next[37m [37mtransmissio[37mn[37m in 52 sec[37mo[37mnds
+[37m01:27:24.162 > N[37metwor[37mk[37m joined. Ne[37mx[37mt transmis[37ms[37mion in 42 s[37me[37mconds
+[37m01:27:34.169 > N[37metw[37mo[37mrk joined.[37m [37mNext transm[37mi[37mssion in 3[37m2[37m seconds
+[37m01:27:44.163 > N[37me[37mtwork joine[37md[37m. Next tra[37mn[37msmission in[37m [37m22 seconds[37m[37m
+[37m01:27:54.167 > N[37me[37mtwork jo[37mi[37mned. Next t[37mr[37mansmission[37m [37min 12 secon[37md[37ms
+[37m01:28:04.164 > N[37me[37mtwork [37mj[37moined. Nex[37mt[37m transmissi[37mo[37mn in 2 seco[37mn[37mds
+[37m01:28:06.521 > N[37me[37mtwork [37mj[37moined, pre[37mp[37maring to se[37mn[37md sensor d[37ma[37mta
+[37m01:28:07.521 > S[37mt[37marting[37m [37msendSensor[37mD[37mata functio[37mn[37m
+01:28:07.524 > Reading [37mB[37mME280 senso[37mr[37m data
+01:28:07.526 > Sen[37ms[37mor readings[37m [37m- Temp: 22.[37m8[37m5°C, Humi[37md[37mity: 45.72%[37m,[37m Pressure:[37m [37m991.05 hPa[37m
+[37m01:28:08.659 > S[37me[37mnding se[37mn[37msor data pa[37mc[37mket of 8 b[37my[37mtes
+01:28:08.663 > Payloa[37md[37m hex: 00 E[37m4[37m 01 C9 00 6[37m3[37m 00 00 
+01:28:08.665 > [L[37mo[37mRaWAN] Sen[37md[37ming data ..[37m.[37m [37mf[37ma[37miled, code[37m [37m-1116
+01:28:15.304 > Fai[37ml[37med to send [37md[37mata! Error[37m [37mcode: -1116[37m[37m
+[37m01:28:17.016 > W[37mai[37mt[37ming 5 seco[37mn[37mds before s[37ml[37meep to ens[37mu[37mre transmis[37ms[37mion complet[37me[37ms
+[37m01:28:22.016 > G[37moi[37mng to sleep [37mf[37mor 120 sec[37mo[37mnds
+[37m01:30:22.249 > E[37mS[37mP-ROM:esp32s[37m3[37m-20210327[37m
+[37m01:30:22.255 > B[37mu[37mild:Mar [37m2[37m7 2021
+01:30:22.256 > rs[37mt[37m:0x5 (DSLEE[37mP[37m),boot:0x8[37m [37m(SPI_FAST_F[37mL[37mASH_BOOT)[37m
+[37m01:30:22.261 > pro cpu res[37me[37mt by JTAG[37m
+[37m01:30:22.263 > SPIWP:0xee[37m
+[37m01:30:22.264 > mode:DIO, c[37ml[37mock div:1[37m
+[37m01:30:22.266 > load:0x3fce[37m3[37m808,len:0x[37m4[37mbc
+01:30:22.268 > load:0[37mx[37m403c9700,le[37mn[37m:0xbd8
+01:30:22.270 > loa[37md[37m:0x403cc70[37m0[37m,len:0x2a0c[37m[37m
+01:30:22.273 > entry 0x4[37m0[37m3c98d0
+[37m01:30:22.314 > [[37m [37m   66][[37mV[37m][esp32-ha[37ml[37m-uart.c:33[37m0[37m] uartBegin[37m([37m): UART0 b[37ma[37mud(115200) [37mM[37mode(800001[37mc[37m) rxPin(44)[37m [37mtxPin(43)
+[37m01:30:22.324 > [[37m    75][V[37m][37m[esp32-hal-[37mu[37mart.c:416][37m [37muartBegin()[37m:[37m UART0 not[37m [37minstalled. [37mS[37mtarting in[37ms[37mtallation
+[37m01:30:22.332 > [[37m    8[37m3[37m][V][esp32-[37mh[37mal-uart.c:[37m4[37m67] uartBeg[37mi[37mn(): UART0[37m [37minitializat[37mi[37mon done.
+[37m01:30:22.639 > 
+[37m01:30:22.639 > 
+01:30:22.639 > === Heltec ES[37mP[37m32 LoRa Se[37mn[37msor Node ==[37m=[37m
+01:30:22.642 > Boot coun[37mt[37m: 2
+01:30:22.643 > [   3[37m9[37m0][I][esp32[37m-[37mhal-i2c.c:[37m7[37m5] i2cInit[37m([37m): Initiali[37ms[37ming I2C Ma[37ms[37mter: sda=46[37m [37mscl=45 freq[37m=[37m100000
+[37m01:30:23.655 > D[37mi[37msplay i[37mn[37mitialized
+[37m01:30:26.228 > [[37m [37m 3980][37m[[37mW][Wire.cpp[37m:[37m301] begin[37m([37m): Bus alre[37ma[37mdy started[37m [37min Master M[37mo[37mde.
+01:30:26.235 > Scann[37mi[37mng I2C bus.[37m.[37m.
+[37m01:30:26.250 > I[37m2[37mC device f[37mo[37mund at addr[37me[37mss 0x76
+01:30:26.253 > F[37mo[37mund 1 I2C d[37me[37mvice(s)
+01:30:26.255 > T[37mr[37mying BME280[37m [37mat address[37m [37m0x76... [  [37m4[37m003][W][Wi[37mr[37me.cpp:301] [37mb[37megin(): Bu[37ms[37m already st[37ma[37mrted in Ma[37ms[37mter Mode.
+[37m01:30:26.387 > S[37muc[37mc[37mess!
+[37m01:30:26.389 > B[37mME280 sen[37ms[37mor initial[37mi[37mzed
+[37m01:30:27.255 > [[37mSX1262][37m [37mInitializi[37mn[37mg ... [37ms[37muccess!
+01:30:27.307 > LoRa initializ[37me[37md and ready[37m[37m
+[37m01:30:29.039 > [[37mLoRaW[37mAN] Attempting over-the[37m-[37mair activa[37mt[37mion ... 

@@ -3,32 +3,34 @@ const SENSOR_LIMITS = {
   TEMPERATURE: {
     MIN: -40,
     MAX: 85,
-    SCALE_FACTOR: 100  // Divide by 100 to get actual value
+    SCALE_FACTOR: 10,   // Correctly adjusted for temperature
+    OFFSET: 0          
   },
   HUMIDITY: {
     MIN: 0,
     MAX: 100,
-    SCALE_FACTOR: 2    // Divide by 2 to get actual value
+    SCALE_FACTOR: 10,   // Adjusted to match payload format
+    OFFSET: 0          
   },
   PRESSURE: {
     MIN: 900,
     MAX: 1100,
-    OFFSET: 900,       // Add this to get actual value
-    SCALE_FACTOR: 10   // Divide by 10 to get actual value
+    OFFSET: 0,       
+    SCALE_FACTOR: 10   
   },
   RSSI: {
-    MIN: -120,        // Typical minimum RSSI value
-    MAX: 0           // Typical maximum RSSI value
+    MIN: -120,        
+    MAX: 0           
   }
 };
 
-// Byte positions in payload
+// Byte positions in payload - Updated to match actual payload format from main.cpp
 const BYTE_POSITIONS = {
   TEMPERATURE: { START: 0, LENGTH: 2 },
-  HUMIDITY: { START: 2, LENGTH: 1 },
-  PRESSURE: { START: 3, LENGTH: 2 },
-  MOTION: { START: 5, LENGTH: 1 },
-  RSSI: { START: 6, LENGTH: 2 }
+  HUMIDITY: { START: 2, LENGTH: 2 },    // Updated to match actual position
+  PRESSURE: { START: 4, LENGTH: 2 },    // Updated to match actual position
+  MOTION: { START: 6, LENGTH: 1 },      // Motion flag is at byte 6
+  RESERVED: { START: 7, LENGTH: 1 }     // Reserved byte at position 7
 };
 
 // Downlink message types
@@ -52,31 +54,36 @@ const ByteConverter = {
 
   toUInt16: (bytes, startIndex) => {
     return (bytes[startIndex] << 8) | bytes[startIndex + 1];
+  },
+  
+  getBit: (byte, bitPosition) => {
+    return (byte >> bitPosition) & 1;
   }
 };
 
 // Sensor data decoders
 const SensorDecoder = {
   temperature: (bytes) => {
+    // Temperature calculation - correctly adjusted
     const raw = ByteConverter.toInt16(bytes, BYTE_POSITIONS.TEMPERATURE.START);
     return raw / SENSOR_LIMITS.TEMPERATURE.SCALE_FACTOR;
   },
 
   humidity: (bytes) => {
-    return bytes[BYTE_POSITIONS.HUMIDITY.START] / SENSOR_LIMITS.HUMIDITY.SCALE_FACTOR;
+    // Updated to match actual format - humidity is 2 bytes at position 2-3
+    const raw = ByteConverter.toUInt16(bytes, BYTE_POSITIONS.HUMIDITY.START);
+    return raw / SENSOR_LIMITS.HUMIDITY.SCALE_FACTOR;
   },
 
   pressure: (bytes) => {
     const raw = ByteConverter.toUInt16(bytes, BYTE_POSITIONS.PRESSURE.START);
-    return (raw / SENSOR_LIMITS.PRESSURE.SCALE_FACTOR) + SENSOR_LIMITS.PRESSURE.OFFSET;
+    // According to main.cpp, pressure was divided by 10 before sending
+    return raw * 10; // Convert back to original value
   },
-
+  
   motion: (bytes) => {
-    return bytes[BYTE_POSITIONS.MOTION.START]===1;
-  },
-
-  rssi: (bytes) => {
-    return ByteConverter.toInt16(bytes, BYTE_POSITIONS.RSSI.START);
+    // Motion is now bit 0 of byte 6, exactly as sent in main.cpp
+    return (bytes[BYTE_POSITIONS.MOTION.START] & 0x01) === 0x01;
   }
 };
 
@@ -107,10 +114,26 @@ function decodeUplink(input) {
     }
 
     // Check payload length
-    const EXPECTED_LENGTH = 8; // Updated to match current payload
+    const EXPECTED_LENGTH = 8; // Matches current payload length
     if (input.bytes.length !== EXPECTED_LENGTH) {
       throw new Error(`Invalid payload length. Expected ${EXPECTED_LENGTH} bytes, got ${input.bytes.length}`);
     }
+
+    // Enhanced motion detection analysis
+    const motionByte = input.bytes[BYTE_POSITIONS.MOTION.START];
+    const motionDetected = (motionByte & 0x01) === 0x01;
+
+    // Add debug information
+    const debugRawValues = {
+      tempRaw: ByteConverter.toInt16(input.bytes, BYTE_POSITIONS.TEMPERATURE.START),
+      tempValue: SensorDecoder.temperature(input.bytes),
+      humidityRaw: ByteConverter.toUInt16(input.bytes, BYTE_POSITIONS.HUMIDITY.START),
+      humidityValue: SensorDecoder.humidity(input.bytes),
+      pressureRaw: ByteConverter.toUInt16(input.bytes, BYTE_POSITIONS.PRESSURE.START),
+      pressureActual: SensorDecoder.pressure(input.bytes),
+      motionByte: motionByte,
+      motionDetected: motionDetected
+    };
 
     // Decode sensor data
     const decoded = {
@@ -120,16 +143,19 @@ function decodeUplink(input) {
       },
       humidity: SensorDecoder.humidity(input.bytes),
       pressure: SensorDecoder.pressure(input.bytes),
-      motion_detected: SensorDecoder.motion(input.bytes),
-      last_rssi: SensorDecoder.rssi(input.bytes)
+      motion_detected: motionDetected,
+      debug: {
+        raw_values: debugRawValues,
+        raw_bytes: Array.from(input.bytes).map(b => b.toString(16).padStart(2, '0')).join(''),
+        notes: "Payload mapping: temp(0-1), humidity(2-3), pressure(4-5), motion(6), reserved(7)"
+      }
     };
 
     // Validate readings
     decoded.status = {
       temperature_valid: Validator.validateReading('temperature', decoded.temperature.celsius, SENSOR_LIMITS.TEMPERATURE),
       humidity_valid: Validator.validateReading('humidity', decoded.humidity, SENSOR_LIMITS.HUMIDITY),
-      pressure_valid: Validator.validateReading('pressure', decoded.pressure, SENSOR_LIMITS.PRESSURE),
-      rssi_valid: Validator.validateReading('rssi', decoded.last_rssi, SENSOR_LIMITS.RSSI)
+      pressure_valid: Validator.validateReading('pressure', decoded.pressure, SENSOR_LIMITS.PRESSURE)
     };
 
     return {
