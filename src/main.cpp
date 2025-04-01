@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include "Config.h"
-#include "DisplayManager.h"
+#include <DisplayManager.h>
+#include <DisplayLogger.h>
 #include "SensorManager.h"
 #include <LoRaManager.h>
 
@@ -9,6 +10,7 @@
 
 // Global instances
 DisplayManager display;
+DisplayLogger logger(display);
 SensorManager sensors;
 LoRaManager lora(US915, 2); // Initialize with US915 band and subband 2
 
@@ -59,7 +61,8 @@ void handleDownlink(uint8_t* payload, size_t size, uint8_t port) {
       // e.g., payload[1] could be a parameter
     }
     
-    display.log("Downlink received");
+    // Use logger instead of direct display.log
+    logger.info("Downlink received");
   }
 }
 
@@ -102,17 +105,17 @@ void setup() {
   #ifdef PIR_PIN
   pinMode(PIR_PIN, INPUT_PULLUP);
   Serial.println("PIR motion sensor initialized on pin " + String(PIR_PIN));
-  display.log("Motion sensor ready");
+  logger.info("Motion sensor ready");
   #endif
   
   // Initialize sensors
   display.updateStartupProgress(30, "Initializing sensors...");
   if (!sensors.begin()) {
     Serial.println("BME280 sensor not found!");
-    display.log("BME280 sensor not found!");
+    logger.warning("BME280 sensor not found!");
   } else {
     Serial.println("BME280 sensor initialized");
-    display.log("BME280 sensor found");
+    logger.info("BME280 sensor found");
   }
   delay(300);
   
@@ -124,7 +127,7 @@ void setup() {
     delay(5000);
   } else {
     Serial.println("LoRa initialized and ready");
-    display.log("LoRa initialized");
+    logger.info("LoRa initialized");
   }
   delay(300);
   
@@ -141,7 +144,7 @@ void setup() {
   // Set credentials
   display.updateStartupProgress(70, "Setting credentials...");
   lora.setCredentials(joinEUI, devEUI, appKey, nwkKey);
-  display.log("LoRaWAN credentials set");
+  logger.info("LoRaWAN credentials set");
   delay(300);
   
   // Join network
@@ -149,7 +152,7 @@ void setup() {
   bool joined = lora.joinNetwork();
   if (joined) {
     display.updateStartupProgress(100, "Network joined!");
-    display.log("LoRaWAN network joined");
+    logger.info("LoRaWAN network joined");
     
     // Reset error counters
     hadSuccessfulTransmission = true;
@@ -157,7 +160,7 @@ void setup() {
     
     // Send sensor data immediately after joining
     Serial.println("Sending sensor data immediately after joining the network");
-    display.log("Sending initial data");
+    logger.info("Sending initial data");
     
     // Small delay to ensure network is ready
     delay(1000);
@@ -181,7 +184,7 @@ void setup() {
       display.showErrorScreen("Network Error", "Failed to join LoRaWAN network");
     }
     
-    display.log("Failed to join network");
+    logger.error("Failed to join network");
     hadSuccessfulTransmission = false;
     consecutiveErrors++;
   }
@@ -197,7 +200,7 @@ void setup() {
   // If we woke up due to motion detection, send data immediately
   if (pirWake && lora.isNetworkJoined()) {
     Serial.println("Motion detected during sleep - sending data immediately");
-    display.log("Motion detected");
+    logger.info("Motion detected");
     
     // Small delay to ensure system is ready
     delay(1000);
@@ -223,7 +226,7 @@ void loop() {
   if (currentMotionState == PIR_WAKE_LEVEL && lastMotionState != PIR_WAKE_LEVEL) {
     Serial.println("Motion detected!");
     display.wakeup(); // Wake up display if it was sleeping
-    display.log("Motion detected");
+    logger.info("Motion detected");
     displayTimeout = millis() + DISPLAY_TIMEOUT; // Reset display timeout
     
     // If we're joined to the network, send data immediately
@@ -232,7 +235,7 @@ void loop() {
       // This prevents too frequent transmissions when motion is continuous
       if (millis() - lastDataSendTime > 10000) {
         Serial.println("Sending sensor data due to motion detection");
-        display.log("Sending motion alert");
+        logger.info("Sending motion alert");
         
         // Add a small delay to make sure everything is ready
         delay(500);
@@ -258,11 +261,11 @@ void loop() {
   if (millis() - lastNetworkCheck > 300000) { // Every 5 minutes
     lastNetworkCheck = millis();
     if (!lora.isNetworkJoined()) {
-      display.log("Not joined, attempting to rejoin...");
+      logger.warning("Not joined, attempting to rejoin...");
       if (lora.joinNetwork()) {
-        display.log("Successfully rejoined network");
+        logger.info("Successfully rejoined network");
       } else {
-        display.log("Failed to rejoin network");
+        logger.error("Failed to rejoin network");
       }
     }
   }
@@ -275,7 +278,7 @@ void loop() {
   // If we're joined to the network and it's time to send data
   if (lora.isNetworkJoined() && (millis() - lastDataSendTime > (MINIMUM_DELAY * 1000))) {
     Serial.println("Network joined, preparing to send sensor data");
-    display.log("Preparing to send data");
+    logger.info("Preparing to send data");
     
     // Add a small delay to make sure everything is ready
     delay(1000);
@@ -397,9 +400,9 @@ void sendSensorData(bool motionDetected) {
   
   // Display sending status
   if (motionDetected) {
-    display.log("Sending motion alert...");
+    logger.info("Sending motion alert...");
   } else {
-    display.log("Sending data...");
+    logger.info("Sending data...");
   }
   display.refresh();
   
@@ -418,7 +421,7 @@ void sendSensorData(bool motionDetected) {
   
   if (success) {
     Serial.println("Data sent successfully!");
-    display.log("Data sent successfully");
+    logger.info("Data sent successfully");
     
     // Update RSSI
     lastRssi = lora.getLastRssi();
@@ -429,7 +432,7 @@ void sendSensorData(bool motionDetected) {
     errorBackoffTime = MINIMUM_DELAY;
   } else {
     Serial.println("Failed to send data! Error code: " + String(lora.getLastErrorCode()));
-    display.log("Failed to send data");
+    logger.error("Failed to send data");
     
     // Get the error code
     int errorCode = lora.getLastErrorCode();
@@ -454,12 +457,12 @@ void sendSensorData(bool motionDetected) {
     
     // If we've never had a successful transmission, we might need to rejoin
     if (!hadSuccessfulTransmission && consecutiveErrors > 3) {
-      display.log("Attempting to rejoin network...");
+      logger.info("Attempting to rejoin network...");
       if (lora.joinNetwork()) {
-        display.log("Network rejoined!");
+        logger.info("Network rejoined!");
         consecutiveErrors = 0;
       } else {
-        display.log("Rejoin failed!");
+        logger.error("Rejoin failed!");
         // Show the error
         int joinError = lora.getLastErrorCode();
         if (joinError != RADIOLIB_ERR_NONE) {
@@ -479,7 +482,7 @@ void processDownlink() {
 
 void goToSleep(uint32_t sleepTime) {
   Serial.println("Going to sleep for " + String(sleepTime) + " seconds");
-  display.log("Sleep: " + String(sleepTime) + "s");
+  logger.info("Sleep: " + String(sleepTime) + "s");
   display.refresh();
   delay(100);
   

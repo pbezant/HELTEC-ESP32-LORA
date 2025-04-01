@@ -1,8 +1,12 @@
 #include "DisplayManager.h"
-#include "Config.h"
+
+// Default pins for OLED display
+#define DEFAULT_OLED_SDA 17
+#define DEFAULT_OLED_SCL 18
+#define DEFAULT_OLED_RST 21
 
 DisplayManager::DisplayManager() : 
-    u8g2(U8G2_R0, OLED_SCL, OLED_SDA, OLED_RST),
+    u8g2(U8G2_R0, DEFAULT_OLED_SCL, DEFAULT_OLED_SDA, DEFAULT_OLED_RST),
     currentLogLine(0),
     currentScreen(0) {
     
@@ -127,7 +131,8 @@ void DisplayManager::drawProgressBar(int x, int y, int width, int height, uint8_
     
     // Draw filled progress area
     if (progressWidth > 0) {
-        fillRect(x + 1, y + 1, progressWidth, height - 2);
+        u8g2.setDrawColor(1); // Ensure we're drawing in white
+        u8g2.drawBox(x + 1, y + 1, progressWidth, height - 2);
     }
 }
 
@@ -136,7 +141,6 @@ void DisplayManager::drawRect(int x, int y, int width, int height) {
 }
 
 void DisplayManager::fillRect(int x, int y, int width, int height) {
-    // Default fill with white (for clearing areas before drawing text)
     u8g2.setDrawColor(0); // 0 for black, 1 for white
     u8g2.drawBox(x, y, width, height);
     u8g2.setDrawColor(1); // Reset to white for subsequent drawing
@@ -155,21 +159,21 @@ void DisplayManager::setScreen(uint8_t screenIndex) {
             case 0: // Main info screen
                 // Empty, to be filled by main application
                 break;
-            case 1: // Log screen
-                refreshLogScreen();
+            case 1: // Startup screen
+                drawStartupScreen();
                 break;
             case 2: // LoRaWAN status screen
                 drawLoRaWANStatusScreen();
                 break;
-            // case 3: // Sensor data screen
-            //     drawSensorDataScreen();
-            //     break;
-            case 3: // System log screen
+            case 3: // Sensor data screen
+                drawSensorDataScreen();
+                break;
+            case 4: // Log screen
                 drawLogScreen();
                 break;
             default:
-                // Custom screens can be implemented here
-                drawSensorDataScreen();
+                // Default to main screen
+                currentScreen = 0;
                 break;
         }
         
@@ -187,7 +191,7 @@ void DisplayManager::log(const String& message) {
     logBuffer[MAX_LOG_LINES - 1] = message;
     
     // If we're on the log screen, refresh it
-    if (currentScreen == 1 || currentScreen == 4) {
+    if (currentScreen == 4) {
         refreshLogScreen();
     }
 }
@@ -197,7 +201,7 @@ void DisplayManager::clearLog() {
         logBuffer[i] = "";
     }
     
-    if (currentScreen == 1 || currentScreen == 4) {
+    if (currentScreen == 4) {
         refreshLogScreen();
     }
 }
@@ -212,12 +216,12 @@ void DisplayManager::refreshLogScreen() {
     u8g2.setFont(u8g2_font_profont10_tf);
     
     int y = 25;
-    int startIdx = (currentLogLine + 1) % MAX_LOG_LINES;
+    int startIdx = MAX_LOG_LINES - 5; // Show last 5 entries
+    if (startIdx < 0) startIdx = 0;
     
-    for (int i = 0; i < MAX_LOG_LINES; i++) {
-        int idx = (startIdx + i) % MAX_LOG_LINES;
-        if (logBuffer[idx].length() > 0) {
-            drawString(0, y, logBuffer[idx]);
+    for (int i = startIdx; i < MAX_LOG_LINES; i++) {
+        if (logBuffer[i].length() > 0) {
+            drawString(0, y, logBuffer[i]);
             y += LINE_HEIGHT;
         }
     }
@@ -232,7 +236,7 @@ void DisplayManager::setFont(const uint8_t* font) {
 void DisplayManager::drawStartupScreen() {
     clear();
     
-    // Draw Heltec logo
+    // Draw logo
     u8g2.setFont(u8g2_font_profont12_tf);
     drawCenteredString(15, "HELTEC");
     
@@ -416,9 +420,6 @@ void DisplayManager::drawLogScreen() {
     // Draw separation line
     u8g2.setFont(u8g2_font_profont10_tf);
     drawLine(0, 15, SCREEN_WIDTH, 15);
-    
-    // Set current screen to log screen (4)
-    currentScreen = 4;
     
     // Refresh the log content
     refreshLogScreen();
