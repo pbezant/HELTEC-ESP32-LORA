@@ -2,9 +2,9 @@
 
 This project implements a sensor node using the Heltec ESP32 LoRa V3 board. It includes support for:
 
-- OLED display with multiple screens and logging
+- OLED display with multiple screens and logging (using the DisplayManager library)
 - BME280 temperature, humidity, and pressure sensor
-- Direct LoRa communication using RadioLib
+- LoRaWAN communication using RadioLib
 - Deep sleep for power saving
 - PIR motion sensor wake-up (optional)
 
@@ -13,16 +13,17 @@ This project implements a sensor node using the Heltec ESP32 LoRa V3 board. It i
 The project is organized in a modular way to make it easy to reuse components:
 
 - `include/Config.h` - Central configuration file
-- `include/DisplayManager.h` - OLED display management
 - `include/SensorManager.h` - BME280 sensor handling
-- `include/LoRaManager.h` - LoRa communication
-- `include/secrets.h` - Credentials template (for API compatibility)
+- `include/secrets.h` - Credentials template for LoRaWAN
 - `src/main.cpp` - Main application
+- `lib/DisplayManager` - OLED display and logging management
+- `lib/LoRaManager` - LoRaWAN communication
 
 ## Libraries Used
 
 This project uses the following libraries:
 
+- **DisplayManager**: Custom library for OLED display and logging
 - **U8g2**: Modern, feature-rich display library
 - **RadioLib**: Comprehensive library for LoRa communication
 - **Adafruit BME280**: Sensor library for temperature, humidity and pressure
@@ -40,6 +41,7 @@ This project uses the following libraries:
 
 - BME280 sensor: Connected to I2C pins (SDA: 46, SCL: 45)
 - PIR motion sensor (optional): Connected to pin 5
+- OLED display: Connected to SDA: 17, SCL: 18, RST: 21 (handled internally by the library)
 
 ## Configuration
 
@@ -59,17 +61,58 @@ The device uses deep sleep to conserve power:
 - The device goes to deep sleep after sending data
 - It can be woken up by a timer or a PIR motion sensor
 
-## Direct LoRa vs LoRaWAN
+## DisplayManager Library
 
-This project uses direct point-to-point LoRa communication rather than LoRaWAN:
+The project now includes a custom DisplayManager library for managing the OLED display:
 
-- **Simpler Implementation**: No need for network servers or gateways
-- **Lower Overhead**: Direct communication reduces protocol overhead
-- **Longer Range**: Can use higher spreading factors without duty cycle limits
-- **More Control**: Full control over frequency, bandwidth, and other parameters
-- **Peer-to-Peer**: Can communicate directly with other nodes
+- Located in the `lib/DisplayManager` directory
+- Provides a reusable interface for OLED display management
+- Includes a logging system with different severity levels
+- Features multiple screen types (startup, LoRaWAN status, sensor data, logs)
+- Easy to integrate into other ESP32 projects
 
-If you need LoRaWAN functionality, you may need to modify the `LoRaManager` class to use a LoRaWAN library.
+### Using DisplayManager
+
+```cpp
+#include <DisplayManager.h>
+#include <DisplayLogger.h>
+
+// Create instances
+DisplayManager display;
+DisplayLogger logger(display);
+
+void setup() {
+  Serial.begin(115200);
+  
+  // Initialize display
+  display.begin();
+  
+  // Show startup screen with progress
+  display.setScreen(1);
+  display.updateStartupProgress(50, "Initializing...");
+  
+  // Log messages at different levels
+  logger.info("System starting");
+  logger.warning("Warning message");
+  logger.error("Error message");
+  logger.debug("Debug info");
+}
+
+void loop() {
+  // Show sensor data
+  display.setScreen(3);
+  display.updateSensorData(23.5, 65.0, 1013.2, 3.7);
+  
+  // Show LoRaWAN status
+  display.setScreen(2);
+  display.updateLoRaWANStatus(true, -105, 10, 2);
+  
+  // Show log screen
+  display.setScreen(4);
+  
+  delay(5000);
+}
+```
 
 ## Extending the Project
 
