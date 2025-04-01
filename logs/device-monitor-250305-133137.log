@@ -1,13 +1,0 @@
-[37m13:31:37.897 > D[37mispl[37ma[37my initializ[37me[37md
-[37m13:31:39.905 > P[37mI[37mR motion se[37mn[37msor initia[37ml[37mized on pin[37m [37m5
-[37m13:31:40.472 > [[37m  4[37m0[37m54][W][Wir[37me[37m.cpp:301] b[37me[37mgin(): Bus[37m [37malready sta[37mr[37mted in Mas[37mt[37mer Mode.
-13:31:40.478 > S[37mc[37manning I2C[37m [37mbus...
-[37m13:31:40.494 > N[37mo[37m I2C [37md[37mevices foun[37md[37m
-13:31:40.497 > Trying B[37mM[37mE280 at add[37mr[37mess 0x76..[37m.[37m [  4077][W[37m][37m[Wire.cpp:[37m3[37m01] begin()[37m:[37m Bus alrea[37md[37my started i[37mn[37m Master Mod[37me[37m.
-13:31:40.506 > Faile[37md[37m
-13:31:40.507 > Trying BM[37mE[37m280 at add[37mr[37mess 0x77...[37m [37m[  4088][W[37m][37m[Wire.cpp:3[37m0[37m1] begin()[37m:[37m Bus alread[37my[37m started i[37mn[37m Master Mod[37me[37m.
-13:31:40.516 > Failed[37m[37m
-13:31:40.517 > BME280 se[37mn[37msor not fou[37mn[37md!
-[37m13:31:41.382 > [[37mSX126[37m2[37m] Initiali[37mz[37ming ... [37ms[37mu[37mccess!
-13:31:41.434 > LoR[37ma[37m initializ[37me[37md and ready[37m[37m
-[37m13:31:43.166 > [[37mL[37moRaWAN] At[37mt[37mempting ove[37mr[37m-the-air a[37mc[37mtivation ..[37m.[37m 

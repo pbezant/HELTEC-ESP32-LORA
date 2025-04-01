@@ -1,14 +1,0 @@
-[37m14:17:01.313 > D[37misp[37ml[37may initiali[37mz[37med
-[37m14:17:03.323 > P[37mIR [37mm[37motion senso[37mr[37m initializ[37me[37md on pin 5[37m
-[37m14:17:03.890 > [[37m [37m 4055][[37mW[37m][Wire.cpp:[37m3[37m01] begin([37m)[37m: Bus alrea[37md[37my started [37mi[37mn Master Mo[37md[37me.
-14:17:03.896 > Scanni[37mn[37mg I2C bus..[37m.[37m
-[37m14:17:03.912 > N[37mo[37m I2C device[37ms[37m found
-14:17:03.914 > Tr[37my[37ming BME280 [37ma[37mt address [37m0[37mx76... [  4[37m0[37m78][W][Wir[37me[37m.cpp:301] b[37me[37mgin(): Bus [37ma[37mlready sta[37mr[37mted in Mast[37me[37mr Mode.
-[37m14:17:03.924 > F[37mailed
-14:17:03.924 > Tr[37my[37ming BME280 [37ma[37mt address [37m0[37mx77... [  4[37m0[37m89][W][Wir[37me[37m.cpp:301] b[37me[37mgin(): Bus[37m [37malready sta[37mr[37mted in Mast[37me[37mr Mode.
-[37m14:17:03.934 > F[37mailed
-14:17:03.934 > BME[37m2[37m80 sensor n[37mo[37mt found!
-[37m14:17:04.800 > [[37mS[37mX1262] Init[37mi[37malizing ...[37m [37ms[37mucc[37me[37mss!
-14:17:04.852 > LoRa i[37mn[37mitialized [37ma[37mnd ready
-[37m14:17:06.583 > [[37mLoRaW[37mA[37mN] Attempt[37mi[37mng over-the[37m-[37mair activa[37mt[37mion ... [37mf[37ma[37miled, code[37m [37m-1116
-[37m14:17:16.074 > M[37moti[37mo[37mn detected![37m[37m

@@ -1,83 +1,0 @@
-[37m01:08:22.492 > E[37mS[37mP-ROM:esp32s[37m3[37m-20210327[37m
-[37m01:08:22.497 > B[37mu[37mild:Mar [37m2[37m7 2021
-01:08:22.499 > rs[37mt[37m:0x1 (POWER[37mO[37mN),boot:0x[37m1[37mc (SPI_FAST[37m_[37mFLASH_BOOT)[37m[37m
-01:08:22.504 > SPIWP:0xe[37me[37m
-01:08:22.505 > mode:DIO[37m,[37m clock div:[37m1[37m
-01:08:22.507 > load:0x3[37mf[37mce3808,len:[37m0[37mx4bc
-01:08:22.509 > load[37m:[37m0x403c9700,[37ml[37men:0xbd8
-[37m01:08:22.512 > l[37moad:0x403cc[37m7[37m00,len:0x2a[37m0[37mc
-01:08:22.514 > entry 0[37mx[37m403c98d0
-[37m01:08:22.625 > [[37m [37m  [37m1[37m33][V][esp3[37m2[37m-hal-uart.[37mc[37m:330] uartB[37me[37mgin(): UAR[37mT[37m0 baud(1152[37m0[37m0) Mode(800[37m0[37m01c) rxPin[37m([37m44) txPin(4[37m3[37m)
-01:08:22.634 > [   14[37m2[37m][V][esp32-[37mh[37mal-uart.c:[37m4[37m16] uartBeg[37mi[37mn(): UART0[37m [37mnot install[37me[37md. Startin[37mg[37m installati[37mo[37mn
-01:08:22.642 > [ [37m [37m 151][V][es[37mp[37m32-hal-uar[37mt[37m.c:467] uar[37mt[37mBegin(): UA[37mR[37mT0 initial[37mi[37mzation done[37m.[37m
-[37m01:08:22.948 > 
-[37m01:08:22.949 > 
-[37m01:08:22.949 > === Helte[37mc[37m ESP32 LoRa[37m [37mSensor Nod[37me[37m ===
-01:08:22.952 > Boot [37mc[37mount: 1
-01:08:22.953 > [[37m [37m  457][I][e[37ms[37mp32-hal-i2[37mc[37m.c:75] i2c[37mI[37mnit(): Init[37mi[37malising I2C[37m [37mMaster: sd[37ma[37m=46 scl=45 [37mf[37mreq=100000[37m[37m
-[37m01:08:23.965 > D[37misp[37ml[37may initial[37mi[37mzed
-[37m01:08:26.538 > [[37m [37m 404[37m7[37m][W][Wire.c[37mp[37mp:301] beg[37mi[37mn(): Bus a[37ml[37mready start[37me[37md in Master[37m [37mMode.
-01:08:26.545 > Sca[37mnning I2C b[37mu[37ms...
-[37m01:08:26.560 > I[37m2[37mC device[37m [37mfound at a[37md[37mdress 0x76[37m
-[37m01:08:26.564 > Found 1 I2[37mC[37m device(s)[37m
-[37m01:08:26.566 > Trying BME2[37m8[37m0 at addre[37ms[37ms 0x76... [[37m [37m 4070][W][[37mW[37mire.cpp:30[37m1[37m] begin(): [37mB[37mus already[37m [37mstarted in [37mM[37master Mode.[37m[37m
-[37m01:08:26.697 > S[37mu[37mccess!
-[37m01:08:26.699 > B[37mME280[37m [37msensor init[37mi[37malized
-[37m01:08:27.564 > [[37mS[37mX1262[37m][37m Initializi[37mn[37mg ... [37ms[37mu[37mccess![37m
-[37m01:08:27.617 > LoRa initia[37ml[37mized and r[37me[37mady
-[37m01:08:29.348 > [[37mL[37moRaWAN] [37mA[37mttempting [37mo[37mver-the-air[37m [37mactivation[37m [37m... [37mf[37ma[37miled, [37mc[37mode -1118[37m
-[37m01:09:05.380 > E[37mSP-[37mR[37mOM:esp32s3-[37m2[37m0210327
-[37m01:09:05.385 > B[37mu[37mild:Mar 2[37m7[37m 2021
-01:09:05.387 > rst:[37m0[37mx1 (POWERO[37mN[37m),boot:0x1c[37m [37m(SPI_FAST_F[37mL[37mASH_BOOT)[37m
-[37m01:09:05.392 > SPIWP:0xee[37m
-[37m01:09:05.393 > mode:DIO, [37mc[37mlock div:1[37m
-[37m01:09:05.395 > load:0x3fc[37me[37m3808,len:0x[37m4[37mbc
-01:09:05.397 > load:0[37mx[37m403c9700,le[37mn[37m:0xbd8
-01:09:05.399 > lo[37ma[37md:0x403cc70[37m0[37m,len:0x2a0[37mc[37m
-01:09:05.402 > entry 0x4[37m0[37m3c98d0
-[37m01:09:05.513 > [[37m [37m  13[37m3[37m][V][esp32[37m-[37mhal-uart.c:[37m3[37m30] uartBeg[37mi[37mn(): UART0[37m baud(115200[37m)[37m Mode(8000[37m0[37m1c) rxPin(4[37m4[37m) txPin(43[37m)[37m
-01:09:05.522 > [   142][37m[[37mV][esp32-ha[37ml[37m-uart.c:41[37m6[37m] uartBegin[37m([37m): UART0 n[37mo[37mt installed[37m.[37m Starting [37mi[37mnstallation[37m[37m
-01:09:05.530 > [   [37m1[37m51][V][esp3[37m2[37m-hal-uart.[37mc[37m:467] uartBegin(): UAR[37mT[37m0 initializ[37ma[37mtion done.[37m[37m
-[37m01:09:05.836 > 
-[37m01:09:05.837 > 
-[37m01:09:05.837 > === Heltec [37mE[37mSP32 LoRa [37mS[37mensor Node [37m=[37m==
-01:09:05.840 > Boot c[37mo[37munt: 1
-01:09:05.841 > [  [37m [37m457][I][esp[37m3[37m2-hal-i2c.[37mc[37m:75] i2cIni[37mt[37m(): Initia[37ml[37mising I2C M[37ma[37mster: sda=[37m4[37m6 scl=45 fr[37me[37mq=100000
-[37m01:09:06.853 > D[37mi[37mspl[37ma[37my initializ[37me[37md
-[37m01:09:09.427 > [[37m [37m 4048][37m[[37mW][Wire.cpp[37m:[37m301] begin[37m([37m): Bus alre[37ma[37mdy started[37m [37min Master M[37mo[37mde.
-01:09:09.434 > Scann[37mi[37mng I2C bus.[37m.[37m.
-[37m01:09:09.449 > I[37m2[37mC device f[37mound at add[37mr[37mess 0x76
-01:09:09.452 > F[37mo[37mund 1 I2C [37md[37mevice(s)
-01:09:09.454 > T[37mr[37mying BME280[37m [37mat address[37m [37m0x76... [ [37m [37m4071][W][Wi[37mr[37me.cpp:301][37m [37mbegin(): Bu[37ms[37m already s[37mt[37marted in Ma[37ms[37mter Mode.[37m
-[37m01:09:09.586 > S[37mu[37mccess!
-[37m01:09:09.588 > B[37mME280 [37ms[37mensor initi[37ma[37mlized
-[37m01:09:10.453 > [[37mS[37mX1262][37m [37mInitializi[37mn[37mg ... [37ms[37mu[37mccess!
-01:09:10.505 > L[37mo[37mRa initial[37mi[37mzed and rea[37md[37my
-[37m01:09:12.237 > [[37mL[37moRaWAN] [37mA[37mttempting o[37mv[37mer-the-air[37m [37mactivation [37m.[37m.. [37mf[37ma[37miled, co[37md[37me -1118
-[37m01:12:45.326 > [[37m2[37m19946][E][[37mW[37mire.cpp:49[37m9[37m] requestFr[37mo[37mm(): i2cWr[37mi[37mteReadNonSt[37mo[37mp returned[37m [37mError 263
-[37m01:12:46.333 > [[37m2[37m20953][E][Wi[37mr[37me.cpp:499] [37mr[37mequestFrom[37m([37m): i2cWrite[37mR[37meadNonStop[37m [37mreturned Er[37mr[37mor 263
-[37m01:12:47.340 > [[37m2[37m21960][E][Wi[37mr[37me.cpp:499][37m [37mrequestFrom[37m([37m): i2cWrit[37me[37mReadNonStop[37m [37mreturned E[37mr[37mror 263
-[37m01:12:48.347 > [[37m2[37m22967][E][W[37mi[37mre.cpp:499][37m [37mrequestFro[37mm[37m(): i2cWrit[37me[37mReadNonSto[37mp[37m returned E[37mr[37mror 263
-[37m01:12:49.354 > [[37m2[37m23974][E][W[37mi[37mre.cpp:499][37m [37mrequestFro[37mm[37m(): i2cWrit[37me[37mReadNonStop[37m [37mreturned E[37mr[37mror 263
-[37m01:12:50.361 > [[37m2[37m24981][E][W[37mi[37mre.cpp:499[37m][37m requestFro[37mm[37m(): i2cWri[37mt[37meReadNonSto[37mp[37m returned [37mE[37mrror 263
-[37m01:12:51.368 > [[37m2[37m25988][E][W[37mi[37mre.cpp:499[37m][37m requestFro[37mm[37m(): i2cWri[37mt[37meReadNonSto[37mp[37m returned [37mE[37mrror 263
-[37m01:12:58.518 > [[37m2[37m33138][[37mE[37m][Wire.cpp:[37m4[37m99] request[37mF[37mrom(): i2c[37mW[37mriteReadNon[37mS[37mtop return[37me[37md Error 263[37m[37m
-[37m01:12:59.525 > [[37m2[37m34145][E][37m[[37mWire.cpp:4[37m9[37m9] requestF[37mr[37mom(): i2cW[37mr[37miteReadNonS[37mt[37mop returned[37m [37mError 263[37m
-[37m01:13:00.532 > [[37m2[37m35152][E[37m][37m[Wire.cpp:4[37m9[37m9] requestF[37mr[37mom(): i2cW[37mr[37miteReadNonS[37mt[37mop returne[37md[37m Error 263[37m[37m
-[37m01:13:01.539 > [[37m2[37m36159][E[37m][37m[Wire.cpp:4[37m9[37m9] request[37mF[37mrom(): i2c[37mW[37mriteReadNon[37mS[37mtop returne[37md[37m Error 263[37m[37m
-[37m01:13:03.428 > E[37mS[37mP-ROM:esp3[37m2[37ms3-20210327[37m[37m
-[37m01:13:03.433 > B[37mu[37mild:Ma[37mr[37m 27 2021
-01:13:03.435 > r[37ms[37mt:0x1 (POW[37mE[37mRON),boot:0[37mx[37m8 (SPI_FAS[37mT[37m_FLASH_BOOT[37m)[37m
-01:13:03.440 > SPIWP:0x[37me[37me
-01:13:03.441 > mode:DIO[37m,[37m clock div[37m:[37m1
-01:13:03.443 > load:0x3[37mf[37mce3808,len[37m:[37m0x4bc
-01:13:03.445 > load[37m:[37m0x403c9700[37m,[37mlen:0xbd8
-[37m01:13:03.448 > l[37moad:0x403c[37mc[37m700,len:0x2[37ma[37m0c
-01:13:03.450 > entry [37m0[37mx403c98d0
-[37m01:13:03.561 > [[37m  [37m [37m133][V][esp[37m3[37m2-hal-uart[37m.[37mc:330] uart[37mB[37megin(): UAR[37mT[37m0 baud(115[37m2[37m00) Mode(80[37m0[37m001c) rxPi[37mn[37m(44) txPin([37m4[37m3)
-01:13:03.570 > [   14[37m2[37m][V][esp32[37m-[37mhal-uart.c:[37m4[37m16] uartBe[37mg[37min(): UART0[37m [37mnot instal[37ml[37med. Startin[37mg[37m installat[37mi[37mon
-01:13:03.578 > [ [37m [37m 150][V][e[37ms[37mp32-hal-uar[37mt[37m.c:467] ua[37mr[37mtBegin(): [37mU[37mART0 initia[37ml[37mization do[37mn[37me.
-[37m01:13:03.992 > E[37mS[37mP-ROM:[37me[37msp32s3-2021[37m0[37m327
-[37m01:13:03.998 > B[37mu[37mild[37m:[37mMar 27 202[37m1[37m
-01:13:04.000 > rst:0x1 ([37mP[37mOWERON),bo[37mo[37mt:0x0 (DOWN[37mL[37mOAD(USB/UA[37mR[37mT0))
-01:13:04.004 > waiti[37mn[37mg for down[37ml[37moad

@@ -1,41 +1,0 @@
-[37m01:14:03.066 > I[37m2C device found at address 0x76
-01:14:03.069 > F[37mo[37mund 1 I2C [37md[37mevice(s)
-01:14:03.071 > T[37mr[37mying BME28[37m0[37m at address[37m [37m0x76... [ [37m3[37m4414][W][Wi[37mr[37me.cpp:301][37m [37mbegin(): Bu[37ms[37m already s[37mt[37marted in Ma[37ms[37mter Mode.[37m
-[37m01:14:03.204 > S[37mu[37mccess[37m![37m
-01:14:03.205 > BME280 [37ms[37mensor initi[37ma[37mlized
-[37m01:14:04.071 > [[37mS[37mX1262] Initi[37ma[37mlizing ...[37m [37ms[37mu[37mcces[37ms[37m!
-01:14:04.123 > LoRa in[37mi[37mtialized an[37md[37m ready
-[37m01:14:05.855 > [[37mLoRaW[37mA[37mN] Attempti[37mn[37mg over-the[37m-[37mair activat[37mi[37mon ... [37mf[37mail[37me[37md, code -11[37m1[37m8
-[37m01:14:31.203 > E[37mS[37mP-ROM:esp[37m3[37m2s3-2021032[37m7[37m
-[37m01:14:31.208 > B[37mu[37mild:M[37ma[37mr 27 2021
-[37m01:14:31.210 > r[37mst:0x1 (PO[37mW[37mERON),boot:[37m0[37mx1c (SPI_F[37mA[37mST_FLASH_BO[37mO[37mT)
-01:14:31.214 > SPIWP:[37m0[37mxee
-01:14:31.215 > mode:D[37mI[37mO, clock d[37mi[37mv:1
-01:14:31.218 > load:0[37mx[37m3fce3808,l[37me[37mn:0x4bc
-01:14:31.219 > lo[37ma[37md:0x403c97[37m0[37m0,len:0xbd8[37m[37m
-01:14:31.222 > load:0x40[37m3[37mcc700,len:0[37mx[37m2a0c
-01:14:31.224 > entry[37m [37m0x403c98d0[37m[37m
-[37m01:14:31.336 > [[37m [37m  133][V[37m][37m[esp32-hal[37m-[37muart.c:330][37m [37muartBegin([37m)[37m: UART0 bau[37md[37m(115200) M[37mo[37mde(800001c)[37m [37mrxPin(44) [37mt[37mxPin(43)
-[37m01:14:31.345 > [[37m   143][V][37m[[37mesp32-hal-u[37ma[37mrt.c:416] u[37ma[37mrtBegin():[37m [37mUART0 not i[37mn[37mstalled. S[37mt[37marting inst[37ma[37mllation
-[37m01:14:31.353 > [[37m   151[37m][37m[V][esp32-h[37ma[37ml-uart.c:4[37m6[37m7] uartBegi[37mn[37m(): UART0 [37mi[37mnitializati[37mo[37mn done.
-[37m01:14:31.659 > 
-[37m01:14:31.659 > 
-01:14:31.659 > ===[37m [37mHeltec ESP3[37m2[37m LoRa Sens[37mo[37mr Node ===[37m
-[37m01:14:31.664 > Boot count[37m:[37m 1
-01:14:31.664 > [   457[37m][37m[I][esp32-[37mh[37mal-i2c.c:75[37m][37m i2cInit()[37m:[37m Initialisi[37mn[37mg I2C Mast[37me[37mr: sda=46 s[37mc[37ml=45 freq=[37m1[37m00000
-[37m01:14:32.676 > D[37mi[37msplay [37mi[37mnitialized[37m
-[37m01:14:35.249 > [[37m [37m 4047][W][37m[[37mWire.cpp:30[37m1[37m] begin():[37m [37mBus already[37m [37mstarted in[37m [37mMaster Mode[37m.[37m
-01:14:35.256 > Scanning[37m [37mI2C bus...[37m
-[37m01:14:35.271 > I[37m2C [37md[37mevice foun[37md[37m at address[37m [37m0x76
-01:14:35.274 > Foun[37md[37m 1 I2C devi[37mc[37me(s)
-01:14:35.276 > Tryi[37mn[37mg BME280 at[37m [37maddress 0x[37m7[37m6... [  407[37m0[37m][W][Wire.c[37mp[37mp:301] begin(): Bus al[37mr[37meady start[37me[37md in Maste[37mr[37m Mode.
-[37m01:14:35.408 > S[37mucce[37ms[37ms!
-[37m01:14:35.410 > B[37mME280 sens[37mo[37mr initializ[37me[37md
-[37m01:14:36.276 > [[37mS[37mX1262] In[37mi[37mtializing .[37m.[37m. [37ms[37muc[37mc[37mess!
-01:14:36.328 > LoRa [37mi[37mnitialized[37m [37mand ready
-[37m01:14:38.059 > [[37mLoRa[37mW[37mAN] Attemp[37mt[37ming over-th[37me[37m-air activ[37ma[37mtion ... [37mf[37ma[37miled, code -[37m1[37m118
-[37m01:16:45.056 > [[37m13[37m3[37m853][E][Wi[37mr[37me.cpp:499] [37mr[37mequestFrom([37m)[37m: i2cWrite[37mR[37meadNonStop [37mr[37meturned Er[37mr[37mor 263
-[37m01:16:46.063 > [[37m1[37m348[37m6[37m0][E][Wire[37m.[37mcpp:499] re[37mq[37muestFrom()[37m:[37m i2cWriteRe[37ma[37mdNonStop r[37me[37mturned Erro[37mr[37m 263
-[37m01:16:47.070 > [[37m135[37m8[37m67][E][Wire[37m.[37mcpp:499] re[37mq[37muestFrom()[37m:[37m i2cWriteRe[37ma[37mdNonStop r[37me[37mturned Erro[37mr[37m 263
-[37m01:16:48.077 > [[37m136[37m8[37m74][E][Wire[37m.[37mcpp:499] r[37me[37mquestFrom()[37m:[37m i2cWriteR[37me[37madNonStop r[37me[37mturned Erro[37mr[37m 263
-[37m01:16:49.084 > [[37m137[37m8[37m81][E][Wire[37m.[37mcpp:499] r[37me[37mquestFrom()[37m:[37m i2cWriteR[37me[37madNonStop r[37me[37mturned Err[37mo[37mr 263

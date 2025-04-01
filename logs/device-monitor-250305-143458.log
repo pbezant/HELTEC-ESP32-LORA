@@ -1,120 +1,0 @@
-[37m14:34:58.708 > D[37mi[37msplay init[37mi[37malized
-[37m14:35:00.714 > P[37mIR [37mm[37motion senso[37mr[37m initializ[37me[37md on pin 5[37m
-[37m14:35:01.279 > [[37m  4039][W[37m][37m[Wire.cpp:3[37m0[37m1] begin()[37m:[37m Bus alread[37my[37m started i[37mn[37m Master Mod[37me[37m.
-14:35:01.286 > Scannin[37mg[37m I2C bus...[37m[37m
-[37m14:35:05.394 > E[37mSP-ROM[37m:[37mesp32s3-202[37m1[37m0327
-[37m14:35:05.399 > B[37mu[37mi[37ml[37md:Mar 27 2[37m0[37m21
-14:35:05.401 > rst:0x1[37m [37m(POWERON),[37mb[37moot:0xc (SP[37mI[37m_FAST_FLAS[37mH[37m_BOOT)
-14:35:05.405 > SPI[37mW[37mP:0xee
-14:35:05.406 > mod[37me[37m:DIO, cloc[37mk[37m div:1
-14:35:05.408 > loa[37md[37m:0x3fce380[37m8[37m,len:0x4bc[37m
-[37m14:35:05.411 > load:0x403[37mc[37m9700,len:0x[37mb[37md8
-14:35:05.413 > load:0[37mx[37m403cc700,le[37mn[37m:0x2a0c
-14:35:05.415 > e[37mn[37mtry 0x403c9[37m8[37md0
-[37m14:35:05.518 > [[37m   [37m1[37m25][V][esp3[37m2[37m-hal-uart.[37mc[37m:330] uartB[37me[37mgin(): UART[37m0[37m baud(1152[37m0[37m0) Mode(800[37m0[37m01c) rxPin[37m([37m44) txPin(4[37m3[37m)
-14:35:05.527 > [   13[37m4[37m][V][esp32-[37mh[37mal-uart.c:[37m4[37m16] uartBeg[37mi[37mn(): UART0[37m [37mnot install[37me[37md. Startin[37mg[37m installati[37mo[37mn
-14:35:05.535 > [ [37m [37m 142][V][es[37mp[37m32-hal-uar[37mt[37m.c:467] uar[37mt[37mBegin(): U[37mA[37mRT0 initial[37mi[37mzation done[37m.[37m
-[37m14:35:05.841 > 
-[37m14:35:05.842 > 
-[37m14:35:05.842 > === Helte[37mc[37m ESP32 LoR[37ma[37m Sensor Nod[37me[37m ===
-14:35:05.845 > Boot[37m [37mcount: 1
-14:35:05.846 > W[37ma[37mkeup was n[37mo[37mt caused by[37m [37mdeep sleep[37m
-[37m14:35:05.850 > [   448][I[37m][37m[esp32-hal-[37mi[37m2c.c:75] i[37m2[37mcInit(): In[37mi[37mtialising [37mI[37m2C Master: [37ms[37mda=45 scl=[37m4[37m6 freq=1000[37m0[37m0
-[37m14:35:06.860 > D[37mispla[37my[37m initialize[37md[37m
-[37m14:35:08.862 > P[37mI[37mR motion [37ms[37mensor init[37mi[37malized on p[37mi[37mn 5
-[37m14:35:09.427 > [[37m  4033[37m][37m[W][Wire.cp[37mp[37m:301] begi[37mn[37m(): Bus alr[37me[37mady starte[37md[37m in Master [37mM[37mode.
-14:35:09.433 > Scan[37mn[37ming I2C bus[37m.[37m..
-[37m14:36:00.832 > I[37m2[37mC device [37mf[37mound at add[37mr[37mess 0x34
-[37m14:36:00.835 > I[37m2C device[37m [37mfound at a[37md[37mdress 0x35[37m
-[37m14:36:00.844 > F[37moun[37md[37m 2 I2C devi[37mc[37me(s)
-14:36:00.846 > Tryin[37mg[37m BME280 at[37m [37maddress 0x7[37m6[37m... [ 5546[37m1[37m][W][Wire.c[37mp[37mp:301] beg[37mi[37mn(): Bus al[37mr[37meady start[37me[37md in Master[37m [37mMode.
-14:36:00.855 > F[37ma[37miled
-14:36:00.856 > Tryin[37mg[37m BME280 at [37ma[37mddress 0x7[37m7[37m... [ 55472[37m][37m[W][Wire.c[37mp[37mp:301] begi[37mn[37m(): Bus al[37mr[37meady starte[37md[37m in Master[37m [37mMode.
-14:36:00.865 > Fa[37mi[37mled
-14:36:00.866 > BME28[37m0[37m sensor not[37m [37mfound!
-[37m14:36:01.729 > [[37mSX1262][37m [37mInitializi[37mn[37mg ... [37ms[37mu[37mccess!
-14:36:01.780 > Lo[37mR[37ma initializ[37me[37md and read[37my[37m
-[37m14:36:03.506 > [[37mL[37moRaWAN] Att[37me[37mmpting ove[37mr[37m-the-air ac[37mt[37mivation ...[37m [37mf[37ma[37miled, cod[37me[37m -1106
-[37m14:36:08.770 > M[37mo[37mtion detect[37me[37md!
-[37m14:36:11.180 > E[37mS[37mP-ROM:esp3[37m2[37ms3-20210327[37m[37m
-[37m14:36:11.185 > B[37mu[37mild:Ma[37mr[37m 27 2021
-14:36:11.187 > r[37ms[37mt:0x1 (POW[37mE[37mRON),boot:0[37mx[37m1c (SPI_FA[37mS[37mT_FLASH_BOO[37mT[37m)
-14:36:11.192 > SPIWP:0[37mx[37mee
-14:36:11.192 > mode:DI[37mO[37m, clock di[37mv[37m:1
-14:36:11.194 > load:0x[37m3[37mfce3808,le[37mn[37m:0x4bc
-14:36:11.196 > loa[37md[37m:0x403c970[37m0[37m,len:0xbd8[37m
-[37m14:36:11.199 > load:0x403[37mc[37mc700,len:0x[37m2[37ma0c
-14:36:11.202 > entry[37m [37m0x403c98d0[37m
-[37m14:36:11.304 > [[37m   125][37m[[37mV][esp32-ha[37ml[37m-uart.c:33[37m0[37m] uartBegin[37m([37m): UART0 b[37ma[37mud(115200) [37mM[37mode(800001[37mc[37m) rxPin(44)[37m [37mtxPin(43)[37m
-[37m14:36:11.313 > [   134][V[37m][37m[esp32-hal-[37mu[37mart.c:416][37m [37muartBegin()[37m:[37m UART0 not[37m [37minstalled. [37mS[37mtarting in[37ms[37mtallation
-[37m14:36:11.322 > [[37m   14[37m2[37m][V][esp32-[37mh[37mal-uart.c:[37m4[37m67] uartBeg[37mi[37mn(): UART0[37m [37minitializat[37mi[37mon done.
-[37m14:36:11.628 > 
-[37m14:36:11.628 > 
-14:36:11.628 > ==[37m=[37m Heltec ES[37mP[37m32 LoRa Sen[37ms[37mor Node ==[37m=[37m
-14:36:11.631 > Boot coun[37mt[37m: 1
-14:36:11.632 > Wakeup[37m [37mwas not ca[37mu[37msed by deep[37m [37msleep
-14:36:11.635 > [  [37m [37m449][I][esp[37m3[37m2-hal-i2c.[37mc[37m:75] i2cIn[37mi[37mt(): Initia[37ml[37mising I2C [37mM[37master: sda=[37m4[37m5 scl=46 fr[37me[37mq=100000
-[37m14:36:12.645 > D[37mi[37msplay initia[37ml[37mized
-[37m14:36:14.644 > P[37mIR[37m [37mmotion sens[37mo[37mr initiali[37mz[37med on pin 5[37m[37m
-[37m14:36:15.208 > [[37m  402[37m9[37m][W][Wire.c[37mp[37mp:301] beg[37mi[37mn(): Bus al[37mr[37meady start[37me[37md in Master[37m [37mMode.
-14:36:15.214 > Sca[37mn[37mning I2C bu[37ms[37m...
-[37m14:36:15.230 > I[37m2[37mC device[37m [37mfound at a[37md[37mdress 0x76[37m
-[37m14:36:15.233 > Found 1 I2[37mC[37m device(s)[37m
-[37m14:36:15.235 > Trying BME2[37m8[37m0 at addre[37ms[37ms 0x76... [[37m [37m 4052][W][[37mW[37mire.cpp:301[37m][37m begin(): Bus already [37ms[37mtarted in [37mM[37master Mode.[37m[37m
-[37m14:36:15.367 > S[37mucc[37me[37mss!
-[37m14:36:15.369 > B[37mME280 sens[37mo[37mr initializ[37me[37md
-[37m14:36:16.232 > [[37mSX126[37m2[37m] Initiali[37mz[37ming ... [37ms[37muc[37mc[37mess!
-14:36:16.283 > LoRa[37m [37minitialized[37m [37mand ready[37m
-[37m14:36:18.010 > [[37mLoRaWA[37mN[37m] Attemptin[37mg[37m over-the-a[37mi[37mr activati[37mo[37mn ... [37ms[37mu[37mccess! (new[37m [37msession sta[37mr[37mted)
-[37m14:36:24.234 > N[37mew[37m [37mLoRaWAN se[37ms[37msion create[37md[37m successful[37ml[37my
-14:36:24.238 > Sending[37m [37msensor data[37m immediatel[37my after joining the network
-[37m14:36:25.234 > S[37mtart[37mi[37mng sendSen[37ms[37morData func[37mt[37mion
-14:36:25.237 > Readi[37mn[37mg BME280 se[37mn[37msor data
-[37m14:36:25.240 > S[37mensor readi[37mn[37mgs - Temp:[37m [37m26.36°C, [37mH[37mumidity: 29[37m.[37m92%, Pressu[37mr[37me: 995.72 [37mh[37mPa
-[37m14:36:26.367 > S[37mendin[37mg[37m sensor da[37mt[37ma packet of[37m [37m8 bytes
-14:36:26.370 > P[37ma[37myload hex: [37m0[37m1 07 01 2B [37m0[37m0 63 00 00[37m [37m
-14:36:26.374 > [LoRaWAN][37m [37mSending da[37mt[37ma ... [37ms[37mu[37mccess! [37mN[37mo downlink [37mr[37meceived.
-[37m14:36:31.913 > D[37mata sent su[37mc[37mcessfully![37m[37m
-[37m14:36:37.687 > M[37motio[37mn[37m detected![37m[37m
-14:36:37.689 > Motion de[37mt[37mected but s[37mk[37mipping tra[37mn[37msmission (t[37mo[37mo soon aft[37me[37mr last send[37m)[37m
-[37m14:36:42.531 > E[37mS[37mP-ROM:esp32s[37m3[37m-20210327
-[37m14:36:42.536 > B[37mu[37mild:Mar [37m2[37m7 2021
-14:36:42.538 > rs[37mt:0x1 (POWER[37mO[37mN),boot:0x[37m1[37mc (SPI_FAST[37m_[37mFLASH_BOOT[37m)[37m
-14:36:42.543 > SPIWP:0xe[37me[37m
-14:36:42.544 > mode:DIO,[37m [37mclock div:[37m1[37m
-14:36:42.546 > load:0x3f[37mc[37me3808,len:[37m0[37mx4bc
-14:36:42.548 > load:[37m0[37mx403c9700,[37ml[37men:0xbd8
-14:36:42.550 > l[37mo[37mad:0x403cc[37m7[37m00,len:0x2a[37m0[37mc
-14:36:42.553 > entry 0[37mx[37m403c98d0
-[37m14:36:42.655 > [[37m [37m  125][V[37m][37m[esp32-hal-[37mu[37mart.c:330][37m [37muartBegin()[37m:[37m UART0 bau[37md[37m(115200) Mo[37md[37me(800001c)[37m [37mrxPin(44) t[37mx[37mPin(43)
-[37m14:36:42.665 > [[37m   134][V][[37me[37msp32-hal-u[37ma[37mrt.c:416] u[37ma[37mrtBegin():[37m [37mUART0 not i[37mn[37mstalled. S[37mt[37marting inst[37ma[37mllation
-[37m14:36:42.673 > [   142][37m[[37mV][esp32-h[37ma[37ml-uart.c:46[37m7[37m] uartBegi[37mn[37m(): UART0 i[37mn[37mitializatio[37mn[37m done.
-[37m14:36:42.979 > 
-[37m14:36:42.979 > 
-14:36:42.979 > === [37mH[37meltec ESP3[37m2[37m LoRa Senso[37mr[37m Node ===[37m
-[37m14:36:42.983 > Boot count:[37m [37m1
-14:36:42.984 > Wakeup [37mw[37mas not caus[37me[37md by deep sleep
-14:36:42.987 > [   4[37m4[37m9][I][esp3[37m2[37m-hal-i2c.c:[37m7[37m5] i2cInit[37m([37m): Initiali[37ms[37ming I2C Ma[37ms[37mter: sda=45[37m [37mscl=46 fre[37mq[37m=100000
-[37m14:36:43.996 > D[37mi[37msplay initi[37ma[37mlized
-[37m14:36:45.997 > P[37mIR m[37mo[37mtion sensor[37m [37minitialize[37md[37m on pin 5
-[37m14:36:46.561 > [[37m  403[37m0[37m][W][Wire.c[37mp[37mp:301] beg[37mi[37mn(): Bus al[37mr[37meady start[37me[37md in Master[37m [37mMode.
-14:36:46.567 > Sca[37mn[37mning I2C bu[37ms[37m...
-[37m14:36:46.582 > I[37m2[37mC device[37m [37mfound at a[37md[37mdress 0x76[37m
-[37m14:36:46.586 > Found 1 I2C[37m [37mdevice(s)[37m
-[37m14:36:46.588 > Trying BME2[37m8[37m0 at addre[37ms[37ms 0x76... [[37m [37m 4053][W][[37mW[37mire.cpp:301[37m][37m begin(): [37mB[37mus already [37ms[37mtarted in [37mM[37master Mode.[37m[37m
-[37m14:36:46.720 > S[37mucces[37ms[37m!
-14:36:46.721 > B[37mM[37mE280 sensor[37m [37minitialized[37m[37m
-[37m14:36:47.584 > [[37mSX1262][37m [37mInitializi[37mn[37mg ... [37ms[37mucc[37me[37mss!
-14:36:47.636 > LoRa i[37mn[37mitialized [37ma[37mnd ready
-[37m14:36:49.363 > [[37mLoRaWAN[37m][37m Attemptin[37mg[37m over-the-a[37mi[37mr activati[37mo[37mn ... [37ms[37muc[37mc[37mess! (new s[37me[37mssion star[37mt[37med)
-[37m14:36:55.588 > N[37me[37mw LoRaWAN s[37me[37mssion creat[37me[37md successf[37mu[37mlly
-14:36:55.592 > Sendin[37mg[37m sensor da[37mt[37ma immediate[37ml[37my after jo[37mi[37mning the ne[37mt[37mwork
-[37m14:36:56.588 > S[37mtarti[37mn[37mg sendSenso[37mr[37mData funct[37mi[37mon
-14:36:56.591 > Reading[37m [37mBME280 sen[37ms[37mor data
-14:36:56.593 > Se[37mn[37msor reading[37ms[37m - Temp: 2[37m6[37m.77°C, Hum[37mi[37mdity: 28.5[37m8[37m%, Pressure[37m:[37m 995.72 hP[37ma[37m
-[37m14:36:57.721 > S[37mending s[37me[37mnsor data p[37ma[37mcket of 8 [37mb[37mytes
-14:36:57.725 > Paylo[37ma[37md hex: 01 [37m0[37mB 01 1D 00 [37m6[37m3 00 00 
-[37m14:36:57.729 > [[37mLoRaWAN] S[37me[37mnding data [37m.[37m.. [37ms[37mu[37mccess! No[37m [37mdownlink r[37me[37mceived.
-14:37:03.267 > Da[37mt[37ma sent suc[37mc[37messfully!
-[37m14:37:06.049 > M[37mo[37mtion dete[37mc[37mted!
-14:37:06.051 > Moti[37mo[37mn detected [37mb[37mut skippin[37mg[37m transmissi[37mo[37mn (too soo[37mn[37m after las[37mt[37m send)

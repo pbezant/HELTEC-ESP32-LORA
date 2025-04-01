@@ -1,88 +1,0 @@
-[37m23:32:06.329 > E[37mS[37mP-ROM:[37me[37msp32s3-202[37m1[37m0327
-[37m23:32:06.334 > B[37mui[37ml[37md:Mar 27 20[37m2[37m1
-23:32:06.337 > rst:0x1[37m [37m(POWERON),b[37mo[37mot:0x8 (SP[37mI[37m_FAST_FLASH[37m_[37mBOOT)
-23:32:06.341 > SPIW[37mP[37m:0xee
-23:32:06.342 > mod[37me[37m:DIO, clock[37m [37mdiv:1
-23:32:06.343 > loa[37md[37m:0x3fce3808[37m,[37mlen:0x4bc[37m
-[37m23:32:06.347 > load:0x403c[37m9[37m700,len:0x[37mb[37md8
-23:32:06.349 > load:0x[37m4[37m03cc700,le[37mn[37m:0x2a0c
-23:32:06.350 > en[37mt[37mry 0x403c9[37m8[37md0
-[37m23:32:06.454 > [[37m [37m  1[37m2[37m6][V][esp32[37m-[37mhal-uart.c[37m:[37m330] uartBe[37mg[37min(): UART[37m0[37m baud(11520[37m0[37m) Mode(800[37m0[37m01c) rxPin([37m4[37m4) txPin(4[37m3[37m)
-23:32:06.463 > [   135[37m][37m[V][esp32-[37mh[37mal-uart.c:4[37m1[37m6] uartBeg[37mi[37mn(): UART0 [37mn[37mot install[37me[37md. Starting[37m [37minstallati[37mo[37mn
-23:32:06.471 > [ [37m [37m 143][V][es[37mp[37m32-hal-uart[37m.[37mc:467] uar[37mt[37mBegin(): UA[37mR[37mT0 initial[37mi[37mzation done[37m.[37m
-[37m23:32:06.778 > 
-[37m23:32:06.778 > 
-[37m23:32:06.779 > === Helte[37mc[37m ESP32 LoRa[37m [37mSensor Node[37m [37m===
-23:32:06.781 > Boot [37mc[37mount: 1
-23:32:06.782 > [ [37m [37m 449][I][e[37ms[37mp32-hal-i2c[37m.[37mc:75] i2cI[37mn[37mit(): Initi[37ma[37mlising I2C[37m [37mMaster: sda[37m=[37m46 scl=45 [37mf[37mreq=100000[37m
-[37m23:32:06.891 > [[37m [37m  562][W[37m][37m[Wire.cpp:3[37m0[37m1] begin()[37m:[37m Bus alread[37my[37m started i[37mn[37m Master Mod[37me[37m.
-[37m23:32:07.713 > [[37m [37m 1384][W[37m][37m[Wire.cpp:[37m3[37m01] begin()[37m:[37m Bus alrea[37md[37my started i[37mn[37m Master Mo[37md[37me.
-23:32:07.720 > Scannin[37mg[37m I2C bus..[37m.[37m
-[37m23:32:07.727 > N[37mo[37m I2C devi[37mc[37mes found
-23:32:07.728 > T[37mr[37mying BME28[37m0[37m at address[37m [37m0x76... [ [37m [37m1398][W][Wi[37mr[37me.cpp:301] [37mb[37megin(): Bu[37ms[37m already st[37ma[37mrted in Ma[37ms[37mter Mode.
-[37m23:32:07.738 > F[37mailed
-23:32:07.738 > Tr[37my[37ming BME280 [37ma[37mt address [37m0[37mx77... [  1[37m4[37m09][W][Wir[37me[37m.cpp:301] b[37me[37mgin(): Bus[37m [37malready st[37ma[37mrted in Mas[37mt[37mer Mode.
-[37m23:32:07.748 > F[37mailed
-[37m23:32:07.848 > [[37m [37m 1519][W][37m[[37mWire.cpp:30[37m1[37m] begin():[37m [37mBus alread[37my[37m started in[37m [37mMaster Mod[37me[37m.
-23:32:07.854 > Scanning[37m [37mI2C bus...[37m[37m
-[37m23:32:07.861 > N[37mo[37m I2C device[37ms[37m found
-23:32:07.863 > Try[37mi[37mng BME280 [37ma[37mt address 0[37mx[37m76... [  15[37m3[37m3][W][Wire[37m.[37mcpp:301] be[37mg[37min(): Bus [37ma[37mlready sta[37mr[37mted in Mast[37me[37mr Mode.
-[37m23:32:07.873 > F[37mailed
-23:32:07.874 > Tryi[37mn[37mg BME280 at[37m [37maddress 0x[37m7[37m7... [  154[37m4[37m][W][Wire.[37mc[37mpp:301] beg[37mi[37mn(): Bus a[37ml[37mready start[37me[37md in Maste[37mr[37m Mode.
-23:32:07.883 > Fa[37mi[37mled
-[37m23:32:07.983 > [[37m [37m 1654][W][37m[[37mWire.cpp:30[37m1[37m] begin():[37m [37mBus already[37m [37mstarted in[37m [37mMaster Mode[37m.[37m
-23:32:07.990 > Scanning[37m [37mI2C bus...[37m
-[37m23:32:07.996 > N[37mo[37m I2C device[37ms[37m found
-23:32:07.999 > Try[37mi[37mng BME280 [37ma[37mt address 0[37mx[37m76... [  1[37m6[37m68][W][Wire[37m.[37mcpp:301] be[37mg[37min(): Bus [37ma[37mlready star[37mt[37med in Mast[37me[37mr Mode.
-23:32:08.008 > F[37ma[37miled
-23:32:08.009 > Tryi[37mn[37mg BME280 at[37m [37maddress 0x[37m7[37m7... [  16[37m7[37m9][W][Wire.[37mc[37mpp:301] beg[37mi[37mn(): Bus a[37ml[37mready start[37me[37md in Maste[37mr[37m Mode.
-23:32:08.018 > Fa[37mi[37mled
-[37m23:32:08.118 > B[37mM[37mE280 senso[37mr[37m not found[37m![37m
-[37m23:32:08.618 > I[37mn[37mitializin[37mg[37m SX1262... [37mS[37mu[37mccess!
-[37m23:32:08.676 > S[37mt[37martin[37mg[37m to listen.[37m.[37m. [37mS[37mu[37mccess!
-23:32:08.683 > L[37mo[37mRa module [37mr[37meady!
-[37m23:32:08.688 > L[37mo[37mRa i[37mn[37mitialized [37ma[37mnd ready
-[37m23:32:50.784 > E[37mSP[37m-[37mROM:esp32s3[37m-[37m20210327
-[37m23:32:50.790 > B[37mu[37mild:Mar [37m2[37m7 2021
-23:32:50.792 > rst[37m:[37m0x1 (POWER[37mO[37mN),boot:0x8[37m [37m(SPI_FAST_[37mF[37mLASH_BOOT)[37m
-[37m23:32:50.798 > SPIWP:0xee
-23:32:50.798 > mode:DIO, [37mc[37mlock div:1[37m
-[37m23:32:50.800 > load:0x3fc[37me[37m3808,len:0x[37m4[37mbc
-23:32:50.801 > load:0[37mx[37m403c9700,le[37mn[37m:0xbd8
-23:32:50.803 > lo[37ma[37md:0x403cc70[37m0[37m,len:0x2a0[37mc[37m
-23:32:50.807 > entry 0x4[37m0[37m3c98d0
-[37m23:32:50.910 > [[37m [37m  126][V][[37me[37msp32-hal-ua[37mr[37mt.c:330] u[37ma[37mrtBegin(): [37mU[37mART0 baud([37m1[37m15200) Mode[37m([37m800001c) r[37mx[37mPin(44) txP[37mi[37mn(43)
-23:32:50.919 > [ [37m [37m 135][V][es[37mp[37m32-hal-uar[37mt[37m.c:416] uar[37mt[37mBegin(): U[37mA[37mRT0 not ins[37mt[37malled. Sta[37mr[37mting instal[37ml[37mation
-[37m23:32:50.927 > [[37m   143][V[37m][37m[esp32-hal[37m-[37muart.c:467] uartBegin([37m)[37m: UART0 ini[37mt[37mialization[37m [37mdone.
-[37m23:32:51.233 > 
-[37m23:32:51.234 > 
-23:32:51.234 > === H[37me[37mltec ESP32 [37mL[37moRa Sensor[37m [37mNode ===
-23:32:51.237 > B[37mo[37mot count: [37m1[37m
-23:32:51.239 > [   449][[37mI[37m][esp32-ha[37ml[37m-i2c.c:75] [37mi[37m2cInit(): [37mI[37mnitialising[37m [37mI2C Master[37m:[37m sda=46 scl[37m=[37m45 freq=10[37m0[37m000
-[37m23:32:51.347 > [[37m   56[37m2[37m][W][Wire.[37mc[37mpp:301] beg[37mi[37mn(): Bus a[37ml[37mready start[37me[37md in Maste[37mr[37m Mode.
-[37m23:32:52.168 > [[37m [37m 138[37m4[37m][W][Wire.[37mc[37mpp:301] be[37mg[37min(): Bus a[37ml[37mready star[37mt[37med in Maste[37mr[37m Mode.
-23:32:52.174 > Sc[37ma[37mnning I2C b[37mu[37ms...
-[37m23:32:52.182 > N[37mo[37m I2C [37md[37mevices fou[37mn[37md
-23:32:52.185 > Trying B[37mM[37mE280 at ad[37md[37mress 0x76..[37m.[37m [  1398][[37mW[37m][Wire.cpp:[37m3[37m01] begin([37m)[37m: Bus alrea[37md[37my started i[37mn[37m Master Mo[37md[37me.
-23:32:52.194 > Faile[37md[37m
-23:32:52.194 > Trying BM[37mE[37m280 at add[37mr[37mess 0x77...[37m [37m[  1409][W][37m[[37mWire.cpp:3[37m0[37m1] begin():[37m [37mBus alread[37my[37m started in[37m [37mMaster Mod[37me[37m.
-23:32:52.203 > Failed[37m
-[37m23:32:52.303 > [[37m [37m 151[37m9[37m][W][Wire.c[37mp[37mp:301] beg[37mi[37mn(): Bus al[37mr[37meady start[37me[37md in Master[37m [37mMode.
-23:32:52.310 > Sca[37mn[37mning I2C bu[37ms[37m...
-[37m23:32:52.317 > N[37mo[37m I2C de[37mv[37mices found[37m[37m
-23:32:52.320 > Trying BME[37m2[37m80 at addre[37ms[37ms 0x76... [37m[[37m  1533][W][[37mW[37mire.cpp:30[37m1[37m] begin(): [37mB[37mus already[37m [37mstarted in[37m [37mMaster Mode[37m.[37m
-23:32:52.328 > Failed[37m
-[37m23:32:52.330 > Trying BME2[37m8[37m0 at addre[37ms[37ms 0x77... [[37m [37m 1544][W][W[37mi[37mre.cpp:301[37m][37m begin(): B[37mu[37ms already [37ms[37mtarted in M[37ma[37mster Mode.[37m[37m
-23:32:52.339 > Failed
-[37m23:32:52.438 > [[37m [37m 165[37m4[37m][W][Wire.c[37mp[37mp:301] beg[37mi[37mn(): Bus al[37mr[37meady starte[37md[37m in Master[37m [37mMode.
-23:32:52.445 > Sca[37mn[37mning I2C bu[37ms[37m...
-[37m23:32:52.452 > N[37mo[37m I2C de[37mv[37mices found[37m[37m
-23:32:52.455 > Trying BME[37m2[37m80 at addr[37me[37mss 0x76... [37m[[37m  1668][W][37m[[37mWire.cpp:30[37m1[37m] begin():[37m [37mBus already[37m [37mstarted in [37mM[37master Mode[37m.[37m
-23:32:52.464 > Failed
-[37m23:32:52.464 > T[37mrying BME2[37m8[37m0 at addres[37ms[37m 0x77... [[37m [37m 1679][W][W[37mi[37mre.cpp:301[37m][37m begin(): B[37mu[37ms already [37ms[37mtarted in M[37ma[37mster Mode.[37m[37m
-23:32:52.474 > Failed
-[37m23:32:52.573 > B[37mM[37mE280 [37ms[37mensor not f[37mo[37mund!
-[37m23:32:53.073 > I[37mn[37mitial[37mi[37mzing SX126[37m2[37m... [37mS[37mucces[37ms[37m!
-[37m23:32:53.132 > S[37mt[37marting to li[37ms[37mten... [37mS[37mu[37mcces[37ms[37m!
-23:32:53.139 > LoRa mod[37mu[37mle ready![37m
-[37m23:32:53.143 > L[37mo[37mRa initiali[37mz[37med and rea[37md[37my

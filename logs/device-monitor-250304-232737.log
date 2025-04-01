@@ -1,26 +1,0 @@
-[37m23:27:53.921 > E[37mS[37mP-ROM:esp[37m3[37m2s3-202103[37m2[37m7
-[37m23:27:53.927 > B[37mu[37mild:M[37ma[37mr 27 2021[37m
-[37m23:27:53.929 > rst:0x1 (PO[37mW[37mERON),boot[37m:[37m0x8 (SPI_FA[37mS[37mT_FLASH_BO[37mO[37mT)
-23:27:53.933 > SPIWP:0[37mx[37mee
-23:27:53.934 > mode:DI[37mO[37m, clock di[37mv[37m:1
-23:27:53.936 > load:0x[37m3[37mfce3808,le[37mn[37m:0x4bc
-23:27:53.938 > loa[37md[37m:0x403c970[37m0[37m,len:0xbd8[37m
-[37m23:27:53.941 > load:0x403[37mc[37mc700,len:0x[37m2[37ma0c
-23:27:53.943 > entry[37m [37m0x403c98d0[37m
-[37m23:27:54.047 > [[37m [37m  126[37m][37m[V][esp32-[37mh[37mal-uart.c:3[37m3[37m0] uartBeg[37mi[37mn(): UART0 [37mb[37maud(115200[37m)[37m Mode(80000[37m1[37mc) rxPin(44[37m)[37m txPin(43)[37m[37m
-23:27:54.056 > [   135][[37mV[37m][esp32-ha[37ml[37m-uart.c:416[37m][37m uartBegin[37m([37m): UART0 no[37mt[37m installed[37m.[37m Starting i[37mn[37mstallation[37m[37m
-23:27:54.064 > [   1[37m4[37m3][V][esp3[37m2[37m-hal-uart.c[37m:[37m467] uartB[37me[37mgin(): UART[37m0[37m initializ[37ma[37mtion done.[37m
-[37m23:27:54.170 > 
-[37m23:27:54.170 > 
-23:27:54.170 > =[37m=[37m= Heltec E[37mS[37mP32 LoRa Se[37mn[37msor Node =[37m=[37m=
-23:27:54.175 > Boot cou[37mnt: 1
-23:27:54.175 > [   2[37m4[37m9][I][esp3[37m2[37m-hal-i2c.c:[37m7[37m5] i2cInit[37m([37m): Initiali[37ms[37ming I2C Ma[37ms[37mter: sda=46[37m [37mscl=45 fre[37mq[37m=100000
-[37m23:27:54.184 > [[37m   263][[37mW[37m][Wire.cpp[37m:[37m301] begin([37m)[37m: Bus alre[37ma[37mdy started [37mi[37mn Master M[37mo[37mde.
-23:27:54.190 > [   2[37m6[37m9][W][Wire[37m.[37mcpp:301] be[37mg[37min(): Bus [37ma[37mlready star[37mt[37med in Mast[37me[37mr Mode.
-[37m23:27:54.513 > [[37m [37m  592][37m[[37mW][Wire.cp[37mp:301] begin[37m([37m): Bus alr[37me[37mady started[37m [37min Master [37mM[37mode.
-23:27:54.519 > [   [37m5[37m98][W][Wire[37m.[37mcpp:301] b[37me[37mgin(): Bus [37ma[37mlready sta[37mr[37mted in Mast[37me[37mr Mode.
-[37m23:27:54.526 > [[37m   605][W][37m[[37mWire.cpp:3[37m0[37m1] begin():[37m [37mBus alread[37my[37m started in[37m [37mMaster Mod[37me[37m.
-23:27:54.532 > BME280[37m [37msensor not [37mf[37mound!
-[37m23:27:55.032 > I[37mni[37mt[37mializing S[37mX[37m1276... [37mF[37ma[37miled, code: [37m-[37m2
-23:27:55.194 > LoRa er[37mr[37mor: Failed [37mt[37mo initiali[37mz[37me radio
-[37m23:27:55.199 > L[37moRa initi[37ma[37mlization fa[37mi[37mled!

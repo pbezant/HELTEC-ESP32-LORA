@@ -1,13 +1,0 @@
-[37m13:32:02.289 > P[37mI[37mR motion sen[37ms[37mor initiali[37mz[37med on pin [37m5[37m
-[37m13:32:02.855 > [[37m [37m 4052][W][[37mW[37mire.cpp:301[37m][37m begin(): [37mB[37mus already [37ms[37mtarted in [37mM[37master Mode.[37m[37m
-13:32:02.861 > Scanning [37mI[37m2C bus...
-[37m13:32:02.877 > N[37mo[37m I2C devices[37m [37mfound
-13:32:02.879 > Tryi[37mn[37mg BME280 a[37mt[37m address 0x[37m7[37m6... [  40[37m7[37m5][W][Wire.[37mc[37mpp:301] be[37mg[37min(): Bus a[37ml[37mready star[37mt[37med in Maste[37mr[37m Mode.
-13:32:02.888 > F[37ma[37miled
-13:32:02.889 > Tryi[37mn[37mg BME280 at[37m [37maddress 0x[37m7[37m7... [  408[37m7[37m][W][Wire.[37mc[37mpp:301] be[37mg[37min(): Bus a[37ml[37mready start[37me[37md in Maste[37mr[37m Mode.
-13:32:02.898 > F[37ma[37miled
-13:32:02.899 > BME28[37m0[37m sensor no[37mt[37m found!
-[37m13:32:03.765 > [[37mS[37mX1262] Init[37mi[37malizing ...[37m [37ms[37mu[37mccess!
-13:32:03.815 > LoRa[37m [37minitialize[37md[37m and ready[37m
-[37m13:32:05.546 > [[37mLoRa[37mW[37mAN] Attemp[37mt[37ming over-th[37me[37m-air activ[37ma[37mtion ... [37mf[37ma[37miled, co[37md[37me -1116
-[37m13:32:15.038 > M[37motion de[37mt[37mected!
