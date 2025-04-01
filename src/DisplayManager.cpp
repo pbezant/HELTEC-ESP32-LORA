@@ -161,14 +161,15 @@ void DisplayManager::setScreen(uint8_t screenIndex) {
             case 2: // LoRaWAN status screen
                 drawLoRaWANStatusScreen();
                 break;
-            case 3: // Sensor data screen
-                drawSensorDataScreen();
-                break;
-            case 4: // System log screen
+            // case 3: // Sensor data screen
+            //     drawSensorDataScreen();
+            //     break;
+            case 3: // System log screen
                 drawLogScreen();
                 break;
             default:
                 // Custom screens can be implemented here
+                drawSensorDataScreen();
                 break;
         }
         

@@ -253,6 +253,20 @@ void loop() {
     lastDisplayUpdate = millis();
   }
   
+  // Periodic network check
+  static unsigned long lastNetworkCheck = 0;
+  if (millis() - lastNetworkCheck > 300000) { // Every 5 minutes
+    lastNetworkCheck = millis();
+    if (!lora.isNetworkJoined()) {
+      display.log("Not joined, attempting to rejoin...");
+      if (lora.joinNetwork()) {
+        display.log("Successfully rejoined network");
+      } else {
+        display.log("Failed to rejoin network");
+      }
+    }
+  }
+  
   // Check if we should turn off the display to save power
   if (millis() > displayTimeout) {
     display.sleep();
