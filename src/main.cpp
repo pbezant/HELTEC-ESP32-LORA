@@ -10,7 +10,7 @@
 // Global instances
 DisplayManager display;
 SensorManager sensors;
-LoRaManager lora;
+LoRaManager lora(US915, 2); // Initialize with US915 band and subband 2
 
 // RTC variables (preserved during deep sleep)
 RTC_DATA_ATTR uint32_t bootCount = 0;
@@ -37,6 +37,31 @@ void sendSensorData(bool motionDetected = false);
 void processDownlink();
 String getBmeStatusString();
 void checkButton();
+
+// Callback function for downlink data
+void handleDownlink(uint8_t* payload, size_t size, uint8_t port) {
+  Serial.println("Downlink received on port " + String(port) + " with " + String(size) + " bytes");
+  
+  // Process downlink data here
+  if (size > 0) {
+    Serial.print("Payload hex: ");
+    for (int i = 0; i < size; i++) {
+      if (payload[i] < 16) Serial.print("0");
+      Serial.print(payload[i], HEX);
+      Serial.print(" ");
+    }
+    Serial.println();
+    
+    // Here you can implement specific actions based on downlink payload
+    // Example: if first byte is 0x01, do something
+    if (payload[0] == 0x01 && size > 1) {
+      // Handle command type 0x01
+      // e.g., payload[1] could be a parameter
+    }
+    
+    display.log("Downlink received");
+  }
+}
 
 void setup() {
   // Initialize Serial
@@ -103,20 +128,15 @@ void setup() {
   }
   delay(300);
   
-  // Convert hex strings to bytes (if using secrets.h approach)
-  uint8_t appKey[16], nwkKey[16];
+  // Register downlink callback
+  lora.setDownlinkCallback(handleDownlink);
+  
+  // Get EUIs from secrets.h
   uint64_t joinEUI = strtoull(APPEUI, NULL, 16);
   uint64_t devEUI = strtoull(DEVEUI, NULL, 16);
   
-  // Convert the App Key string to bytes
-  for (int i = 0; i < 16; i++) {
-    sscanf(APPKEY + i*2, "%2hhx", &appKey[i]);
-  }
-  
-  // Convert the Network Key string to bytes
-  for (int i = 0; i < 16; i++) {
-    sscanf(NWKKEY + i*2, "%2hhx", &nwkKey[i]);
-  }
+  // Use the appKey and nwkKey arrays directly from secrets.h
+  Serial.println("Setting LoRaWAN credentials");
   
   // Set credentials
   display.updateStartupProgress(70, "Setting credentials...");
@@ -131,12 +151,7 @@ void setup() {
     display.updateStartupProgress(100, "Network joined!");
     display.log("LoRaWAN network joined");
     
-    // Check if this was a new session
-    if (lora.getLastErrorCode() == -1118) {
-      display.log("New LoRaWAN session");
-      Serial.println("New LoRaWAN session created successfully");
-    }
-    
+    // Reset error counters
     hadSuccessfulTransmission = true;
     consecutiveErrors = 0;
     
@@ -153,18 +168,14 @@ void setup() {
     // Update the last send time to maintain the regular schedule
     lastDataSendTime = millis();
     
-    // Process any potential downlink messages
-    processDownlink();
-    
   } else {
     display.updateStartupProgress(100, "Join failed!");
-    // Get and save the last error code
-    lastJoinError = RADIOLIB_ERR_NONE; // Default
     
-    // Get the error code from the SX1262 if possible
-    if (lora.getLastErrorCode() != 0) {
-      lastJoinError = lora.getLastErrorCode();
-      // Show error on display
+    // Get the error code from the LoRaManager
+    lastJoinError = lora.getLastErrorCode();
+    
+    // Show error on display
+    if (lastJoinError != RADIOLIB_ERR_NONE) {
       display.showLoRaError(lastJoinError);
     } else {
       display.showErrorScreen("Network Error", "Failed to join LoRaWAN network");
@@ -193,9 +204,6 @@ void setup() {
     
     sendSensorData(true);
     lastDataSendTime = millis();
-    
-    // Process any downlink messages
-    processDownlink();
   }
 }
 
@@ -231,9 +239,6 @@ void loop() {
         
         sendSensorData(true);
         lastDataSendTime = millis();
-        
-        // Process any downlink data
-        processDownlink();
       } else {
         Serial.println("Motion detected but skipping transmission (too soon after last send)");
       }
@@ -263,16 +268,6 @@ void loop() {
     
     sendSensorData(false); // Regular scheduled transmission, not motion triggered
     lastDataSendTime = millis();
-    
-    // Process any downlink data
-    processDownlink();
-    
-    // Add delay after sending to ensure transmission completes
-    Serial.println("Waiting 5 seconds before sleep to ensure transmission completes");
-    delay(5000);
-    
-    // Sleep after sending data
-    goToSleep(MINIMUM_DELAY);
   } else if (lora.isNetworkJoined()) {
     // Debug: print time until next transmission
     unsigned long timeToNext = (MINIMUM_DELAY * 1000) - (millis() - lastDataSendTime);
@@ -404,7 +399,8 @@ void sendSensorData(bool motionDetected) {
   }
   Serial.println();
   
-  bool success = lora.sendData(payload, sizeof(payload), 1, false);
+  // Use the LoRaManager to send data (port 1, unconfirmed)
+  bool success = lora.sendData(payload, sizeof(payload), 1, LORAWAN_CONFIRMED_MESSAGES);
   
   if (success) {
     Serial.println("Data sent successfully!");
@@ -464,8 +460,7 @@ void sendSensorData(bool motionDetected) {
 }
 
 void processDownlink() {
-  // This function would process any downlink data received
-  // In the new implementation, this is handled in the sendData method
+  // This function is now replaced by the handleDownlink callback
 }
 
 void goToSleep(uint32_t sleepTime) {

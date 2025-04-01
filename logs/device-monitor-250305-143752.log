@@ -1,0 +1,10 @@
+[37m[[37m  402[37m8[37m][W][Wire.[37mc[37mpp:301] beg[37mi[37mn(): Bus a[37ml[37mready start[37me[37md in Maste[37mr[37m Mode.
+14:37:52.321 > Sca[37mn[37mning I2C b[37mu[37ms...
+[37m14:37:52.336 > I[37m2[37mC device[37m [37mfound at ad[37md[37mress 0x76[37m
+[37m14:37:52.340 > Found 1 I2C[37m [37mdevice(s)[37m
+[37m14:37:52.342 > Trying BME[37m2[37m80 at addre[37ms[37ms 0x76... [37m[[37m  4051][W][[37mW[37mire.cpp:30[37m1[37m] begin(): [37mB[37mus already [37ms[37mtarted in [37mM[37master Mode.[37m[37m
+[37m14:37:52.473 > S[37mucces[37ms[37m!
+14:37:52.475 > BM[37mE[37m280 sensor[37m [37minitialized[37m[37m
+[37m14:37:53.338 > [[37mSX1262[37m][37m Initializi[37mn[37mg ... [37ms[37mucce[37ms[37ms!
+14:37:53.389 > LoRa in[37mi[37mtialized a[37mn[37md ready
+[37m14:37:55.113 > [[37mL[37moRaWAN] A[37mt[37mtempting o[37mv[37mer-the-air[37m [37mactivation [37m.[37m.. 

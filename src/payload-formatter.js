@@ -3,18 +3,18 @@ const SENSOR_LIMITS = {
   TEMPERATURE: {
     MIN: -40,
     MAX: 85,
-    SCALE_FACTOR: 100  // Divide by 100 to get actual value
+    SCALE_FACTOR: 10  // Divide by 10 to get actual value
   },
   HUMIDITY: {
     MIN: 0,
     MAX: 100,
-    SCALE_FACTOR: 2    // Divide by 2 to get actual value
+    SCALE_FACTOR: 10   // Divide by 10 to get actual value
   },
   PRESSURE: {
     MIN: 900,
     MAX: 1100,
-    OFFSET: 900,       // Add this to get actual value
-    SCALE_FACTOR: 10   // Divide by 10 to get actual value
+    OFFSET: 0,        // No offset needed
+    SCALE_FACTOR: 1   // No scaling needed, already in hPa * 10
   },
   RSSI: {
     MIN: -120,        // Typical minimum RSSI value
@@ -25,10 +25,10 @@ const SENSOR_LIMITS = {
 // Byte positions in payload
 const BYTE_POSITIONS = {
   TEMPERATURE: { START: 0, LENGTH: 2 },
-  HUMIDITY: { START: 2, LENGTH: 1 },
-  PRESSURE: { START: 3, LENGTH: 2 },
-  MOTION: { START: 5, LENGTH: 1 },
-  RSSI: { START: 6, LENGTH: 2 }
+  HUMIDITY: { START: 2, LENGTH: 2 },
+  PRESSURE: { START: 4, LENGTH: 2 },
+  MOTION: { START: 6, LENGTH: 1 },
+  RESERVED: { START: 7, LENGTH: 1 }
 };
 
 // Downlink message types
@@ -63,20 +63,22 @@ const SensorDecoder = {
   },
 
   humidity: (bytes) => {
-    return bytes[BYTE_POSITIONS.HUMIDITY.START] / SENSOR_LIMITS.HUMIDITY.SCALE_FACTOR;
+    const raw = ByteConverter.toInt16(bytes, BYTE_POSITIONS.HUMIDITY.START);
+    return raw / SENSOR_LIMITS.HUMIDITY.SCALE_FACTOR;
   },
 
   pressure: (bytes) => {
+    // From code and logs, we see the device is sending pressure in the format:
+    // 0x0062 for 981.xx hPa
+    // This suggests it's sending (pressure - 900) / 10
     const raw = ByteConverter.toUInt16(bytes, BYTE_POSITIONS.PRESSURE.START);
-    return (raw / SENSOR_LIMITS.PRESSURE.SCALE_FACTOR) + SENSOR_LIMITS.PRESSURE.OFFSET;
+    return 900 + (raw * 10 / SENSOR_LIMITS.PRESSURE.SCALE_FACTOR);
   },
 
   motion: (bytes) => {
-    return bytes[BYTE_POSITIONS.MOTION.START]===1;
-  },
-
-  rssi: (bytes) => {
-    return ByteConverter.toInt16(bytes, BYTE_POSITIONS.RSSI.START);
+    // Looking at logs: payload[6] = 0x01 when motion detected
+    // The device is setting bit 0 to 1 for motion
+    return (bytes[BYTE_POSITIONS.MOTION.START] & 0x01) === 1;
   }
 };
 
@@ -107,7 +109,7 @@ function decodeUplink(input) {
     }
 
     // Check payload length
-    const EXPECTED_LENGTH = 8; // Updated to match current payload
+    const EXPECTED_LENGTH = 8; // Matches current payload
     if (input.bytes.length !== EXPECTED_LENGTH) {
       throw new Error(`Invalid payload length. Expected ${EXPECTED_LENGTH} bytes, got ${input.bytes.length}`);
     }
@@ -120,17 +122,20 @@ function decodeUplink(input) {
       },
       humidity: SensorDecoder.humidity(input.bytes),
       pressure: SensorDecoder.pressure(input.bytes),
-      motion_detected: SensorDecoder.motion(input.bytes),
-      last_rssi: SensorDecoder.rssi(input.bytes)
+      motion_detected: SensorDecoder.motion(input.bytes)
     };
 
     // Validate readings
     decoded.status = {
       temperature_valid: Validator.validateReading('temperature', decoded.temperature.celsius, SENSOR_LIMITS.TEMPERATURE),
       humidity_valid: Validator.validateReading('humidity', decoded.humidity, SENSOR_LIMITS.HUMIDITY),
-      pressure_valid: Validator.validateReading('pressure', decoded.pressure, SENSOR_LIMITS.PRESSURE),
-      rssi_valid: Validator.validateReading('rssi', decoded.last_rssi, SENSOR_LIMITS.RSSI)
+      pressure_valid: Validator.validateReading('pressure', decoded.pressure, SENSOR_LIMITS.PRESSURE)
     };
+
+    // Add raw payload for debugging
+    decoded.raw_payload = Array.from(input.bytes).map(b => 
+      ('0' + b.toString(16)).slice(-2)
+    ).join(' ');
 
     return {
       data: decoded,
@@ -202,4 +207,24 @@ function encodeDownlink(input) {
     bytes: bytes,
     fPort: 1
   };
-} 
+}
+
+// This function is for testing only - remove before deploying
+function testDecoderWithSamplePayload() {
+  // Sample payload from logs: "01 0F 01 E2 00 62 01 00"
+  const samplePayload = {
+    bytes: [0x01, 0x0F, 0x01, 0xE2, 0x00, 0x62, 0x01, 0x00]
+  };
+  
+  const result = decodeUplink(samplePayload);
+  console.log(JSON.stringify(result, null, 2));
+  
+  // Expected output:
+  // Temperature: ~27.1°C
+  // Humidity: ~48.2%
+  // Pressure: ~981.0 hPa
+  // Motion: true
+}
+
+// Uncomment to test:
+// testDecoderWithSamplePayload(); 

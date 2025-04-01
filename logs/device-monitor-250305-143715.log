@@ -1,0 +1,20 @@
+[37m14:37:16.459 > D[37mispla[37my[37m initialize[37md[37m
+[37m14:37:18.457 > P[37mIR [37mm[37motion sens[37mo[37mr initializ[37me[37md on pin 5[37m[37m
+[37m14:37:19.019 > [[37m [37m 4016][W[37m][37m[Wire.cpp:3[37m0[37m1] begin()[37m:[37m Bus alread[37my[37m started i[37mn[37m Master Mod[37me[37m.
+14:37:19.026 > Scannin[37mg[37m I2C bus...[37m[37m
+[37m14:37:19.041 > I[37m2[37mC device fou[37mn[37md at addre[37ms[37ms 0x76
+14:37:19.044 > Fou[37mn[37md 1 I2C de[37mv[37mice(s)
+14:37:19.046 > Try[37mi[37mng BME280 [37ma[37mt address 0[37mx[37m76... [  4[37m0[37m39][W][Wire[37m.[37mcpp:301] be[37mg[37min(): Bus [37ma[37mlready star[37mt[37med in Mast[37me[37mr Mode.
+[37m14:37:19.178 > S[37mucc[37me[37mss!
+[37m14:37:19.180 > B[37mME280 sens[37mo[37mr initializ[37me[37md
+[37m14:37:20.041 > [[37mS[37mX1262] I[37mn[37mitializing [37m.[37m.. [37ms[37muc[37mc[37mess!
+14:37:20.093 > LoRa [37mi[37mnitialized[37m [37mand ready
+[37m14:37:21.817 > [[37mL[37moRaWAN] Atte[37mm[37mpting over[37m-[37mthe-air act[37mi[37mvation ...[37m [37ms[37mucces[37ms[37m! (new ses[37ms[37mion started[37m)[37m
+[37m14:37:28.010 > N[37mew [37mL[37moRaWAN sess[37mi[37mon created[37m [37msuccessfull[37my[37m
+14:37:28.014 > Sending [37ms[37mensor data [37mi[37mmmediately[37m [37mafter joini[37mn[37mg the netw[37mo[37mrk
+[37m14:37:29.010 > S[37mtart[37mi[37mng sendSens[37mo[37mrData funct[37mi[37mon
+14:37:29.013 > Readin[37mg[37m BME280 sen[37ms[37mor data
+14:37:29.015 > S[37me[37mnsor readin[37mg[37ms - Temp: [37m2[37m4.07°C, Hu[37mm[37midity: 33.[37m6[37m9%, Pressur[37me[37m: 995.69 h[37mP[37ma
+[37m14:37:30.141 > S[37mending s[37me[37mnsor data p[37ma[37mcket of 8 [37mb[37mytes
+14:37:30.145 > Paylo[37ma[37md hex: 00 F[37m0[37m 01 50 00 [37m6[37m3 00 00 
+14:37:30.148 > [[37mL[37moRaWAN] Se[37mn[37mding data .[37m.[37m. 
