@@ -2,7 +2,7 @@
 #include "Config.h"
 #include "DisplayManager.h"
 #include "SensorManager.h"
-#include "LoRaManager.h"
+#include <LoRaManager.h>
 
 // Include secrets for LoRaWAN credentials
 #include "secrets.h"
