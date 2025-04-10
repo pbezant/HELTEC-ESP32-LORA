@@ -1,0 +1,123 @@
+[37mP[37mIR mo[37mt[37mion sensor [37mi[37mnitialized[37m [37mon pin 5
+13:01:32.407 > I[37mN[37mFO: Motion[37m [37msensor read[37my[37m
+[37m13:01:32.969 > [[37m [37m 40[37m3[37m0][W][Wire.[37mc[37mpp:301] be[37mg[37min(): Bus a[37ml[37mready star[37mt[37med in Maste[37mr[37m Mode.
+13:01:32.975 > Sc[37ma[37mnning I2C b[37mu[37ms...
+[37m13:01:32.991 > N[37mo[37m I2C de[37mv[37mices found[37m
+[37m13:01:32.994 > Trying BME[37m2[37m80 at addre[37ms[37ms 0x76... [37m[[37m  4053][W][[37mW[37mire.cpp:30[37m1[37m] begin():[37m [37mBus already[37m [37mstarted in [37mM[37master Mode[37m.[37m
+13:01:33.003 > Failed[37m
+[37m13:01:33.004 > Trying BME[37m2[37m80 at addre[37ms[37ms 0x77... [37m[[37m  4064][W][[37mW[37mire.cpp:30[37m1[37m] begin(): [37mB[37mus already [37ms[37mtarted in [37mM[37master Mode.[37m[37m
+13:01:33.013 > Failed[37m
+[37m13:01:33.014 > BME280 sen[37ms[37mor not foun[37md[37m!
+13:01:33.016 > WARN: BM[37mE[37m280 sensor[37m [37mnot found![37m
+[37m13:01:33.878 > [[37mL[37moRaManage[37mr[37m] Creating[37m [37mSX1262 inst[37ma[37mnce...
+13:01:33.881 > [S[37mX[37m1262] Initi[37ma[37mlizing ...[37m [37ms[37mucce[37ms[37ms!
+13:01:33.929 > [LoRaMa[37mn[37mager] Conf[37mi[37mguring LoRa[37mW[37mAN for EU8[37m6[37m8 band...
+[37m13:01:33.934 > [[37mLoRaManager[37m][37m Using EU8[37m6[37m8 region wi[37mt[37mh subband:[37m [37m2
+13:01:33.938 > [LoRaMa[37mn[37mager] Initi[37ma[37mlizing node[37m.[37m..
+13:01:33.941 > [LoRaM[37ma[37mnager] LoRa[37mW[37mAN node in[37mi[37mtialized su[37mc[37mcessfully![37m[37m
+13:01:33.946 > LoRa initi[37ma[37mlized and [37mr[37meady
+13:01:33.948 > INFO:[37m [37mLoRa initi[37ma[37mlized
+[37m13:01:34.249 > [[37mLoRaMa[37mn[37mager] Down[37ml[37mink callbac[37mk[37m registere[37md[37m
+13:01:34.253 > Setting L[37mo[37mRaWAN cred[37me[37mntials
+[37m13:01:34.813 > I[37mNF[37mO[37m: LoRaWAN c[37mr[37medentials [37ms[37met
+[37m13:01:35.676 > [[37mLoRa[37mW[37mAN] Attemp[37mt[37ming over-th[37me[37m-air activ[37ma[37mtion (attem[37mp[37mt 1 of 5) [37m.[37m.. [37m[[37mLoRaW[37mA[37mN] Setting[37m [37mdata rate t[37mo[37m DR1 for r[37me[37mliability
+[37m13:01:46.635 > s[37mucc[37me[37mss! (new s[37me[37mssion start[37me[37md)
+[37m13:01:47.198 > I[37mN[37mFO: LoRaWA[37mN[37m network j[37mo[37mined
+13:01:47.200 > Sendi[37mn[37mg sensor d[37ma[37mta immediat[37me[37mly after j[37mo[37mining the n[37me[37mtwork
+13:01:47.205 > INF[37mO[37m: Sending i[37mn[37mitial data[37m[37m
+[37m13:01:48.198 > S[37mtartin[37mg[37m sendSenso[37mr[37mData functi[37mo[37mn
+13:01:48.201 > BME280 [37mn[37mot availabl[37me[37m, using dum[37mm[37my values
+[37m13:01:48.761 > I[37mNFO:[37m [37mSending da[37mt[37ma...
+[37m13:01:49.324 > S[37mendin[37mg[37m sensor da[37mt[37ma packet of[37m [37m8 bytes
+13:01:49.327 > Pa[37my[37mload hex: [37m0[37m0 00 00 00 [37m0[37m0 00 00 00[37m [37m
+13:01:49.331 > [LoRaWAN][37m [37mSending da[37mt[37ma (attempt [37m1[37m of 3) ... [37ms[37mucc[37me[37mss!
+13:01:54.644 > Data [37ms[37ment success[37mf[37mully!
+13:01:54.646 > INFO[37m:[37m Data sent[37m [37msuccessfull[37my[37m
+[37m13:01:57.416 > M[37mo[37mtion detecte[37md[37m!
+13:01:57.418 > INFO: M[37mo[37mtion detect[37me[37md
+13:01:57.420 > Motion [37md[37metected but[37m [37mskipping t[37mr[37mansmission [37m([37mtoo soon a[37mf[37mter last se[37mn[37md)
+[37m13:01:58.945 > N[37metwork[37m [37mjoined. Ne[37mx[37mt transmiss[37mi[37mon in 116 [37ms[37meconds
+[37m13:02:08.945 > N[37metwork[37m [37mjoined. Nex[37mt[37m transmiss[37mi[37mon in 106 s[37me[37mconds
+[37m13:02:18.954 > N[37metwork[37m [37mjoined. Nex[37mt[37m transmiss[37mi[37mon in 96 se[37mc[37monds
+[37m13:02:38.954 > N[37metwork[37m [37mjoined. Nex[37mt[37m transmiss[37mi[37mon in 76 se[37mc[37monds
+[37m13:02:48.954 > N[37metwork[37m [37mjoined. Nex[37mt[37m transmiss[37mi[37mon in 66 se[37mc[37monds
+[37m13:03:08.954 > N[37metwork[37m [37mjoined. Nex[37mt[37m transmissi[37mo[37mn in 46 se[37mc[37monds
+[37m13:03:18.954 > N[37metwork[37m [37mjoined. Nex[37mt[37m transmissi[37mo[37mn in 36 se[37mc[37monds
+[37m13:03:28.954 > N[37metwork[37m [37mjoined. Nex[37mt[37m transmissi[37mo[37mn in 26 se[37mc[37monds
+[37m13:03:38.955 > N[37metwork [37mj[37moined. Nex[37mt[37m transmissi[37mo[37mn in 16 se[37mc[37monds
+[37m13:03:55.805 > N[37metwork [37mj[37moined, pre[37mp[37maring to se[37mn[37md sensor d[37ma[37mta
+13:03:55.809 > INFO: P[37mr[37meparing to[37m [37msend data
+[37m13:03:56.804 > S[37mtarting[37m [37msendSensorD[37ma[37mta functio[37mn[37m
+13:03:56.808 > BME280 no[37mt[37m available[37m,[37m using dum[37mm[37my values
+[37m13:03:57.370 > I[37mN[37mFO: Send[37mi[37mng data...[37m
+[37m13:03:57.936 > S[37mending [37ms[37mensor data [37mp[37macket of 8[37m [37mbytes
+13:03:57.939 > Payl[37mo[37mad hex: 00[37m [37m00 00 00 00[37m [37m00 00 00 [37m
+[37m13:03:57.943 > [LoRaWAN] S[37me[37mnding data[37m [37m(attempt 1 [37mo[37mf 3) ... [37ms[37mucce[37ms[37ms!
+13:04:03.256 > Data s[37me[37mnt successf[37mu[37mlly!
+13:04:03.258 > INFO[37m:[37m Data sent [37ms[37muccessfull[37my[37m
+[37m13:04:08.956 > N[37metwork[37m [37mjoined. Nex[37mt[37m transmiss[37mi[37mon in 115 s[37me[37mconds
+[37m13:04:18.956 > N[37metwork [37mj[37moined. Nex[37mt[37m transmissi[37mo[37mn in 105 s[37me[37mconds
+[37m13:04:28.956 > N[37metwork [37mj[37moined. Nex[37mt[37m transmissi[37mo[37mn in 95 se[37mc[37monds
+[37m13:04:38.956 > N[37metwork [37mj[37moined. Nex[37mt[37m transmissi[37mo[37mn in 85 se[37mc[37monds
+[37m13:04:48.956 > N[37metwork [37mj[37moined. Nex[37mt[37m transmissi[37mo[37mn in 75 se[37mc[37monds
+[37m13:04:58.956 > N[37metwork [37mj[37moined. Nex[37mt[37m transmissi[37mo[37mn in 65 se[37mc[37monds
+[37m13:05:08.956 > N[37metwork [37mj[37moined. Nex[37mt[37m transmissi[37mo[37mn in 55 se[37mc[37monds
+[37m13:05:28.956 > N[37metwork [37mj[37moined. Nex[37mt[37m transmissi[37mo[37mn in 35 sec[37mo[37mnds
+[37m13:05:38.956 > N[37metwork [37mj[37moined. Nex[37mt[37m transmissi[37mo[37mn in 25 se[37mc[37monds
+[37m13:05:58.957 > N[37metwork [37mj[37moined. Nex[37mt[37m transmissi[37mo[37mn in 5 sec[37mo[37mnds
+[37m13:06:04.406 > N[37metwork [37mj[37moined, prep[37ma[37mring to se[37mn[37md sensor da[37mt[37ma
+13:06:04.411 > INFO: P[37mr[37meparing to [37ms[37mend data
+[37m13:06:05.406 > S[37mtarting[37m [37msendSensorD[37ma[37mta functio[37mn[37m
+13:06:05.410 > BME280 no[37mt[37m available[37m,[37m using dumm[37my[37m values
+[37m13:06:05.972 > I[37mNF[37mO[37m: Sending d[37ma[37mta...
+[37m13:06:06.537 > S[37mend[37mi[37mng sensor d[37ma[37mta packet o[37mf[37m 8 bytes
+[37m13:06:06.541 > P[37mayload hex:[37m [37m00 00 00 0[37m0[37m 00 00 00 0[37m0[37m 
+13:06:06.544 > [LoRaWA[37mN[37m] Sending [37md[37mata (attemp[37mt[37m 1 of 3) .[37m.[37m. [37ms[37mucce[37ms[37ms!
+13:06:11.857 > Data se[37mn[37mt successf[37mu[37mlly!
+13:06:11.859 > INFO[37m:[37m Data sent [37ms[37muccessfully[37m[37m
+[37m13:06:18.956 > N[37metwork [37mj[37moined. Nex[37mt[37m transmissi[37mo[37mn in 114 s[37me[37mconds
+[37m13:06:28.956 > N[37metwork [37mj[37moined. Nex[37mt[37m transmissi[37mo[37mn in 104 s[37me[37mconds
+[37m13:06:38.956 > N[37metwork [37mj[37moined. Nex[37mt[37m transmissi[37mo[37mn in 94 se[37mc[37monds
+[37m13:06:48.957 > N[37metwork [37mj[37moined. Nex[37mt[37m transmissi[37mo[37mn in 84 se[37mc[37monds
+[37m13:06:58.957 > N[37metwork [37mj[37moined. Nex[37mt[37m transmissi[37mo[37mn in 74 se[37mc[37monds
+[37m13:07:18.957 > N[37metwork [37mj[37moined. Nex[37mt[37m transmissi[37mo[37mn in 54 se[37mc[37monds
+[37m13:07:28.957 > N[37metwork [37mj[37moined. Nex[37mt[37m transmissi[37mo[37mn in 44 se[37mc[37monds
+[37m13:07:38.957 > N[37metwork [37mj[37moined. Nex[37mt[37m transmissi[37mo[37mn in 34 se[37mc[37monds
+[37m13:07:48.957 > N[37metwork [37mj[37moined. Nex[37mt[37m transmissi[37mo[37mn in 24 se[37mc[37monds
+[37m13:07:58.957 > N[37metwork [37mj[37moined. Nex[37mt[37m transmissi[37mo[37mn in 14 se[37mc[37monds
+[37m13:08:08.957 > N[37metwork [37mj[37moined. Nex[37mt[37m transmissi[37mo[37mn in 4 sec[37mo[37mnds
+[37m13:08:13.007 > N[37metwork [37mj[37moined, pre[37mp[37maring to se[37mn[37md sensor d[37ma[37mta
+13:08:13.011 > INFO: P[37mr[37meparing to[37m [37msend data
+[37m13:08:14.007 > S[37mtarting[37m [37msendSensor[37mD[37mata functio[37mn[37m
+13:08:14.010 > BME280 n[37mo[37mt available[37m,[37m using dumm[37my[37m values
+[37m13:08:14.573 > I[37mN[37mFO: Sending [37md[37mata...
+[37m13:08:15.138 > S[37me[37mnding sensor[37m [37mdata packe[37mt[37m of 8 bytes[37m[37m
+13:08:15.141 > Payload h[37me[37mx: 00 00 00[37m [37m00 00 00 0[37m0[37m 00 
+13:08:15.144 > [LoRa[37mW[37mAN] Sendin[37mg[37m data (att[37me[37mmpt 1 of 3)[37m [37m... [37ms[37mucce[37ms[37ms!
+13:08:20.458 > Data s[37me[37mnt success[37mf[37mully!
+13:08:20.460 > INFO[37m:[37m Data sent [37ms[37muccessfull[37my[37m
+[37m13:08:28.958 > N[37metwork[37m [37mjoined. Nex[37mt[37m transmiss[37mi[37mon in 112 s[37me[37mconds
+[37m13:08:38.958 > N[37metwork [37mj[37moined. Nex[37mt[37m transmissi[37mo[37mn in 102 s[37me[37mconds
+[37m13:08:48.958 > N[37metwork[37m [37mjoined. Nex[37mt[37m transmissi[37mo[37mn in 92 se[37mc[37monds
+[37m13:09:08.958 > N[37metwork[37m [37mjoined. Nex[37mt[37m transmiss[37mi[37mon in 72 se[37mc[37monds
+[37m13:09:18.958 > N[37metwork [37mj[37moined. Nex[37mt[37m transmissi[37mo[37mn in 62 se[37mc[37monds
+[37m13:09:28.959 > N[37metwork [37mj[37moined. Nex[37mt[37m transmissi[37mo[37mn in 52 se[37mc[37monds
+[37m13:09:38.958 > N[37metwork[37m [37mjoined. Nex[37mt[37m transmissi[37mo[37mn in 42 se[37mc[37monds
+[37m13:09:48.959 > N[37metwork [37mj[37moined. Nex[37mt[37m transmissi[37mo[37mn in 32 se[37mc[37monds
+[37m13:09:58.959 > N[37metwork[37m [37mjoined. Nex[37mt[37m transmiss[37mi[37mon in 22 se[37mc[37monds
+[37m13:10:08.959 > N[37metwork [37mj[37moined. Nex[37mt[37m transmissi[37mo[37mn in 12 se[37mc[37monds
+[37m13:10:21.609 > N[37metwork [37mj[37moined, pre[37mp[37maring to se[37mn[37md sensor d[37ma[37mta
+13:10:21.613 > INFO: P[37mr[37meparing to[37m [37msend data
+[37m13:10:22.609 > S[37mtarting[37m [37msendSensor[37mD[37mata functio[37mn[37m
+13:10:22.612 > BME280 n[37mo[37mt available[37m,[37m using dum[37mm[37my values
+[37m13:10:23.174 > I[37mN[37mFO: Sending[37m [37mdata...
+[37m13:10:23.739 > S[37me[37mnding se[37mn[37msor data pa[37mc[37mket of 8 b[37my[37mtes
+13:10:23.743 > Payloa[37md[37m hex: 00 0[37m0[37m 00 00 00 0[37m0[37m 00 00 
+13:10:23.746 > [L[37mo[37mRaWAN] Sen[37md[37ming data (a[37mt[37mtempt 1 of[37m [37m3) ... [37ms[37mucce[37ms[37ms!
+13:10:29.060 > Data s[37me[37mnt successf[37mu[37mlly!
+13:10:29.062 > INFO[37m:[37m Data sent [37ms[37muccessfull[37my[37m
+[37m13:10:38.960 > N[37metwork[37m [37mjoined. Nex[37mt[37m transmiss[37mi[37mon in 111 s[37me[37mconds
+[37m13:10:58.960 > N[37metwork [37mj[37moined. Nex[37mt[37m transmiss[37mi[37mon in 91 se[37mc[37monds
+[37m13:11:08.960 > N[37metwork [37mj[37moined. Nex[37mt[37m transmissi[37mo[37mn in 81 se[37mc[37monds
+[37m13:18:08.940 > N[37metwork joined. Next transmission in 47 seconds
+[37m13:18:18.913 > N[37metwork joined. Next transmission in 37 seconds[37m

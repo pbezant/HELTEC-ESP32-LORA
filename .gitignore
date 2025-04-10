@@ -6,3 +6,4 @@
 include/secrets.h
 lib/.DS_Store
 .DS_Store
+include/secrets.h

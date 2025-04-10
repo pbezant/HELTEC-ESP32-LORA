@@ -1,0 +1,132 @@
+[37m12:56:57.887 > P[37mI[37mR motion sen[37ms[37mor initiali[37mz[37med on pin [37m5[37m
+12:56:57.891 > INFO: Mot[37mi[37mon sensor [37mr[37meady
+[37m12:56:58.451 > [[37m  4020[37m][37m[W][Wire.cp[37mp[37m:301] begi[37mn[37m(): Bus alr[37me[37mady starte[37md[37m in Master [37mM[37mode.
+12:56:58.457 > Scan[37mn[37ming I2C bus[37m.[37m..
+[37m12:56:58.473 > N[37mo[37m I2C devi[37mc[37mes found
+12:56:58.475 > T[37mr[37mying BME28[37m0[37m at addres[37ms[37m 0x76... [ [37m [37m4043][W][W[37mi[37mre.cpp:301][37m [37mbegin(): B[37mu[37ms already s[37mt[37marted in Ma[37ms[37mter Mode.[37m
+[37m12:56:58.485 > Failed
+12:56:58.485 > T[37mr[37mying BME28[37m0[37m at address[37m [37m0x77... [ [37m [37m4054][W][Wi[37mr[37me.cpp:301][37m [37mbegin(): Bu[37ms[37m already s[37mt[37marted in Ma[37ms[37mter Mode.[37m
+[37m12:56:58.495 > Failed
+12:56:58.495 > B[37mM[37mE280 sensor[37m [37mnot found![37m[37m
+12:56:58.498 > WARN: BME2[37m8[37m0 sensor n[37mo[37mt found!
+[37m12:56:59.359 > [[37mLoRaMana[37mg[37mer] Creati[37mn[37mg SX1262 in[37ms[37mtance...
+[37m12:56:59.363 > [[37mSX1262] Ini[37mt[37mializing .[37m.[37m. [37ms[37mu[37mccess!
+12:56:59.410 > [Lo[37mR[37maManager] C[37mo[37mnfiguring [37mL[37moRaWAN for [37mE[37mU868 band.[37m.[37m.
+12:56:59.415 > [LoRaMan[37ma[37mger] Using[37m [37mEU868 regio[37mn[37m with subb[37ma[37mnd: 2
+12:56:59.419 > [LoR[37ma[37mManager] In[37mi[37mtializing [37mn[37mode...
+12:56:59.422 > [Lo[37mR[37maManager] [37mL[37moRaWAN node[37m [37minitialize[37md[37m successful[37ml[37my!
+12:56:59.427 > LoRa i[37mn[37mitialized [37ma[37mnd ready
+12:56:59.429 > I[37mN[37mFO: LoRa in[37mi[37mtialized
+[37m12:56:59.730 > [[37mLo[37mR[37maManager] D[37mo[37mwnlink cal[37ml[37mback regist[37me[37mred
+12:56:59.734 > Setti[37mn[37mg LoRaWAN c[37mr[37medentials[37m
+[37m12:57:00.294 > I[37mNFO: [37mL[37moRaWAN cred[37me[37mntials set[37m[37m
+[37m12:57:01.158 > [[37mLoRaWAN] [37mA[37mttempting o[37mv[37mer-the-air[37m [37mactivation [37m([37mattempt 1 [37mo[37mf 5) ... [37mf[37ma[37miled, co[37md[37me -1116
+12:57:07.875 > [[37mL[37moRaWAN] Err[37mo[37mr code: -1[37m1[37m16
+[37m12:57:08.874 > [[37mLoR[37ma[37mWAN] Attemp[37mt[37ming over-t[37mh[37me-air activ[37ma[37mtion (atte[37mm[37mpt 2 of 5) [37m.[37m.. [37mf[37ma[37miled, cod[37me[37m -1116
+12:57:15.599 > [L[37mo[37mRaWAN] Erro[37mr[37m code: -11[37m1[37m6
+[37m12:57:17.598 > [[37mLoRa[37mW[37mAN] Attemp[37mt[37ming over-th[37me[37m-air activ[37ma[37mtion (attem[37mpt 3 of 5) [37m.[37m.. [37mf[37mailed, cod[37me[37m -1116
+12:57:24.323 > [Lo[37mR[37maWAN] Erro[37mr[37m code: -111[37m6[37m
+[37m12:57:28.322 > [[37mLoRa[37mW[37mAN] Attempt[37mi[37mng over-the[37m-[37mair activa[37mt[37mion (attemp[37mt[37m 4 of 5) .[37m.[37m. [37mf[37ma[37miled, code[37m [37m-1116
+12:57:35.047 > [Lo[37mR[37maWAN] Error[37m [37mcode: -1116[37m[37m
+[37m12:57:43.046 > [[37mLoRaWAN] Attempti[37mn[37mg over-the-[37ma[37mir activat[37mi[37mon (attempt[37m [37m5 of 5) ..[37m.[37m [37mf[37mailed, code -1116
+12:57:49.773 > [LoRa[37mWAN] Error code: -1116[37m
+[37m12:57:59.199 > E[37mSP-ROM:esp32s3-202[37m1[37m0327
+[37m12:57:59.204 > B[37muil[37md[37m:Mar 27 20[37m2[37m1
+12:57:59.207 > rst:0x1 [37m(POWERON),b[37mo[37mot:0x8 (SPI[37m_[37mFAST_FLASH[37m_[37mBOOT)
+12:57:59.210 > SPIW[37mP[37m:0xee
+12:57:59.211 > mod[37me[37m:DIO, clock[37m [37mdiv:1
+12:57:59.213 > loa[37md[37m:0x3fce3808[37m,[37mlen:0x4bc[37m
+[37m12:57:59.216 > load:0x403c[37m9[37m700,len:0xb[37md[37m8
+12:57:59.218 > load:0x[37m4[37m03cc700,len[37m:[37m0x2a0c
+12:57:59.220 > en[37mt[37mry 0x403c98[37md[37m0
+[37m12:57:59.316 > [[37m   11[37m7[37m][V][esp32-[37mh[37mal-uart.c:[37m3[37m30] uartBeg[37mi[37mn(): UART0[37m [37mbaud(115200[37m)[37m Mode(8000[37m0[37m1c) rxPin(4[37m4[37m) txPin(43[37m)[37m
+12:57:59.325 > [   127][37m[[37mV][esp32-h[37ma[37ml-uart.c:41[37m6[37m] uartBegi[37mn[37m(): UART0 n[37mo[37mt installe[37md[37m. Starting [37mi[37mnstallatio[37mn[37m
+12:57:59.333 > [   [37m1[37m35][V][esp[37m3[37m2-hal-uart.[37mc[37m:467] uart[37mB[37megin(): UAR[37mT[37m0 initiali[37mz[37mation done.[37m[37m
+[37m12:57:59.639 > 
+[37m12:57:59.640 > 
+[37m12:57:59.640 > === Heltec [37mE[37mSP32 LoRa S[37me[37mnsor Node [37m=[37m==
+12:57:59.643 > Boot co[37mu[37mnt: 1
+12:57:59.644 > Wak[37me[37mup was not [37mc[37maused by d[37me[37mep sleep
+12:57:59.647 > [[37m [37m  441][I][[37me[37msp32-hal-i2[37mc[37m.c:75] i2cI[37mn[37mit(): Init[37mi[37malising I2C[37m [37mMaster: sd[37ma[37m=45 scl=46 [37mf[37mreq=100000[37m[37m
+[37m12:58:00.657 > D[37mi[37msplay init[37mi[37malized
+[37m12:58:02.655 > P[37mI[37mR motion se[37mn[37msor initia[37ml[37mized on pin[37m [37m5
+12:58:02.659 > INFO: Mo[37mt[37mion sensor[37m [37mready
+[37m12:58:03.218 > [[37m  [37m4[37m020][W][Wir[37me[37m.cpp:301] [37mb[37megin(): Bus[37m [37malready st[37ma[37mrted in Mas[37mt[37mer Mode.
+[37m12:58:03.225 > S[37mcanning I2C[37m [37mbus...
+[37m12:58:03.241 > N[37mo[37m I2C [37md[37mevices foun[37md[37m
+12:58:03.243 > Trying B[37mM[37mE280 at add[37mr[37mess 0x76..[37m.[37m [  4043][W[37m][37m[Wire.cpp:[37m3[37m01] begin()[37m:[37m Bus alrea[37md[37my started i[37mn[37m Master Mo[37md[37me.
+12:58:03.252 > Faile[37md[37m
+12:58:03.253 > Trying B[37mM[37mE280 at add[37mr[37mess 0x77..[37m.[37m [  4054][W[37m][37m[Wire.cpp:[37m3[37m01] begin()[37m:[37m Bus alrea[37md[37my started i[37mn[37m Master Mod[37me[37m.
+12:58:03.262 > Faile[37md[37m
+12:58:03.263 > BME280 se[37mn[37msor not fo[37mu[37mnd!
+12:58:03.265 > WARN: [37mB[37mME280 sens[37mo[37mr not found[37m![37m
+[37m12:58:04.125 > [[37mLoRaMa[37mn[37mager] Creat[37mi[37mng SX1262 [37mi[37mnstance...[37m
+[37m12:58:04.129 > [SX1262] In[37mi[37mtializing [37m.[37m.. [37ms[37mu[37mccess!
+12:58:04.176 > [L[37mo[37mRaManager] [37mC[37monfiguring[37m [37mLoRaWAN for[37m [37mEU868 band[37m.[37m..
+12:58:04.181 > [LoRaMa[37mn[37mager] Usin[37mg[37m EU868 regi[37mo[37mn with sub[37mb[37mand: 2
+12:58:04.185 > [Lo[37mR[37maManager] [37mI[37mnitializing[37m [37mnode...
+12:58:04.188 > [[37mL[37moRaManager][37m [37mLoRaWAN no[37md[37me initializ[37me[37md successfu[37ml[37mly!
+12:58:04.193 > LoRa [37mi[37mnitialized [37ma[37mnd ready
+[37m12:58:04.196 > I[37mNFO: LoRa i[37mn[37mitialized[37m
+[37m12:58:04.496 > [[37mL[37moRaManager] [37mD[37mownlink ca[37ml[37mlback regis[37mt[37mered
+12:58:04.500 > Sett[37mi[37mng LoRaWAN [37mc[37mredentials[37m[37m
+[37m12:58:05.059 > I[37mNFO:[37m [37mLoRaWAN cr[37me[37mdentials se[37mt[37m
+[37m12:58:05.922 > [[37mL[37moRaWAN] A[37mt[37mtempting ov[37me[37mr-the-air [37ma[37mctivation [37m([37mattempt 1 o[37mf[37m 5) ... [37mf[37ma[37miled, c[37mo[37mde -1116
+[37m12:58:12.640 > [[37mLoRaWAN] Er[37mr[37mor code: -[37m1[37m116
+[37m12:58:13.640 > [[37mLoRaWAN] Atte[37mm[37mpting over-[37mt[37mhe-air act[37mi[37mvation (att[37me[37mmpt 2 of 5)[37m [37m... [37mf[37ma[37miled, c[37mo[37mde -1116
+12:58:20.363 > [[37mL[37moRaWAN] Er[37mr[37mor code: -1[37m1[37m16
+[37m12:58:22.362 > [[37mLoR[37ma[37mWAN] Attem[37mp[37mting over-t[37mh[37me-air acti[37mv[37mation (atte[37mm[37mpt 3 of 5)[37m [37m... [37mE[37mSP-ROM:esp32s3[37m-[37m20210327
+[37m12:58:27.422 > B[37mu[37mild:Mar 2[37m7[37m 2021
+12:58:27.424 > rst[37m:[37m0x1 (POWERO[37mN[37m),boot:0x8[37m [37m(SPI_FAST_F[37mL[37mASH_BOOT)[37m
+[37m12:58:27.429 > SPIWP:0xee[37m
+[37m12:58:27.430 > mode:DIO, [37mc[37mlock div:1[37m
+[37m12:58:27.432 > load:0x3fc[37me[37m3808,len:0x[37m4[37mbc
+12:58:27.434 > load:0[37mx[37m403c9700,le[37mn[37m:0xbd8
+12:58:27.436 > lo[37ma[37md:0x403cc70[37m0[37m,len:0x2a0c[37m[37m
+12:58:27.440 > entry 0x4[37m0[37m3c98d0
+[37m12:58:27.534 > [[37m [37m  117][V][e[37ms[37mp32-hal-uar[37mt[37m.c:330] ua[37mr[37mtBegin(): U[37mA[37mRT0 baud(1[37m1[37m5200) Mode([37m8[37m00001c) rx[37mP[37min(44) txPi[37mn[37m(43)
+12:58:27.543 > [  [37m [37m127][V][esp[37m3[37m2-hal-uart[37m.[37mc:416] uart[37mB[37megin(): UA[37mR[37mT0 not inst[37ma[37mlled. Star[37mt[37ming install[37ma[37mtion
+[37m12:58:27.552 > [[37m   135][V][37m[[37mesp32-hal-[37mu[37mart.c:467] [37mu[37martBegin()[37m:[37m UART0 init[37mi[37malization d[37mo[37mne.
+[37m12:58:27.858 > 
+[37m12:58:27.858 > 
+12:58:27.858 > === Hel[37mt[37mec ESP32 L[37mo[37mRa Sensor N[37mo[37mde ===
+12:58:27.861 > Bo[37mo[37mt count: 1[37m
+[37m12:58:27.863 > Wakeup was[37m [37mnot caused [37mb[37my deep slee[37mp[37m
+12:58:27.866 > [   441][37m[[37mI][esp32-ha[37ml[37m-i2c.c:75][37m [37mi2cInit(): [37mI[37mnitialisin[37mg[37m I2C Master[37m:[37m sda=45 sc[37ml[37m=46 freq=10[37m0[37m000
+[37m12:58:28.875 > D[37mi[37msplay [37mi[37mnitialized[37m[37m
+[37m12:58:30.874 > P[37mI[37mR moti[37mo[37mn sensor in[37mi[37mtialized o[37mn[37m pin 5
+12:58:30.877 > INF[37mO[37m: Motion se[37mn[37msor ready[37m
+[37m12:58:31.437 > [[37m [37m 40[37m2[37m0][W][Wire[37m.[37mcpp:301] be[37mg[37min(): Bus [37ma[37mlready star[37mt[37med in Mast[37me[37mr Mode.
+12:58:31.443 > Sc[37ma[37mnning I2C [37mb[37mus...
+[37m12:58:31.460 > N[37mo[37m I2C d[37me[37mvices found[37m[37m
+12:58:31.462 > Trying BM[37mE[37m280 at addr[37me[37mss 0x76...[37m [37m[  4043][W][37m[[37mWire.cpp:30[37m1[37m] begin():[37m [37mBus already[37m [37mstarted in[37m [37mMaster Mod[37me[37m.
+12:58:31.471 > Failed[37m[37m
+12:58:31.472 > Trying BME[37m2[37m80 at addr[37me[37mss 0x77... [37m[[37m  4054][W][37m[[37mWire.cpp:30[37m1[37m] begin():[37m [37mBus already[37m [37mstarted in[37m [37mMaster Mode[37m.[37m
+12:58:31.481 > Failed[37m
+[37m12:58:31.482 > BME280 sen[37ms[37mor not foun[37md[37m!
+12:58:31.484 > WARN: B[37mM[37mE280 sensor[37m [37mnot found![37m[37m
+[37m12:58:32.344 > [[37mLoRaMa[37mn[37mager] Creat[37mi[37mng SX1262 i[37mn[37mstance...[37m
+[37m12:58:32.348 > [SX1262] I[37mn[37mitializing [37m.[37m.. [37ms[37mu[37mccess![37m[37m
+12:58:32.396 > [LoRaManag[37me[37mr] Configu[37mr[37ming LoRaWAN[37m [37mfor EU868 [37mb[37mand...
+12:58:32.400 > [L[37mo[37mRaManager] [37mU[37msing EU868[37m [37mregion with[37m [37msubband: 2[37m
+[37m12:58:32.405 > [LoRaManag[37me[37mr] Initiali[37mz[37ming node..[37m.[37m
+12:58:32.408 > [LoRaMana[37mg[37mer] LoRaWA[37mN[37m node initi[37ma[37mlized succ[37me[37mssfully!
+12:58:32.412 > L[37mo[37mRa initial[37mi[37mzed and rea[37md[37my
+12:58:32.415 > INFO: Lo[37mR[37ma initiali[37mz[37med
+[37m12:58:32.716 > [[37mLoRaMana[37mg[37mer] Downlin[37mk[37m callback [37mr[37megistered
+[37m12:58:32.720 > S[37metting LoR[37ma[37mWAN credent[37mi[37mals
+[37m12:58:33.279 > I[37mNFO: [37mL[37moRaWAN cred[37me[37mntials set[37m
+[37m12:58:34.142 > [[37mLoRaWAN] At[37mt[37mempting ov[37me[37mr-the-air a[37mc[37mtivation ([37ma[37mttempt 1 of[37m [37m5) ... [37mf[37mail[37me[37md, code -11[37m1[37m6
+12:58:40.518 > [LoRaWA[37mN[37m] Error cod[37me[37m: -1116
+[37m12:58:41.517 > [[37mLoRaWAN] [37mA[37mttempting o[37mv[37mer-the-air[37m [37mactivation[37m [37m(attempt 2 [37mo[37mf 5) ... [37mf[37mailed, code -11[37m1[37m6
+12:58:47.900 > [LoRaWAN[37m][37m Error cod[37me[37m: -1116
+[37m12:58:49.899 > [[37mL[37moRaWAN] [37mA[37mttempting o[37mv[37mer-the-air[37m [37mactivation [37m([37mattempt 3 [37mo[37mf 5) ... [37mf[37maile[37md, code -111[37m6[37m
+12:58:56.624 > [LoRaWAN[37m][37m Error code[37m:[37m -1116
+[37m12:59:00.623 > [[37mLoRaWAN] A[37mt[37mtempting ov[37me[37mr-the-air [37ma[37mctivation [37m([37mattempt 4 o[37mf[37m 5) ... [37mf[37mailed[37m,[37m code -111[37m6[37m
+12:59:07.348 > [LoRaWAN][37m [37mError code:[37m [37m-1116
+[37m12:59:15.347 > [[37mLoRaWAN] Attempting ov[37me[37mr-the-air a[37mc[37mtivation ([37ma[37mttempt 5 of[37m [37m5) ... [37mf[37mailed,[37m [37mcode -1116[37m[37m
+12:59:22.072 > [LoRaWAN] [37mE[37mrror code:[37m [37m-1116
+[37m12:59:38.070 > [[37mL[37moRaWAN] Fai[37ml[37med to join [37ma[37mfter maxim[37mu[37mm attempts.[37m[37m
+[37m12:59:39.200 > E[37mRROR: Failed to j[37mo[37min network[37m[37m
+[37m12:59:40.840 > M[37motion [37md[37metected!
+12:59:40.841 > I[37mN[37mFO: Motion[37m [37mdetected

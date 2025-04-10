@@ -1,0 +1,36 @@
+[37m12:34:14.881 > E[37mSP-ROM:esp32s3-20210327
+[37m12:34:14.883 > B[37muild[37m:[37mMar 27 2021[37m[37m
+12:34:14.885 > rst:0x1 ([37mP[37mOWERON),boo[37mt[37m:0x1c (SPI[37m_[37mFAST_FLASH_[37mB[37mOOT)
+12:34:14.889 > SPIW[37mP[37m:0xee
+12:34:14.889 > mode[37m:[37mDIO, clock[37m [37mdiv:1
+12:34:14.891 > load[37m:[37m0x3fce3808[37m,[37mlen:0x4bc
+[37m12:34:14.894 > l[37moad:0x403c[37m9[37m700,len:0xb[37md[37m8
+12:34:14.896 > load:0x[37m4[37m03cc700,len[37m:[37m0x2a0c
+12:34:14.898 > en[37mt[37mry 0x403c98[37md[37m0
+[37m12:34:14.987 > [[37m [37m  110][[37mV[37m][esp32-hal[37m-[37muart.c:330[37m][37m uartBegin([37m)[37m: UART0 ba[37mu[37md(115200) M[37mo[37mde(800001c[37m)[37m rxPin(44) [37mt[37mxPin(43)
+[37m12:34:14.996 > [[37m   119][V][37m[[37mesp32-hal-[37mu[37mart.c:416] [37mu[37martBegin()[37m:[37m UART0 not [37mi[37mnstalled. [37mS[37mtarting ins[37mt[37mallation
+[37m12:34:15.004 > [[37m   128[37m][37m[V][esp32-[37mh[37mal-uart.c:4[37m6[37m7] uartBeg[37mi[37mn(): UART0 [37mi[37mnitializat[37mi[37mon done.
+[37m12:34:15.110 > 
+[37m12:34:15.111 > 
+12:34:15.111 > LoR[37ma[37mWAN Class C[37m [37mRelay Cont[37mr[37moller
+12:34:15.113 > ====[37m=[37m==========[37m=[37m===========[37m=[37m====
+12:34:15.117 > Init[37mi[37malizing rel[37ma[37my pins...[37m
+[37m12:34:15.190 > R[37melay[37m [37mpins initia[37ml[37mized.
+[37m12:34:15.290 > I[37mniti[37ma[37mlizing LoRa[37m [37mmodule...[37m
+[37m12:34:15.400 > [[37mLoRa[37mM[37manager] Cr[37me[37mating SX126[37m2[37m instance..[37m.[37m
+12:34:15.405 > [SX1262][37m [37mInitializin[37mg[37m ... [37ms[37mucc[37me[37mss!
+12:34:15.451 > [LoRaM[37ma[37mnager] Con[37mf[37miguring LoR[37ma[37mWAN for EU[37m8[37m68 band...[37m
+[37m12:34:15.456 > [LoRaManag[37me[37mr] Using EU[37m8[37m68 region w[37mi[37mth subband[37m:[37m 2
+12:34:15.460 > [LoRaMa[37mn[37mager] Init[37mi[37malizing nod[37me[37m...
+12:34:15.463 > [LoRa[37mM[37manager] LoR[37ma[37mWAN node i[37mn[37mitialized s[37mu[37mccessfully[37m![37m
+12:34:15.468 > LoRa modu[37ml[37me initiali[37mz[37med successf[37mu[37mlly!
+12:34:15.471 > [LoR[37ma[37mManager] Do[37mw[37mnlink call[37mb[37mack registe[37mr[37med
+12:34:15.475 > LoRa s[37me[37mtup complet[37me[37m. Will att[37me[37mmpt joining[37m [37min main lo[37mo[37mp.
+12:34:15.480 > Setup c[37mo[37mmplete - e[37mn[37mtering main[37m [37mloop.
+12:34:15.483 > Att[37me[37mmpting to j[37mo[37min LoRaWAN[37m [37mnetwork...[37m
+[37m12:34:15.487 > [LoRaWAN] [37mA[37mttempting o[37mv[37mer-the-air[37m [37mactivation [37m([37mattempt 1 [37mo[37mf 5) ... [37m[[37mLoR[37ma[37mWAN] Setti[37mn[37mg data rate[37m [37mto DR1 for[37m [37mreliability[37m[37m
+[37m12:34:26.463 > s[37muccess[37m![37m (new sessi[37mo[37mn started)[37m[37m
+12:34:26.466 > Successful[37ml[37my joined t[37mh[37me network![37m
+[37m12:34:26.470 > [LoRaWAN] [37mS[37mending data[37m [37m(attempt 1[37m [37mof 3) ... [37ms[37mu[37mccess!
+12:34:31.762 > Stat[37mu[37ms packet se[37mn[37mt successf[37mu[37mlly
+12:34:31.765 > [LoRaW[37mA[37mN] Sending[37m [37mdata (attem[37mp[37mt 1 of 3) [37m.[37m.. 

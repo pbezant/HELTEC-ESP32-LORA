@@ -1,0 +1,20 @@
+[37m13:32:04.526 > f[37mailed, code -1116
+[37m13:32:04.528 > [[37mLoRaWAN] E[37mr[37mror code: -[37m1[37m116
+[37m13:32:05.527 > [[37mL[37moRaWAN] Atte[37mm[37mpting over[37m-[37mthe-air act[37mi[37mvation (at[37mt[37mempt 2 of 5[37m)[37m ... [37mf[37mailed, c[37mode -1116
+[37m13:32:12.254 > [[37mLoRaWAN] Er[37mr[37mor code: -[37m1[37m116
+[37m13:32:14.253 > [[37mL[37moRaWAN] Atte[37mm[37mpting over-[37mt[37mhe-air act[37mi[37mvation (att[37me[37mmpt 3 of 5[37m)[37m ... [37mf[37ma[37miled, c[37mo[37mde -1116
+13:32:20.978 > [[37mL[37moRaWAN] Er[37mr[37mor code: -1[37m1[37m16
+[37m13:32:24.978 > [[37mLoR[37ma[37mWAN] Attem[37mp[37mting over-t[37mh[37me-air acti[37mv[37mation (att[37me[37mmpt 4 of 5)[37m [37m... [37m[[37mL[37moRaW[37mA[37mN] Setting[37m [37mdata rate t[37mo[37m DR1 for re[37ml[37miability
+[37m13:32:35.944 > s[37muccess! (new[37m [37msession st[37ma[37mrted)
+[37m13:32:36.508 > I[37mN[37mFO: LoRaWA[37mN[37m network j[37mo[37mined
+13:32:36.511 > Sendi[37mn[37mg sensor d[37ma[37mta immediat[37me[37mly after jo[37mi[37mning the n[37me[37mtwork
+13:32:36.516 > INFO[37m:[37m Sending i[37mn[37mitial data[37m[37m
+[37m13:32:37.509 > S[37mtart[37mi[37mng sendSen[37ms[37morData func[37mt[37mion
+13:32:37.512 > Readi[37mn[37mg BME280 s[37me[37mnsor data
+[37m13:32:37.515 > S[37mensor read[37mi[37mngs - Temp:[37m [37m27.01°C, H[37mu[37mmidity: 36[37m.[37m18%, Pressu[37mr[37me: 996.75 [37mh[37mPa
+[37m13:32:38.078 > I[37mN[37mFO: Se[37mn[37mding data..[37m.[37m
+[37m13:32:38.642 > S[37mending s[37me[37mnsor data p[37ma[37mcket of 8 [37mb[37mytes
+13:32:38.646 > Paylo[37ma[37md hex: 01 [37m0[37mE 01 69 00 [37m6[37m3 00 00 
+[37m13:32:38.650 > [[37mLoRaWAN] Se[37mn[37mding data [37m([37mattempt 1 o[37mf[37m 3) ... [37ms[37mu[37mccess!
+13:32:43.963 > Dat[37ma[37m sent succe[37ms[37msfully!
+13:32:43.965 > I[37mN[37mFO: Data se[37mn[37mt successf[37mu[37mlly
