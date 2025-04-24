@@ -2,15 +2,15 @@
 
 // ===== Board Configuration =====
 // I2C Pins
-#define I2C_SDA 45
-#define I2C_SCL 46
+#define I2C_SDA 45 //Green wire
+#define I2C_SCL 46 //White wire
 
 // BME280 Sensor
 #define BME_ADDRESS 0x76  // Try 0x77 if 0x76 doesn't work
 #define SEALEVELPRESSURE_HPA (1013.25)
 
 // PIR Motion Sensor
-#define PIR_PIN 5
+#define PIR_PIN 5 //White wire
 #define PIR_WAKE_LEVEL HIGH  // HIGH for active-high PIR, LOW for active-low
 
 // Button for UI navigation
