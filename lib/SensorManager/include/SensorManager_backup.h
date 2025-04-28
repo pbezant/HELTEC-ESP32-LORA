@@ -5,7 +5,7 @@
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BME280.h>
 #include <driver/i2s.h>
-#include "arduinoFFT.h"
+#include <arduinoFFT.h>
 
 // Default configuration values
 #ifndef I2C_SDA
@@ -99,6 +99,7 @@ private:
     float smoothedDecibelLevel;
     
     // FFT variables
+    arduinoFFT fft;
     double fftReal[BUFFER_SIZE];
     double fftImag[BUFFER_SIZE];
     
@@ -108,5 +109,5 @@ private:
     
     // Internal methods
     void i2s_adc_data_scale(uint8_t* d_buff, uint8_t* s_buff, uint32_t len);
-    double computeDecibelLevel(double* samples, uint32_t sampleCount);
+    double computeDecibelLevel(float* samples, uint32_t sampleCount);
 }; 

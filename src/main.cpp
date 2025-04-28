@@ -22,12 +22,14 @@ RTC_DATA_ATTR int consecutiveErrors = 0;
 RTC_DATA_ATTR uint32_t errorBackoffTime = MINIMUM_DELAY;
 RTC_DATA_ATTR bool pirWake = false;
 RTC_DATA_ATTR int lastJoinError = 0;
+RTC_DATA_ATTR float lastDecibelLevel = 0.0;
 
 // Timers
 uint32_t lastDisplayUpdate = 0;
 uint32_t displayTimeout = 0;
 uint32_t lastDataSendTime = 0;
 uint32_t lastButtonCheck = 0;
+uint32_t lastSoundCheck = 0;
 
 // Button state
 bool lastButtonState = HIGH;
@@ -38,7 +40,9 @@ void updateDisplay();
 void sendSensorData(bool motionDetected = false);
 void processDownlink();
 String getBmeStatusString();
+String getMicStatusString();
 void checkButton();
+void checkSound();
 
 // Callback function for downlink data
 void handleDownlink(uint8_t* payload, size_t size, uint8_t port) {
@@ -112,6 +116,19 @@ void setup() {
   } else {
     Serial.println("BME280 sensor initialized");
     logger.info("BME280 sensor found");
+  }
+  
+  // Initialize microphone
+  display.updateStartupProgress(40, "Initializing microphone...");
+  if (!sensors.beginMicrophone(I2S_SCK, I2S_WS, I2S_SD)) {
+    Serial.println("INMP441 microphone not found or initialization failed!");
+    logger.warning("Microphone not initialized");
+  } else {
+    Serial.println("INMP441 microphone initialized");
+    logger.info("Microphone found");
+    // Take an initial reading
+    lastDecibelLevel = sensors.readDecibelLevel();
+    Serial.println("Initial sound level: " + String(lastDecibelLevel) + " dB");
   }
   delay(300);
   
@@ -218,6 +235,9 @@ void loop() {
   // Check button presses
   checkButton();
   
+  // Periodically check sound level
+  checkSound();
+  
   // Check for motion detection
   #ifdef PIR_PIN
   static bool lastMotionState = LOW;
@@ -298,6 +318,32 @@ void loop() {
   delay(10);
 }
 
+void checkSound() {
+  // Only check sound at specified intervals
+  if (millis() - lastSoundCheck < DB_SAMPLING_PERIOD) {
+    return;
+  }
+  
+  lastSoundCheck = millis();
+  
+  // Check if microphone is available
+  if (sensors.isMicrophoneAvailable()) {
+    // Read decibel level
+    float db = sensors.readDecibelLevel();
+    
+    // Store the value for later use
+    lastDecibelLevel = db;
+    
+    // Log to serial
+    Serial.print("Sound level: ");
+    Serial.print(db);
+    Serial.println(" dB");
+    
+    // Update display with this info if needed
+    updateDisplay();
+  }
+}
+
 void updateDisplay() {
   // Wake up display if it was sleeping
   display.wakeup();
@@ -331,8 +377,15 @@ void updateDisplay() {
     }
   }
   
-  // Update sensor data screen
+  // Update sensor data screen including sound level
+  // Note: You'll need to modify DisplayManager to include the sound level display
+  // For now, we'll just use the existing methods
   display.updateSensorData(temperature, humidity, pressure, batteryVoltage);
+  
+  // Add sound level to the status line if microphone is available
+  if (sensors.isMicrophoneAvailable()) {
+    display.log("Sound level: " + String(lastDecibelLevel, 1) + " dB");
+  }
   
   // Update LoRaWAN status screen
   display.updateLoRaWANStatus(
@@ -366,6 +419,15 @@ void sendSensorData(bool motionDetected) {
     Serial.println("BME280 not available, using dummy values");
   }
   
+  // Read sound level if microphone is available
+  if (sensors.isMicrophoneAvailable()) {
+    Serial.println("Reading sound level data");
+    lastDecibelLevel = sensors.readDecibelLevel();
+    Serial.println("Sound level: " + String(lastDecibelLevel) + " dB");
+  } else {
+    Serial.println("Microphone not available, using previous value");
+  }
+  
   // Show sensor data screen before sending
   display.drawSensorDataScreen();
   display.updateSensorData(
@@ -375,13 +437,18 @@ void sendSensorData(bool motionDetected) {
     3.7 // Default battery value, replace with actual reading if available
   );
   
+  // Show sound level
+  display.log("Sound level: " + String(lastDecibelLevel, 1) + " dB");
+  
   // Prepare payload (simple binary format)
-  uint8_t payload[8];
+  // Add sound level to the payload - we'll need 10 bytes now
+  uint8_t payload[10];
   
   // Convert float to int16_t (2 bytes) with 1 decimal place precision
   int16_t temp_int = (int16_t)(temperature * 10);
   int16_t hum_int = (int16_t)(humidity * 10);
   int16_t press_int = (int16_t)(pressure / 10); // Reduce to fit in int16_t
+  int16_t db_int = (int16_t)(lastDecibelLevel * 10); // Decibel level with 1 decimal place
   
   // Pack the data into the payload
   payload[0] = temp_int >> 8;
@@ -392,6 +459,8 @@ void sendSensorData(bool motionDetected) {
   payload[5] = press_int & 0xFF;
   payload[6] = 0; // Use bit 0 of byte 6 as motion flag
   payload[7] = 0; // Reserved for future use
+  payload[8] = db_int >> 8;
+  payload[9] = db_int & 0xFF;
   
   // Set motion flag if data is being sent due to motion detection
   if (motionDetected) {
@@ -507,6 +576,14 @@ String getBmeStatusString() {
     return "BME280: OK";
   } else {
     return "BME280: Not Found";
+  }
+}
+
+String getMicStatusString() {
+  if (sensors.isMicrophoneAvailable()) {
+    return "Mic: OK (" + String(lastDecibelLevel, 1) + " dB)";
+  } else {
+    return "Mic: Not Found";
   }
 }
 

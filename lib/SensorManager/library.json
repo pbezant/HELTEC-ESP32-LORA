@@ -1,8 +1,8 @@
 {
   "name": "SensorManager",
-  "version": "1.0.0",
-  "description": "A library for managing BME280 and other sensors",
-  "keywords": "bme280, sensor, temperature, humidity, pressure, altitude",
+  "version": "1.1.0",
+  "description": "A library for managing BME280 and INMP441 microphone sensors",
+  "keywords": "bme280, sensor, temperature, humidity, pressure, altitude, inmp441, microphone, sound, decibel, i2s",
   "repository": {
     "type": "git",
     "url": "https://github.com/yourusername/SensorManager.git"
@@ -17,7 +17,8 @@
   "license": "MIT",
   "dependencies": {
     "adafruit/Adafruit BME280 Library": "^2.0.0",
-    "adafruit/Adafruit Unified Sensor": "^1.1.4"
+    "adafruit/Adafruit Unified Sensor": "^1.1.4",
+    "kosme/arduinoFFT": "^1.5.6"
   },
   "frameworks": "arduino",
   "platforms": "*"

@@ -9,6 +9,20 @@
 #define BME_ADDRESS 0x76  // Try 0x77 if 0x76 doesn't work
 #define SEALEVELPRESSURE_HPA (1013.25)
 
+// INMP441 Microphone Configuration (I2S)
+#define I2S_SCK 16  // Serial Clock
+#define I2S_WS 15   // Word Select or Left/Right Clock
+#define I2S_SD 7    // Serial Data
+#define I2S_PORT I2S_NUM_0
+
+// Sound level configuration
+#define SAMPLE_RATE 16000      // Sample rate in Hz
+#define SAMPLE_BITS 32         // Bits per sample
+#define BUFFER_SIZE 512        // Buffer size for I2S and FFT
+#define DB_SMOOTHING_FACTOR 0.8 // Smoothing factor for dB readings (0-1)
+#define DB_SAMPLING_PERIOD 1000 // How often to sample sound in milliseconds
+#define DB_OFFSET 35           // Calibration offset for dB calculation
+
 // PIR Motion Sensor
 #define PIR_PIN 5 //White wire
 #define PIR_WAKE_LEVEL HIGH  // HIGH for active-high PIR, LOW for active-low
