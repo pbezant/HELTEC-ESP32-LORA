@@ -4,6 +4,10 @@ SensorManager::SensorManager() : bme280Available(false) {
 }
 
 bool SensorManager::begin(int sda, int scl) {
+    // Add a delay to ensure any previous I2C operations have completed
+    // This helps prevent conflicts with upload process
+    delay(100);
+    
     // Avoid warnings about re-initialization
     // The Wire library will handle multiple calls to begin() gracefully
     Wire.begin(sda, scl);

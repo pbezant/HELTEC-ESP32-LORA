@@ -2,7 +2,7 @@
 #include "Config.h"
 #include <DisplayManager.h>
 #include <DisplayLogger.h>
-#include "SensorManager.h"
+#include <SensorManager.h>
 #include <LoRaManager.h>
 
 // Include secrets for LoRaWAN credentials
@@ -87,10 +87,6 @@ void setup() {
     pirWake = false;
   }
   
-  // Initialize I2C once for all devices that use it
-  Wire.begin(I2C_SDA, I2C_SCL);
-  delay(100);  // Short delay after I2C init
-  
   // Initialize display with startup screen
   display.begin();
   display.setNormalMode(); // Ensure display is in normal mode
@@ -108,9 +104,13 @@ void setup() {
   logger.info("Motion sensor ready");
   #endif
   
+  // Give additional time for boot to complete before I2C initialization
+  // This helps to avoid conflicts with USB/Serial during flashing
+  delay(500);
+  
   // Initialize sensors
   display.updateStartupProgress(30, "Initializing sensors...");
-  if (!sensors.begin()) {
+  if (!sensors.begin(I2C_SDA, I2C_SCL)) { // Pass I2C pins from Config.h
     Serial.println("BME280 sensor not found!");
     logger.warning("BME280 sensor not found!");
   } else {

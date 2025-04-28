@@ -4,7 +4,23 @@
 #include <Wire.h>
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BME280.h>
-#include "Config.h"
+
+// Default configuration values
+#ifndef I2C_SDA
+#define I2C_SDA 21
+#endif
+
+#ifndef I2C_SCL 
+#define I2C_SCL 22
+#endif
+
+#ifndef BME_ADDRESS
+#define BME_ADDRESS 0x76
+#endif
+
+#ifndef SEALEVELPRESSURE_HPA
+#define SEALEVELPRESSURE_HPA 1013.25
+#endif
 
 class SensorManager {
 public:
