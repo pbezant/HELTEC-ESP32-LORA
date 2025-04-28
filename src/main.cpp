@@ -104,13 +104,9 @@ void setup() {
   logger.info("Motion sensor ready");
   #endif
   
-  // Give additional time for boot to complete before I2C initialization
-  // This helps to avoid conflicts with USB/Serial during flashing
-  delay(500);
-  
   // Initialize sensors
   display.updateStartupProgress(30, "Initializing sensors...");
-  if (!sensors.begin(I2C_SDA, I2C_SCL)) { // Pass I2C pins from Config.h
+  if (!sensors.begin()) {
     Serial.println("BME280 sensor not found!");
     logger.warning("BME280 sensor not found!");
   } else {

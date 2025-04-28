@@ -2,14 +2,8 @@
 
 // ===== Board Configuration =====
 // I2C Pins
-// Original pins (may conflict with upload when BME280 connected)
-// #define I2C_SDA 45 //Green wire
-// #define I2C_SCL 46 //White wire
-
-// Alternative I2C pins that don't conflict with upload
-// For the Heltec ESP32 LoRa V3, use these instead if you have upload issues
-#define I2C_SDA 3  // Change wire connection to this pin 
-#define I2C_SCL 4  // Change wire connection to this pin
+#define I2C_SDA 3 //Green wire
+#define I2C_SCL 4 //White wire
 
 // BME280 Sensor
 #define BME_ADDRESS 0x76  // Try 0x77 if 0x76 doesn't work
