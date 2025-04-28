@@ -12,6 +12,8 @@ uint64_t testJoinEUI = 0x0000000000000000;
 uint64_t testDevEUI = 0x0000000000000000;
 uint8_t testAppKey[16] = {0};
 uint8_t testNwkKey[16] = {0};
+String testAppKeyHex = "00000000000000000000000000000000";
+String testNwkKeyHex = "00000000000000000000000000000000";
 
 void setUp(void) {
     // Setup code before each test
@@ -35,6 +37,36 @@ void test_lora_credentials() {
     
     // This is more of a compilation test since we can't verify values
     TEST_PASS();
+}
+
+void test_lora_credentials_hex() {
+    LoRaManager lora;
+    lora.begin(TEST_LORA_CS, TEST_LORA_DIO1, TEST_LORA_RST, TEST_LORA_BUSY);
+    
+    // Set and verify credentials using hex strings
+    bool result = lora.setCredentialsHex(testJoinEUI, testDevEUI, testAppKeyHex, testNwkKeyHex);
+    
+    // Verify the keys were successfully converted
+    TEST_ASSERT_TRUE(result);
+}
+
+void test_lora_credentials_hex_invalid() {
+    LoRaManager lora;
+    lora.begin(TEST_LORA_CS, TEST_LORA_DIO1, TEST_LORA_RST, TEST_LORA_BUSY);
+    
+    // Test with invalid hex strings
+    String invalidHex = "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ"; // Contains invalid hex chars
+    bool result = lora.setCredentialsHex(testJoinEUI, testDevEUI, invalidHex, testNwkKeyHex);
+    
+    // Verify the function returns false for invalid hex
+    TEST_ASSERT_FALSE(result);
+    
+    // Test with wrong length
+    String shortHex = "0000"; // Too short
+    result = lora.setCredentialsHex(testJoinEUI, testDevEUI, shortHex, testNwkKeyHex);
+    
+    // Verify the function returns false for incorrect length
+    TEST_ASSERT_FALSE(result);
 }
 
 void test_lora_join() {
@@ -100,6 +132,8 @@ void RUN_UNITY_TESTS() {
 
     RUN_TEST(test_lora_initialization);
     RUN_TEST(test_lora_credentials);
+    RUN_TEST(test_lora_credentials_hex);
+    RUN_TEST(test_lora_credentials_hex_invalid);
     RUN_TEST(test_lora_join);
     RUN_TEST(test_lora_send_data);
     RUN_TEST(test_lora_send_string);

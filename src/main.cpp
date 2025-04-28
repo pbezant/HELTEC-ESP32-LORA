@@ -134,13 +134,18 @@ void setup() {
   uint64_t joinEUI = strtoull(APPEUI, NULL, 16);
   uint64_t devEUI = strtoull(DEVEUI, NULL, 16);
   
-  // Use the appKey and nwkKey arrays directly from secrets.h
+  // Use the hex string keys from secrets.h
   Serial.println("Setting LoRaWAN credentials");
   
-  // Set credentials
+  // Set credentials using hex strings
   display.updateStartupProgress(70, "Setting credentials...");
-  lora.setCredentials(joinEUI, devEUI, appKey, nwkKey);
-  logger.info("LoRaWAN credentials set");
+  if (lora.setCredentialsHex(joinEUI, devEUI, APPKEY, NWKKEY)) {
+    logger.info("LoRaWAN credentials set");
+  } else {
+    logger.error("Failed to set LoRaWAN credentials");
+    display.showErrorScreen("Credential Error", "Invalid key format");
+    delay(5000);
+  }
   delay(300);
   
   // Join network
