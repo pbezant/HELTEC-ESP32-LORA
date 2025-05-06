@@ -153,8 +153,9 @@ public:
      * 2 = LoRaWAN status screen
      * 3 = Sensor data screen
      * 4 = Log screen
+     * @param redraw If true, clear and redraw the screen; if false, just update the screen index
      */
-    void setScreen(uint8_t screenIndex);
+    void setScreen(uint8_t screenIndex, bool redraw = true);
     
     /**
      * @brief Get the current screen index
