@@ -5,18 +5,18 @@
 // (e.g., The Things Network, Helium, etc.)
 
 // Device EUI (8 bytes, hex format without spaces)
-#define DEVEUI "DCEED005FC2FFD11"
+#define DEVEUI "dcb753528f2e2352"
 
 // Application EUI (8 bytes, hex format without spaces)
-#define APPEUI "AFBB42ACD4518531"
+#define APPEUI "1ce2885bcf0b8cc2"
 
 // Application Key (16 bytes, hex format without spaces)
-#define APPKEY "F30A2F42EAEA8DE5D796A22DBBC86908"
+#define APPKEY "3ad55cc4db7ae1326b04663e5d8f11af"
 
 // Network Key (16 bytes, hex format without spaces)
 // For LoRaWAN 1.1, this should be a different key than APPKEY
 // For LoRaWAN 1.0.x, this can be the same as APPKEY
-#define NWKKEY "F30A2F42EAEA8DE5D796A22DBBC86908"
+#define NWKKEY "3ad55cc4db7ae1326b04663e5d8f11af"
 
 // Note: For security reasons, it's recommended to store these credentials
 // in a separate file that is not committed to version control.

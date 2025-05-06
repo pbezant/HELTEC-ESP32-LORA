@@ -168,35 +168,41 @@ void DisplayManager::drawLine(int x0, int y0, int x1, int y1) {
     u8g2.drawLine(x0, y0, x1, y1);
 }
 
-void DisplayManager::setScreen(uint8_t screenIndex) {
-    if (currentScreen != screenIndex) {
-        currentScreen = screenIndex;
-        clear();
-        
-        switch (currentScreen) {
-            case 0: // Main info screen
-                // Empty, to be filled by main application
-                break;
-            case 1: // Startup screen
-                drawStartupScreen();
-                break;
-            case 2: // LoRaWAN status screen
-                drawLoRaWANStatusScreen();
-                break;
-            case 3: // Sensor data screen
-                drawSensorDataScreen();
-                break;
-            case 4: // Log screen
-                drawLogScreen();
-                break;
-            default:
-                // Default to main screen
-                currentScreen = 0;
-                break;
-        }
-        
-        refresh();
+void DisplayManager::setScreen(uint8_t screenIndex, bool redraw) {
+    // Update the screen index
+    currentScreen = screenIndex;
+    
+    // If redraw is false, just update the screen index without clearing or drawing
+    if (!redraw) {
+        return;
     }
+    
+    // Otherwise, clear and draw the new screen
+    clear();
+    
+    switch (currentScreen) {
+        case 0: // Main info screen
+            // Empty, to be filled by main application
+            break;
+        case 1: // Startup screen
+            drawStartupScreen();
+            break;
+        case 2: // LoRaWAN status screen
+            drawLoRaWANStatusScreen();
+            break;
+        case 3: // Sensor data screen
+            drawSensorDataScreen();
+            break;
+        case 4: // Log screen
+            drawLogScreen();
+            break;
+        default:
+            // Default to main screen
+            currentScreen = 0;
+            break;
+    }
+    
+    refresh();
 }
 
 void DisplayManager::log(const String& message) {
@@ -355,6 +361,7 @@ void DisplayManager::updateSensorData(float temperature, float humidity, float p
     drawString(0, 55, "Battery:");
     drawRightAlignedString(55, String(battery, 1) + " V");
     
+    // Always refresh the display immediately after updating sensor data
     refresh();
 }
 

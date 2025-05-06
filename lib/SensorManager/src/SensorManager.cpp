@@ -4,9 +4,18 @@ SensorManager::SensorManager() : bme280Available(false) {
 }
 
 bool SensorManager::begin(int sda, int scl) {
-    // Avoid warnings about re-initialization
-    // The Wire library will handle multiple calls to begin() gracefully
-    Wire.begin(sda, scl);
+    // Log the I2C pins being used for debugging
+    Serial.println("Initializing BME280 with I2C pins - SDA: " + String(sda) + ", SCL: " + String(scl));
+    
+    // Ensure wire is properly initialized
+    if(Wire.begin(sda, scl)) {
+        Serial.println("I2C initialized successfully");
+    } else {
+        Serial.println("I2C initialization may have issues");
+    }
+    
+    // Increase I2C clock for faster response
+    Wire.setClock(100000); // Standard 100kHz I2C clock
     
     // Scan I2C bus for devices (for debugging)
     Serial.println("Scanning I2C bus...");
@@ -23,7 +32,7 @@ bool SensorManager::begin(int sda, int scl) {
         }
     }
     if (foundDevices == 0) {
-        Serial.println("No I2C devices found");
+        Serial.println("No I2C devices found - check wiring connections");
     } else {
         Serial.print("Found ");
         Serial.print(foundDevices);
@@ -34,13 +43,24 @@ bool SensorManager::begin(int sda, int scl) {
     Serial.print("Trying BME280 at address 0x");
     Serial.print(BME_ADDRESS, HEX);
     Serial.print("... ");
-    bme280Available = bme.begin(BME_ADDRESS, &Wire);
     
-    if (bme280Available) {
-        Serial.println("Success!");
-    } else {
-        Serial.println("Failed");
-        
+    // Multiple attempts to initialize BME280
+    for (int attempt = 0; attempt < 3; attempt++) {
+        bme280Available = bme.begin(BME_ADDRESS, &Wire);
+        if (bme280Available) {
+            Serial.println("Success on attempt " + String(attempt+1) + "!");
+            break;
+        } else {
+            if (attempt < 2) {
+                Serial.println("Failed attempt " + String(attempt+1) + ", retrying...");
+                delay(100); // Short delay before retry
+            } else {
+                Serial.println("Failed after multiple attempts");
+            }
+        }
+    }
+    
+    if (!bme280Available) {
         // Try alternative I2C address if the first one fails
         Serial.print("Trying BME280 at address 0x77... ");
         bme280Available = bme.begin(0x77, &Wire);
@@ -48,6 +68,15 @@ bool SensorManager::begin(int sda, int scl) {
             Serial.println("Success!");
         } else {
             Serial.println("Failed");
+            
+            // One last attempt with the default Wire instance
+            Serial.print("Final attempt with default Wire... ");
+            bme280Available = bme.begin();
+            if (bme280Available) {
+                Serial.println("Success!");
+            } else {
+                Serial.println("Failed. BME280 not detected.");
+            }
         }
     }
     
@@ -59,6 +88,15 @@ bool SensorManager::begin(int sda, int scl) {
                         Adafruit_BME280::SAMPLING_X1,     // Humidity Oversampling
                         Adafruit_BME280::FILTER_X16,      // Filtering
                         Adafruit_BME280::STANDBY_MS_500); // Standby Time
+                        
+        // Verify we can read from the sensor
+        float test_temp = bme.readTemperature();
+        float test_hum = bme.readHumidity();
+        Serial.println("Verification readings - Temp: " + String(test_temp) + "°C, Humidity: " + String(test_hum) + "%");
+        
+        if (test_temp == 0.0 && test_hum == 0.0) {
+            Serial.println("Warning: BME280 returning zeros. May not be working correctly despite successful initialization.");
+        }
     }
     
     return bme280Available;

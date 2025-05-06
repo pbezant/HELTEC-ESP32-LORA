@@ -2,12 +2,15 @@
 
 // ===== Board Configuration =====
 // I2C Pins
-#define I2C_SDA 3 //Green wire
-#define I2C_SCL 4 //White wire
+#define I2C_SDA 3 //Green wire - Make sure this is correct for your BME280 connection
+#define I2C_SCL 4 //White wire - Make sure this is correct for your BME280 connection
 
 // BME280 Sensor
-#define BME_ADDRESS 0x76  // Try 0x77 if 0x76 doesn't work
+#define BME_ADDRESS 0x76  // Default BME280 address. Try 0x77 if 0x76 doesn't work
 #define SEALEVELPRESSURE_HPA (1013.25)
+
+// Debug options for BME280
+#define BME280_DEBUG true  // Enable detailed BME280 debugging
 
 // PIR Motion Sensor
 #define PIR_PIN 5 //White wire
