@@ -57,14 +57,18 @@
 #define DISPLAY_ENABLED true
 #define DISPLAY_TIMEOUT 30000  // Turn off display after this many ms of inactivity
 
-// Heltec board version
-// 0 = V3.0/V3.1 (normal VEXT)
-// 1 = V3.2 (inverted VEXT)
-#define HELTEC_BOARD_VERSION 1  // Set to 1 for V3.2 boards, 0 for V3.0/V3.1 boards
-
 // ===== OLED Display Configuration =====
 #define OLED_SDA 17
 #define OLED_SCL 18
 #define OLED_RST 21
 #define OLED_WIDTH 128
-#define OLED_HEIGHT 64 
+#define OLED_HEIGHT 64
+
+// ===== Heltec Board Configuration =====
+// Heltec board version
+// 0 = V3.0/V3.1 (normal VEXT)
+// 1 = V3.2 (inverted VEXT)
+#define HELTEC_BOARD_VERSION 1  // Set to 1 for V3.2 boards, 0 for V3.0/V3.1 boards
+
+// VEXT pin for controlling external devices
+#define VEXT_PIN 36  // GPIO36 is VEXT on Heltec WiFi LoRa 32 V3.x boards 
