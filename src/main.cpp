@@ -87,13 +87,6 @@ void setup() {
     pirWake = false;
   }
   
-  // Initialize display with startup screen
-  display.begin(-1, -1, HELTEC_BOARD_VERSION == 1 ? DisplayManager::V3_2 : DisplayManager::V3_0);
-  display.setNormalMode(); // Ensure display is in normal mode
-  display.drawStartupScreen();
-  display.updateStartupProgress(10, "Initializing...");
-  delay(300);
-  
   // Initialize button pin
   pinMode(BUTTON_PIN, INPUT_PULLUP);
   
@@ -101,52 +94,79 @@ void setup() {
   #ifdef PIR_PIN
   pinMode(PIR_PIN, INPUT_PULLUP);
   Serial.println("PIR motion sensor initialized on pin " + String(PIR_PIN));
-  logger.info("Motion sensor ready");
   #endif
+
+  // Define VEXT pin for the Heltec board to control peripherals
+  #define VEXT_PIN 36
   
-  // Initialize sensors
-  display.updateStartupProgress(30, "Initializing sensors...");
+  // First, toggle VEXT to power cycle all external sensors
+  pinMode(VEXT_PIN, OUTPUT);
+  
+  // Power cycle for the BME280 sensor (HIGH = off, LOW = on for VEXT)
+  // The V3.2 board has inverted VEXT logic
+  if (HELTEC_BOARD_VERSION == 1) {
+    digitalWrite(VEXT_PIN, LOW);  // Turn OFF external devices for V3.2 (inverted)
+    delay(500);
+    digitalWrite(VEXT_PIN, HIGH); // Turn ON external devices for V3.2 (inverted)
+  } else {
+    digitalWrite(VEXT_PIN, HIGH); // Turn OFF external devices for V3.0/V3.1
+    delay(500);
+    digitalWrite(VEXT_PIN, LOW);  // Turn ON external devices for V3.0/V3.1
+  }
+  delay(500); // Wait for devices to power up
+
+  // IMPORTANT: Initialize BME280 BEFORE display
+  Serial.println("Initializing BME280 sensor with priority...");
+  
   #if BME280_DEBUG
   Serial.println("BME280 Debug mode is ENABLED");
   Serial.println("Using I2C pins - SDA: " + String(I2C_SDA) + ", SCL: " + String(I2C_SCL));
   Serial.println("BME280 address: 0x" + String(BME_ADDRESS, HEX));
   #endif
 
-  // Try to initialize BME280 with a couple of retries if needed
+  // Try to initialize BME280 with multiple attempts
   bool sensorInitialized = false;
   for (int i = 0; i < 3; i++) {
+    Serial.println("BME280 initialization attempt " + String(i+1) + " of 3");
     if (sensors.begin(I2C_SDA, I2C_SCL)) {
       sensorInitialized = true;
-      Serial.println("BME280 sensor initialized on attempt " + String(i+1));
-      logger.info("BME280 sensor found");
+      Serial.println("BME280 sensor initialized successfully on attempt " + String(i+1));
       break;
     } else {
       Serial.println("BME280 sensor init failed, attempt " + String(i+1));
-      delay(100); // Wait before retry
+      delay(300); // Longer wait before retry
     }
   }
-
+  
+  // Now initialize the display AFTER BME280 setup
+  Serial.println("Initializing display...");
+  display.begin(OLED_SDA, OLED_SCL, HELTEC_BOARD_VERSION == 1 ? DisplayManager::V3_2 : DisplayManager::V3_0);
+  display.setNormalMode(); // Ensure display is in normal mode
+  display.drawStartupScreen();
+  display.updateStartupProgress(10, "Initializing...");
+  
+  // Update user about sensor initialization
   if (!sensorInitialized) {
-    Serial.println("BME280 sensor not found after multiple attempts!");
+    Serial.println("WARNING: BME280 sensor not found after multiple attempts!");
     logger.warning("BME280 sensor not found!");
+    display.updateStartupProgress(30, "BME280 not found!");
   } else {
+    display.updateStartupProgress(30, "BME280 initialized");
+    
     // Check sensor readings immediately after initialization
     float t, h, p, a;
+    sensors.readBME280(t, h, p, a);
     
-    // Try multiple times to get valid readings
-    for (int attempt = 0; attempt < 3; attempt++) {
-      sensors.readBME280(t, h, p, a);
-      Serial.println("Initial BME280 readings (attempt " + String(attempt+1) + ") - Temp: " + 
-                   String(t) + "°C, Humidity: " + String(h) + "%, Pressure: " + String(p) + " hPa");
-                   
-      // If we got non-zero readings, break the loop
-      if (t != 0 || h != 0 || p != 0) {
-        Serial.println("Got valid initial sensor readings");
-        break;
-      }
-      
-      // Short delay before trying again
-      delay(100);
+    Serial.println("Initial BME280 readings:");
+    Serial.println("  Temperature: " + String(t) + "°C");
+    Serial.println("  Humidity: " + String(h) + "%");
+    Serial.println("  Pressure: " + String(p) + " hPa");
+    
+    // Check if readings are valid
+    if (isnan(t) || isnan(h) || isnan(p) || 
+        (t == 0.0 && h == 0.0 && p == 0.0)) {
+      Serial.println("WARNING: BME280 returning invalid readings");
+      logger.warning("BME280 reading error");
     }
   }
   delay(300);
@@ -214,11 +234,11 @@ void setup() {
         delay(100);
       }
     } else {
-      // Use dummy values for testing if sensor is unavailable
-      temperature = 22.5;
-      humidity = 45.0;
-      pressure = 1013.25;
-      Serial.println("Using test values for initial display");
+      // Use zeros if sensor is unavailable
+      temperature = 0.0;
+      humidity = 0.0;
+      pressure = 0.0;
+      Serial.println("BME280 unavailable, using zeros for display");
     }
     
     // First draw the sensor data screen and populate it with data
@@ -404,11 +424,11 @@ void updateDisplay() {
       delay(100);
     }
   } else {
-    Serial.println("BME280 not available for display update, using dummy values");
-    // Use dummy values for display testing
-    temperature = 22.5;
-    humidity = 45.0;
-    pressure = 1013.25;
+    Serial.println("BME280 not available for display update, using zeros");
+    // Use zeros when sensor not available
+    temperature = 0.0;
+    humidity = 0.0;
+    pressure = 0.0;
   }
   
   // If we're on screen 1 (startup), move to sensor or status screen
@@ -491,14 +511,13 @@ void sendSensorData(bool motionDetected) {
       }
     }
   } else {
-    Serial.println("BME280 not available, using dummy values");
+    Serial.println("BME280 not available, using zeros");
     
-    // Set dummy values for testing if sensor is not available
-    // These should show up on the display but will be marked as test data
-    temperature = 22.5;
-    humidity = 45.0;
-    pressure = 1013.25;
-    Serial.println("Using test values - Temp: 22.5°C, Humidity: 45.0%, Pressure: 1013.25 hPa");
+    // Set zeros if sensor is not available
+    temperature = 0.0;
+    humidity = 0.0;
+    pressure = 0.0;
+    Serial.println("Using zeros - Temp: 0.0°C, Humidity: 0.0%, Pressure: 0.0 hPa");
   }
   
   // Show sensor data screen before sending
@@ -641,11 +660,18 @@ void goToSleep(uint32_t sleepTime) {
 }
 
 String getBmeStatusString() {
-  if (sensors.isBME280Available()) {
-    return "BME280: OK";
-  } else {
-    return "BME280: Not Found";
+  if (!sensors.isBME280Available()) {
+    return "BME280 not found";
   }
+  
+  float temp = sensors.readTemperature();
+  float humidity = sensors.readHumidity();
+  
+  if (isnan(temp) || isnan(humidity) || (temp == 0.0 && humidity == 0.0)) {
+    return "BME280 error";
+  }
+  
+  return String(temp, 1) + "C " + String(humidity, 0) + "%";
 }
 
 void checkButton() {
@@ -685,10 +711,10 @@ void checkButton() {
           delay(100);
         }
       } else {
-        // Use dummy values for testing
-        temperature = 22.5;
-        humidity = 45.0;
-        pressure = 1013.25;
+        // Use zeros when sensor not available
+        temperature = 0.0;
+        humidity = 0.0;
+        pressure = 0.0;
       }
       
       // Draw the screen first, then update with data
