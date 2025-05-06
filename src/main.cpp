@@ -88,7 +88,7 @@ void setup() {
   }
   
   // Initialize display with startup screen
-  display.begin();
+  display.begin(-1, -1, HELTEC_BOARD_VERSION == 1 ? DisplayManager::V3_2 : DisplayManager::V3_0);
   display.setNormalMode(); // Ensure display is in normal mode
   display.drawStartupScreen();
   display.updateStartupProgress(10, "Initializing...");

@@ -14,6 +14,7 @@ A comprehensive library for managing OLED displays on ESP32 boards, specifically
   - System logs
   - Error messages
 - Integrated logging system with serial output support
+- Support for multiple Heltec board versions, including V3.2 with inverted VEXT pin
 
 ## Installation
 
@@ -23,7 +24,24 @@ A comprehensive library for managing OLED displays on ESP32 boards, specifically
 ## Hardware Requirements
 
 - ESP32 board with an SSD1306 OLED display (default pins SDA=17, SCL=18, RST=21)
-- Compatible with Heltec WiFi LoRa 32 V3 boards
+- Compatible with Heltec WiFi LoRa 32 V3 boards (including V3.0, V3.1, and V3.2)
+
+## Board Versions
+
+The library supports different versions of Heltec WiFi LoRa 32 boards:
+
+- `V3_0`: Original V3.0 and V3.1 boards
+- `V3_2`: Newer V3.2 boards with inverted VEXT pin
+
+When initializing the display, specify the correct board version to ensure proper display operation:
+
+```cpp
+// For older V3.0/V3.1 boards
+display.begin(-1, -1, DisplayManager::V3_0);
+
+// For newer V3.2 boards
+display.begin(-1, -1, DisplayManager::V3_2);
+```
 
 ## Dependencies
 

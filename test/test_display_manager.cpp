@@ -11,18 +11,18 @@ void tearDown(void) {
 
 void test_display_initialization() {
     DisplayManager display;
-    TEST_ASSERT_TRUE(display.begin());
+    TEST_ASSERT_TRUE(display.begin(-1, -1, DisplayManager::V3_0));
 }
 
 void test_display_update() {
     DisplayManager display;
-    display.begin();
+    display.begin(-1, -1, DisplayManager::V3_0);
     TEST_ASSERT_TRUE(display.update());
 }
 
 void test_display_clear() {
     DisplayManager display;
-    display.begin();
+    display.begin(-1, -1, DisplayManager::V3_0);
     display.clear();
     TEST_ASSERT_TRUE(true); // Add specific display state verification
 }
