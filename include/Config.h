@@ -13,7 +13,7 @@
 #define BME280_DEBUG true  // Enable detailed BME280 debugging
 
 // PIR Motion Sensor
-#define PIR_PIN 5 //White wire
+#define PIR_PIN 5 //Yellow wire
 #define PIR_WAKE_LEVEL HIGH  // HIGH for active-high PIR, LOW for active-low
 
 // Button for UI navigation
