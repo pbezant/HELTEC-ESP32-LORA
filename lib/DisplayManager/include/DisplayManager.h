@@ -17,6 +17,12 @@ public:
     static const int SCREEN_HEIGHT = 64;
     static const int LINE_HEIGHT = 10;
     static const int MAX_LOG_LINES = 10;
+    
+    // Heltec board versions
+    enum BoardVersion {
+        V3_0, // V3.0 or V3.1
+        V3_2  // V3.2 (inverted VEXT)
+    };
 
     /**
      * @brief Constructor
@@ -28,8 +34,17 @@ public:
      * 
      * @param sda SDA pin (pass -1 to use default)
      * @param scl SCL pin (pass -1 to use default)
+     * @param boardVersion Board version (V3_0 for V3.0/V3.1, V3_2 for V3.2)
      */
-    void begin(int sda = -1, int scl = -1);
+    void begin(int sda = -1, int scl = -1, BoardVersion boardVersion = V3_0);
+    
+    /**
+     * @brief Control VEXT power pin for display
+     * 
+     * @param state true to enable display power, false to disable
+     * @param inverted true for V3.2 boards where VEXT is inverted, false for other boards
+     */
+    void controlDisplayPower(bool state, bool inverted = false);
     
     /**
      * @brief Clear the display

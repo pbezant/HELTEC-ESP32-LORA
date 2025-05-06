@@ -1,6 +1,6 @@
 {
     "name": "DisplayManager",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "description": "A comprehensive OLED display manager for ESP32 boards, especially for Heltec WiFi LoRa 32 devices",
     "keywords": "display, oled, esp32, lora, heltec, logger",
     "repository": {

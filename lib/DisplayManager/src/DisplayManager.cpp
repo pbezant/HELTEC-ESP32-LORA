@@ -4,6 +4,7 @@
 #define DEFAULT_OLED_SDA 17
 #define DEFAULT_OLED_SCL 18
 #define DEFAULT_OLED_RST 21
+#define VEXT_PIN 36  // VEXT control pin on Heltec boards (GPIO36)
 
 DisplayManager::DisplayManager() : 
     u8g2(U8G2_R0, DEFAULT_OLED_SCL, DEFAULT_OLED_SDA, DEFAULT_OLED_RST),
@@ -16,7 +17,24 @@ DisplayManager::DisplayManager() :
     }
 }
 
-void DisplayManager::begin(int sda, int scl) {
+void DisplayManager::controlDisplayPower(bool state, bool inverted) {
+    pinMode(VEXT_PIN, OUTPUT);
+    
+    // For V3.2 boards, VEXT is inverted (LOW turns on the display, HIGH turns it off)
+    // For older boards, VEXT is normal (LOW turns off the display, HIGH turns it on)
+    if (inverted) {
+        digitalWrite(VEXT_PIN, state ? LOW : HIGH);
+    } else {
+        digitalWrite(VEXT_PIN, state ? HIGH : LOW);
+    }
+    
+    delay(10); // Small delay to ensure power stabilizes
+}
+
+void DisplayManager::begin(int sda, int scl, BoardVersion boardVersion) {
+    // Control display power based on board version
+    controlDisplayPower(true, boardVersion == V3_2);
+    
     // Initialize the OLED display
     if (sda != -1 && scl != -1) {
         u8g2.setBusClock(400000);  // Set I2C clock speed to 400kHz
