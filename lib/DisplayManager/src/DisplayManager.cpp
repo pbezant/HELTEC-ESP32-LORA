@@ -262,7 +262,7 @@ void DisplayManager::drawStartupScreen() {
     
     // Draw logo
     u8g2.setFont(u8g2_font_profont12_tf);
-    drawCenteredString(15, "HELTEC");
+    drawCenteredString(15, "StructureSense");
     
     u8g2.setFont(u8g2_font_profont10_tf);
     drawCenteredString(30, "ESP32 LoRaWAN Node");
